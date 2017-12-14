@@ -2,6 +2,10 @@
 
 > The Game
 
+## Waffle board
+
+[https://waffle.io/nerd-labs/mutambo](https://waffle.io/nerd-labs/mutambo)
+
 ## Build Setup
 
 ``` bash
