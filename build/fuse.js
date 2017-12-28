@@ -4,7 +4,6 @@ require('./check-versions')()
 
 const path = require('path');
 
-console.log(path.join('.', __dirname, '../src'));
 const {
   FuseBox,
   VueComponentPlugin,
