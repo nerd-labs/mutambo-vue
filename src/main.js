@@ -1,22 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Vuetify from 'vuetify';
 
-// import 'prismjs/prism';
-// import 'prismjs/themes/prism.css';
-// import 'prismjs/themes/prism-solarizedlight.css';
-// import 'vuetify/dist/vuetify.min.css';
 import App from './App.vue';
 import Home from './components/Home.vue';
-// import Config from './components/Config.vue';
+import Create from './components/Create.vue';
+import Input from './components/Input.vue';
 
 Vue.use(VueRouter);
-// Vue.use(Vuetify);
+
+Vue.component('mut-input', Input);
 
 const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
-    // { path: '/config', component:/ Config }
+    { path: '/create', component: Create }
   ]
 });
 

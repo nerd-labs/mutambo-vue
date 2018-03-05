@@ -1,11 +1,9 @@
 <template>
-  <a class="button button--white" href="#">
-    create tournament
-  </a>
+  <router-link to="create" class="button button--white"> create tournament</router-link>
 </template>
 
 <script>
 export default {
-  name: 'home',
-}
+  name: "home"
+};
 </script>
