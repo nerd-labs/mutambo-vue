@@ -21,13 +21,16 @@ let fuse;
 const DIRS = {
 	src: '../src',
 	dist: '../dist',
-	assets: './assets'
+	assets: './assets',
+	style: './style',
 }
 
 
 Sparky.task("clean", () => Sparky.src(DIRS.dist).clean("dist/"));
 Sparky.task("watch-assets", () => Sparky.watch(`${DIRS.assets}/*.*`, { base: DIRS.src }).dest(DIRS.dist));
+Sparky.task("watch-style", () => Sparky.watch(`${DIRS.style}/*.*`, { base: DIRS.src }).dest(DIRS.dist));
 Sparky.task("copy-assets", () => Sparky.src(`${DIRS.assets}/*.*`, {  base: DIRS.src }).dest(DIRS.dist));
+Sparky.task("copy-style", () => Sparky.src(`${DIRS.style}/*.*`, {  base: DIRS.src }).dest(DIRS.dist));
 
 Sparky.task("config", () => {
   fuse = FuseBox.init({
@@ -74,11 +77,11 @@ Sparky.task("config", () => {
   app.watch().hmr();
 })
 
-Sparky.task("default", ["clean", "watch-assets", "config"], () => {
+Sparky.task("default", ["clean", "watch-assets", "watch-style", "config"], () => {
 	return fuse.run();
 });
 
-Sparky.task("dist", ["clean", "copy-assets", "config"], () => {
+Sparky.task("dist", ["clean", "copy-assets", "copy-style", "config"], () => {
 	return fuse.run();
 });
 
