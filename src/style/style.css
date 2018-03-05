@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,900');
+:root {
+  --color-white: #fff;
+  --color-primary: #009EC4;
+  --color-secondary: #009658;
+  --font-main: 'Montserrat', sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-black: 900;
+}
+
+/*
+  DEFAULT
+*/
+
+html,
+body {
+  color: var(--color-white);
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+  TYPOGRAPHY
+*/
+
+h1 {
+  font-size: 50px;
+  font-weight: var(--font-weight-black);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  opacity: .75;
+  text-transform: uppercase;
+}
+
+/*
+  PAGE
+*/
+
+.page {
+  align-items: center;
+  background-image: linear-gradient(-45deg, #009EC4, #009658);
+  display: grid;
+  grid-template-rows: 120px 1fr 100px;
+  grid-template-areas: "header" "content" "footer";
+  height: 100%;
+}
+
+.page__header {
+  justify-self: center;
+  grid-area: header;
+  text-align: center;
+}
+
+.page__content {
+  grid-area: content;
+  padding: 30px;
+}
+
+.page__content--center {
+  justify-self: center;
+}
+
+.page__footer {
+  justify-self: center;
+  grid-area: footer;
+}
+
+/*
+  LOGO
+*/
+
+.logo {
+  --logo-size: 50px;
+  bottom: 30px;
+  fill: var(--color-white);
+  height: var(--logo-size);
+  right: 30px;
+  position: absolute;
+  width: var(--logo-size);
+}
+
+@keyframes bubble1 {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  75% {
+    opacity: .75;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}
+
+@keyframes bubble2 {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  75% {
+    opacity: .75;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}
+
+@keyframes bubble3 {
+  0% {
+    opacity: 0;
+    transform: translateY(30%);
+  }
+  75% {
+    opacity: .75;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+}
+
+.logo circle {
+  animation-duration: 2s;
+  animation-fill-mode: backwards;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.logo circle:nth-of-type(1) {
+  animation-delay: 1s;
+  animation-name: bubble1;
+}
+
+.logo circle:nth-of-type(2) {
+  animation-delay: 1.5s;
+  animation-name: bubble2;
+}
+
+.logo circle:nth-of-type(3) {
+  animation-name: bubble3;
+}
+
+.logo:hover circle {
+  animation-play-state: running;
+}
+
+/*
+  BUTTON
+*/
+
+.button {
+  background-color: transparent;
+  border: 2px solid var(--button-color-background);
+  border-radius: 6px;
+  color: var(--button-color-background);
+  cursor: pointer;
+  display: inline-block;
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  padding: 15px;
+  text-decoration: none;
+  transition-duration: .1s;
+  transition-property: background-color, color;
+  transition-timing-function: ease-in-out;
+  -webkit-appearance: none;
+}
+
+.button:hover {
+  background-color: var(--button-color-background);
+  color: var(--button-color-hover-text);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button--white {
+  --button-color-background: var(--color-white);
+  --button-color-hover-text: var(--color-secondary);
+}
+
+.button--primary {
+  --button-color-background: var(--color-primary);
+  --button-color-hover-text: var(--color-white);
+}
+
+.button--secondary {
+  --button-color-background: var(--color-secondary);
+  --button-color-hover-text: var(--color-white);
+}

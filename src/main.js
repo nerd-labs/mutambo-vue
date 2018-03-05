@@ -7,7 +7,7 @@ import VueRouter from 'vue-router';
 // import 'prismjs/themes/prism-solarizedlight.css';
 // import 'vuetify/dist/vuetify.min.css';
 import App from './App.vue';
-import Hello from './components/Hello.vue';
+import Home from './components/Home.vue';
 // import Config from './components/Config.vue';
 
 Vue.use(VueRouter);
@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes: [
-    { path: '/', component: Hello },
+    { path: '/', component: Home },
     // { path: '/config', component:/ Config }
   ]
 });
