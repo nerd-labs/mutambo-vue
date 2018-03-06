@@ -11,7 +11,17 @@ import Create from './components/Create.vue';
 Vue.component('mut-logo', Logo);
 
 Vue.use(VueRouter);
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  theme: {
+    primary: "#26A69A",
+    secondary: "#00897B",
+    accent: "#F50057",
+    error: "#FF5252",
+    warning: "#FF8F00",
+    info: "#29B6F6",
+    success: "#00E676"
+  }
+});
 
 const router = new VueRouter({
   routes: [
@@ -21,7 +31,7 @@ const router = new VueRouter({
 });
 
 new Vue({
-    router,
-    el: '#app',
-    render: h => h(App),
+  router,
+  el: '#app',
+  render: h => h(App),
 });
