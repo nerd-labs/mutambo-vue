@@ -69,7 +69,8 @@
     "vue": "^2.5.13",
     "vue-hot-reload-api": "^2.2.4",
     "vue-template-compiler": "^2.5.13",
-    "vue-template-es2015-compiler": "^1.6.0"
+    "vue-template-es2015-compiler": "^1.6.0",
+    "vuetify": "^1.0.4"
   },
   "engines": {
     "node": ">= 4.0.0",
