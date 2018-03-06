@@ -1,3 +1,4 @@
-<template>
-  <router-link to="create" class="button button--white"> create tournament</router-link>
+<template lang="pug">
+  div
+    router-link.button.button--white(to="create") create tournament
 </template>
