@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
 import App from './App.vue';
 import Home from './components/Home.vue';
+import Logo from './components/Logo.vue';
 import Create from './components/Create.vue';
+
+Vue.component('mut-logo', Logo);
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
