@@ -13,35 +13,39 @@ const {
   CSSPlugin,
   CSSResourcePlugin,
   WebIndexPlugin,
-  Sparky
+  Sparky,
+  ConsolidatePlugin
 } = require("fuse-box");
 
 let fuse;
 
 const DIRS = {
-	src: '../src',
-	dist: '../dist',
-	assets: './assets',
-	style: './style',
+  src: '../src',
+  dist: '../dist',
+  assets: './assets',
+  style: './style',
 }
 
 
 Sparky.task("clean", () => Sparky.src(DIRS.dist).clean("dist/"));
 Sparky.task("watch-assets", () => Sparky.watch(`${DIRS.assets}/*.*`, { base: DIRS.src }).dest(DIRS.dist));
 Sparky.task("watch-style", () => Sparky.watch(`${DIRS.style}/*.*`, { base: DIRS.src }).dest(DIRS.dist));
-Sparky.task("copy-assets", () => Sparky.src(`${DIRS.assets}/*.*`, {  base: DIRS.src }).dest(DIRS.dist));
-Sparky.task("copy-style", () => Sparky.src(`${DIRS.style}/*.*`, {  base: DIRS.src }).dest(DIRS.dist));
+Sparky.task("copy-assets", () => Sparky.src(`${DIRS.assets}/*.*`, { base: DIRS.src }).dest(DIRS.dist));
+Sparky.task("copy-style", () => Sparky.src(`${DIRS.style}/*.*`, { base: DIRS.src }).dest(DIRS.dist));
 
 Sparky.task("config", () => {
   fuse = FuseBox.init({
     homeDir: DIRS.src,
-		output: `${DIRS.dist}/$name.js`,
+    output: `${DIRS.dist}/$name.js`,
     sourceMaps: true,
     target: 'browser',
     useTypescriptCompiler: true,
     polyfillNonStandardDefaultUsage: true,
     plugins: [
       VueComponentPlugin({
+        template: ConsolidatePlugin({
+          engine: 'pug'
+        }),
         style: [
           SassPlugin({
             importer: true
@@ -78,11 +82,11 @@ Sparky.task("config", () => {
 })
 
 Sparky.task("default", ["clean", "watch-assets", "watch-style", "config"], () => {
-	return fuse.run();
+  return fuse.run();
 });
 
 Sparky.task("dist", ["clean", "copy-assets", "copy-style", "config"], () => {
-	return fuse.run();
+  return fuse.run();
 });
 
 
