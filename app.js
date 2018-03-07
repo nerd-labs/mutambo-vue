@@ -12,7 +12,6 @@ var App_vue_1 = require("./App.vue");
 var Home_vue_1 = require("./components/Home.vue");
 var Logo_vue_1 = require("./components/Logo.vue");
 var Create_vue_1 = require("./components/Create.vue");
-var store_1 = require("./store");
 vue_1.default.component('mut-logo', Logo_vue_1.default);
 vue_1.default.use(vue_router_1.default);
 vue_1.default.use(vuetify_1.default, {
@@ -34,7 +33,6 @@ var router = new vue_router_1.default({
 });
 new vue_1.default({
     router: router,
-    store: store_1.default,
     el: '#app',
     render: function (h) { return h(App_vue_1.default); },
 });
@@ -79,7 +77,7 @@ ___scope___.file("components/Home.vue", function(exports, require, module, __fil
 var _options = { _vueModuleId: 'data-v-9b326459'}
 Object.assign(_options, {
         _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-btn',{attrs:{"color":"primary"},on:{"click":function($event){_vm.goToRoute('create')}}},[_vm._v("Create tournament")]),_c('br'),_c('br'),(_vm.existingTournaments.length)?_c('div',[_c('v-list',[_vm._l((_vm.existingTournaments),function(tournament,index){return [_c('div',{staticClass:"pl-3 pr-3"},[(index !== 0)?_c('v-divider'):_vm._e()],1),_c('v-subheader',[_vm._v(_vm._s(tournament.name))])]})],2)],1):_vm._e()],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-btn',{attrs:{"color":"primary"},on:{"click":function($event){_vm.goToRoute('create')}}},[_vm._v("Create tournament")])],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -88,11 +86,6 @@ exports.default = {
     methods: {
         goToRoute: function (route) {
             this.$router.push(route);
-        }
-    },
-    computed: {
-        existingTournaments: function () {
-            return this.$store.state.tournaments;
         }
     }
 };
@@ -167,12 +160,6 @@ exports.default = {
             if (!this.$refs.form.validate()) {
                 return;
             }
-            this.$store.commit("addTournament", {
-                name: this.name,
-                type: this.type,
-                numberOfPlayers: this.totalPlayers
-            });
-            this.$router.push('/');
         }
     }
 };
@@ -192,56 +179,6 @@ Object.assign(exports.default.options||exports.default, _options)
           }
         }
       
-});
-___scope___.file("store/index.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var vue_1 = require("vue");
-var vuex_1 = require("vuex");
-var mutations_1 = require("./mutations");
-var plugins_1 = require("./plugins");
-vue_1.default.use(vuex_1.default);
-exports.default = new vuex_1.default.Store({
-    state: mutations_1.state,
-    mutations: mutations_1.mutations,
-    plugins: plugins_1.default
-});
-//# sourceMappingURL=index.js.map
-});
-___scope___.file("store/mutations.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.STORAGE_KEY = 'mut-tournament';
-exports.state = {
-    tournaments: JSON.parse(window.localStorage.getItem(exports.STORAGE_KEY) || '[]')
-};
-exports.mutations = {
-    addTournament: function (state, _a) {
-        var name = _a.name, numberOfPlayers = _a.numberOfPlayers, type = _a.type;
-        state.tournaments.push({
-            name: name,
-            numberOfPlayers: numberOfPlayers,
-            type: type
-        });
-    },
-};
-//# sourceMappingURL=mutations.js.map
-});
-___scope___.file("store/plugins.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var mutations_1 = require("./mutations");
-var localStoragePlugin = function (store) {
-    store.subscribe(function (mutation, _a) {
-        var tournaments = _a.tournaments;
-        window.localStorage.setItem(mutations_1.STORAGE_KEY, JSON.stringify(tournaments));
-    });
-};
-exports.default = [localStoragePlugin];
-//# sourceMappingURL=plugins.js.map
 });
 ___scope___.file("components.css", function(exports, require, module, __filename, __dirname){
 
