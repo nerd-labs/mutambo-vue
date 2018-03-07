@@ -77,7 +77,7 @@ ___scope___.file("components/Home.vue", function(exports, require, module, __fil
 var _options = { _vueModuleId: 'data-v-9b326459'}
 Object.assign(_options, {
         _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-btn',{attrs:{"color":"primary"},on:{"click":function($event){_vm.goToRoute('create')}}},[_vm._v("Create tournaments")])],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-btn',{attrs:{"color":"primary"},on:{"click":function($event){_vm.goToRoute('create')}}},[_vm._v("Create tournament")])],1)},
         staticRenderFns: []
       })
 "use strict";
