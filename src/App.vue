@@ -1,16 +1,24 @@
-<template>
-  <div class="page">
-    <header class="page__header">
-      <h1>Mutambo</h1>
-      <h2>Your awesome tournament generator</h2>
-    </header>
+<template lang="pug">
+  v-app
+    v-toolbar(color='primary white--text')
+      v-toolbar-title(@click="goToRoute('/')") Mutambo
+    v-content
+      v-container(fluid fill-height)
+        v-layout(justify-center align-center)
+          v-flex(text-xs-center)
+            router-view
 
-    <main class="page__content page__content--center">
-      <router-view></router-view>
-    </main>
+    v-footer(color='accent')
+      mut-logo
 
-    <footer class="page__footer">
-      <mut-logo></mut-logo>
-    </footer>
-  </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    goToRoute(route) {
+      this.$router.push(route);
+    }
+  }
+};
+</script>
