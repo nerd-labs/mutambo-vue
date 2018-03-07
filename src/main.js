@@ -7,8 +7,10 @@ import App from './App.vue';
 import Home from './components/Home.vue';
 import Logo from './components/Logo.vue';
 import Create from './components/Create.vue';
+import CreateTeam from './components/create-team.vue';
 
 Vue.component('mut-logo', Logo);
+Vue.component('mut-create-team', CreateTeam);
 
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
