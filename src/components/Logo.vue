@@ -12,11 +12,11 @@
 
 <style>
 .logo {
-  --logo-size: 50px;
-  bottom: 30px;
+  --logo-size: 30px;
+  bottom: 5px;
   fill: var(--color-white);
   height: var(--logo-size);
-  right: 30px;
+  right: 10px;
   position: absolute;
   width: var(--logo-size);
 }
