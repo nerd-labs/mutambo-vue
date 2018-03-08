@@ -7,7 +7,8 @@
   "scripts": {
     "fuse": "node build/fuse.js",
     "start": "npm run fuse",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "vue-router": "^3.0.1"
@@ -40,6 +41,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^1.1.5",
     "fuse-box": "^3.0.0-next.44",
+    "gh-pages": "^1.1.0",
     "inject-loader": "^3.0.1",
     "karma": "^1.7.1",
     "karma-coverage": "^1.1.1",
