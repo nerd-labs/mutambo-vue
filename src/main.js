@@ -8,6 +8,8 @@ import Home from './components/Home.vue';
 import Logo from './components/Logo.vue';
 import Create from './components/Create.vue';
 
+import store from './store';
+
 Vue.component('mut-logo', Logo);
 
 Vue.use(VueRouter);
@@ -32,6 +34,7 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   el: '#app',
   render: h => h(App),
 });

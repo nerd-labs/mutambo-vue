@@ -33,10 +33,18 @@ export default {
     type: "knockout"
   }),
   methods: {
-    submit () {
+    submit() {
       if (!this.$refs.form.validate()) {
         return;
       }
+
+      this.$store.commit("addTournament", {
+        name: this.name,
+        type: this.type,
+        numberOfPlayers: this.totalPlayers
+      });
+
+      this.$router.push('/');
     }
   }
 };
