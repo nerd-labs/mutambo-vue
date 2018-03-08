@@ -8,7 +8,7 @@
     "fuse": "node build/fuse.js",
     "start": "npm run fuse",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "deploy": "sure && gh-pages -d dist"
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "vue-router": "^3.0.1"
@@ -63,7 +63,6 @@
     "shelljs": "^0.7.8",
     "sinon": "^4.0.1",
     "sinon-chai": "^2.14.0",
-    "sure": "0.0.3",
     "typescript": "^2.6.2",
     "url-loader": "^0.6.2",
     "vue": "^2.5.13",
