@@ -1,18 +1,18 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
-import App from './App.vue';
-import Home from './components/Home.vue';
-import Logo from './components/Logo.vue';
-import Create from './components/Create.vue';
-import CreateTeam from './components/create-team.vue';
+import app from './app.vue';
 
-Vue.component('mut-logo', Logo);
-Vue.component('mut-create-team', CreateTeam);
+import logo from './components/logo.vue';
+import createTeam from './components/create-team.vue';
 
-Vue.use(VueRouter);
+import router from './router';
+import store from './store';
+
+Vue.component('mut-logo', logo);
+Vue.component('mut-create-team', createTeam);
+
 Vue.use(Vuetify, {
   theme: {
     primary: "#26A69A",
@@ -25,15 +25,9 @@ Vue.use(Vuetify, {
   }
 });
 
-const router = new VueRouter({
-  routes: [
-    { path: '/', component: Home },
-    { path: '/create', component: Create }
-  ]
-});
-
 new Vue({
   router,
+  store,
   el: '#app',
-  render: h => h(App),
+  render: h => h(app),
 });
