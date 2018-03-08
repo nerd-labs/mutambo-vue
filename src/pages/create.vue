@@ -44,7 +44,7 @@ export default {
         numberOfPlayers: this.totalPlayers
       });
 
-      this.$router.push('/', );
+      this.$router.push('/teams');
     }
   }
 };
