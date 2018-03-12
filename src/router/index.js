@@ -11,6 +11,6 @@ export default new Router({
   routes: [
     { path: '/', component: home },
     { path: '/create', component: create },
-    { path: '/teams', component: teams }
+    { path: '/teams/:slug', component: teams }
   ]
 })
