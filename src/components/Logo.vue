@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .logo {
   --logo-size: 30px;
   bottom: 5px;
