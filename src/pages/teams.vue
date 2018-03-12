@@ -20,7 +20,6 @@ export default {
   }),
   computed: {
     numberOfPlayers() {
-      console.log('number',  this.$store.getters.numberOfPlayers(this.$route.params.slug));
       return this.$store.getters.numberOfPlayers(this.$route.params.slug);
     },
 
