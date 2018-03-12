@@ -9,6 +9,8 @@ import logo from './components/logo.vue';
 import router from './router';
 import store from './store';
 
+import './style/style.css';
+
 Vue.component('mut-logo', logo);
 
 Vue.use(Vuetify, {
