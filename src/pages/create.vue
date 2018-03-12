@@ -20,6 +20,9 @@
 </template>
 
  <script>
+
+import slug from 'slug';
+
 export default {
   data: () => ({
     valid: true,
@@ -38,13 +41,16 @@ export default {
         return;
       }
 
+      const slugged = slug(this.name);
+
       this.$store.commit("addTournament", {
+        slug: slugged,
         name: this.name,
         type: this.type,
         numberOfPlayers: this.totalPlayers
       });
 
-      this.$router.push('/teams');
+      this.$router.push(`/teams/${slugged}`);
     }
   }
 };
