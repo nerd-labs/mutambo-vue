@@ -50,7 +50,7 @@ export default {
         numberOfPlayers: this.totalPlayers
       });
 
-      this.$router.push(`/teams/${slugged}`);
+      this.$router.push(`/detail/${slugged}`);
     }
   }
 };
