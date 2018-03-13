@@ -20,9 +20,12 @@
 </template>
 
  <script>
+
+import slug from 'slug';
+
 export default {
   data: () => ({
-    valid: true,
+    valid: false,
     name: "",
     nameRules: [v => !!v || "Name is required"],
     totalPlayers: 2,
@@ -38,13 +41,16 @@ export default {
         return;
       }
 
+      const slugged = slug(this.name.toLowerCase());
+
       this.$store.commit("addTournament", {
+        slug: slugged,
         name: this.name,
         type: this.type,
         numberOfPlayers: this.totalPlayers
       });
 
-      this.$router.push('/');
+      this.$router.push(`/teams/${slugged}`);
     }
   }
 };
