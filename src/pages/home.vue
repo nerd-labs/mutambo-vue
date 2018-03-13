@@ -12,12 +12,11 @@
             v-flex(xs12 v-if="index !== 0")
               .pl-3.pr-3
                 v-divider
-            v-flex(xs7 md9)
+            v-flex(xs12 sm7)
               v-subheader(@click="goToRoute(`teams/${tournament.slug}`)")
                 | {{ tournament.name }}
-            v-flex(xs3 md1)
+            v-flex.text-xs-left.text-sm-right(xs12 sm5)
               v-chip(color='secondary' text-color='white' disabled) {{tournament.type}}
-            v-flex(xs2 md1)
               v-chip(color='accent' text-color='white' disabled) {{tournament.numberOfPlayers}}
 
 </template>
