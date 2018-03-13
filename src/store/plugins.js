@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from './mutations'
+import { STORAGE_KEY } from './config'
 
 const localStoragePlugin = store => {
   store.subscribe((mutation, { tournaments }) => {

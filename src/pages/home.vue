@@ -10,7 +10,9 @@
         template(v-for="(tournament, index) in existingTournaments")
           .pl-3.pr-3
             v-divider(v-if="index !== 0")
-          v-subheader {{ tournament.name }}
+          v-subheader(@click="goToRoute(`teams/${tournament.slug}`)")
+            | {{ tournament.name }}
+
 
 </template>
 
