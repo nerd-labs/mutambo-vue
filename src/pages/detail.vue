@@ -29,7 +29,7 @@ export default {
     },
 
     tournamentName() {
-      return this.$store.getters.tournamentName(this.$route.params.slug);
+      return this.$store.getters.tournamentName(this.slug);
     },
   },
   methods: {
