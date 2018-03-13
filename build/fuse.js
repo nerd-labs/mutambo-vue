@@ -38,7 +38,6 @@ Sparky.task("config", () => {
     homeDir: DIRS.src,
     output: `${DIRS.dist}/$name.js`,
     sourceMaps: true,
-    target: 'browser',
     useTypescriptCompiler: true,
     polyfillNonStandardDefaultUsage: true,
     plugins: [
@@ -47,24 +46,21 @@ Sparky.task("config", () => {
           engine: 'pug'
         }),
         style: [
-          SassPlugin({
-            importer: true
-          }),
-          CSSResourcePlugin({
-            dist: "../dist/assets",
-            resolve: f => `/assets/${f}`
-          }),
-          CSSPlugin({
-            group: 'components.css',
-            inject: 'components.css'
-          })
-        ]
+              SassPlugin({
+                  importer: true
+              }),
+              CSSResourcePlugin(),
+              CSSPlugin({
+                  group: 'components.css',
+                  inject: 'components.css'
+              })
+          ]
       }),
       CSSPlugin(),
       WebIndexPlugin({
-        template: "../src/index.html"
+          template: "../src/index.html"
       }),
-    ]
+  ]
   });
 
   fuse.dev({

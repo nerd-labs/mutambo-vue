@@ -10,6 +10,8 @@ import createTeam from './components/create-team.vue';
 import router from './router';
 import store from './store';
 
+import './style/style.css';
+
 Vue.component('mut-logo', logo);
 Vue.component('mut-create-team', createTeam);
 
