@@ -23,7 +23,14 @@ export default {
 
     if (tournament.name) {
       if (!tournament.teams) tournament.teams = [];
-      tournament.teams.push(team)
+
+      const index = tournament.teams.findIndex(t => t.id === team.id);
+
+      if (index < 0) {
+        tournament.teams.push(team)
+      } else {
+        tournament.teams[index] = team;
+      }
     }
   },
 }
