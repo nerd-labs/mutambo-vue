@@ -18,7 +18,7 @@ export default {
     }
   },
 
-  addTeam(state, { team, tournament, random }) {
+  addTeam(state, { team, tournament }) {
     const tournament = state.tournaments.find(t => t.slug === tournament);
 
     if (tournament.name) {
