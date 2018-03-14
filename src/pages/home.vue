@@ -5,14 +5,19 @@
     br
     br
 
-    div(v-if="existingTournaments.length")
-      v-list
-        template(v-for="(tournament, index) in existingTournaments")
-          .pl-3.pr-3
-            v-divider(v-if="index !== 0")
-          v-subheader(@click="goToRoute(`teams/${tournament.slug}`)")
-            | {{ tournament.name }}
-
+    v-list(v-if="existingTournaments.length")
+      v-container(grid-list-md fluid)
+        v-layout(row wrap justify-space-between)
+          template(v-for="(tournament, index) in existingTournaments")
+            v-flex(xs12 v-if="index !== 0")
+              .pl-3.pr-3
+                v-divider
+            v-flex(xs12 sm7)
+              v-subheader(@click="goToRoute(`teams/${tournament.slug}`)")
+                | {{ tournament.name }}
+            v-flex.text-xs-left.text-sm-right(xs12 sm5)
+              v-chip(color='secondary' text-color='white' disabled) {{tournament.type}}
+              v-chip(color='accent' text-color='white' disabled) {{tournament.numberOfPlayers}}
 
 </template>
 
@@ -25,7 +30,7 @@ export default {
   },
 
   computed: {
-    existingTournaments () {
+    existingTournaments() {
       return this.$store.state.tournaments;
     }
   }

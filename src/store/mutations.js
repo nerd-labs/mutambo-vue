@@ -8,7 +8,17 @@ export default {
     })
   },
 
-  addTeam(state, { team, tournament, random }) {
+  addDetails(state, { slug, details }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      tournament.details = details;
+    } else {
+      throw new Error(`Tournament ${slug} not found`);
+    }
+  },
+
+  addTeam(state, { team, tournament }) {
     const tournament = state.tournaments.find(t => t.slug === tournament);
 
     if (tournament.name) {
