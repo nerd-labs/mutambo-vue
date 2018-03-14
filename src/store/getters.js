@@ -14,4 +14,8 @@ export default {
   teams: state => slug => {
     return state.tournaments.find(tournament => tournament.slug === slug).teams;
   },
+
+  tournament: state => slug => {
+    return state.tournaments.find(tournament => tournament.slug === slug) || {};
+  }
 }

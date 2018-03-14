@@ -1,9 +1,9 @@
 export default {
-  addTournament(state, { slug, name, numberOfPlayers, type }) {
+  addTournament(state, { slug, name, teams, type }) {
     state.tournaments.push({
       slug: slug,
       name,
-      numberOfPlayers,
+      teams,
       type
     })
   },
@@ -18,7 +18,7 @@ export default {
     }
   },
 
-  addTeam(state, { team, tournament }) {
+  addTeam(state, { team, tournament, random }) {
     const tournament = state.tournaments.find(t => t.slug === tournament);
 
     if (tournament.name) {
