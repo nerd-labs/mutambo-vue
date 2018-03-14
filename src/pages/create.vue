@@ -20,8 +20,7 @@
 </template>
 
  <script>
-
-import slug from 'slug';
+import slug from "slug";
 
 export default {
   data: () => ({
@@ -42,12 +41,13 @@ export default {
       }
 
       const slugged = slug(this.name.toLowerCase());
+      const teams = Array.from({length: this.totalPlayers}).map(() => ({});
 
       this.$store.commit("addTournament", {
         slug: slugged,
         name: this.name,
         type: this.type,
-        numberOfPlayers: this.totalPlayers
+        teams
       });
 
       this.$router.push(`/teams/${slugged}`);
