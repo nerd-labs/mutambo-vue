@@ -78,12 +78,21 @@ export default {
       });
 
       const matches = berger.getTable(this.teams);
+      const m = [];
 
       // remove the rounds and just keep all single matches
       const flattendMatches = [].concat.apply([], matches);
 
+      for (let i = 0; i < this.numberOfPlays; i++) {
+        [...flattendMatches].forEach((r) => {
+          m.push(r);
+        });
+      }
+
+      console.log(m);
+
       this.$store.commit("addMatches", {
-        matches: flattendMatches,
+        matches: m,
         slug: this.slug
       });
     }
