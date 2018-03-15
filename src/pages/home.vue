@@ -17,7 +17,7 @@
                 | {{ tournament.name }}
             v-flex.text-xs-left.text-sm-right(xs12 sm5)
               v-chip(color='secondary' text-color='white' disabled) {{tournament.type}}
-              v-chip(color='accent' text-color='white' disabled) {{tournament.numberOfPlayers}}
+              v-chip(color='accent' text-color='white' disabled) {{tournament.teams.length}}
 
 </template>
 

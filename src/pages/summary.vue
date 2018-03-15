@@ -1,0 +1,59 @@
+<template lang="pug">
+  div
+
+    v-container(grid-list-md)
+        v-layout(row wrap justify-space-between)
+          v-flex(md8 offset-md2)
+            v-card
+              v-card-title.accent.white--text Summary
+              v-card-text
+                v-list
+                  v-list-tile
+                    v-list-tile-content
+                      v-list-tile-title Your tournament will contain {{ totalTeams }} players.
+                  v-list-tile
+                    v-list-tile-content
+                      v-list-tile-title Every player will play with 1 team.
+                  v-list-tile
+                    v-list-tile-content
+                      v-list-tile-title All teams will play {{ numberOfPlays }} {{numberOfPlays > 1 ? 'times' : 'time' }} against all other player's teams.
+                  v-list-tile
+                    v-list-tile-content
+                      v-list-tile-title The tournament will consist of {{ totalFixtures }} fixtures.
+                  v-list-tile
+                    v-list-tile-content
+                      v-list-tile-title It will take ± {{ totalMinutes }} minutes to play all fixtures (6 minutes per half).
+        v-flex(mt-3)
+          v-btn(color="primary") Create tournament
+</template>
+
+ <script>
+export default {
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
+
+    tournament() {
+      return this.$store.getters.tournament(this.slug);
+    },
+
+    totalTeams() {
+      return this.tournament.teams.length;
+    },
+
+    numberOfPlays() {
+      return this.tournament.details.numberOfPlays;
+    },
+
+    totalFixtures() {
+      const length = this.tournament.teams.length;
+      return ((length*(length-1))/2) * this.numberOfPlays;
+    },
+
+    totalMinutes() {
+      return this.totalFixtures * 12;
+    }
+  }
+};
+</script>
