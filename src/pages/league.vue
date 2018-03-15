@@ -8,22 +8,13 @@
 
 </template>
 
-<style lang="scss">
-.matches {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 20px;
-}
-</style>
-
-
 <script>
 import { matchStates } from '../config';
 
 export default {
   data: () => ({
     randomly: false,
+    activeTeams: [],
     matches: [{
       home: {
         team: 'Juventus',
@@ -116,14 +107,18 @@ export default {
     },
   },
   methods: {
+    isTeamPlaying(team) {
+      return this.activeTeams.indexOf(team) > -1;
+    },
+
     matchUpdate() {
-      let activeTeams = [];
+      this.activeTeams = [];
 
       const activeMatches = this.matches.filter((m) => m.state === matchStates.PLAYING);
 
       activeMatches.forEach((m) => {
-        activeTeams.push(m.home.team);
-        activeTeams.push(m.away.team);
+        this.activeTeams.push(m.home.team);
+        this.activeTeams.push(m.away.team);
       });
 
       this.matches.forEach((m, i) => {
@@ -131,8 +126,8 @@ export default {
 
         if (
           (
-            activeTeams.indexOf(m.home.team) > -1 ||
-            activeTeams.indexOf(m.away.team) > -1
+            this.isTeamPlaying(m.home.team) ||
+            this.isTeamPlaying(m.away.team)
           ) && m.state !== matchStates.PLAYING
         ) {
           this.matches[i].state = matchStates.DISABLED;
@@ -144,3 +139,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.matches {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px;
+}
+</style>

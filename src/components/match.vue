@@ -1,12 +1,13 @@
 <template lang="pug">
-  .match(v-bind:class="{'match--playing': match.state === 'playing', 'match--done': match.state === 'done' , 'match--disabled': match.state === 'disabled'}")
-    .math__side.match__side--home(v-bind:class="{'match__side--winner': match.home.winner ===  true, 'match__side--loser': match.home.winner === false}")
-      .match__team {{ match.home.team }}
+  .match(:class="{'match--playing': match.state === 'playing', 'match--done': match.state === 'done' , 'match--disabled': match.state === 'disabled'}")
+    .math__side.match__side--home(:class="{'match__side--winner': match.home.winner ===  true, 'match__side--loser': match.home.winner === false}")
+      .match__team
+        .match__name {{ match.home.team }}
         .match__player {{ match.home.player }}
 
       .match__score {{ match.home.score }}
 
-      input(type="number" v-model="match.home.score" min="0").match__score--input
+      input.match__score--input(type="number" v-model="match.home.score" min="0")
 
     .match__center
       .match__playing live
@@ -14,14 +15,49 @@
       button.match__button.match__button--start(@click="startMatch") start match
       button.match__button.match__button--end(@click="endMatch") end match
 
-    .math__side.match__side--away(v-bind:class="{'match__side--winner': match.away.winner ===  true, 'match__side--loser': match.away.winner === false}")
-      .match__team {{ match.away.team }}
-          .match__player {{ match.away.player }}
+    .math__side.match__side--away(:class="{'match__side--winner': match.away.winner ===  true, 'match__side--loser': match.away.winner === false}")
+      .match__team
+        .match__name {{ match.away.team }}
+        .match__player {{ match.away.player }}
 
       .match__score {{ match.away.score }}
 
-      input(type="number" v-model="match.away.score" min="0").match__score--input
+      input.match__score--input(type="number" v-model="match.away.score" min="0")
 </template>
+
+<script>
+import { matchStates } from '../config';
+
+export default {
+  props: {
+    match: {
+      required: true
+    }
+  },
+
+  methods: {
+    startMatch() {
+      this.match.state = matchStates.PLAYING;
+
+      this.$emit("update");
+    },
+
+    endMatch() {
+      this.match.state = matchStates.DONE;
+
+      if (this.match.home.score > this.match.away.score) {
+        this.match.home.winner = true;
+        this.match.away.winner = false;
+      } else if (this.match.home.score < this.match.away.score) {
+        this.match.home.winner = false;
+        this.match.away.winner = true;
+      }
+
+      this.$emit("update");
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 .match {
@@ -176,37 +212,3 @@
   }
 }
 </style>
-
-<script>
-import { matchStates } from '../config';
-
-export default {
-  props: {
-    match: {
-      required: true
-    }
-  },
-
-  methods: {
-    startMatch() {
-      this.match.state = matchStates.PLAYING;
-
-      this.$emit("update");
-    },
-
-    endMatch() {
-      this.match.state = matchStates.DONE;
-
-      if (this.match.home.score > this.match.away.score) {
-        this.match.home.winner = true;
-        this.match.away.winner = false;
-      } else if (this.match.home.score < this.match.away.score) {
-        this.match.home.winner = false;
-        this.match.away.winner = true;
-      }
-
-      this.$emit("update");
-    }
-  }
-};
-</script>
