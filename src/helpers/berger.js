@@ -19,7 +19,7 @@ function getTable (teams, useDummy = false, dummy = {}) {
   let columnB = teams.slice(gamesPerRound)
   const fixed = teams[0]
 
-  return Array.from({length: numberOfRounds}).map((_, i) => {
+  const matches = Array.from({length: numberOfRounds}).map((_, i) => {
     let gameCount = 1
 
     let round = Array.from({length: gamesPerRound}).reduce((acc, _, k) => {
@@ -42,7 +42,11 @@ function getTable (teams, useDummy = false, dummy = {}) {
     columnA = [fixed, columnB.shift(), ...columnA.slice(1)]
     columnB.push(columnA.pop())
     return round
-  })
+  });
+
+  const flattendMatches = [].concat.apply([], matches);
+
+  return flattendMatches;
 }
 
 export default {

@@ -36,7 +36,6 @@ export default {
       this.activeTeams = [];
 
       const activeMatches = this.matches.filter((m) => m.state === matchStates.PLAYING);
-      console.log(activeMatches);
 
       activeMatches.forEach((m) => {
         this.activeTeams.push(m.home.club);
