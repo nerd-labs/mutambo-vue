@@ -2,7 +2,7 @@
   .match(:class="{'match--playing': match.state === 'playing', 'match--done': match.state === 'done' , 'match--disabled': match.state === 'disabled'}")
     .math__side.match__side--home(:class="{'match__side--winner': match.home.winner ===  true, 'match__side--loser': match.home.winner === false}")
       .match__team
-        .match__name {{ match.home.team }}
+        .match__name {{ match.home.club }}
         .match__player {{ match.home.player }}
 
       .match__score {{ match.home.score }}
@@ -17,7 +17,7 @@
 
     .math__side.match__side--away(:class="{'match__side--winner': match.away.winner ===  true, 'match__side--loser': match.away.winner === false}")
       .match__team
-        .match__name {{ match.away.team }}
+        .match__name {{ match.away.club }}
         .match__player {{ match.away.player }}
 
       .match__score {{ match.away.score }}

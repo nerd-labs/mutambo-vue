@@ -33,5 +33,13 @@ export default {
       }
     }
   },
+
+  addMatches(state, { matches, slug }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      tournament.matches = matches;
+    }
+  },
 }
 

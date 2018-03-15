@@ -28,6 +28,8 @@
 </template>
 
  <script>
+import berger from '../helpers/berger';
+
 export default {
   computed: {
     slug() {
@@ -36,6 +38,10 @@ export default {
 
     tournament() {
       return this.$store.getters.tournament(this.slug);
+    },
+
+    teams() {
+      return this.tournament.teams;
     },
 
     totalTeams() {
@@ -56,9 +62,30 @@ export default {
     }
   },
 
+  mounted() {
+    this.generateMatches();
+  },
+
   methods: {
     submit() {
       this.$router.push(`/${this.tournament.type}/${this.slug}`);
+    },
+
+    generateMatches() {
+      this.teams.map((t) => {
+        t.score = 0;
+        t.winner = undefined;
+      });
+
+      const matches = berger.getTable(this.teams);
+
+      // remove the rounds and just keep all single matches
+      const flattendMatches = [].concat.apply([], matches);
+
+      this.$store.commit("addMatches", {
+        matches: flattendMatches,
+        slug: this.slug
+      });
     }
   }
 };

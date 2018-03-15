@@ -14,98 +14,19 @@ import { matchStates } from '../config';
 export default {
   data: () => ({
     randomly: false,
-    activeTeams: [],
-    matches: [{
-      home: {
-        team: 'Juventus',
-        player: 'Wart',
-        score: 0,
-        winner: undefined
-      },
-      away: {
-        team: 'AS Roma',
-        player: 'Robbert',
-        score: 0,
-        winner: undefined
-      },
-      state: matchStates.NONE
-    }, {
-      home: {
-        team: 'Chelsea',
-        player: 'Lander',
-        score: 0,
-        winner: undefined
-      },
-      away: {
-        team: 'Man. Utd.',
-        player: 'Stijn',
-        score: 0,
-        winner: undefined
-      },
-      state: matchStates.NONE
-    }, {
-      home: {
-        team: 'Man. City',
-        player: 'Tom',
-        score: 0,
-        winner: undefined
-      },
-      away: {
-        team: 'PSG',
-        player: 'Frederik',
-        score: 0,
-        winner: undefined
-      },
-      state: matchStates.NONE
-    },{
-      home: {
-        team: 'Juventus',
-        player: 'Wart',
-        score: 0,
-        winner: undefined
-      },
-      away: {
-        team: 'Chelsea',
-        player: 'Lander',
-        score: 0,
-        winner: undefined
-      },
-      state: matchStates.NONE
-    },{
-      home: {
-        team: 'AS Roma',
-        player: 'Robbert',
-        score: 0,
-        winner: undefined
-      },
-      away: {
-        team: 'PSG',
-        player: 'Frederik',
-        score: 0,
-        winner: undefined
-      },
-      state: matchStates.NONE
-    },{
-      home: {
-        team: 'Man. Utd.',
-        player: 'Stijn',
-        score: 0,
-        winner: undefined
-      },
-      away: {
-        team: 'Man. City',
-        player: 'Tom',
-        score: 0,
-        winner: undefined
-      },
-      state: matchStates.NONE
-    }]
+    activeTeams: []
   }),
+
   computed: {
     tournamentName() {
       return this.$store.getters.tournamentName(this.$route.params.slug);
     },
+
+    matches() {
+      return this.$store.getters.matchList(this.$route.params.slug);
+    },
   },
+
   methods: {
     isTeamPlaying(team) {
       return this.activeTeams.indexOf(team) > -1;
@@ -117,8 +38,8 @@ export default {
       const activeMatches = this.matches.filter((m) => m.state === matchStates.PLAYING);
 
       activeMatches.forEach((m) => {
-        this.activeTeams.push(m.home.team);
-        this.activeTeams.push(m.away.team);
+        this.activeTeams.push(m.home.club);
+        this.activeTeams.push(m.away.club);
       });
 
       this.matches.forEach((m, i) => {
@@ -126,8 +47,8 @@ export default {
 
         if (
           (
-            this.isTeamPlaying(m.home.team) ||
-            this.isTeamPlaying(m.away.team)
+            this.isTeamPlaying(m.home.club) ||
+            this.isTeamPlaying(m.away.club)
           ) && m.state !== matchStates.PLAYING
         ) {
           this.matches[i].state = matchStates.DISABLED;
