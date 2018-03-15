@@ -10,7 +10,7 @@
 
         .mt-5.text-xs-left
           v-checkbox(label='Randomly mix players and teams' v-model='randomly')
-          v-btn(color="success") Submit
+          v-btn(color="success" @click="submit") Submit
 </template>
 
 <script>
@@ -27,6 +27,10 @@ export default {
       return this.$store.getters.tournamentName(this.$route.params.slug);
     },
 
+    tournamentType() {
+      return this.$store.getters.tournamentType(this.$route.params.slug);
+    },
+
     tournamentSlug() {
       return this.$store.getters.tournamentSlug(this.$route.params.slug);
     },
@@ -41,6 +45,10 @@ export default {
         team: team,
         tournament: this.tournamentSlug
       });
+    },
+
+    submit() {
+      this.$router.push(`/${this.tournamentType}/${this.tournamentSlug}`);
     }
   }
 };
