@@ -24,7 +24,7 @@
                     v-list-tile-content
                       v-list-tile-title It will take ± {{ totalMinutes }} minutes to play all fixtures (6 minutes per half).
         v-flex(mt-3)
-          v-btn(color="primary" @click="submit") Create tournament
+          v-btn(color="primary" @click="submit") Start tournament
 </template>
 
  <script>
