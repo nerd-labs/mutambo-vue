@@ -7,6 +7,10 @@ export default {
     return state.tournaments.find(tournament => tournament.slug === slug).name;
   },
 
+  tournamentType: state => slug => {
+    return state.tournaments.find(tournament => tournament.slug === slug).type;
+  },
+
   tournamentSlug: state => slug => {
     return state.tournaments.find(tournament => tournament.slug === slug).slug;
   },
