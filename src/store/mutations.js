@@ -1,3 +1,5 @@
+import { pages } from '../config';
+
 export default {
   addTournament(state, { slug, name, teams, type }) {
     state.tournaments.push({
@@ -6,6 +8,16 @@ export default {
       teams,
       type
     })
+  },
+
+  setProgress(state, { slug, page }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      tournament.page = page;
+    } else {
+      throw new Error(`Tournament ${slug} not found`);
+    }
   },
 
   addDetails(state, { slug, details }) {

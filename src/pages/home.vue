@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-btn(color="primary" @click="goToRoute('create')") Create tournament
+    v-btn(color="primary" @click="goToCreate()") Create tournament
 
     br
     br
@@ -13,7 +13,7 @@
               .pl-3.pr-3
                 v-divider
             v-flex(xs12 sm7)
-              v-subheader(@click="goToRoute(`teams/${tournament.slug}`)")
+              v-subheader(@click="goToRoute(tournament.slug)")
                 | {{ tournament.name }}
             v-flex.text-xs-left.text-sm-right(xs12 sm5)
               v-chip(color='secondary' text-color='white' disabled) {{tournament.type}}
@@ -24,8 +24,15 @@
 <script>
 export default {
   methods: {
-    goToRoute(route) {
-      this.$router.push(route);
+    goToCreate() {
+      this.$router.push(`create`);
+    },
+
+    goToRoute(slug) {
+      const tournament = this.$store.getters.tournament(slug);
+      const route = tournament.page;
+
+      this.$router.push(`${route}/${slug}`);
     }
   },
 

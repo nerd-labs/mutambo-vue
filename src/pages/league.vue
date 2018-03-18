@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import { matchStates } from '../config';
+
+import { matchStates, pages } from '../config';
 
 export default {
   data: () => ({
@@ -25,6 +26,13 @@ export default {
     matches() {
       return this.$store.getters.matchList(this.$route.params.slug);
     },
+  },
+
+  mounted() {
+    this.$store.commit('setProgress', {
+      slug: this.$route.params.slug,
+      page: pages.LEAGUE
+    });
   },
 
   methods: {

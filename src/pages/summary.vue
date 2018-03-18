@@ -28,7 +28,9 @@
 </template>
 
  <script>
+
 import berger from '../helpers/berger';
+import { pages } from "../config";
 
 export default {
   computed: {
@@ -64,6 +66,11 @@ export default {
 
   mounted() {
     this.generateMatches();
+
+    this.$store.commit('setProgress', {
+      slug: this.$route.params.slug,
+      page: pages.SUMMARY
+    });
   },
 
   methods: {
