@@ -7,6 +7,7 @@ import detail from '../pages/detail.vue';
 import teams from '../pages/teams.vue';
 import random from '../pages/random.vue';
 import summary from '../pages/summary.vue';
+import league from '../pages/league.vue';
 
 Vue.use(Router)
 
@@ -18,5 +19,6 @@ export default new Router({
     { path: '/teams/:slug', component: teams },
     { path: '/random/:slug', component: random },
     { path: '/summary/:slug', component: summary }
+    { path: '/league/:slug', component: league }
   ]
 })
