@@ -72,22 +72,20 @@ export default {
     },
 
     generateMatches() {
-      this.teams.map((t) => {
-        t.score = 0;
-        t.winner = undefined;
+      this.teams.map((team) => {
+        team.score = 0;
+        team.winner = undefined;
       });
 
-      const matches = berger.getTable(this.teams);
-      const m = [];
+      const matches = [];
 
       for (let i = 0; i < this.numberOfPlays; i++) {
-        m.push(...matches);
+        const bergerTable = berger.getTable(this.teams);
+        matches.push(...bergerTable);
       }
 
-      console.log(m);
-
       this.$store.commit("addMatches", {
-        matches: m,
+        matches: matches,
         slug: this.slug
       });
     }
