@@ -24,10 +24,12 @@
                     v-list-tile-content
                       v-list-tile-title It will take ± {{ totalMinutes }} minutes to play all fixtures (6 minutes per half).
         v-flex(mt-3)
-          v-btn(color="primary" @click="submit") Create tournament
+          v-btn(color="primary" @click="submit") Start tournament
 </template>
 
  <script>
+import berger from '../helpers/berger';
+
 export default {
   computed: {
     slug() {
@@ -36,6 +38,10 @@ export default {
 
     tournament() {
       return this.$store.getters.tournament(this.slug);
+    },
+
+    teams() {
+      return this.tournament.teams;
     },
 
     totalTeams() {
@@ -56,9 +62,36 @@ export default {
     }
   },
 
+  mounted() {
+    this.generateMatches();
+  },
+
   methods: {
     submit() {
       this.$router.push(`/${this.tournament.type}/${this.slug}`);
+    },
+
+    reverseFixtures(n) {
+      return n % 2 === 0;
+    },
+
+    generateMatches() {
+      this.teams.map((team) => {
+        team.score = 0;
+        team.winner = undefined;
+      });
+
+      const matches = [];
+
+      for (let i = 1; i <= this.numberOfPlays; i++) {
+        const bergerTable = berger.getTable(this.teams, this.reverseFixtures(i));
+        matches.push(...bergerTable);
+      }
+
+      this.$store.commit("addMatches", {
+        matches: matches,
+        slug: this.slug
+      });
     }
   }
 };

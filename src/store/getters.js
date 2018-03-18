@@ -19,6 +19,10 @@ export default {
     return state.tournaments.find(tournament => tournament.slug === slug).teams;
   },
 
+  matchList: state => slug => {
+    return state.tournaments.find(tournament => tournament.slug === slug).matches;
+  },
+
   tournament: state => slug => {
     return state.tournaments.find(tournament => tournament.slug === slug) || {};
   }
