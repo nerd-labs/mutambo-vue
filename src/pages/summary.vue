@@ -78,6 +78,10 @@ export default {
       this.$router.push(`/${this.tournament.type}/${this.slug}`);
     },
 
+    reverseFixtures(n) {
+      return n % 2 === 0;
+    },
+
     generateMatches() {
       this.teams.map((team) => {
         team.score = 0;
@@ -86,8 +90,8 @@ export default {
 
       const matches = [];
 
-      for (let i = 0; i < this.numberOfPlays; i++) {
-        const bergerTable = berger.getTable(this.teams);
+      for (let i = 1; i <= this.numberOfPlays; i++) {
+        const bergerTable = berger.getTable(this.teams, this.reverseFixtures(i));
         matches.push(...bergerTable);
       }
 

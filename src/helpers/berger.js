@@ -1,6 +1,6 @@
 import { matchStates } from '../config';
 
-function getTable (teams, useDummy = false, dummy = {}) {
+function getTable(teams, reverseFixtures, useDummy = false, dummy = {}) {
   if (!Array.isArray(teams)) {
     teams = Array.from({ length: teams }).map((_, i) => i)
   } else {
@@ -27,8 +27,8 @@ function getTable (teams, useDummy = false, dummy = {}) {
         acc.push({
           round: i + 1,
           game: gameCount,
-          home: columnA[k],
-          away: columnB[k],
+          home: reverseFixtures ? columnB[k] : columnA[k],
+          away: reverseFixtures ? columnA[k] : columnB[k],
           state: matchStates.NONE
         })
 
