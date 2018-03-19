@@ -13,8 +13,6 @@
 
 <script>
 
-import { pages } from "../config";
-
 export default {
   data: () => ({
     randomly: false
@@ -31,13 +29,6 @@ export default {
     teams() {
       return this.$store.getters.teams(this.$route.params.slug) || [];
     }
-  },
-
-  mounted: function() {
-    this.$store.commit('setProgress', {
-      slug: this.$route.params.slug,
-      page: pages.TEAMS
-    });
   },
 
   methods: {

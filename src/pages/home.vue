@@ -22,10 +22,13 @@
 </template>
 
 <script>
+
+import { routes } from '../config';
+
 export default {
   methods: {
     goToCreate() {
-      this.$router.push(`create`);
+      this.$router.push(routes.CREATE.path);
     },
 
     goToRoute(slug) {

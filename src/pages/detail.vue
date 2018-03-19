@@ -14,8 +14,6 @@
 
 <script>
 
-import { pages } from "../config";
-
 export default {
   data: () => ({
     valid: true,
@@ -34,13 +32,6 @@ export default {
     tournamentName() {
       return this.$store.getters.tournamentName(this.slug);
     },
-  },
-
-  mounted: function() {
-    this.$store.commit('setProgress', {
-      slug: this.$route.params.slug,
-      page: pages.DETAIL
-    });
   },
 
   methods: {
