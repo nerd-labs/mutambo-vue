@@ -40,7 +40,6 @@ export default {
     },
 
     submit() {
-      console.log('submit', this.randomly);
       this.$router.push(`/summary/${this.tournamentSlug}`);
     }
   }
