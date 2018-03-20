@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import { routes } from '../config';
+
 import home from '../pages/home.vue';
 import create from '../pages/create.vue';
 import detail from '../pages/detail.vue';
@@ -11,14 +13,19 @@ import league from '../pages/league.vue';
 
 Vue.use(Router)
 
+function buildRouteConfig() {
+  let routeConfig = [];
+
+  for(let key in routes) {
+    routeConfig.push({
+      path: routes[key].fullPath,
+      component: routes[key].component,
+    });
+  }
+
+  return routeConfig;
+}
+
 export default new Router({
-  routes: [
-    { path: '/', component: home },
-    { path: '/create', component: create },
-    { path: '/detail/:slug', component: detail },
-    { path: '/teams/:slug', component: teams },
-    { path: '/summary/:slug', component: summary },
-    { path: '/league/:slug', component: league },
-    { path: '/random/:slug', component: random }
-  ]
+  routes: buildRouteConfig()
 })

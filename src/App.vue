@@ -14,11 +14,29 @@
 </template>
 
 <script>
+import { routes } from './config';
+
 export default {
   methods: {
     goToRoute(route) {
       this.$router.push(route);
     }
-  }
+  },
+
+  watch:{
+    $route (to){
+      const nextRoute = to.fullPath.split('/')[1];
+
+      const activePath = Object.keys(routes).find(r => routes[r].path === nextRoute);
+      const routeConfig = routes[activePath];
+
+      if (routeConfig.save) {
+        this.$store.commit('setProgress', {
+          slug: this.$route.params.slug,
+          page: routeConfig.path
+        });
+      }
+    }
+}
 };
 </script>

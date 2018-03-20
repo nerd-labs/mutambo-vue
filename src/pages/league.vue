@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 import { matchStates } from '../config';
 
 export default {

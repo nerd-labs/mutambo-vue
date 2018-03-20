@@ -12,7 +12,7 @@
               v-btn(color="primary" @click="submit" :disabled="!valid") Submit
 </template>
 
- <script>
+<script>
 
 export default {
   data: () => ({
@@ -23,6 +23,7 @@ export default {
       v => v >= 1 || "There should be at least 1 play"
     ]
   }),
+
   computed: {
     slug() {
       return this.$route.params.slug;
@@ -32,6 +33,7 @@ export default {
       return this.$store.getters.tournamentName(this.slug);
     },
   },
+
   methods: {
     submit() {
       if (!this.$refs.form.validate()) {

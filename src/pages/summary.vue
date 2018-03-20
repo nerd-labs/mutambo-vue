@@ -28,6 +28,7 @@
 </template>
 
  <script>
+
 import berger from '../helpers/berger';
 
 export default {
