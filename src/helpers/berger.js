@@ -1,4 +1,5 @@
 import { matchStates } from '../config';
+import IdGenerator from '../services/id-generator'
 
 function getTable(teams, reverseFixtures, useDummy = false, dummy = {}) {
   if (!Array.isArray(teams)) {
@@ -29,7 +30,8 @@ function getTable(teams, reverseFixtures, useDummy = false, dummy = {}) {
           game: gameCount,
           home: reverseFixtures ? columnB[k] : columnA[k],
           away: reverseFixtures ? columnA[k] : columnB[k],
-          state: matchStates.NONE
+          state: matchStates.NONE,
+          id: IdGenerator.id(),
         })
 
         gameCount++

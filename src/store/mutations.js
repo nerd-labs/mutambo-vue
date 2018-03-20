@@ -53,5 +53,7 @@ export default {
       tournament.matches = matches;
     }
   },
+
+  updateMatchScore() { }
 }
 
