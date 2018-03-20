@@ -18,6 +18,8 @@
 </template>
 
  <script>
+import IdGenerator from "../services/id-generator";
+
 export default {
   data: () => ({
     draw: false,
@@ -39,21 +41,20 @@ export default {
 
     startDraw() {
       this.draw = true;
-
-      const i = 0;
       this.random();
     },
 
-    random(y = 0) {
+    random(i = 0) {
       setTimeout(() => {
         this.newTeams.push({
           club: this.getRandomClub(),
-          player: this.getRandomPlayer()
+          player: this.getRandomPlayer(),
+          id: IdGenerator.id(),
         });
 
-        if (y < this.teams.length - 1) {
-          y++;
-          this.random(y);
+        if (i < this.teams.length - 1) {
+          i++;
+          this.random(i);
         } else {
           this.submitable = true;
         }
@@ -88,37 +89,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-// .matches {
-//   display: grid;
-//   grid-gap: 20px;
-//   grid-template-columns: repeat(3, 1fr);
-//   margin: 20px;
-// }
-
-// .match {
-//   background-color: white;
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   height: 80px;
-//   padding: 20px;
-// }
-
-// .math__side {
-//   align-items: center;
-//   display: flex;
-//   justify-content: space-between;
-// }
-
-// .match__team {
-//   font-size: 20px;
-//   font-weight: 300;
-// }
-
-// .match__player {
-//   font-size: 12px;
-//   line-height: 20px;
-//   opacity: 0.5;
-// }
-</style>

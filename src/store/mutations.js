@@ -45,8 +45,6 @@ export default {
   randomizeTeams(state, { slug, newTeams }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 
-    console.log('teams', newTeams)
-
     if (tournament) {
       tournament.teams = newTeams;
     } else {
