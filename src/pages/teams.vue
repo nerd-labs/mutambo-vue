@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 export default {
   data: () => ({
     randomly: false
@@ -29,6 +30,7 @@ export default {
       return this.$store.getters.teams(this.$route.params.slug) || [];
     }
   },
+
   methods: {
     addTeam(team) {
       this.$store.commit("addTeam", {
