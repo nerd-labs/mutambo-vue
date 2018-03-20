@@ -27,7 +27,7 @@ export default {
     $route (to){
       const nextRoute = to.fullPath.split('/')[1];
 
-      const activePath = Object.keys(routes).find(p => routes[p].path === nextRoute);
+      const activePath = Object.keys(routes).find(r => routes[r].path === nextRoute);
       const routeConfig = routes[activePath];
 
       if (routeConfig.save) {
