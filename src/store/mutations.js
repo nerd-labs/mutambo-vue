@@ -54,6 +54,16 @@ export default {
     }
   },
 
-  updateMatchScore() { }
+  updateMatchScore() { },
+  
+  randomizeTeams(state, { slug, newTeams }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      tournament.teams = newTeams;
+    } else {
+      throw new Error(`No tournament ${slug} found.`);
+    }
+  }
 }
 

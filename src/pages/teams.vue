@@ -35,13 +35,13 @@ export default {
     addTeam(team) {
       this.$store.commit("addTeam", {
         team: team,
-        tournament: this.tournamentSlug,
+        tournament: this.tournamentSlug
       });
     },
 
     submit() {
-      console.log('submit', this.randomly);
-      this.$router.push(`/summary/${this.tournamentSlug}`);
+      if (this.randomly) this.$router.push(`/random/${this.tournamentSlug}`);
+      else this.$router.push(`/summary/${this.tournamentSlug}`);
     }
   }
 };
