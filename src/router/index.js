@@ -7,6 +7,7 @@ import home from '../pages/home.vue';
 import create from '../pages/create.vue';
 import detail from '../pages/detail.vue';
 import teams from '../pages/teams.vue';
+import random from '../pages/random.vue';
 import summary from '../pages/summary.vue';
 import league from '../pages/league.vue';
 
