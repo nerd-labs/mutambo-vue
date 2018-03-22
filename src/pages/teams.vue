@@ -22,16 +22,16 @@ export default {
       return this.$route.params.slug;
     },
 
-    tournamentName() {
-      return this.$store.getters.tournament(this.slug).name();
+    tournament() {
+      return this.$store.getters.tournament(this.slug);
     },
 
-    tournamentSlug() {
-      return this.$store.getters.tournament(this.slug).slug();
+    name() {
+      return this.tournament.name();
     },
 
     teams() {
-      return this.$store.getters.tournament(this.slug).teams();
+      return this.tournament.teams();
     }
   },
 
@@ -39,13 +39,13 @@ export default {
     addTeam(team) {
       this.$store.commit("addTeam", {
         team: team,
-        tournament: this.tournamentSlug
+        tournament: this.slug
       });
     },
 
     submit() {
-      if (this.randomly) this.$router.push(`/random/${this.tournamentSlug}`);
-      else this.$router.push(`/summary/${this.tournamentSlug}`);
+      if (this.randomly) this.$router.push(`/random/${this.slug}`);
+      else this.$router.push(`/summary/${this.slug}`);
     }
   }
 };
