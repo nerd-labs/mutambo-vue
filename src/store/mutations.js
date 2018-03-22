@@ -53,15 +53,30 @@ export default {
       tournament.matches = matches;
     }
   },
-
+  
   randomizeTeams(state, { slug, newTeams }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
+	const tournament = state.tournaments.find(t => t.slug === slug);
 
     if (tournament) {
       tournament.teams = newTeams;
     } else {
       throw new Error(`No tournament ${slug} found.`);
     }
+  },
+
+  updateMatchScore(state, { match, slug }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      const index = tournament.matches.findIndex(m => m.id === match.id);
+
+      if (index > -1) {
+        tournament.matches[index] = match;
+      }
+    } else {
+      throw new Error(`Tournament ${slug} not found`);
+    }
+
   }
 }
 

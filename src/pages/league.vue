@@ -9,12 +9,10 @@
 </template>
 
 <script>
-
-import { matchStates } from '../config';
+import { matchStates } from "../config";
 
 export default {
   data: () => ({
-    randomly: false,
     activeTeams: []
   }),
 
@@ -26,19 +24,30 @@ export default {
     matches() {
       return this.$store.getters.matchList(this.$route.params.slug);
     },
+
+    isTeamPlaying() {
+      return team => this.activeTeams.indexOf(team) > -1;
+    }
   },
 
   methods: {
-    isTeamPlaying(team) {
-      return this.activeTeams.indexOf(team) > -1;
-    },
+    matchUpdate(event) {
+      const index = this.matches.findIndex(m => {
+        return m.id === event.match.id;
+      });
 
-    matchUpdate() {
+      if (index === -1) throw new Error("match not found");
+
+      this.matches[index].state = event.state;
+      this.matches[index].winner = event.winner;
+
       this.activeTeams = [];
 
-      const activeMatches = this.matches.filter((m) => m.state === matchStates.PLAYING);
+      const activeMatches = this.matches.filter(
+        m => m.state === matchStates.PLAYING
+      );
 
-      activeMatches.forEach((m) => {
+      activeMatches.forEach(m => {
         this.activeTeams.push(m.home.club);
         this.activeTeams.push(m.away.club);
       });
@@ -47,16 +56,22 @@ export default {
         if (m.state === matchStates.DONE) return;
 
         if (
-          (
-            this.isTeamPlaying(m.home.club) ||
-            this.isTeamPlaying(m.away.club)
-          ) && m.state !== matchStates.PLAYING
+          (this.isTeamPlaying(m.home.club) ||
+            this.isTeamPlaying(m.away.club)) &&
+          m.state !== matchStates.PLAYING
         ) {
           this.matches[i].state = matchStates.DISABLED;
-        } else if(m.state === matchStates.DISABLED) {
+        } else if (m.state === matchStates.DISABLED) {
           this.matches[i].state = matchStates.NONE;
         }
       });
+
+      if (event.state === matchStates.DONE) {
+        this.$store.commit("updateMatchScore", {
+          match: this.matches[index],
+          slug: this.$route.params.slug
+        });
+      }
     }
   }
 };

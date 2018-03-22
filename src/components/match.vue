@@ -1,59 +1,76 @@
 <template lang="pug">
-  .match(:class="{'match--playing': match.state === 'playing', 'match--done': match.state === 'done' , 'match--disabled': match.state === 'disabled'}")
-    .math__side.match__side--home(:class="{'match__side--winner': match.home.winner ===  true, 'match__side--loser': match.home.winner === false}")
-      .match__team
-        .match__club {{ match.home.club }}
-        .match__player {{ match.home.player }}
+    .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}")
+      .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
+        .match__team
+          .match__club {{ internalMatch.home.club }}
+          .match__player {{ internalMatch.home.player }}
 
-      .match__score {{ match.home.score }}
+        .match__score {{ internalMatch.home.score }}
 
-      input.match__score--input(type="number" v-model="match.home.score" min="0")
+        input.match__score--input(type="number" v-model="internalMatch.home.score" min="0")
 
-    .match__center
-      .match__playing live
-      .match__divider -
-      button.match__button.match__button--start(@click="startMatch") start match
-      button.match__button.match__button--end(@click="endMatch") end match
+      .match__center
+        .match__playing live
+        .match__divider -
+        button.match__button.match__button--start(@click="startMatch") start match
+        button.match__button.match__button--end(@click="endMatch") end match
 
-    .math__side.match__side--away(:class="{'match__side--winner': match.away.winner ===  true, 'match__side--loser': match.away.winner === false}")
-      .match__team
-        .match__club {{ match.away.club }}
-        .match__player {{ match.away.player }}
+      .math__side.match__side--away(:class="{'match__side--winner': internalMatch.winner ===  2, 'match__side--loser': internalMatch.winner === 1}")
+        .match__team
+          .match__club {{ internalMatch.away.club }}
+          .match__player {{ internalMatch.away.player }}
 
-      .match__score {{ match.away.score }}
+        .match__score {{ internalMatch.away.score }}
 
-      input.match__score--input(type="number" v-model="match.away.score" min="0")
+        input.match__score--input(type="number" v-model="internalMatch.away.score" min="0")
 </template>
 
 <script>
-import { matchStates } from '../config';
+import { matchStates } from "../config";
 
 export default {
+  data: () => ({
+    internalMatch: undefined
+  }),
+
   props: {
     match: {
       required: true
     }
   },
 
+  beforeMount() {
+    this.internalMatch = this.match;
+  },
+
   methods: {
     startMatch() {
-      this.match.state = matchStates.PLAYING;
-
-      this.$emit("update");
+      this.$emit("update", {
+        match: this.internalMatch,
+        state: matchStates.PLAYING
+      });
     },
 
     endMatch() {
-      this.match.state = matchStates.DONE;
+      let winner = 0;
 
-      if (this.match.home.score > this.match.away.score) {
-        this.match.home.winner = true;
-        this.match.away.winner = false;
-      } else if (this.match.home.score < this.match.away.score) {
-        this.match.home.winner = false;
-        this.match.away.winner = true;
+      // convert to number
+      this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
+      this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
+
+      if (this.internalMatch.home.score > this.internalMatch.away.score) {
+        winner = 1;
+      } else if (
+        this.internalMatch.home.score < this.internalMatch.away.score
+      ) {
+        winner = 2;
       }
 
-      this.$emit("update");
+      this.$emit("update", {
+        match: this.internalMatch,
+        state: matchStates.DONE,
+        winner
+      });
     }
   }
 };
@@ -81,7 +98,7 @@ export default {
 }
 
 .match--disabled {
-  opacity: .25;
+  opacity: 0.25;
 
   .match__button,
   .match__score {
@@ -98,7 +115,7 @@ export default {
   }
 
   .match__side--loser .match__team {
-    opacity: .5;
+    opacity: 0.5;
   }
 
   .match__button,
@@ -150,13 +167,13 @@ export default {
 
   &::after {
     animation-name: move;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     background-color: currentColor;
     border-radius: 50%;
-    content: '';
+    content: "";
     display: block;
     height: 3px;
     right: -10px;
@@ -186,7 +203,7 @@ export default {
 .match__player {
   font-size: 12px;
   line-height: 20px;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .match__score,

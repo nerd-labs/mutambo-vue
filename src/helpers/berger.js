@@ -1,10 +1,9 @@
 import { matchStates } from '../config';
+import IdGenerator from '../services/id-generator'
 
 function getTable(teams, reverseFixtures, useDummy = false, dummy = {}) {
   if (!Array.isArray(teams)) {
     teams = Array.from({ length: teams }).map((_, i) => i)
-  } else {
-    teams = [...teams] // copy array to avoid side effects
   }
 
   if (teams.length % 2 !== 0) {
@@ -19,17 +18,18 @@ function getTable(teams, reverseFixtures, useDummy = false, dummy = {}) {
   let columnB = teams.slice(gamesPerRound)
   const fixed = teams[0]
 
-  const matches = Array.from({length: numberOfRounds}).map((_, i) => {
+  const matches = Array.from({ length: numberOfRounds }).map((_, i) => {
     let gameCount = 1
 
-    let round = Array.from({length: gamesPerRound}).reduce((acc, _, k) => {
+    let round = Array.from({ length: gamesPerRound }).reduce((acc, _, k) => {
       if (useDummy || (columnA[k] !== dummy && columnB[k] !== dummy)) {
         acc.push({
           round: i + 1,
           game: gameCount,
-          home: reverseFixtures ? columnB[k] : columnA[k],
-          away: reverseFixtures ? columnA[k] : columnB[k],
-          state: matchStates.NONE
+          home: JSON.parse(JSON.stringify(reverseFixtures ? columnB[k] : columnA[k])),
+          away: JSON.parse(JSON.stringify(reverseFixtures ? columnA[k] : columnB[k])),
+          state: matchStates.NONE,
+          id: IdGenerator.id(),
         })
 
         gameCount++
