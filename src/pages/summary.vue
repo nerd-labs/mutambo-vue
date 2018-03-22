@@ -28,8 +28,7 @@
 </template>
 
  <script>
-
-import berger from '../helpers/berger';
+import berger from "../helpers/berger";
 
 export default {
   computed: {
@@ -55,7 +54,7 @@ export default {
 
     totalFixtures() {
       const length = this.tournament.teams.length;
-      return ((length*(length-1))/2) * this.numberOfPlays;
+      return length * (length - 1) / 2 * this.numberOfPlays;
     },
 
     totalMinutes() {
@@ -77,17 +76,22 @@ export default {
     },
 
     generateMatches() {
-      this.teams.map((team) => {
-        team.score = 0;
-        team.winner = undefined;
-      });
-
       const matches = [];
 
       for (let i = 1; i <= this.numberOfPlays; i++) {
-        const bergerTable = berger.getTable(this.teams, this.reverseFixtures(i));
+        const teams = JSON.parse(JSON.stringify(this.teams));
+
+        const bergerTable = berger.getTable(
+          teams,
+          this.reverseFixtures(i)
+        );
         matches.push(...bergerTable);
       }
+
+      matches.map(match => {
+        match.away.score = 0;
+        match.home.score = 0;
+      });
 
       this.$store.commit("addMatches", {
         matches: matches,
