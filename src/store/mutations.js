@@ -54,6 +54,19 @@ export default {
     }
   },
 
-  updateMatchScore() { }
+  updateMatchScore(state, { match, slug }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      const index = tournament.matches.findIndex(m => m.id === match.id);
+
+      if (index > -1) {
+        tournament.matches[index] = match;
+      }
+    } else {
+      throw new Error(`Tournament ${slug} not found`);
+    }
+
+  }
 }
 

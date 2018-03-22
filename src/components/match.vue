@@ -30,12 +30,12 @@ import { matchStates } from "../config";
 
 export default {
   data: () => ({
-    internalMatch: undefined,
+    internalMatch: undefined
   }),
 
   props: {
     match: {
-      required: true,
+      required: true
     }
   },
 
@@ -54,9 +54,15 @@ export default {
     endMatch() {
       let winner = 0;
 
+      // convert to number
+      this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
+      this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
+
       if (this.internalMatch.home.score > this.internalMatch.away.score) {
         winner = 1;
-      } else if (this.internalMatch.home.score < this.internalMatch.away.score) {
+      } else if (
+        this.internalMatch.home.score < this.internalMatch.away.score
+      ) {
         winner = 2;
       }
 

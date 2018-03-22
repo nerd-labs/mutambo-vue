@@ -69,6 +69,7 @@ export default {
       if (event.state === matchStates.DONE) {
         this.$store.commit("updateMatchScore", {
           match: this.matches[index],
+          slug: this.$route.params.slug
         });
       }
     }
