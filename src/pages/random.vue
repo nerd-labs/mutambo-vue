@@ -76,7 +76,7 @@ export default {
     },
 
     teams() {
-      return this.$store.getters.teams(this.slug);
+      return this.$store.getters.tournament(this.slug).teams();
     },
 
     clubs() {

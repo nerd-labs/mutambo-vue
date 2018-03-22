@@ -17,12 +17,20 @@ export default {
   }),
 
   computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
+
+    tournament() {
+      return this.$store.getters.tournament(this.slug);
+    },
+
     tournamentName() {
-      return this.$store.getters.tournamentName(this.$route.params.slug);
+      return this.tournament.name();
     },
 
     matches() {
-      return this.$store.getters.matchList(this.$route.params.slug);
+      return this.tournament.matchList();
     },
 
     isTeamPlaying() {
@@ -69,7 +77,7 @@ export default {
       if (event.state === matchStates.DONE) {
         this.$store.commit("updateMatchScore", {
           match: this.matches[index],
-          slug: this.$route.params.slug
+          slug: this.slug
         });
       }
     }

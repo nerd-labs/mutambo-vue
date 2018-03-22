@@ -30,7 +30,7 @@ export default {
     },
 
     tournamentName() {
-      return this.$store.getters.tournamentName(this.slug);
+      return this.$store.getters.tournament(this.slug).name();
     },
   },
 

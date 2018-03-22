@@ -18,16 +18,20 @@ export default {
     randomly: false
   }),
   computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
+
     tournamentName() {
-      return this.$store.getters.tournamentName(this.$route.params.slug);
+      return this.$store.getters.tournament(this.slug).name();
     },
 
     tournamentSlug() {
-      return this.$store.getters.tournamentSlug(this.$route.params.slug);
+      return this.$store.getters.tournament(this.slug).slug();
     },
 
     teams() {
-      return this.$store.getters.teams(this.$route.params.slug) || [];
+      return this.$store.getters.tournament(this.slug).teams();
     }
   },
 

@@ -41,19 +41,23 @@ export default {
     },
 
     teams() {
-      return this.tournament.teams;
+      return this.tournament.teams();
     },
 
     totalTeams() {
-      return this.tournament.teams.length;
+      return this.teams.length;
+    },
+
+    type() {
+      return this.tournament.type();
     },
 
     numberOfPlays() {
-      return this.tournament.details.numberOfPlays;
+      return this.tournament.numberOfPlays();
     },
 
     totalFixtures() {
-      const length = this.tournament.teams.length;
+      const length = this.totalTeams;
       return length * (length - 1) / 2 * this.numberOfPlays;
     },
 
@@ -68,7 +72,7 @@ export default {
 
   methods: {
     submit() {
-      this.$router.push(`/${this.tournament.type}/${this.slug}`);
+      this.$router.push(`/${this.type}/${this.slug}`);
     },
 
     reverseFixtures(n) {
