@@ -53,6 +53,16 @@ export default {
       tournament.matches = matches;
     }
   },
+  
+  randomizeTeams(state, { slug, newTeams }) {
+	const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      tournament.teams = newTeams;
+    } else {
+      throw new Error(`No tournament ${slug} found.`);
+    }
+  },
 
   updateMatchScore(state, { match, slug }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
