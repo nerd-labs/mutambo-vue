@@ -33,7 +33,7 @@ export default {
 
     goToRoute(slug) {
       const tournament = this.$store.getters.tournament(slug);
-      const route = tournament.page;
+      const route = tournament.page();
 
       this.$router.push(`${route}/${slug}`);
     }
@@ -41,7 +41,7 @@ export default {
 
   computed: {
     existingTournaments() {
-      return this.$store.state.tournaments;
+      return this.$store.getters.tournaments();
     }
   }
 };

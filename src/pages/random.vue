@@ -75,8 +75,12 @@ export default {
       return this.$route.params.slug;
     },
 
+    tournament() {
+      return this.$store.getters.tournament(this.slug);
+    },
+
     teams() {
-      return this.$store.getters.teams(this.slug);
+      return this.tournament.teams();
     },
 
     clubs() {
