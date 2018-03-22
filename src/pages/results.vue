@@ -3,7 +3,7 @@
       v-container(grid-list-md)
         h2.display-2.accent--text.mb-5 {{ tournamentName }} results
 
-        v-flex(md8 offset-md2)
+        v-flex(xs12 xl8 offset-xl2)
           v-data-table.elevation-1(:headers='headers' :items='sortedResults' hide-actions)
             template(slot='items', slot-scope='props')
               td.text-xs-left {{ props.item.team }}
@@ -27,65 +27,47 @@ export default {
       {
         text: "Team",
         value: "team",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Played",
         value: "played",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Wins",
         value: "wins",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Draws",
         value: "draws",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Losses",
         value: "losses",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Scored",
         value: "scored",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Against",
         value: "against",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Difference",
         value: "difference",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       },
       {
         text: "Points",
         value: "points",
-        sortable: false,
-        align: "left",
-        class: "caption"
+        sortable: false
       }
     ]
   }),
