@@ -52,6 +52,5 @@ export const routes = {
     path: 'results',
     fullPath: '/results/:slug',
     component: results,
-    // save: true, ??
   },
 };
