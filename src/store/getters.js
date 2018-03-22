@@ -1,6 +1,5 @@
 export default {
   tournaments: state => () => {
-    console.log(state.tournaments);
     return state.tournaments;
   },
 
