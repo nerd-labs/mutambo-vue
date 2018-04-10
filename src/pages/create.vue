@@ -50,7 +50,7 @@ export default {
         teams
       });
 
-      this.$router.push(`/detail/${slugged}`);
+      this.$router.push(`/${this.type}/detail/${slugged}`);
     }
   }
 };

@@ -25,19 +25,19 @@ export const routes = {
   },
   DETAIL: {
     path: 'detail',
-    fullPath: '/detail/:slug',
+    fullPath: '/:type/detail/:slug',
     component: detail,
     save: true,
   },
   TEAMS: {
     path: 'teams',
-    fullPath: '/teams/:slug',
+    fullPath: '/:type/teams/:slug',
     component: teams,
     save: true,
   },
   SUMMARY: {
     path: 'summary',
-    fullPath: '/summary/:slug',
+    fullPath: '/:type/summary/:slug',
     component: summary,
     save: true,
   },
