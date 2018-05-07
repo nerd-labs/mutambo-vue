@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     valid: true,
@@ -29,9 +28,13 @@ export default {
       return this.$route.params.slug;
     },
 
+    type() {
+      return this.$route.params.type;
+    },
+
     tournamentName() {
       return this.$store.getters.tournament(this.slug).name();
-    },
+    }
   },
 
   methods: {
@@ -47,7 +50,7 @@ export default {
         }
       });
 
-      this.$router.push(`/teams/${this.slug}`);
+      this.$router.push(`/${this.type}/teams/${this.slug}`);
     }
   }
 };

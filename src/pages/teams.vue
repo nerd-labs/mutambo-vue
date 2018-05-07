@@ -22,6 +22,10 @@ export default {
       return this.$route.params.slug;
     },
 
+    type() {
+      return this.$route.params.type;
+    },
+
     tournament() {
       return this.$store.getters.tournament(this.slug);
     },
@@ -44,8 +48,8 @@ export default {
     },
 
     submit() {
-      if (this.randomly) this.$router.push(`/random/${this.slug}`);
-      else this.$router.push(`/summary/${this.slug}`);
+      if (this.randomly) this.$router.push(`/${this.type}/random/${this.slug}`);
+      else this.$router.push(`/${this.type}/summary/${this.slug}`);
     }
   }
 };
