@@ -5,14 +5,12 @@
           h1 {{ round.name }}
           .matches
             mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
-            //- .winner(v-if="round.name === 'Finals'")
+              .winner(v-if="round.name === 'Finals'")
                   span 🏆 As Roma 🏆
 </template>
 
 <script>
 import * as faker from "faker";
-
-import Duel from "duel";
 
 export default {
   data: () => ({
