@@ -1,109 +1,64 @@
 <template lang="pug">
     div
-      .bracket
-        .round(v-for="round in rounds" :class="round.classes")
+      .bracket(:class="totalRoundsClass")
+        .round(v-for="round in internalRounds" :class="round.classes")
           h1 {{ round.name }}
           .matches
             mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
-            .winner(v-if="round.name === 'Finals'")
+            //- .winner(v-if="round.name === 'Finals'")
                   span 🏆 As Roma 🏆
 </template>
 
 <script>
 import * as faker from "faker";
 
+import Duel from "duel";
+
 export default {
   data: () => ({
-    rounds: [
-      {
-        name: "Round 1",
-        classes: "round1 round--left",
-        matches: []
-      },
-      {
-        name: "Round 1",
-        classes: "round1 round--right",
-        matches: []
-      },
-      {
-        name: "Round 2",
-        classes: "round2 round--left",
-        matches: []
-      },
-      {
-        name: "Round 2",
-        classes: "round2 round--right",
-        matches: []
-      },
-      {
-        name: "Round 3",
-        classes: "round3 round--left",
-        matches: []
-      },
-      {
-        name: "Round 3",
-        classes: "round3 round--right",
-        matches: []
-      },
-      {
-        name: "Semi-Finals",
-        classes: "semi-finals round--left",
-        matches: []
-      },
-      {
-        name: "Semi-Finals",
-        classes: "semi-finals round--right",
-        matches: [
-        ]
-      },
-      {
-        name: "Finals",
-        classes: "finals",
-        matches: []
-      }
-    ]
+    internalRounds: [],
   }),
 
+  computed: {
+    slug() {
+      return this.$route.params.slug;
+    },
+
+    tournament() {
+      return this.$store.getters.tournament(this.slug);
+    },
+
+    rounds() {
+      return this.tournament.koRounds();
+    },
+
+    totalRoundsClass() {
+      return `bracket--${this.rounds.length}`;
+    }
+  },
   beforeMount() {
     for (let i = 0; i < this.rounds.length; i++) {
-      let number;
+      const round = this.rounds[i] || [];
+      const matches = round.matches || [];
 
-      switch (i) {
-        case 0:
-        case 1:
-          number = 8;
-          break;
-        case 2:
-        case 3:
-          number = 4;
-          break;
-        case 4:
-        case 5:
-          number = 2;
-          break;
-        default:
-          number = 1;
-      }
+      if (matches.length % 2 === 0) {
+        const half = matches.length / 2;
+        const full = matches.length;
 
-      for (let y = 0; y < number; y++) {
-        const home = {
-          club: faker.name.firstName(),
-          score: faker.random.number(10)
-        };
+        this.internalRounds.push({
+          matches: matches.slice(0, half),
+          round: i,
+          classes: `round${i + 1} round--left`
+        });
 
-        const away = {
-          club: faker.name.firstName(),
-          score: faker.random.number(10)
-        };
-
-        if (home.score === away.score) {
-          home.penaltyScore = faker.random.number(5);
-          away.penaltyScore = faker.random.number(5);
-        }
-
-        this.rounds[i].matches.push({
-          home,
-          away
+        this.internalRounds.push({
+          matches: matches.slice(half, full),
+          classes: `round${i + 1} round--right`
+        });
+      } else {
+        this.internalRounds.push({
+          matches,
+          round: i + 1
         });
       }
     }
@@ -174,12 +129,13 @@ export default {
   .bracket {
     display: grid;
     grid-auto-columns: minmax(50px, 1fr);
-    grid-template-rows: 1fr 1fr 200px minmax(1fr, 200px);
+    grid-template-rows: 1fr minmax(1fr, 200px);
     grid-template-areas:
-      "round1 round2-left round3-left"
-      "round3-right round2-right round1"
-      "semi-finals-left . semi-finals-right"
-      ". finals .";
+      "round1-left round1-right"
+      "round2-left round2-right"
+      "round3-left round3-right"
+      "round4-left round4-right"
+      "round5 .";
     grid-gap: 10px;
   }
 
@@ -228,25 +184,44 @@ export default {
     }
   }
 
-  .semi-finals {
+  .round4 {
     &.round--left {
-      grid-area: semi-finals-left;
+      grid-area: round4-left;
     }
 
     &.round--right {
-      grid-area: semi-finals-right;
+      grid-area: round4-right;
     }
   }
 
-  .finals {
-    grid-area: finals;
+  .round5 {
+    grid-area: round5;
   }
 }
 
 @media screen and (min-width: 1640px) {
   .bracket {
     grid-auto-columns: minmax(50px, 1fr);
-    grid-template-areas: "round1-left round2-left round3-left semi-finals-left finals semi-finals-right round3-right round2-right round1-right";
+  }
+
+  .bracket--1 {
+    grid-template-areas: "round1";
+  }
+
+  .bracket--2 {
+    grid-template-areas: "round1-left round2 round1-right";
+  }
+
+  .bracket--3 {
+    grid-template-areas: "round1-left round2-left round3 round2-right round1-right";
+  }
+
+  .bracket--4 {
+    grid-template-areas: "round1-left round2-left round3-left round4 round3-right round2-right round1-right";
+  }
+
+  .bracket--5 {
+    grid-template-areas: "round1-left round2-left round3-left round4-left round5 round4-right round3-right round2-right round1-right";
   }
 
   .round.finals {

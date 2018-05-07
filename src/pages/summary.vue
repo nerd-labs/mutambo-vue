@@ -67,7 +67,16 @@ export default {
   },
 
   mounted() {
-    this.generateMatches();
+    switch (this.type) {
+      case "league":
+        this.generateMatches();
+        break;
+      case "knockout":
+        this.generateKnockoutRounds();
+        break;
+      default:
+        break;
+    }
   },
 
   methods: {
@@ -101,6 +110,13 @@ export default {
         matches: matches,
         slug: this.slug
       });
+    },
+
+    generateKnockoutRounds() {
+      this.$store.commit('generateKORounds', {
+        teams: this.teams,
+        slug: this.slug
+      })
     }
   }
 };

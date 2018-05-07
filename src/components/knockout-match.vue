@@ -1,11 +1,13 @@
 <template lang="pug">
   .knockout-match
     .knockout-match__club
+      div(v-if="home")
         span.knockout-match__club-name {{ home.club }}
         span.knockout-match__score
           | {{ home.score }}
           span.knockout-match__penalty-score(v-if="home.penaltyScore") {{ home.penaltyScore }}
     .knockout-match__club
+      div(v-if="away")
         span.knockout-match__club-name {{ away.club }}
         span.knockout-match__score
           | {{ away.score }}
