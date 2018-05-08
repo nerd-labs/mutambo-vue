@@ -5,6 +5,7 @@ import teams from './pages/teams.vue'
 import summary from './pages/summary.vue'
 import league from './pages/league.vue'
 import knockout from './pages/knockout.vue'
+import results from './pages/results.vue';
 
 export const matchStates = {
   NONE: '',
@@ -47,6 +48,11 @@ export const routes = {
     fullPath: '/league/:slug',
     component: league,
     save: true
+  },
+  RESULTS: {
+    path: 'results',
+    fullPath: '/results/:slug',
+    component: results
   },
   KNOCKOUT: {
     path: 'knockout',

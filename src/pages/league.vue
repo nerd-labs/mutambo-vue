@@ -6,15 +6,22 @@
       .matches
         mut-match(v-for="match in matches" :match="match" @update="matchUpdate")
 
+      v-btn(v-if="allMatchedsPlayed" @click="endTournament") End tournament
+
 </template>
 
 <script>
-import { matchStates } from "../config";
+import { matchStates, routes } from "../config";
 
 export default {
   data: () => ({
-    activeTeams: []
+    activeTeams: [],
+    totalMatchesLeft: 0
   }),
+
+  beforeMount() {
+    this.totalMatchesLeft = this.matches && this.matches.length;
+  },
 
   computed: {
     slug() {
@@ -35,6 +42,10 @@ export default {
 
     isTeamPlaying() {
       return team => this.activeTeams.indexOf(team) > -1;
+    },
+
+    allMatchedsPlayed() {
+      return this.totalMatchesLeft === 0;
     }
   },
 
@@ -75,11 +86,17 @@ export default {
       });
 
       if (event.state === matchStates.DONE) {
-        this.$store.commit("updateMatchScore", {
+        this.totalMatchesLeft--;
+
+        this.$store.dispatch("updateMatch", {
           match: this.matches[index],
           slug: this.slug
         });
       }
+    },
+
+    endTournament() {
+      this.$router.push(`/results/${this.$route.params.slug}`);
     }
   }
 };
