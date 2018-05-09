@@ -38,7 +38,7 @@ new vue_1.default({
 });
 ___scope___.file("app.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-1bece084'}
+var _options = { _vueModuleId: 'data-v-2bcf71fc'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-toolbar',{attrs:{"color":"primary white--text"}},[_c('v-toolbar-title',{on:{"click":function($event){_vm.goToRoute('/')}}},[_vm._v("Mutambo")])],1),_c('v-content',[_c('v-container',{attrs:{"fluid":"fluid","fill-height":"fill-height"}},[_c('v-layout',{attrs:{"justify-center":"justify-center","align-center":"align-center"}},[_c('v-flex',{attrs:{"text-xs-center":"text-xs-center"}},[_c('router-view')],1)],1)],1)],1),_c('v-footer',{attrs:{"color":"accent"}},[_c('mut-logo')],1)],1)},
@@ -77,9 +77,9 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-1bece084']) {
-            process.env.vueHMR['data-v-1bece084'] = true;
-            api.createRecord('data-v-1bece084', module.exports.default);
+          if (!process.env.vueHMR['data-v-2bcf71fc']) {
+            process.env.vueHMR['data-v-2bcf71fc'] = true;
+            api.createRecord('data-v-2bcf71fc', module.exports.default);
           }
         }
       
@@ -140,7 +140,7 @@ exports.routes = {
 });
 ___scope___.file("pages/home.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-db7e27a5'}
+var _options = { _vueModuleId: 'data-v-fb0b9dfd'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-btn',{attrs:{"color":"primary"},on:{"click":function($event){_vm.goToCreate()}}},[_vm._v("Create tournament")]),_c('br'),_c('br'),(_vm.existingTournaments.length)?_c('v-list',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md","fluid":"fluid"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap","justify-space-between":"justify-space-between"}},[_vm._l((_vm.existingTournaments),function(tournament,index){return [(index !== 0)?_c('v-flex',{attrs:{"xs12":"xs12"}},[_c('div',{staticClass:"pl-3 pr-3"},[_c('v-divider')],1)]):_vm._e(),_c('v-flex',{attrs:{"xs12":"xs12","sm7":"sm7"}},[_c('v-subheader',{on:{"click":function($event){_vm.goToRoute(tournament.slug)}}},[_vm._v(_vm._s(tournament.name))])],1),_c('v-flex',{staticClass:"text-xs-left text-sm-right",attrs:{"xs12":"xs12","sm5":"sm5"}},[_c('v-chip',{attrs:{"color":"secondary","text-color":"white","disabled":"disabled"}},[_vm._v(_vm._s(tournament.type))]),_c('v-chip',{attrs:{"color":"accent","text-color":"white","disabled":"disabled"}},[_vm._v(_vm._s(tournament.teams.length))])],1)]})],2)],1)],1):_vm._e()],1)},
@@ -176,16 +176,16 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-db7e27a5']) {
-            process.env.vueHMR['data-v-db7e27a5'] = true;
-            api.createRecord('data-v-db7e27a5', module.exports.default);
+          if (!process.env.vueHMR['data-v-fb0b9dfd']) {
+            process.env.vueHMR['data-v-fb0b9dfd'] = true;
+            api.createRecord('data-v-fb0b9dfd', module.exports.default);
           }
         }
       
 });
 ___scope___.file("pages/create.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-79d97cee'}
+var _options = { _vueModuleId: 'data-v-c9b3b456'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('v-form',{ref:"form",attrs:{"lazy-validation":"lazy-validation"},model:{value:(_vm.valid),callback:function ($$v) {_vm.valid=$$v},expression:"valid"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap"}},[_c('v-flex',{attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-text-field',{attrs:{"label":"Name","required":"required","rules":_vm.nameRules},model:{value:(_vm.name),callback:function ($$v) {_vm.name=$$v},expression:"name"}})],1),_c('v-flex',{attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-text-field',{attrs:{"label":"Number of players","required":"required","rules":_vm.totalPlayerRules,"type":"number"},model:{value:(_vm.totalPlayers),callback:function ($$v) {_vm.totalPlayers=$$v},expression:"totalPlayers"}})],1),_c('v-flex',{attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-btn-toggle',{model:{value:(_vm.type),callback:function ($$v) {_vm.type=$$v},expression:"type"}},[_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"knockout"}},[_vm._v("Knockout")]),_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"league"}},[_vm._v("League")]),_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"groupstage-knockout"}},[_vm._v("Groupstate & Knockout")])],1)],1),_c('v-flex',{attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-btn',{attrs:{"color":"primary","disabled":!_vm.valid},on:{"click":_vm.submit}},[_vm._v("Submit")])],1)],1)],1)],1)],1)},
@@ -233,16 +233,16 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-79d97cee']) {
-            process.env.vueHMR['data-v-79d97cee'] = true;
-            api.createRecord('data-v-79d97cee', module.exports.default);
+          if (!process.env.vueHMR['data-v-c9b3b456']) {
+            process.env.vueHMR['data-v-c9b3b456'] = true;
+            api.createRecord('data-v-c9b3b456', module.exports.default);
           }
         }
       
 });
 ___scope___.file("pages/detail.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-8d3f1e3b'}
+var _options = { _vueModuleId: 'data-v-2f38b4a3'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.tournamentName))]),_c('v-form',{ref:"form",attrs:{"lazy-validation":"lazy-validation"},model:{value:(_vm.valid),callback:function ($$v) {_vm.valid=$$v},expression:"valid"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap"}},[_c('v-flex',{attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-text-field',{attrs:{"label":"Number of plays against each team","required":"required","rules":_vm.numberOfPlaysRules,"type":"number"},model:{value:(_vm.numberOfPlays),callback:function ($$v) {_vm.numberOfPlays=$$v},expression:"numberOfPlays"}})],1),_c('v-flex',{attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-btn',{attrs:{"color":"primary","disabled":!_vm.valid},on:{"click":_vm.submit}},[_vm._v("Submit")])],1)],1)],1)],1)],1)},
@@ -292,16 +292,16 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-8d3f1e3b']) {
-            process.env.vueHMR['data-v-8d3f1e3b'] = true;
-            api.createRecord('data-v-8d3f1e3b', module.exports.default);
+          if (!process.env.vueHMR['data-v-2f38b4a3']) {
+            process.env.vueHMR['data-v-2f38b4a3'] = true;
+            api.createRecord('data-v-2f38b4a3', module.exports.default);
           }
         }
       
 });
 ___scope___.file("pages/teams.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-3aa42064'}
+var _options = { _vueModuleId: 'data-v-dace461c'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.tournamentName))]),_c('v-layout',{attrs:{"row":"row","wrap":"wrap","justify-center":"justify-center","align-center":"align-center"}},_vm._l((_vm.teams),function(team){return _c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12","sm6":"sm6","md4":"md4","lg3":"lg3","xl2":"xl2","my-2":"my-2"}},[_c('mut-create-team',{attrs:{"team":team},on:{"addTeam":_vm.addTeam}})],1)})),_c('div',{staticClass:"mt-5 text-xs-left"},[_c('v-checkbox',{attrs:{"label":"Randomly mix players and teams"},model:{value:(_vm.randomly),callback:function ($$v) {_vm.randomly=$$v},expression:"randomly"}}),_c('v-btn',{attrs:{"color":"success"},on:{"click":_vm.submit}},[_vm._v("Submit")])],1)],1)],1)},
@@ -352,16 +352,16 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-3aa42064']) {
-            process.env.vueHMR['data-v-3aa42064'] = true;
-            api.createRecord('data-v-3aa42064', module.exports.default);
+          if (!process.env.vueHMR['data-v-dace461c']) {
+            process.env.vueHMR['data-v-dace461c'] = true;
+            api.createRecord('data-v-dace461c', module.exports.default);
           }
         }
       
 });
 ___scope___.file("pages/summary.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-e766e9a6'}
+var _options = { _vueModuleId: 'data-v-70e8c61e'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap","justify-space-between":"justify-space-between"}},[_c('v-flex',{attrs:{"md8":"md8","offset-md2":"offset-md2"}},[_c('v-card',[_c('v-card-title',{staticClass:"accent white--text"},[_vm._v("Summary")]),_c('v-card-text',[_c('v-list',[_c('v-list-tile',[_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("Your tournament will contain "+_vm._s(_vm.totalTeams)+" players.")])],1)],1),_c('v-list-tile',[_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("Every player will play with 1 team.")])],1)],1),_c('v-list-tile',[_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("All teams will play "+_vm._s(_vm.numberOfPlays)+" "+_vm._s(_vm.numberOfPlays > 1 ? 'times' : 'time')+" against all other player's teams.")])],1)],1),_c('v-list-tile',[_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("The tournament will consist of "+_vm._s(_vm.totalFixtures)+" fixtures.")])],1)],1),_c('v-list-tile',[_c('v-list-tile-content',[_c('v-list-tile-title',[_vm._v("It will take ± "+_vm._s(_vm.totalMinutes)+" minutes to play all fixtures (6 minutes per half).")])],1)],1)],1)],1)],1)],1)],1),_c('v-flex',{attrs:{"mt-3":"mt-3"}},[_c('v-btn',{attrs:{"color":"primary"},on:{"click":_vm.submit}},[_vm._v("Start tournament")])],1)],1)],1)},
@@ -436,9 +436,9 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-e766e9a6']) {
-            process.env.vueHMR['data-v-e766e9a6'] = true;
-            api.createRecord('data-v-e766e9a6', module.exports.default);
+          if (!process.env.vueHMR['data-v-70e8c61e']) {
+            process.env.vueHMR['data-v-70e8c61e'] = true;
+            api.createRecord('data-v-70e8c61e', module.exports.default);
           }
         }
       
@@ -520,7 +520,7 @@ exports.default = new IdGenerator();
 });
 ___scope___.file("pages/league.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-5ee00795'}
+var _options = { _vueModuleId: 'data-v-1571ce8d'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.tournamentName))])]),_c('div',{staticClass:"matches"},_vm._l((_vm.matches),function(match){return _c('mut-match',{attrs:{"match":match},on:{"update":_vm.matchUpdate}})}))],1)},
@@ -600,19 +600,19 @@ require("~/components.css")
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-5ee00795']) {
-            process.env.vueHMR['data-v-5ee00795'] = true;
-            api.createRecord('data-v-5ee00795', module.exports.default);
+          if (!process.env.vueHMR['data-v-1571ce8d']) {
+            process.env.vueHMR['data-v-1571ce8d'] = true;
+            api.createRecord('data-v-1571ce8d', module.exports.default);
           }
         }
       
 });
 ___scope___.file("components/logo.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-dd6e56bd'}
-Object.assign(_options, {_scopeId: 'data-v-dd6e56bd'})
+var _options = { _vueModuleId: 'data-v-fb11cde5'}
+Object.assign(_options, {_scopeId: 'data-v-fb11cde5'})
 Object.assign(_options, {
-        _scopeId: "data-v-dd6e56bd",
+        _scopeId: "data-v-fb11cde5",
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('svg',{staticClass:"logo",attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 500 500"}},[_c('path',{attrs:{"d":"M342.4,433.42a17.33,17.33,0,0,0,.25-17.33L284.34,310.23V233.41h17.48V188.05H198.18v45.35h17.48v76.82L157.32,416.09A17.48,17.48,0,0,0,172.58,442H327.42A17.33,17.33,0,0,0,342.4,433.42ZM196.51,376l9.64-17.48H247.5v-15H214.41l5.49-10h27.6v-15H228.17l2.5-4.47v-5.49H247.5v-15H230.65v-10H247.5v-15H230.65v-50.2H213.16V203h73.67v15.38H269.35V314.1L303.47,376Z"}}),_vm._v(" "),_c('path',{attrs:{"d":"M430.89,238.9c-12.71-5.1-27.59-8.12-44.25-9-6.61-.34-13.18-.5-19.69-.5a393,393,0,0,0-75.57,7.3c-5.11,1-10.27,2.35-15.45,3.69-8.72,2.26-17.73,4.59-25.58,5.22-8.56-.63-17.57-3-26.29-5.22-5.17-1.34-10.34-2.67-15.44-3.69a393,393,0,0,0-75.57-7.3c-6.51,0-13.09.17-19.7.5-16.66.86-31.53,3.87-44.24,9l-3.64,1.47.82,3.84a65.63,65.63,0,0,1,1,7.61c.47,4.79,1,9.74,3.14,14.49a17.87,17.87,0,0,0,5.73,6.79,9,9,0,0,1,2.55,2.58c2.79,5.25,4.39,11.2,5.94,16.95.91,3.39,1.81,6.69,2.9,9.78,6.3,17.88,12.83,33.36,29.11,42,14.41,7.6,44.73,11.89,62.23,8.12,30.3-6.52,52-28.88,64.42-66.47.3-.91.6-2,.92-3.11.5-1.82,1.55-5.62,2.28-6.33a8.8,8.8,0,0,1,3.32-.64,10.75,10.75,0,0,1,3.5.56c.87.8,1.91,4.6,2.41,6.42.31,1.12.61,2.19.92,3.11,12.43,37.59,34.12,60,64.42,66.47A76.19,76.19,0,0,0,337,354c16.27,0,35.77-4,46.36-9.62,16.28-8.59,22.81-24.08,29.11-42,1.09-3.08,2-6.39,2.9-9.78,1.55-5.75,3.15-11.7,5.94-16.95a9,9,0,0,1,2.55-2.58,17.87,17.87,0,0,0,5.73-6.79c2.18-4.75,2.67-9.7,3.14-14.49a63.89,63.89,0,0,1,1-7.61l.82-3.84Zm-339,19.4H84.74a6.25,6.25,0,1,1,0-12.51h7.19a6.25,6.25,0,1,1,0,12.51Zm121.83,37c-6.56,24.75-26.1,37.83-56.94,37.83-13-.06-27.44-3.55-34.35-8.31s-10.55-17.66-13-28.38c-5.25-23.32-2.35-32.45-.16-35.81,4.73-7.25,22.48-12.13,44.16-12.13,3.16,0,6.27.11,9.22.32,5.82.4,11.52.83,17.13,1.43,17,1.8,31.36,7.51,34.8,13.89C217.79,270,217.46,281.38,213.75,295.33Zm176.76,1.13c-2.43,10.73-6.11,23.66-13,28.39s-21.34,8.25-34.75,8.31c-30.42,0-50-13.09-56.53-37.84-3.71-13.95-4-25.31-.89-31.16,3.44-6.39,17.75-12.1,34.81-13.89,5.6-.6,11.29-1,17.11-1.43,3-.21,6-.31,9.19-.31,21.71,0,39.47,4.88,44.19,12.14C392.86,264,395.76,273.15,390.51,296.47Zm22.3-38.17h-7.19a6.25,6.25,0,1,1,0-12.51h7.19a6.25,6.25,0,1,1,0,12.51Z"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"226.63","cy":"153.88","r":"16.75"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"272.58","cy":"119.14","r":"16.75"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"239.07","cy":"74.74","r":"16.75"}})])])},
         staticRenderFns: []
       })
@@ -628,16 +628,16 @@ require("~/components.css")
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-dd6e56bd']) {
-            process.env.vueHMR['data-v-dd6e56bd'] = true;
-            api.createRecord('data-v-dd6e56bd', module.exports.default);
+          if (!process.env.vueHMR['data-v-fb11cde5']) {
+            process.env.vueHMR['data-v-fb11cde5'] = true;
+            api.createRecord('data-v-fb11cde5', module.exports.default);
           }
         }
       
 });
 ___scope___.file("components/create-team.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-f18d2362'}
+var _options = { _vueModuleId: 'data-v-f914d85a'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-form',{ref:"form",attrs:{"lazy-validation":"lazy-validation"},model:{value:(_vm.valid),callback:function ($$v) {_vm.valid=$$v},expression:"valid"}},[_c('v-card',[_c('v-card-title',{attrs:{"primary-title":"primary-title"}},[_c('v-container',{attrs:{"fluid":"fluid","grid-list-md":"grid-list-md"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap"}},[_c('div',{attrs:{"hidden":"hidden"}},[_c('v-text-field',{attrs:{"label":"id"},model:{value:(_vm.team.id),callback:function ($$v) {_vm.$set(_vm.team, "id", $$v)},expression:"team.id"}})],1),_c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12"}},[_c('v-text-field',{attrs:{"label":"Player","value":_vm.team.player},on:{"input":_vm.changePlayer}})],1),_c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12"}},[_c('v-text-field',{attrs:{"label":"Club","value":_vm.team.club},on:{"input":_vm.changeClub}})],1)],1)],1)],1)],1)],1)],1)},
@@ -688,16 +688,16 @@ Object.assign(exports.default.options||exports.default, _options)
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-f18d2362']) {
-            process.env.vueHMR['data-v-f18d2362'] = true;
-            api.createRecord('data-v-f18d2362', module.exports.default);
+          if (!process.env.vueHMR['data-v-f914d85a']) {
+            process.env.vueHMR['data-v-f914d85a'] = true;
+            api.createRecord('data-v-f914d85a', module.exports.default);
           }
         }
       
 });
 ___scope___.file("components/match.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-ca9d0d25'}
+var _options = { _vueModuleId: 'data-v-ce07337d'}
 Object.assign(_options, {
         _scopeId: null,
         render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"match",class:{'match--playing': _vm.internalMatch.state === 'playing', 'match--done': _vm.internalMatch.state === 'done' , 'match--disabled': _vm.internalMatch.state === 'disabled'}},[_c('div',{staticClass:"math__side match__side--home",class:{'match__side--winner': _vm.internalMatch.winner ===  1, 'match__side--loser': _vm.internalMatch.winner === 2}},[_c('div',{staticClass:"match__team"},[_c('div',{staticClass:"match__club"},[_vm._v(_vm._s(_vm.internalMatch.home.club))]),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(_vm.internalMatch.home.player))])]),_c('div',{staticClass:"match__score"},[_vm._v(_vm._s(_vm.internalMatch.home.score))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.home.score),expression:"internalMatch.home.score"}],staticClass:"match__score--input",attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.home.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.home, "score", $event.target.value)}}})]),_c('div',{staticClass:"match__center"},[_c('div',{staticClass:"match__playing"},[_vm._v("live")]),_c('div',{staticClass:"match__divider"},[_vm._v("-")]),_c('button',{staticClass:"match__button match__button--start",on:{"click":_vm.startMatch}},[_vm._v("start match")]),_c('button',{staticClass:"match__button match__button--end",on:{"click":_vm.endMatch}},[_vm._v("end match")])]),_c('div',{staticClass:"math__side match__side--away",class:{'match__side--winner': _vm.internalMatch.winner ===  2, 'match__side--loser': _vm.internalMatch.winner === 1}},[_c('div',{staticClass:"match__team"},[_c('div',{staticClass:"match__club"},[_vm._v(_vm._s(_vm.internalMatch.away.club))]),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(_vm.internalMatch.away.player))])]),_c('div',{staticClass:"match__score"},[_vm._v(_vm._s(_vm.internalMatch.away.score))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.away.score),expression:"internalMatch.away.score"}],staticClass:"match__score--input",attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.away.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.away, "score", $event.target.value)}}})])])},
@@ -756,9 +756,9 @@ require("~/components.css")
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-ca9d0d25']) {
-            process.env.vueHMR['data-v-ca9d0d25'] = true;
-            api.createRecord('data-v-ca9d0d25', module.exports.default);
+          if (!process.env.vueHMR['data-v-ce07337d']) {
+            process.env.vueHMR['data-v-ce07337d'] = true;
+            api.createRecord('data-v-ce07337d', module.exports.default);
           }
         }
       
@@ -966,7 +966,7 @@ require("fuse-box-css")("style/style.css", "@import url('https://fonts.googleapi
 ___scope___.file("components.css", function(exports, require, module, __filename, __dirname){
 
 
-require("fuse-box-css")("components.css", ".matches {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px; }\n\n.logo[data-v-dd6e56bd] {\n  --logo-size: 30px;\n  bottom: 5px;\n  fill: var(--color-white);\n  height: var(--logo-size);\n  right: 10px;\n  position: absolute;\n  width: var(--logo-size);\n}\n.logo circle[data-v-dd6e56bd] {\n  animation-duration: 2s;\n  animation-fill-mode: backwards;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-play-state: paused;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(1) {\n  animation-delay: 1s;\n  animation-name: bubble1-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(2) {\n  animation-delay: 1.5s;\n  animation-name: bubble2-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(3) {\n  animation-name: bubble3-data-v-dd6e56bd;\n}\n.logo:hover circle[data-v-dd6e56bd] {\n  animation-play-state: running;\n}\n@keyframes bubble1-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(10%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble2-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(20%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble3-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(30%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-10%);\n}\n}\n.match {\n  background-color: white;\n  display: grid;\n  grid-template-columns: 2fr 1fr 2fr;\n  height: 100px;\n  padding: 20px; }\n\n.match--playing .match__playing,\n.match--playing .match__score--input,\n.match--playing .match__button--end {\n  display: block; }\n\n.match--playing .match__button--start {\n  display: none; }\n\n.match--disabled {\n  opacity: 0.25; }\n  .match--disabled .match__button,\n  .match--disabled .match__score {\n    display: none; }\n\n.match--done {\n  background-color: limegreen;\n  color: white; }\n  .match--done .match__score {\n    color: white; }\n  .match--done .match__side--loser .match__team {\n    opacity: 0.5; }\n  .match--done .match__button,\n  .match--done .match__playing {\n    display: none; }\n  .match--done .match__score,\n  .match--done .match__divider {\n    display: block; }\n\n.match__center {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  font-size: 12px;\n  justify-content: center; }\n\n.match__button {\n  background-color: transparent;\n  color: limegreen;\n  cursor: pointer;\n  border: 1px solid limegreen;\n  border-radius: 5px;\n  padding: 4px; }\n\n.match__button--end {\n  border: none;\n  color: #999;\n  display: none;\n  margin-top: 10px;\n  text-decoration: underline; }\n\n.match__divider {\n  display: none;\n  font-size: 40px;\n  font-weight: 300; }\n\n.match__playing {\n  color: red;\n  display: none;\n  position: relative; }\n  .match__playing::after {\n    animation-name: move;\n    animation-duration: 0.5s;\n    animation-timing-function: linear;\n    animation-iteration-count: infinite;\n    animation-direction: alternate;\n    background-color: currentColor;\n    border-radius: 50%;\n    content: \"\";\n    display: block;\n    height: 3px;\n    right: -10px;\n    position: absolute;\n    top: 50%;\n    width: 3px; }\n\n.math__side {\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  text-align: left; }\n\n.match__side--away {\n  flex-direction: row-reverse;\n  text-align: right; }\n\n.match__team {\n  font-size: 20px;\n  font-weight: 300; }\n\n.match__player {\n  font-size: 12px;\n  line-height: 20px;\n  opacity: 0.5; }\n\n.match__score,\n.match__score--input {\n  display: none;\n  color: limegreen;\n  font-size: 40px;\n  font-weight: 100;\n  text-align: center;\n  width: 100px; }\n  .match__score:focus,\n  .match__score--input:focus {\n    outline: none; }\n\n@keyframes move {\n  from {\n    transform: translateY(-200%); }\n  to {\n    transform: translateY(200%); } }");
+require("fuse-box-css")("components.css", ".matches {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px; }\n\n.logo[data-v-fb11cde5] {\n  --logo-size: 30px;\n  bottom: 5px;\n  fill: var(--color-white);\n  height: var(--logo-size);\n  right: 10px;\n  position: absolute;\n  width: var(--logo-size);\n}\n.logo circle[data-v-fb11cde5] {\n  animation-duration: 2s;\n  animation-fill-mode: backwards;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-play-state: paused;\n}\n.logo circle[data-v-fb11cde5]:nth-of-type(1) {\n  animation-delay: 1s;\n  animation-name: bubble1-data-v-fb11cde5;\n}\n.logo circle[data-v-fb11cde5]:nth-of-type(2) {\n  animation-delay: 1.5s;\n  animation-name: bubble2-data-v-fb11cde5;\n}\n.logo circle[data-v-fb11cde5]:nth-of-type(3) {\n  animation-name: bubble3-data-v-fb11cde5;\n}\n.logo:hover circle[data-v-fb11cde5] {\n  animation-play-state: running;\n}\n@keyframes bubble1-data-v-fb11cde5 {\n0% {\n    opacity: 0;\n    transform: translateY(10%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble2-data-v-fb11cde5 {\n0% {\n    opacity: 0;\n    transform: translateY(20%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble3-data-v-fb11cde5 {\n0% {\n    opacity: 0;\n    transform: translateY(30%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-10%);\n}\n}\n.match {\n  background-color: white;\n  display: grid;\n  grid-template-columns: 2fr 1fr 2fr;\n  height: 100px;\n  padding: 20px; }\n\n.match--playing .match__playing,\n.match--playing .match__score--input,\n.match--playing .match__button--end {\n  display: block; }\n\n.match--playing .match__button--start {\n  display: none; }\n\n.match--disabled {\n  opacity: 0.25; }\n  .match--disabled .match__button,\n  .match--disabled .match__score {\n    display: none; }\n\n.match--done {\n  background-color: limegreen;\n  color: white; }\n  .match--done .match__score {\n    color: white; }\n  .match--done .match__side--loser .match__team {\n    opacity: 0.5; }\n  .match--done .match__button,\n  .match--done .match__playing {\n    display: none; }\n  .match--done .match__score,\n  .match--done .match__divider {\n    display: block; }\n\n.match__center {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  font-size: 12px;\n  justify-content: center; }\n\n.match__button {\n  background-color: transparent;\n  color: limegreen;\n  cursor: pointer;\n  border: 1px solid limegreen;\n  border-radius: 5px;\n  padding: 4px; }\n\n.match__button--end {\n  border: none;\n  color: #999;\n  display: none;\n  margin-top: 10px;\n  text-decoration: underline; }\n\n.match__divider {\n  display: none;\n  font-size: 40px;\n  font-weight: 300; }\n\n.match__playing {\n  color: red;\n  display: none;\n  position: relative; }\n  .match__playing::after {\n    animation-name: move;\n    animation-duration: 0.5s;\n    animation-timing-function: linear;\n    animation-iteration-count: infinite;\n    animation-direction: alternate;\n    background-color: currentColor;\n    border-radius: 50%;\n    content: \"\";\n    display: block;\n    height: 3px;\n    right: -10px;\n    position: absolute;\n    top: 50%;\n    width: 3px; }\n\n.math__side {\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  text-align: left; }\n\n.match__side--away {\n  flex-direction: row-reverse;\n  text-align: right; }\n\n.match__team {\n  font-size: 20px;\n  font-weight: 300; }\n\n.match__player {\n  font-size: 12px;\n  line-height: 20px;\n  opacity: 0.5; }\n\n.match__score,\n.match__score--input {\n  display: none;\n  color: limegreen;\n  font-size: 40px;\n  font-weight: 100;\n  text-align: center;\n  width: 100px; }\n  .match__score:focus,\n  .match__score--input:focus {\n    outline: none; }\n\n@keyframes move {\n  from {\n    transform: translateY(-200%); }\n  to {\n    transform: translateY(200%); } }");
 });
 return ___scope___.entry = "main.js";
 });
