@@ -5,6 +5,7 @@ import mutations from './mutations';
 import actions from './actions';
 import getters from './getters';
 import plugins from './plugins';
+import currentTournament from './modules/current-tournament';
 
 Vue.use(Vuex)
 
@@ -13,5 +14,8 @@ export default new Vuex.Store({
   actions,
   mutations,
   plugins,
-  getters
+  getters,
+  modules: {
+    currentTournament: currentTournament
+  }
 })

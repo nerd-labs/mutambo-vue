@@ -13,7 +13,7 @@
               .pl-3.pr-3
                 v-divider
             v-flex(xs12 sm7)
-              v-subheader(@click="goToRoute(tournament.slug)")
+              v-subheader(@click="goToRoute(tournament.id)")
                 | {{ tournament.name }}
             v-flex.text-xs-left.text-sm-right(xs12 sm5)
               v-chip(color='secondary' text-color='white' disabled) {{tournament.type}}
@@ -22,20 +22,20 @@
 </template>
 
 <script>
-
-import { routes } from '../config';
+import { routes } from "../config";
 
 export default {
+  beforeMount() {
+    this.$store.commit("currentTournament/reset");
+  },
   methods: {
     goToCreate() {
       this.$router.push(routes.CREATE.path);
     },
 
-    goToRoute(slug) {
-      const tournament = this.$store.getters.tournament(slug);
-      const route = tournament.page();
-
-      this.$router.push(`${route}/${slug}`);
+    goToRoute(id) {
+      const tournament = this.$store.getters.tournamentById(id);
+      this.$router.push(`${tournament.page}/${tournament.slug}`);
     }
   },
 

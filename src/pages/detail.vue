@@ -26,12 +26,12 @@ export default {
 
   computed: {
     slug() {
-      return this.$route.params.slug;
+      return this.$store.getters["currentTournament/slug"];
     },
 
     tournamentName() {
-      return this.$store.getters.tournament(this.slug).name();
-    },
+      return this.$store.getters["currentTournament/name"];
+    }
   },
 
   methods: {
@@ -40,10 +40,9 @@ export default {
         return;
       }
 
-      this.$store.commit("addDetails", {
-        slug: this.slug,
+      this.$store.dispatch("currentTournament/updateDetails", {
         details: {
-          numberOfPlays: this.numberOfPlays
+          numberOfPlays: parseInt(this.numberOfPlays)
         }
       });
 
