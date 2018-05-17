@@ -3,7 +3,7 @@ import { pages } from '../config';
 export default {
   updateMatch({ commit }, { match, slug }) {
 
-    commit("updateMatchScore", {
+    commit("updateLeagueMatchScore", {
       match: match,
       slug
     });

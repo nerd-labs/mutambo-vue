@@ -2,12 +2,16 @@ import { pages } from '../config';
 
 export default {
   addTournament(state, { slug, name, teams, type }) {
-    state.tournaments.push({
+    const t = {
       slug: slug,
       name,
       teams,
       type
-    })
+    };
+
+    t[type] = {};
+
+    state.tournaments.push(t);
   },
 
   setProgress(state, { slug, page }) {
@@ -46,11 +50,11 @@ export default {
     }
   },
 
-  addMatches(state, { matches, slug }) {
+  addLeagueMatches(state, { matches, slug }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 
     if (tournament) {
-      tournament.matches = matches;
+      tournament.league.matches = matches;
     }
   },
 
@@ -64,15 +68,25 @@ export default {
     }
   },
 
-  updateMatchScore(state, { match, slug }) {
+  updateLeagueMatchScore(state, { match, slug }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 
     if (tournament) {
-      const index = tournament.matches.findIndex(m => m.id === match.id);
+      const index = tournament.league.matches.findIndex(m => m.id === match.id);
 
       if (index > -1) {
-        tournament.matches[index] = match;
+        tournament.league.matches[index] = match;
       }
+    } else {
+      throw new Error(`Tournament ${slug} not found`);
+    }
+  },
+
+  completeLeague(state, { slug }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
+
+    if (tournament) {
+      tournament.league.done = true;
     } else {
       throw new Error(`Tournament ${slug} not found`);
     }

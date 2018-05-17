@@ -73,10 +73,10 @@ export default {
   }),
   computed: {
     tournamentName() {
-      return this.$store.getters.tournamentName(this.$route.params.slug);
+      return this.$store.getters.tournament(this.$route.params.slug).name();
     },
     teams() {
-      return this.$store.getters.teams(this.$route.params.slug);
+      return this.$store.getters.tournament(this.$route.params.slug).teams();
     },
 
     results() {

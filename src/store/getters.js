@@ -27,8 +27,8 @@ export default {
         return tournament.teams;
       },
 
-      matchList: () => {
-        return tournament.matches
+      leagueMatchList: () => {
+        if (tournament.league) return tournament.league.matches
       },
 
       page: () => {
@@ -38,6 +38,11 @@ export default {
       numberOfPlays: () => {
         return tournament.details.numberOfPlays;
       },
+
+      leagueCompleted: () => {
+        if (tournament.league) return tournament.league.done
+      },
+
     }
-  }
+  },
 }

@@ -1,12 +1,11 @@
 <template lang="pug">
-    div
-      v-container(grid-list-md)
-        h2.display-2.accent--text.mb-5 {{ tournamentName }}
+  div
+    v-container(grid-list-md)
+      h2.display-2.accent--text.mb-5 {{ tournamentName }}
 
-      .matches
-        mut-match(v-for="match in matches" :match="match" @update="matchUpdate")
+      mut-matches(:matches="matches" @update="matchUpdate" @done="allMatchesPlayed")
 
-      v-btn(v-if="allMatchedsPlayed" @click="endTournament") End tournament
+      v-btn(v-if="done || internalDone" @click="endTournament") End tournament
 
 </template>
 
@@ -15,13 +14,8 @@ import { matchStates, routes } from "../config";
 
 export default {
   data: () => ({
-    activeTeams: [],
-    totalMatchesLeft: 0
+    internalDone: false
   }),
-
-  beforeMount() {
-    this.totalMatchesLeft = this.matches && this.matches.length;
-  },
 
   computed: {
     slug() {
@@ -37,65 +31,30 @@ export default {
     },
 
     matches() {
-      return this.tournament.matchList();
+      return this.tournament.leagueMatchList();
     },
 
-    isTeamPlaying() {
-      return team => this.activeTeams.indexOf(team) > -1;
-    },
-
-    allMatchedsPlayed() {
-      return this.totalMatchesLeft === 0;
+    done() {
+      return this.tournament.leagueCompleted();
     }
   },
 
   methods: {
     matchUpdate(event) {
-      const index = this.matches.findIndex(m => {
-        return m.id === event.match.id;
+      this.$store.dispatch("updateMatch", {
+        match: event.match,
+        slug: this.slug
       });
+    },
 
-      if (index === -1) throw new Error("match not found");
-
-      this.matches[index].state = event.state;
-      this.matches[index].winner = event.winner;
-
-      this.activeTeams = [];
-
-      const activeMatches = this.matches.filter(
-        m => m.state === matchStates.PLAYING
-      );
-
-      activeMatches.forEach(m => {
-        this.activeTeams.push(m.home.club);
-        this.activeTeams.push(m.away.club);
+    allMatchesPlayed() {
+      this.$store.commit('completeLeague', {
+        slug: this.slug
       });
-
-      this.matches.forEach((m, i) => {
-        if (m.state === matchStates.DONE) return;
-
-        if (
-          (this.isTeamPlaying(m.home.club) ||
-            this.isTeamPlaying(m.away.club)) &&
-          m.state !== matchStates.PLAYING
-        ) {
-          this.matches[i].state = matchStates.DISABLED;
-        } else if (m.state === matchStates.DISABLED) {
-          this.matches[i].state = matchStates.NONE;
-        }
-      });
-
-      if (event.state === matchStates.DONE) {
-        this.totalMatchesLeft--;
-
-        this.$store.dispatch("updateMatch", {
-          match: this.matches[index],
-          slug: this.slug
-        });
-      }
     },
 
     endTournament() {
+      this.internalDone = true;
       this.$router.push(`/results/${this.$route.params.slug}`);
     }
   }

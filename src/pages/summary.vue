@@ -97,7 +97,7 @@ export default {
         match.home.score = 0;
       });
 
-      this.$store.commit("addMatches", {
+      this.$store.commit("addLeagueMatches", {
         matches: matches,
         slug: this.slug
       });
