@@ -14,7 +14,8 @@ const {
   CSSResourcePlugin,
   WebIndexPlugin,
   Sparky,
-  ConsolidatePlugin
+  ConsolidatePlugin,
+  BabelPlugin
 } = require("fuse-box");
 
 let fuse;
@@ -46,21 +47,22 @@ Sparky.task("config", () => {
           engine: 'pug'
         }),
         style: [
-              SassPlugin({
-                  importer: true
-              }),
-              CSSResourcePlugin(),
-              CSSPlugin({
-                  group: 'components.css',
-                  inject: 'components.css'
-              })
-          ]
+          SassPlugin({
+            importer: true
+          }),
+          CSSResourcePlugin(),
+          CSSPlugin({
+            group: 'components.css',
+            inject: 'components.css'
+          })
+        ],
+        script: BabelPlugin()
       }),
       CSSPlugin(),
       WebIndexPlugin({
-          template: "../src/index.html"
+        template: "../src/index.html"
       }),
-  ]
+    ]
   });
 
   fuse.dev({
