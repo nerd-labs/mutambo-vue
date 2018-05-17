@@ -37,31 +37,49 @@ export default {
       return getters.tournament.matches
     },
 
-    details: (state, getters) => {
-      return getters.tournament.details || {}
-    },
-
     numberOfPlays: (state, getters) => {
-      return getters.details.numberOfPlays
+      if (getters.tournament.details) {
+        return getters.tournament.details.numberOfPlays
+      }
     }
   },
   mutations: {
-    set(state, tournamentId) {
+    set (state, tournamentId) {
       state.id = tournamentId
     },
 
-    reset(state) {
+    reset (state) {
       state.id = undefined
     },
+
+    updateDetails (state, { tournament, details }) {
+      tournament.details = Object.assign({}, tournament.details, details)
+    },
+
+    randomizeTeams (state, { tournament, randomizedTeams }) {
+      tournament.teams = randomizedTeams
+    }
   },
 
   actions: {
-    updateDetails ({ commit, getters, rootState }, details) {
-      const payload = Object.assign({}, {
-        id: getters.id
-      }, details)
+    updateDetails ({ commit, state, rootState }, details) {
+      const tournament = rootState.tournaments.find(t => t.id === state.id)
+      if (tournament) {
+        commit('updateDetails', {
+          tournament,
+          details
+        })
+      }
+    },
 
-      commit('updateDetails', payload, { root: true })
+    randomizeTeams ({ commit, state, rootState }, randomizedTeams) {
+      const tournament = rootState.tournaments.find(t => t.id === state.id)
+      if (tournament) {
+        commit('randomizeTeams', {
+          tournament,
+          randomizedTeams
+        })
+      }
     }
   }
 }

@@ -1,15 +1,15 @@
 export default {
-  tournaments: state => () => {
-    return state.tournaments;
+  tournaments: state => {
+    return state.tournaments
   },
 
   tournamentById: state => id => {
-    const tournament = state.tournaments.find(tournament => tournament.id === id);
+    const tournament = state.tournaments.find(tournament => tournament.id === id)
     return tournament || {}
   },
 
   tournamentBySlug: state => slug => {
-    const tournament = state.tournaments.find(tournament => tournament.slug === slug);
+    const tournament = state.tournaments.find(tournament => tournament.slug === slug)
     return tournament || {}
   },
 
@@ -49,5 +49,4 @@ export default {
         return tournament.details.numberOfPlays;
       },
     }
-  }
 }

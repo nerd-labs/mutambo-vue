@@ -35,7 +35,7 @@ export default {
     addTeam(team) {
       this.$store.commit("addTeam", {
         team: team,
-        tournament: this.slug
+        slug: this.slug
       });
     },
 

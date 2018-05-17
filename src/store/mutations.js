@@ -7,7 +7,8 @@ export default {
       slug: slug,
       name,
       teams,
-      type
+      type,
+      details: {}
     })
   },
 
@@ -21,18 +22,8 @@ export default {
     }
   },
 
-  updateDetails (state, payload) {
-    const tournament = state.tournaments.find(t => t.id === payload.id)
-
-    if (tournament) {
-      tournament.details = Object.assign({}, tournament.details, payload.details)
-    } else {
-      throw new Error(`Tournament ${payload.id} not found`)
-    }
-  },
-
-  addTeam(state, { team, tournament }) {
-    const tournament = state.tournaments.find(t => t.slug === tournament);
+  addTeam(state, { team, slug }) {
+    const tournament = state.tournaments.find(t => t.slug === slug);
 
     if (tournament.name) {
       if (!tournament.teams) tournament.teams = [];
@@ -54,17 +45,6 @@ export default {
       tournament.matches = matches;
     }
   },
-
-  randomizeTeams(state, { slug, newTeams }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
-
-    if (tournament) {
-      tournament.teams = newTeams;
-    } else {
-      throw new Error(`No tournament ${slug} found.`);
-    }
-  },
-
   updateMatchScore(state, { match, slug }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 

@@ -33,15 +33,11 @@ import berger from "../helpers/berger";
 export default {
   computed: {
     slug() {
-      return this.$route.params.slug;
-    },
-
-    tournament() {
-      return this.$store.getters.tournament(this.slug);
+      return this.$store.getters["currentTournament/slug"];
     },
 
     teams() {
-      return this.tournament.teams();
+      return this.$store.getters["currentTournament/teams"];
     },
 
     totalTeams() {
@@ -49,11 +45,11 @@ export default {
     },
 
     type() {
-      return this.tournament.type();
+      return this.$store.getters["currentTournament/type"];
     },
 
     numberOfPlays() {
-      return this.tournament.numberOfPlays();
+      return this.$store.getters["currentTournament/numberOfPlays"];
     },
 
     totalFixtures() {
