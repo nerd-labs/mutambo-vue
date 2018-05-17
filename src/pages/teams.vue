@@ -19,19 +19,15 @@ export default {
   }),
   computed: {
     slug() {
-      return this.$route.params.slug;
-    },
-
-    tournament() {
-      return this.$store.getters.tournament(this.slug);
+      return this.$store.getters["currentTournament/slug"];
     },
 
     name() {
-      return this.tournament.name();
+      return this.$store.getters["currentTournament/name"];
     },
 
     teams() {
-      return this.tournament.teams();
+      return this.$store.getters["currentTournament/teams"];
     }
   },
 

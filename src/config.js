@@ -28,29 +28,44 @@ export const routes = {
     path: 'detail',
     fullPath: '/detail/:slug',
     component: detail,
-    save: true,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
   },
   TEAMS: {
     path: 'teams',
     fullPath: '/teams/:slug',
     component: teams,
-    save: true,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
   },
   SUMMARY: {
     path: 'summary',
     fullPath: '/summary/:slug',
     component: summary,
-    save: true,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
   },
   LEAGUE: {
     path: 'league',
     fullPath: '/league/:slug',
     component: league,
-    save: true,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
   },
   RESULTS: {
     path: 'results',
     fullPath: '/results/:slug',
-    component: results,
-  },
-};
+    meta: {
+      component: results,
+      fetchCurrentTournament: true
+    }
+  }
+}

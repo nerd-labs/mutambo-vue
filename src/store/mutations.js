@@ -1,9 +1,10 @@
 import { pages } from '../config';
 
 export default {
-  addTournament(state, { slug, name, teams, type }) {
+  addTournament(state, { id, slug, name, teams, type }) {
     const t = {
-      slug: slug,
+      id,
+      slug,
       name,
       teams,
       type
@@ -24,13 +25,13 @@ export default {
     }
   },
 
-  addDetails(state, { slug, details }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
+  updateDetails (state, payload) {
+    const tournament = state.tournaments.find(t => t.id === payload.id)
 
     if (tournament) {
-      tournament.details = details;
+      tournament.details = Object.assign({}, tournament.details, payload.details)
     } else {
-      throw new Error(`Tournament ${slug} not found`);
+      throw new Error(`Tournament ${payload.id} not found`)
     }
   },
 

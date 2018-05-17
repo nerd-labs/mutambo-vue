@@ -3,6 +3,16 @@ export default {
     return state.tournaments;
   },
 
+  tournamentById: state => id => {
+    const tournament = state.tournaments.find(tournament => tournament.id === id);
+    return tournament || {}
+  },
+
+  tournamentBySlug: state => slug => {
+    const tournament = state.tournaments.find(tournament => tournament.slug === slug);
+    return tournament || {}
+  },
+
   tournament: state => slug => {
     const tournament = state.tournaments.find(tournament => tournament.slug === slug);
 
