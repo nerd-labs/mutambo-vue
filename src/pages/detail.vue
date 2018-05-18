@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ tournamentName }}
+      h2.display-2.accent--text.mb-5 {{ name }}
 
       v-form(v-model="valid" lazy-validation ref="form")
         v-layout(row wrap)
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 
 export default {
   data: () => ({
@@ -25,13 +26,10 @@ export default {
   }),
 
   computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
-
-    tournamentName() {
-      return this.$store.getters.tournament(this.slug).name();
-    },
+    ...mapGetters({
+      slug: "currentTournament/slug",
+      name: "currentTournament/name"
+    })
   },
 
   methods: {
@@ -40,11 +38,8 @@ export default {
         return;
       }
 
-      this.$store.commit("addDetails", {
-        slug: this.slug,
-        details: {
-          numberOfPlays: this.numberOfPlays
-        }
+      this.$store.dispatch("currentTournament/updateDetails", {
+        numberOfPlays: parseInt(this.numberOfPlays)
       });
 
       this.$router.push(`/teams/${this.slug}`);

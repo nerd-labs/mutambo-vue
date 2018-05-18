@@ -13,34 +13,25 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
+
 export default {
   data: () => ({
     randomly: false
   }),
   computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
 
-    tournament() {
-      return this.$store.getters.tournament(this.slug);
-    },
+    ...mapGetters({
+      slug: 'currentTournament/slug',
+      name: 'currentTournament/name',
+      teams: 'currentTournament/teams',
+    })
 
-    name() {
-      return this.tournament.name();
-    },
-
-    teams() {
-      return this.tournament.teams();
-    }
   },
 
   methods: {
     addTeam(team) {
-      this.$store.commit("addTeam", {
-        team: team,
-        tournament: this.slug
-      });
+      this.$store.dispatch("currentTournament/addTeam", team);
     },
 
     submit() {

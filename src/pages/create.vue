@@ -20,7 +20,9 @@
 </template>
 
  <script>
+
 import slug from "slug";
+import idGenerator from "../services/id-generator";
 
 export default {
   data: () => ({
@@ -41,16 +43,25 @@ export default {
       }
 
       const slugged = slug(this.name.toLowerCase());
-      const teams = Array.from({length: this.totalPlayers}).map(() => ({});
 
-      this.$store.commit("addTournament", {
-        slug: slugged,
+      // create array of total players
+      // const teams = Array.from({length: this.totalPlayers}).map(() => ({}))
+      const teams = []; //TODO: fix with array.from
+      for(let i = 0; i < this.totalPlayers; i++) {
+        teams.push({});
+      }
+
+      const tournament = {
+        id: idGenerator.id(),
         name: this.name,
         type: this.type,
         teams
-      });
+      };
 
-      this.$router.push(`/detail/${slugged}`);
+      tournament.slug = `${slugged}-${idGenerator.random4chars}`
+
+      this.$store.commit("addTournament", tournament);
+      this.$router.push(`/detail/${tournament.slug}`);
     }
   }
 };

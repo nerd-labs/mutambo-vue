@@ -30,7 +30,7 @@ export default {
       const activePath = Object.keys(routes).find(r => routes[r].path === nextRoute);
       const routeConfig = routes[activePath];
 
-      if (routeConfig.save) {
+      if (routeConfig.meta && routeConfig.meta.save) {
         this.$store.commit('setProgress', {
           slug: this.$route.params.slug,
           page: routeConfig.path

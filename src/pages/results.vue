@@ -20,6 +20,7 @@
 
 <script>
 import { matchStates, routes } from "../config";
+import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
@@ -72,18 +73,10 @@ export default {
     ]
   }),
   computed: {
-
-    tournament() {
-      return this.$store.getters.tournament(this.$route.params.slug);
-    },
-
-    name() {
-      return this.tournament.name();
-    },
-
-    teams() {
-      return this.tournament.teams();
-    },
+    ...mapGetters({
+      name: 'currentTournament/name',
+      teams: 'currentTournament/teams'
+    }),
 
     results() {
       return this.teams.map(t => {

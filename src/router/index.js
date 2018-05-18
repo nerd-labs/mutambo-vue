@@ -1,9 +1,10 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 
-import { routes } from '../config'
+import store from '../store'
+import { routes } from '../config';
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
 function buildRouteConfig () {
   let routeConfig = []
@@ -11,13 +12,30 @@ function buildRouteConfig () {
   for (let key in routes) {
     routeConfig.push({
       path: routes[key].fullPath,
-      component: routes[key].component
-    })
+      component: routes[key].component,
+      meta: routes[key].meta
+    });
   }
 
   return routeConfig
 }
 
-export default new Router({
+const router = new VueRouter({
   routes: buildRouteConfig()
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta && to.meta.fetchCurrentTournament) {
+    let tournament = store.getters.tournamentBySlug(to.params.slug)
+
+    if (Object.keys(tournament).length === 0) {
+      next('/')
+    }
+
+    store.commit('currentTournament/set', tournament.id)
+  }
+
+  next()
+})
+
+export default router
