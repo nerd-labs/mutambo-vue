@@ -22,22 +22,6 @@ export default {
     }
   },
 
-  addTeam(state, { team, slug }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
-
-    if (tournament.name) {
-      if (!tournament.teams) tournament.teams = [];
-
-      const index = tournament.teams.findIndex(t => t.id === team.id);
-
-      if (index < 0) {
-        tournament.teams.push(team)
-      } else {
-        tournament.teams[index] = team;
-      }
-    }
-  },
-
   addMatches(state, { matches, slug }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 

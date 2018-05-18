@@ -29,28 +29,18 @@
 
  <script>
 import berger from "../helpers/berger";
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    slug() {
-      return this.$store.getters["currentTournament/slug"];
-    },
 
-    teams() {
-      return this.$store.getters["currentTournament/teams"];
-    },
-
-    totalTeams() {
-      return this.teams.length;
-    },
-
-    type() {
-      return this.$store.getters["currentTournament/type"];
-    },
-
-    numberOfPlays() {
-      return this.$store.getters["currentTournament/numberOfPlays"];
-    },
+    ...mapGetters({
+      slug: 'currentTournament/slug',
+      teams: 'currentTournament/teams',
+      totalTeams: 'currentTournament/totalTeams',
+      type: 'currentTournament/type',
+      numberOfPlays: 'currentTournament/numberOfPlays',
+    }),
 
     totalFixtures() {
       const length = this.totalTeams;

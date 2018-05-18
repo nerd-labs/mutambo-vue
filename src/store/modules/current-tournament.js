@@ -33,6 +33,10 @@ export default {
       return getters.tournament.teams
     },
 
+    totalTeams: (state, getters) => {
+      return getters.teams.length
+    },
+
     matchList: (state, getters) => {
       return getters.tournament.matches
     },
@@ -58,6 +62,17 @@ export default {
 
     randomizeTeams (state, { tournament, randomizedTeams }) {
       tournament.teams = randomizedTeams
+    },
+
+    addTeam (state, { tournament, team }) {
+      if (!tournament.teams) tournament.teams = []
+      const index = tournament.teams.findIndex(t => t.id === team.id)
+
+      if (index < 0) {
+        tournament.teams.push(team)
+      } else {
+        tournament.teams[index] = team
+      }
     }
   },
 
@@ -78,6 +93,17 @@ export default {
         commit('randomizeTeams', {
           tournament,
           randomizedTeams
+        })
+      }
+    },
+
+    addTeam ({ commit, state, rootState }, team) {
+      const tournament = rootState.tournaments.find(t => t.id === state.id)
+
+      if (tournament) {
+        commit('addTeam', {
+          tournament,
+          team
         })
       }
     }
