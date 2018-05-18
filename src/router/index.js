@@ -40,7 +40,8 @@ router.beforeEach((to, from, next) => {
       next('/')
     }
 
-    store.commit('currentTournament/set', tournament.id)
+    store.commit('currentTournament/set', tournament.id);
+    store.commit('league/set', tournament.id);
   }
 
   next()

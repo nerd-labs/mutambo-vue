@@ -7,10 +7,15 @@ export default {
       slug,
       name,
       teams,
-      type
+      type,
+      details: {},
+      league: {
+        matches: [],
+        done: false
+      },
+      knockout: {},
+      groupstage: {},
     };
-
-    t[type] = {};
 
     state.tournaments.push(t);
   },
@@ -51,6 +56,7 @@ export default {
     }
   },
 
+  // TODO: Move to league module
   addLeagueMatches(state, { matches, slug }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 
@@ -69,32 +75,8 @@ export default {
     }
   },
 
-  updateLeagueMatchScore(state, { match, slug }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
-
-    if (tournament) {
-      const index = tournament.league.matches.findIndex(m => m.id === match.id);
-
-      if (index > -1) {
-        tournament.league.matches[index] = match;
-      }
-    } else {
-      throw new Error(`Tournament ${slug} not found`);
-    }
-  },
-
-  completeLeague(state, { slug }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
-
-    if (tournament) {
-      tournament.league.done = true;
-    } else {
-      throw new Error(`Tournament ${slug} not found`);
-    }
-  },
-
-  updateTeamStat(state, { teamId, score, scoreOpponent, slug }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
+  updateTeamStat(state, { teamId, score, scoreOpponent, id }) {
+    const tournament = state.tournaments.find(t => t.id === id);
 
     if (tournament) {
       const team = tournament.teams.find(t => t.id === teamId);

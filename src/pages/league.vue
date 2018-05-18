@@ -5,7 +5,7 @@
 
       mut-matches(:matches="matches" @update="matchUpdate" @done="allMatchesPlayed")
 
-      v-btn(v-if="done || internalDone" @click="endTournament") End tournament
+      v-btn(v-if="done" @click="endTournament") End tournament
 
 </template>
 
@@ -13,48 +13,34 @@
 import { matchStates, routes } from "../config";
 
 export default {
-  data: () => ({
-    internalDone: false
-  }),
-
   computed: {
     slug() {
-      return this.$route.params.slug;
-    },
-
-    tournament() {
-      return this.$store.getters.tournament(this.slug);
+      return this.$store.getters["currentTournament/slug"];
     },
 
     tournamentName() {
-      return this.tournament.name();
+      return this.$store.getters["currentTournament/name"];
     },
 
     matches() {
-      return this.tournament.leagueMatchList();
+      return this.$store.getters["currentTournament/leagueMatches"];
     },
 
     done() {
-      return this.tournament.leagueCompleted();
+      return this.$store.getters["currentTournament/leagueCompleted"];
     }
   },
 
   methods: {
     matchUpdate(event) {
-      this.$store.dispatch("updateMatch", {
-        match: event.match,
-        slug: this.slug
-      });
+      this.$store.dispatch("league/updateMatch", event.match);
     },
 
     allMatchesPlayed() {
-      this.$store.commit('completeLeague', {
-        slug: this.slug
-      });
+      this.$store.dispatch('league/complete');
     },
 
     endTournament() {
-      this.internalDone = true;
       this.$router.push(`/results/${this.$route.params.slug}`);
     }
   }

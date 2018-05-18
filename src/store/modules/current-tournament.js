@@ -33,17 +33,18 @@ export default {
       return getters.tournament.teams
     },
 
-    matchList: (state, getters) => {
-      return getters.tournament.matches
-    },
-
-    details: (state, getters) => {
-      return getters.tournament.details || {}
-    },
-
     numberOfPlays: (state, getters) => {
-      return getters.details.numberOfPlays
+      if (getters.tournament.details) return getters.tournament.details.numberOfPlays
+    },
+
+    leagueMatches: (state, getters) => {
+      if (getters.tournament.league) return getters.tournament.league.matches
+    },
+
+    leagueCompleted: (state, getters) => {
+      if (getters.tournament.league) return getters.tournament.league.done
     }
+
   },
   mutations: {
     set(state, tournamentId) {

@@ -27,7 +27,9 @@ import { routes } from "../config";
 export default {
   beforeMount() {
     this.$store.commit("currentTournament/reset");
+    this.$store.commit("league/reset");
   },
+
   methods: {
     goToCreate() {
       this.$router.push(routes.CREATE.path);
