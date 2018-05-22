@@ -1,7 +1,7 @@
 <template lang="pug">
     div
       v-container(grid-list-md)
-        h2.display-2.accent--text.mb-5 {{ tournamentName }} results
+        h2.display-2.accent--text.mb-5 {{ name }} results
 
         v-flex(xs12 xl8 offset-xl2)
           v-data-table.elevation-1(:headers='headers' :items='sortedResults' hide-actions)
@@ -20,6 +20,7 @@
 
 <script>
 import { matchStates, routes } from "../config";
+import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
@@ -72,12 +73,10 @@ export default {
     ]
   }),
   computed: {
-    tournamentName() {
-      return this.$store.getters.tournamentName(this.$route.params.slug);
-    },
-    teams() {
-      return this.$store.getters.teams(this.$route.params.slug);
-    },
+    ...mapGetters({
+      name: 'currentTournament/name',
+      teams: 'currentTournament/teams'
+    }),
 
     results() {
       return this.teams.map(t => {

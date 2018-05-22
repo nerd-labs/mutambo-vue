@@ -18,7 +18,9 @@
 </template>
 
  <script>
+
 import IdGenerator from "../services/id-generator";
+import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
@@ -39,7 +41,7 @@ export default {
       return this.clubs.splice((this.clubs.length * Math.random()) | 0, 1)[0];
     },
 
-    startDraw() {
+    startDraw() { // TODO: redraw??
       this.draw = true;
       this.random();
     },
@@ -62,26 +64,16 @@ export default {
     },
 
     submit() {
-      this.$store.commit("randomizeTeams", {
-        slug: this.slug,
-        newTeams: this.newTeams
-      });
-
+      this.$store.dispatch("currentTournament/randomizeTeams", this.newTeams);
       this.$router.push(`/summary/${this.slug}`);
     }
   },
   computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
 
-    tournament() {
-      return this.$store.getters.tournament(this.slug);
-    },
-
-    teams() {
-      return this.tournament.teams();
-    },
+    ...mapGetters({
+      slug: 'currentTournament/slug',
+      teams: 'currentTournament/teams',
+    }),
 
     clubs() {
       return this.teams.map(t => t.club);
