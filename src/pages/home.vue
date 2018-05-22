@@ -5,10 +5,10 @@
     br
     br
 
-    v-list(v-if="existingTournaments.length")
+    v-list(v-if="tournaments.length")
       v-container(grid-list-md fluid)
         v-layout(row wrap justify-space-between)
-          template(v-for="(tournament, index) in existingTournaments")
+          template(v-for="(tournament, index) in tournaments")
             v-flex(xs12 v-if="index !== 0")
               .pl-3.pr-3
                 v-divider
@@ -22,7 +22,9 @@
 </template>
 
 <script>
+
 import { routes } from "../config";
+import { mapGetters } from "vuex";
 
 export default {
   beforeMount() {
@@ -42,9 +44,9 @@ export default {
   },
 
   computed: {
-    existingTournaments() {
-      return this.$store.getters.tournaments();
-    }
+    ...mapGetters({
+      tournaments: "tournaments"
+    })
   }
 };
 </script>
