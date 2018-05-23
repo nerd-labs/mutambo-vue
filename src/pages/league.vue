@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ tournamentName }}
+      h2.display-2.accent--text.mb-5 {{ name }}
 
       mut-matches(:matches="matches" @update="matchUpdate" @done="allMatchesPlayed")
 
