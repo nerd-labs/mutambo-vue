@@ -59,24 +59,16 @@ export default {
     },
 
     updateMatchScore({ state, rootState, commit }, match) {
-      const tournament = rootState.tournaments.find(t => t.id === state.id);
+      const tournament = getters.tournament;
+      const matchIndex = tournament.league.matches.findIndex(m => m.id === match.id);
 
-      if (tournament) {
-        const matchIndex = tournament.league.matches.findIndex(m => m.id === match.id);
-        commit('updateMatchScore', { tournament, matchIndex, match });
-      } else {
-        throw new Error(`Tournament not found`);
-      }
+      commit('updateMatchScore', { tournament, matchIndex, match });
     },
 
     addMatches({ state, rootState, commit }, matches) {
-      const tournament = rootState.tournaments.find(t => t.id === state.id);
+      const tournament = getters.tournament;
 
-      if (tournament) {
-        commit('addMatches', {tournament, matches});
-      } else {
-        throw new Error(`Tournament not found`);
-      }
+      commit('addMatches', {tournament, matches});
     },
 
     updateMatch({ commit, dispatch, state }, match) {
