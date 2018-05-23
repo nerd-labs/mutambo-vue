@@ -83,10 +83,7 @@ export default {
         match.home.score = 0;
       });
 
-      this.$store.commit("addLeagueMatches", {
-        matches: matches,
-        slug: this.slug
-      });
+      this.$store.dispatch("league/addMatches", matches);
     }
   }
 };

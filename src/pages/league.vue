@@ -10,25 +10,18 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { matchStates, routes } from "../config";
 
 export default {
+
   computed: {
-    slug() {
-      return this.$store.getters["currentTournament/slug"];
-    },
-
-    tournamentName() {
-      return this.$store.getters["currentTournament/name"];
-    },
-
-    matches() {
-      return this.$store.getters["currentTournament/leagueMatches"];
-    },
-
-    done() {
-      return this.$store.getters["currentTournament/leagueCompleted"];
-    }
+    ...mapGetters({
+      slug: 'currentTournament/slug',
+      name: 'currentTournament/name',
+      matches: 'league/matches',
+      done: 'league/completed',
+    })
   },
 
   methods: {

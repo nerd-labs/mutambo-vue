@@ -28,8 +28,7 @@ import { mapGetters } from "vuex";
 
 export default {
   beforeMount() {
-    this.$store.commit("currentTournament/reset");
-    this.$store.commit("league/reset");
+    this.$store.dispatch("currentTournament/reset");
   },
 
   methods: {

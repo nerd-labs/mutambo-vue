@@ -5,6 +5,9 @@ export default {
 
   tournamentById: state => id => {
     const tournament = state.tournaments.find(tournament => tournament.id === id)
+
+    // if (!tournament) throw new Error('Tournament not found');
+
     return tournament || {}
   },
 

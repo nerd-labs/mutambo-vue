@@ -9,8 +9,12 @@ export default {
       return state.id
     },
 
-    league: (state, getters, rootState, rootGetters) => {
-      return rootGetters.tournamentById(state.id).league
+    tournament: (state, getters, rootState, rootGetters) => {
+      return rootGetters.tournamentById(state.id)
+    },
+
+    league: (state, getters) => {
+      if (getters.tournament) return getters.tournament.league
     },
 
     matches: (state, getters) => {
@@ -20,6 +24,7 @@ export default {
     completed: (state, getters) => {
       if (getters.league) return getters.league.done
     }
+
 
   },
   mutations: {
@@ -35,11 +40,9 @@ export default {
       tournament.league.done = true;
     },
 
-    updateMatchScore(state, { tournament, match }) {
-      const index = tournament.league.matches.findIndex(m => m.id === match.id);
-
-      if (index > -1) {
-        tournament.league.matches[index] = match;
+    updateMatchScore(state, { tournament, matchIndex, match }) {
+      if (matchIndex > -1) {
+        tournament.league.matches[matchIndex] = match;
       }
     },
 
@@ -49,28 +52,25 @@ export default {
   },
 
   actions: {
-    complete({ state, rootState, commit }) {
-      const tournament = rootState.tournaments.find(t => t.id === state.id);
+    complete({ state, rootState, commit, getters }) {
+      const tournament = getters.tournament;
 
-      if (tournament) {
-        commit('complete', tournament);
-      } else {
-        throw new Error(`Tournament not found`);
-      }
+      commit('complete', tournament);
     },
 
     updateMatchScore({ state, rootState, commit }, match) {
       const tournament = rootState.tournaments.find(t => t.id === state.id);
 
       if (tournament) {
-        commit('updateMatchScore', { tournament, match });
+        const matchIndex = tournament.league.matches.findIndex(m => m.id === match.id);
+        commit('updateMatchScore', { tournament, matchIndex, match });
       } else {
         throw new Error(`Tournament not found`);
       }
     },
 
-    addMatches({ state, rootState }, matches) {
-      const tournament = rootState.tournaments.find(t => t.slug === slug);
+    addMatches({ state, rootState, commit }, matches) {
+      const tournament = rootState.tournaments.find(t => t.id === state.id);
 
       if (tournament) {
         commit('addMatches', {tournament, matches});

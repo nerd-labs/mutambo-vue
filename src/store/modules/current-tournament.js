@@ -74,7 +74,12 @@ export default {
       } else {
         tournament.teams[index] = team
       }
-    }
+    },
+
+    setProgress(state, { tournament, page }) {
+      tournament.page = page;
+    },
+
   },
 
   actions: {
@@ -116,13 +121,20 @@ export default {
 
     addTeam ({ commit, state, rootState }, team) {
       const tournament = rootState.tournaments.find(t => t.id === state.id)
-
       if (tournament) {
         commit('addTeam', {
           tournament,
           team
         })
       }
-    }
+    },
+
+    setProgress({ state, getters, commit }, page) {
+      const tournament = getters.tournament;
+      commit('setProgress', {
+        tournament,
+        page
+      })
+    },
   }
 }
