@@ -99,10 +99,7 @@ export default {
     },
 
     generateKnockoutRounds() {
-      this.$store.commit('generateKORounds', {
-        teams: this.teams,
-        slug: this.slug
-      })
+      this.$store.dispatch('knockout/generate', this.teams)
     }
   }
 };

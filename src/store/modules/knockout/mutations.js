@@ -6,4 +6,8 @@ export default {
   reset(state) {
     state.id = undefined
   },
+
+  generate(state, { tournament, matches }) {
+    tournament.knockout.rounds.push(matches);
+  }
 }

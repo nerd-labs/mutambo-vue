@@ -50,6 +50,9 @@ export default {
       },
 
       koRounds: () => {
+
+        // fill rounds array with total rounds as empty
+
         const rounds = [];
 
         let totalTeams = tournament.teams.length;

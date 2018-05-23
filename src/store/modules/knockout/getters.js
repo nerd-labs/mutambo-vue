@@ -1,13 +1,17 @@
 export default {
   id: (state) => {
-    return state.id
+    return state.id;
   },
 
-  ko: (state, getters, rootState, rootGetters) => {
-    return rootGetters.tournamentById(state.id).knockout
+  tournament: (state, getters, rootState, rootGetters) => {
+    return rootGetters.tournamentById(state.id);
+  },
+
+  ko: (state, getters) => {
+    return getters.tournament.knockout;
   },
 
   rounds: (state, getters) => {
-    return getters.ko.rounds
+    if (getters.ko) return getters.ko.rounds;
   },
 }
