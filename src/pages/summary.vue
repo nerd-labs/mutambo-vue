@@ -96,7 +96,7 @@ export default {
     },
 
     generateKnockoutRounds() {
-      this.$store.dispatch('knockout/generate', this.teams)
+      this.$store.dispatch('knockout/generate')
     }
   }
 };

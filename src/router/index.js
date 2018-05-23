@@ -33,7 +33,10 @@ router.beforeEach((to, from, next) => {
         next('/')
       }
 
-      store.dispatch('currentTournament/set', tournament.id);
+      const currentTournamentId = store.getters['currentTournament/id'];
+      if (tournament.id !== currentTournamentId) {
+        store.dispatch('currentTournament/set', tournament.id);
+      }
     }
 
     if (to.meta.save) {

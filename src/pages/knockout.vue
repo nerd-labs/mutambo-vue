@@ -1,9 +1,8 @@
 <template lang="pug">
     div
-      pre  {{ internalRounds }}
+
       .bracket(:class="totalRoundsClass")
         .round(v-for="round in internalRounds" :class="round.classes")
-          h1 {{ round.name }}
           .matches
             mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
               .winner(v-if="round.name === 'Finals'")
@@ -32,25 +31,26 @@ export default {
   beforeMount() {
     for (let i = 0; i < this.rounds.length; i++) {
       const round = this.rounds[i] || [];
-      const matches = round.matches || [];
 
-      if (matches.length % 2 === 0) {
-        const half = matches.length / 2;
-        const full = matches.length;
+console.log(round.length, round.length % 2)
+      if (round.length % 2 === 0) {
+        const half = round.length / 2;
+        const full = round.length;
 
         this.internalRounds.push({
-          matches: matches.slice(0, half),
+          matches: round.slice(0, half),
           round: i,
           classes: `round${i + 1} round--left`
         });
 
         this.internalRounds.push({
-          matches: matches.slice(half, full),
+          matches: round.slice(half, full),
           classes: `round${i + 1} round--right`
         });
       } else {
+        console.log('else', round);
         this.internalRounds.push({
-          matches,
+          matches: round,
           round: i + 1
         });
       }
@@ -63,7 +63,7 @@ export default {
 .bracket {
   padding: 10px;
   box-sizing: border-box;
-  min-height: calc(100vh - 20px);
+  min-height: calc(100vh - 136px); // height of header, footer and padding
   color: #2c7399;
   font-family: "Roboto Condensed", sans-serif;
 }
@@ -134,7 +134,7 @@ export default {
 
   .round {
     display: grid;
-    grid-template-rows: 40px 1fr;
+    // grid-template-rows: 40px 1fr;
 
     h1 {
       align-self: start;

@@ -14,12 +14,12 @@ export default {
         done: false
       },
       knockout: {
-		rounds: []
-	  },
-      groupstage: {},
-    };
+        rounds: []
+      },
+        groupstage: {},
+      };
 
-    state.tournaments.push(t);
+      state.tournaments.push(t);
   },
 
   setProgress(state, { slug, page }) {

@@ -1,26 +1,31 @@
 import { generateMatch } from '../../../helpers/match';
+import { calculateTotalRounds } from '../../../helpers/knockout';
 
 export default {
-  generate({commit, getters}, teams) {
+  generate({ commit, getters }) {
     const tournament = getters.tournament;
+    const teams = tournament.teams;
 
-    if (tournament) {
-      const shuffeledTeams = teams.sort(function (a, b) { return 0.5 - Math.random() });
+    const shuffeledTeams = JSON.parse(JSON.stringify(teams.sort((a, b) => 0.5 - Math.random())));
+    const totalRounds = calculateTotalRounds(teams.length);
 
-      const matches = [];
-      for (let i = 0; i < shuffeledTeams.length; i = i + 2) {
-        // TODO: splice??
-        matches.push(generateMatch(shuffeledTeams[i], shuffeledTeams[i + 1]));
-      }
+    const rounds = Array.from({ length: totalRounds }).map((round, i) => {
+      const matches = teams.length / 2; // TODO: calculation error???
+      const totalMatchesPerRound = Math.floor((matches / (i + 1)));
+      // create empty matches
+      return Array.from({ length: totalMatchesPerRound }).map(i => ([generateMatch({}, {})]))
+    });
 
-      commit('generate', {
-        tournament,
-        matches
-      });
-    } else {
-      throw new Error(`Tournament ${slug} not found`);
+    for (let i = 0; i < rounds[0].length; i++) {
+      const teamA = shuffeledTeams.shift();
+      const teamB = shuffeledTeams.shift();
+      rounds[0][i] = generateMatch(teamA, teamB);
     }
 
+    commit('generate', {
+      tournament,
+      rounds
+    });
   }
 
 }
