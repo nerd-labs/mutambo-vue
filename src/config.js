@@ -84,6 +84,7 @@ export const routes = {
     fullPath: '/results/:slug',
     component: results,
     meta: {
+      save: true,
       fetchCurrentTournament: true
     }
   }

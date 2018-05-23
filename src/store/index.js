@@ -8,6 +8,7 @@ import plugins from './plugins';
 
 // modules
 import currentTournament from './modules/current-tournament';
+import league from './modules/league';
 import knockout from './modules/knockout';
 
 Vue.use(Vuex)
@@ -19,7 +20,8 @@ export default new Vuex.Store({
   plugins,
   getters,
   modules: {
-    currentTournament: currentTournament,
-    knockout: knockout,
+    currentTournament,
+    league,
+	knockout
   }
 })

@@ -46,6 +46,7 @@ export default {
         return getters.tournament.details.numberOfPlays
       }
     }
+
   },
   mutations: {
     set (state, tournamentId) {
@@ -73,21 +74,37 @@ export default {
       } else {
         tournament.teams[index] = team
       }
-    }
+    },
+
+    setProgress(state, { tournament, page }) {
+      tournament.page = page;
+    },
+
   },
 
   actions: {
-
     set ({ commit }, tournamentId) {
-      if (!tournamentId) throw new Error('Tournament does not exist!')
-
       commit('set', tournamentId);
-      commit('knockout/set', tournamentId, { root: true });
+
+      commit('league/set', tournamentId, {
+        root: true
+      });
+
+	  commit('knockout/set', tournamentId, { 
+		root: true 
+	  });
     },
 
     reset ({ commit }) {
       commit('reset');
-      commit('knockout/reset', null, { root: true });
+
+      commit('league/reset', null, {
+        root: true
+      });
+
+	  commit('knockout/reset', null, {
+        root: true
+      });
     },
 
     updateDetails ({ commit, state, rootState }, details) {
@@ -112,13 +129,20 @@ export default {
 
     addTeam ({ commit, state, rootState }, team) {
       const tournament = rootState.tournaments.find(t => t.id === state.id)
-
       if (tournament) {
         commit('addTeam', {
           tournament,
           team
         })
       }
-    }
+    },
+
+    setProgress({ state, getters, commit }, page) {
+      const tournament = getters.tournament;
+      commit('setProgress', {
+        tournament,
+        page
+      })
+    },
   }
 }

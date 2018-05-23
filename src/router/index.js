@@ -25,14 +25,20 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta && to.meta.fetchCurrentTournament) {
-    let tournament = store.getters.tournamentBySlug(to.params.slug)
+  if (to.meta) {
+    if (to.meta.fetchCurrentTournament) {
+      const tournament = store.getters.tournamentBySlug(to.params.slug)
 
-    if (Object.keys(tournament).length === 0) {
-      next('/')
+      if (Object.keys(tournament).length === 0) {
+        next('/')
+      }
+
+      store.dispatch('currentTournament/set', tournament.id);
     }
 
-    store.dispatch('currentTournament/set', tournament.id)
+    if (to.meta.save) {
+      store.dispatch('currentTournament/setProgress', to.path);
+    }
   }
 
   next()
