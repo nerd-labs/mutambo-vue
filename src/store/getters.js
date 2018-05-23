@@ -46,35 +46,7 @@ export default {
 
       numberOfPlays: () => {
         return tournament.details.numberOfPlays;
-      },
-
-      koRounds: () => {
-
-        // fill rounds array with total rounds as empty
-
-        const rounds = [];
-
-        let totalTeams = tournament.teams.length;
-        let totalRounds = 0;
-
-        for (let i = totalTeams; i >= 2; i = i / 2) {
-          rounds.push({
-            matches: []
-          });
-
-          const matches = [];
-          const totalMatches = i / 2;
-          for (let y = 0; y < totalMatches; y++) {
-            const round = tournament.knockout.rounds[totalRounds] || [];
-            matches.push(round[y] || {});
-          }
-
-          rounds[totalRounds].matches = matches;
-          totalRounds++;
-        }
-
-        return rounds;
-      },
+      }
     }
   },
 }
