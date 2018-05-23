@@ -70,6 +70,15 @@ export const routes = {
       fetchCurrentTournament: true
     }
   },
+  KNOCKOUT: {
+    path: 'knockout',
+    fullPath: '/knockout/:slug',
+    component: knockout,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
+  },
   RESULTS: {
     path: 'results',
     fullPath: '/results/:slug',

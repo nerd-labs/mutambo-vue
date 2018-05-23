@@ -9,7 +9,10 @@ export default {
       name,
       teams,
       type,
-      details: {}
+      details: {},
+      knockout: {
+        rounds: [],
+      }
     })
   },
 
@@ -104,7 +107,5 @@ generateKORounds(state, { teams, slug }) {
     }
 
   }
-
-  
 }
 

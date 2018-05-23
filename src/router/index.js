@@ -32,7 +32,7 @@ router.beforeEach((to, from, next) => {
       next('/')
     }
 
-    store.commit('currentTournament/set', tournament.id)
+    store.dispatch('currentTournament/set', tournament.id)
   }
 
   next()

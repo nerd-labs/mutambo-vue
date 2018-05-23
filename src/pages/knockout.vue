@@ -1,5 +1,6 @@
 <template lang="pug">
     div
+      pre  {{ internalRounds }}
       .bracket(:class="totalRoundsClass")
         .round(v-for="round in internalRounds" :class="round.classes")
           h1 {{ round.name }}
@@ -10,7 +11,8 @@
 </template>
 
 <script>
-import * as faker from "faker";
+
+import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
@@ -18,17 +20,10 @@ export default {
   }),
 
   computed: {
-    slug() {
-      return this.$route.params.slug;
-    },
 
-    tournament() {
-      return this.$store.getters.tournament(this.slug);
-    },
-
-    rounds() {
-      return this.tournament.koRounds();
-    },
+    ...mapGetters({
+      rounds: 'knockout/rounds',
+    }),
 
     totalRoundsClass() {
       return `bracket--${this.rounds.length}`;
