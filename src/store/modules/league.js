@@ -58,14 +58,14 @@ export default {
       commit('complete', tournament);
     },
 
-    updateMatchScore({ state, rootState, commit }, match) {
+    updateMatchScore({ state, rootState, commit, getters }, match) {
       const tournament = getters.tournament;
       const matchIndex = tournament.league.matches.findIndex(m => m.id === match.id);
 
       commit('updateMatchScore', { tournament, matchIndex, match });
     },
 
-    addMatches({ state, rootState, commit }, matches) {
+    addMatches({ state, rootState, commit, getters }, matches) {
       const tournament = getters.tournament;
 
       commit('addMatches', {tournament, matches});
