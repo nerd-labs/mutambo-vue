@@ -22,6 +22,6 @@ export default new Vuex.Store({
   modules: {
     currentTournament,
     league,
-	knockout
+	  knockout
   }
 })
