@@ -38,7 +38,7 @@ export default {
 
     goToRoute(id) {
       const tournament = this.$store.getters.tournamentById(id);
-      this.$router.push(`${tournament.page}/${tournament.slug}`);
+      this.$router.push(tournament.page);
     }
   },
 

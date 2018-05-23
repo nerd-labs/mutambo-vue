@@ -40,20 +40,12 @@ export default {
         return tournament.teams
       },
 
-      leagueMatchList: () => {
-        if (tournament.league) return tournament.league.matches
-      },
-
       page: () => {
         return tournament.page
       },
 
       numberOfPlays: () => {
         return tournament.details.numberOfPlays;
-      },
-
-      leagueCompleted: () => {
-        if (tournament.league) return tournament.league.done
       },
 
     }
