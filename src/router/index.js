@@ -35,7 +35,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta) {
     if (to.meta.fetchCurrentTournament) {
-      let tournament = store.getters.tournamentBySlug(to.params.slug)
+      const tournament = store.getters.tournamentBySlug(to.params.slug)
 
       if (Object.keys(tournament).length === 0) {
         next('/')
