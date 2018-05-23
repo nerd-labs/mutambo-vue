@@ -30,13 +30,13 @@ export default {
     }
   },
 
-  updateDetails (state, payload) {
-    const tournament = state.tournaments.find(t => t.id === payload.id)
+  updateDetails (state, { id, details }) {
+    const tournament = state.tournaments.find(t => t.id === id)
 
     if (tournament) {
-      tournament.details = Object.assign({}, tournament.details, payload.details)
+      tournament.details = Object.assign({}, tournament.details, details)
     } else {
-      throw new Error(`Tournament ${payload.id} not found`)
+      throw new Error(`Tournament ${id} not found`)
     }
   },
 
