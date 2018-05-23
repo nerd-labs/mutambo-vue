@@ -49,10 +49,6 @@ export default {
         return tournament.details.numberOfPlays;
       },
 
-      knockoutRounds: () => {
-        return tournament.knockout.round;
-      },
-
       koRounds: () => {
         const rounds = [];
 

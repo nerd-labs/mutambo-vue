@@ -6,8 +6,8 @@ import { routes } from '../config';
 
 Vue.use(VueRouter)
 
-function buildRouteConfig () {
-  let routeConfig = []
+function buildRouteConfig() {
+  let routeConfig = [];
 
   for (let key in routes) {
     routeConfig.push({
@@ -17,7 +17,7 @@ function buildRouteConfig () {
     });
   }
 
-  return routeConfig
+  return routeConfig;
 }
 
 const router = new VueRouter({

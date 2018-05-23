@@ -6,6 +6,7 @@ import actions from './actions';
 import getters from './getters';
 import plugins from './plugins';
 
+// modules
 import currentTournament from './modules/current-tournament';
 import knockout from './modules/knockout';
 
