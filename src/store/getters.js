@@ -47,6 +47,7 @@ export default {
       numberOfPlays: () => {
         return tournament.details.numberOfPlays;
       },
+
     }
   },
 }
