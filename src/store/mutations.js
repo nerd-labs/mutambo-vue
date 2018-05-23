@@ -56,15 +56,6 @@ export default {
     }
   },
 
-  // TODO: Move to league module
-  addLeagueMatches(state, { matches, slug }) {
-    const tournament = state.tournaments.find(t => t.slug === slug);
-
-    if (tournament) {
-      tournament.league.matches = matches;
-    }
-  },
-
   randomizeTeams(state, { slug, newTeams }) {
     const tournament = state.tournaments.find(t => t.slug === slug);
 

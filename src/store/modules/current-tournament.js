@@ -34,7 +34,7 @@ export default {
     },
 
     totalTeams: (state, getters) => {
-      return getters.teams.length
+      if (getters.teams) return getters.teams.length
     },
 
     matchList: (state, getters) => {
@@ -78,6 +78,22 @@ export default {
   },
 
   actions: {
+    set ({ commit }, tournamentId) {
+      commit('set', tournamentId);
+
+      commit('league/set', tournamentId, {
+        root: true
+      });
+    },
+
+    reset ({ commit }) {
+      commit('reset');
+
+      commit('league/reset', null, {
+        root: true
+      });
+    },
+
     updateDetails ({ commit, state, rootState }, details) {
       const tournament = rootState.tournaments.find(t => t.id === state.id)
       if (tournament) {
