@@ -5,6 +5,9 @@ export default {
 
   tournamentById: state => id => {
     const tournament = state.tournaments.find(tournament => tournament.id === id)
+
+    // if (!tournament) throw new Error('Tournament not found');
+
     return tournament || {}
   },
 
@@ -37,17 +40,14 @@ export default {
         return tournament.teams
       },
 
-      matchList: () => {
-        return tournament.matches
-      },
-
       page: () => {
         return tournament.page
       },
 
       numberOfPlays: () => {
-        return tournament.details.numberOfPlays
-      }
+        return tournament.details.numberOfPlays;
+      },
+
     }
-  }
+  },
 }

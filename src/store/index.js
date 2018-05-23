@@ -6,6 +6,7 @@ import actions from './actions';
 import getters from './getters';
 import plugins from './plugins';
 import currentTournament from './modules/current-tournament';
+import league from './modules/league';
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   plugins,
   getters,
   modules: {
-    currentTournament: currentTournament
+    currentTournament,
+    league
   }
 })

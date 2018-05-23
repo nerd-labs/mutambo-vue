@@ -34,7 +34,7 @@ export default {
     },
 
     totalTeams: (state, getters) => {
-      return getters.teams.length
+      if (getters.teams) return getters.teams.length
     },
 
     matchList: (state, getters) => {
@@ -46,6 +46,7 @@ export default {
         return getters.tournament.details.numberOfPlays
       }
     }
+
   },
   mutations: {
     set (state, tournamentId) {
@@ -73,10 +74,31 @@ export default {
       } else {
         tournament.teams[index] = team
       }
-    }
+    },
+
+    setProgress(state, { tournament, page }) {
+      tournament.page = page;
+    },
+
   },
 
   actions: {
+    set ({ commit }, tournamentId) {
+      commit('set', tournamentId);
+
+      commit('league/set', tournamentId, {
+        root: true
+      });
+    },
+
+    reset ({ commit }) {
+      commit('reset');
+
+      commit('league/reset', null, {
+        root: true
+      });
+    },
+
     updateDetails ({ commit, state, rootState }, details) {
       const tournament = rootState.tournaments.find(t => t.id === state.id)
       if (tournament) {
@@ -99,13 +121,20 @@ export default {
 
     addTeam ({ commit, state, rootState }, team) {
       const tournament = rootState.tournaments.find(t => t.id === state.id)
-
       if (tournament) {
         commit('addTeam', {
           tournament,
           team
         })
       }
-    }
+    },
+
+    setProgress({ state, getters, commit }, page) {
+      const tournament = getters.tournament;
+      commit('setProgress', {
+        tournament,
+        page
+      })
+    },
   }
 }

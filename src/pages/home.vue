@@ -28,8 +28,9 @@ import { mapGetters } from "vuex";
 
 export default {
   beforeMount() {
-    this.$store.commit("currentTournament/reset");
+    this.$store.dispatch("currentTournament/reset");
   },
+
   methods: {
     goToCreate() {
       this.$router.push(routes.CREATE.path);
@@ -37,7 +38,7 @@ export default {
 
     goToRoute(id) {
       const tournament = this.$store.getters.tournamentById(id);
-      this.$router.push(`${tournament.page}/${tournament.slug}`);
+      this.$router.push(tournament.page);
     }
   },
 
