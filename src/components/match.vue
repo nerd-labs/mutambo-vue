@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { matchStates } from "../config";
+import { matchStates, matchWinner } from "../config";
 
 export default {
   data: () => ({
@@ -61,18 +61,18 @@ export default {
     },
 
     endMatch(event) {
-      let winner = 0;
+      let winner = matchWinner.TIE;
 
       // convert to number
       this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
       this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
 
       if (this.internalMatch.home.score > this.internalMatch.away.score) {
-        winner = 1;
+        winner = matchWinner.HOME;
       } else if (
         this.internalMatch.home.score < this.internalMatch.away.score
       ) {
-        winner = 2;
+        winner = matchWinner.AWAY;
       }
 
       this.$emit("update", {
