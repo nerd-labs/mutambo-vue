@@ -1,5 +1,5 @@
 <template lang="pug">
-    .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}")
+    .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}" @click="editMatch")
       .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
         .match__team
           .match__club {{ internalMatch.home.club }}
@@ -51,7 +51,16 @@ export default {
       });
     },
 
-    endMatch() {
+    editMatch() {
+      if (this.match.state === matchStates.DONE) {
+        this.$emit("update", {
+          match: this.internalMatch,
+          state: matchStates.PLAYING
+        });
+      }
+    },
+
+    endMatch(event) {
       let winner = 0;
 
       // convert to number
@@ -71,6 +80,8 @@ export default {
         state: matchStates.DONE,
         winner
       });
+
+      event.stopPropagation();
     }
   }
 };
