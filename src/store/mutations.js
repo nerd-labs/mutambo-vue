@@ -14,11 +14,13 @@ export default {
         table: [],
         done: false
       },
-      knockout: {},
-      groupstage: {},
-    };
+      knockout: {
+        rounds: []
+      },
+        groupstage: {},
+      };
 
-    state.tournaments.push(t);
+      state.tournaments.push(t);
   },
 
   setProgress(state, { slug, page }) {
@@ -65,6 +67,7 @@ export default {
     } else {
       throw new Error(`No tournament ${slug} found.`);
     }
+
   },
 }
 

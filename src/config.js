@@ -5,14 +5,15 @@ import teams from './pages/teams.vue';
 import summary from './pages/summary.vue';
 import league from './pages/league.vue';
 import random from './pages/random.vue';
+import knockout from './pages/knockout.vue';
 import results from './pages/results.vue';
 
 export const matchStates = {
   NONE: '',
   PLAYING: 'playing',
   DISABLED: 'disabled',
-  DONE: 'done',
-};
+  DONE: 'done'
+}
 
 export const matchWinner = {
   TIE: 0,
@@ -24,12 +25,12 @@ export const routes = {
   HOME: {
     path: '',
     fullPath: '/',
-    component: home,
+    component: home
   },
   CREATE: {
     path: 'create',
     fullPath: '/create/',
-    component: create,
+    component: create
   },
   DETAIL: {
     path: 'detail',
@@ -70,6 +71,15 @@ export const routes = {
     path: 'league',
     fullPath: '/league/:slug',
     component: league,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
+  },
+  KNOCKOUT: {
+    path: 'knockout',
+    fullPath: '/knockout/:slug',
+    component: knockout,
     meta: {
       save: true,
       fetchCurrentTournament: true

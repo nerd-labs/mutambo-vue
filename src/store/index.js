@@ -5,8 +5,11 @@ import mutations from './mutations';
 import actions from './actions';
 import getters from './getters';
 import plugins from './plugins';
+
+// modules
 import currentTournament from './modules/current-tournament';
 import league from './modules/league';
+import knockout from './modules/knockout';
 
 Vue.use(Vuex)
 
@@ -18,6 +21,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     currentTournament,
-    league
+    league,
+	  knockout
   }
 })

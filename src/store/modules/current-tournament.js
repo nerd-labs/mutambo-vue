@@ -89,6 +89,10 @@ export default {
       commit('league/set', tournamentId, {
         root: true
       });
+
+	    commit('knockout/set', tournamentId, {
+        root: true
+      });
     },
 
     reset ({ commit }) {
@@ -97,6 +101,10 @@ export default {
       commit('league/reset', null, {
         root: true
       });
+
+      commit('knockout/reset', null, {
+          root: true
+        });
     },
 
     updateDetails ({ commit, state, rootState }, details) {

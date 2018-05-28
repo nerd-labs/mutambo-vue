@@ -4,14 +4,6 @@ import VueRouter from 'vue-router'
 import store from '../store'
 import { routes } from '../config';
 
-import home from '../pages/home.vue';
-import create from '../pages/create.vue';
-import detail from '../pages/detail.vue';
-import teams from '../pages/teams.vue';
-import random from '../pages/random.vue';
-import summary from '../pages/summary.vue';
-import league from '../pages/league.vue';
-
 Vue.use(VueRouter)
 
 function buildRouteConfig() {
@@ -41,7 +33,10 @@ router.beforeEach((to, from, next) => {
         next('/')
       }
 
-      store.dispatch('currentTournament/set', tournament.id);
+      const currentTournamentId = store.getters['currentTournament/id'];
+      if (tournament.id !== currentTournamentId) {
+        store.dispatch('currentTournament/set', tournament.id);
+      }
     }
 
     if (to.meta.save) {
