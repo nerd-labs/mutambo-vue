@@ -14,3 +14,21 @@ export function calculateTotalRounds(teams) {
       throw new Error('Number of teams is not valid');
   }
 }
+
+export function getRoundName(matches) {
+  console.log(matches);
+  switch (matches) {
+    case 1:
+      return 'Final';
+    case 2:
+      return 'Semi-Final';
+    case 4:
+      return 'Quarter Final';
+    case 8:
+      return 'Round of 16';
+    case 16:
+      return 'Round of 32';
+    default:
+      // throw new Error('Number of rounds is not valid');
+  }
+}

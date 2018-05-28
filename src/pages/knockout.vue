@@ -1,8 +1,8 @@
 <template lang="pug">
     div
-
       .bracket(:class="totalRoundsClass")
         .round(v-for="round in internalRounds" :class="round.classes")
+          h2 {{ getNameOfRound(round) }}
           .matches
             mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
               .winner(v-if="round.name === 'Finals'")
@@ -12,6 +12,7 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import { getRoundName } from '../helpers/knockout'
 
 export default {
   data: () => ({
@@ -32,28 +33,38 @@ export default {
     for (let i = 0; i < this.rounds.length; i++) {
       const round = this.rounds[i] || [];
 
-console.log(round.length, round.length % 2)
       if (round.length % 2 === 0) {
         const half = round.length / 2;
         const full = round.length;
 
         this.internalRounds.push({
           matches: round.slice(0, half),
-          round: i,
+          round: i + 1,
+          totalTeams: round.length,
           classes: `round${i + 1} round--left`
         });
 
         this.internalRounds.push({
           matches: round.slice(half, full),
+          round: i + 1,
+          totalTeams: round.length,
           classes: `round${i + 1} round--right`
         });
       } else {
-        console.log('else', round);
         this.internalRounds.push({
           matches: round,
+          totalTeams: round.length,
           round: i + 1
         });
       }
+    }
+
+    console.log(this.internalRounds);
+  },
+
+  methods: {
+    getNameOfRound(round) {
+      return getRoundName(round.totalTeams);
     }
   }
 };
@@ -134,7 +145,7 @@ console.log(round.length, round.length % 2)
 
   .round {
     display: grid;
-    // grid-template-rows: 40px 1fr;
+    grid-template-rows: 100px 1fr;
 
     h1 {
       align-self: start;

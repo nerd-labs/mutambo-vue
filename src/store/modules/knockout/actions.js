@@ -10,11 +10,15 @@ export default {
     const totalRounds = calculateTotalRounds(teams.length);
 
     const rounds = Array.from({ length: totalRounds }).map((round, i) => {
-      const matches = teams.length / 2; // TODO: calculation error???
-      const totalMatchesPerRound = Math.floor((matches / (i + 1)));
+      const matches = teams.length / Math.pow(2, totalRounds - (i + 1));
+      console.log('matches', Math.pow(2, totalRounds - (i + 1)));
+      // const totalMatchesPerRound = Math.floor((matches / (i + 1)));
+      console.log(matches);
       // create empty matches
-      return Array.from({ length: totalMatchesPerRound }).map(i => ([generateMatch({}, {})]))
+      return Array.from({ length: matches / 2 }).map(i => ([generateMatch({}, {})]))
     });
+
+    rounds.reverse();
 
     for (let i = 0; i < rounds[0].length; i++) {
       const teamA = shuffeledTeams.shift();
