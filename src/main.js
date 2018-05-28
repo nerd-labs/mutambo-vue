@@ -8,6 +8,7 @@ import logo from './components/logo.vue';
 import createTeam from './components/create-team.vue';
 import match from './components/match.vue';
 import matches from './components/matches.vue';
+import table from './components/table.vue';
 
 import router from './router';
 import store from './store';
@@ -18,6 +19,7 @@ Vue.component('mut-logo', logo);
 Vue.component('mut-create-team', createTeam);
 Vue.component('mut-match', match);
 Vue.component('mut-matches', matches);
+Vue.component('mut-table', table);
 
 Vue.use(Vuetify, {
   theme: {

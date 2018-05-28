@@ -14,6 +14,12 @@ export const matchStates = {
   DONE: 'done',
 };
 
+export const matchWinner = {
+  TIE: 0,
+  HOME: 1,
+  AWAY: 2,
+};
+
 export const routes = {
   HOME: {
     path: '',
