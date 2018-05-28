@@ -14,4 +14,12 @@ export default {
   rounds: (state, getters) => {
     if (getters.ko) return getters.ko.rounds;
   },
+
+  round: (state, getters) => {
+    if (getters.ko) return getters.ko.rounds[getters.activeRoundId];
+  },
+
+  activeRoundId: (state, getters) => {
+    if (getters.ko) return getters.ko.activeRound;
+  },
 }

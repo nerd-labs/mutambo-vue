@@ -1,6 +1,15 @@
 <template lang="pug">
     div
-      .bracket(:class="totalRoundsClass")
+
+      v-flex.mb-5(xs6 offset-xs3)
+       v-btn-toggle(v-model="view")
+        v-btn(color="primary white--text" flat value="matches") Matches
+        v-btn(color="primary white--text" flat value="tree") Tree
+
+      v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+        mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed")
+
+      .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
         .round(v-for="round in internalRounds" :class="round.classes")
           h2 {{ getNameOfRound(round) }}
           .matches
@@ -17,18 +26,9 @@ import { getRoundName } from '../helpers/knockout'
 export default {
   data: () => ({
     internalRounds: [],
+    view: "matches"
   }),
 
-  computed: {
-
-    ...mapGetters({
-      rounds: 'knockout/rounds',
-    }),
-
-    totalRoundsClass() {
-      return `bracket--${this.rounds.length}`;
-    }
-  },
   beforeMount() {
     for (let i = 0; i < this.rounds.length; i++) {
       const round = this.rounds[i] || [];
@@ -60,10 +60,29 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      rounds: 'knockout/rounds',
+      activeRound: 'knockout/round',
+    }),
+
+    totalRoundsClass() {
+      return `bracket--${this.rounds.length}`;
+    }
+  },
+
   methods: {
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
-    }
+    },
+
+    matchUpdate(event) {
+      this.$store.dispatch("knockout/updateMatch", event.match);
+    },
+
+    allMatchesPlayed() {
+      this.$store.dispatch('knockout/completeRound');
+    },
   }
 };
 </script>

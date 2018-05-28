@@ -28,6 +28,36 @@ export default {
       tournament,
       rounds
     });
-  }
 
+    commit('setRound', {
+      tournament,
+      round: 0
+    });
+  },
+
+  updateMatch({ dispatch }, match) {
+
+    dispatch('updateMatchScore', match);
+  },
+
+  updateMatchScore({ commit, getters }, match) {
+    const tournament = getters.tournament;
+    const round = getters.round;
+    const roundIndex = getters.activeRoundId;
+    const matchIndex = round.findIndex(m => m.id === match.id);
+
+    commit('updateMatchScore', { tournament, roundIndex, matchIndex, match });
+  },
+
+  completeRound({ commit, getters }) {
+    const tournament = getters.tournament;
+    const roundIndex = getters.activeRoundId;
+    const totalRounds = getters.rounds.length;
+
+    console.log(roundIndex, totalRounds);
+
+    const done = roundIndex === (totalRounds - 1);
+
+    commit('complete', {tournament, roundIndex, done});
+  },
 }

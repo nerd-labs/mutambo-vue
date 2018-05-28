@@ -37,6 +37,12 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 5px 10px;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 
 .knockout-match__score {
