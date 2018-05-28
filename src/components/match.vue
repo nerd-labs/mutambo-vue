@@ -1,5 +1,5 @@
 <template lang="pug">
-    .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}")
+    .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}" @click="editMatch")
       .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
         .match__team
           .match__club {{ internalMatch.home.club }}
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { matchStates } from "../config";
+import { matchStates, matchWinner } from "../config";
 
 export default {
   data: () => ({
@@ -51,19 +51,28 @@ export default {
       });
     },
 
-    endMatch() {
-      let winner = 0;
+    editMatch() {
+      if (this.match.state === matchStates.DONE) {
+        this.$emit("update", {
+          match: this.internalMatch,
+          state: matchStates.PLAYING
+        });
+      }
+    },
+
+    endMatch(event) {
+      let winner = matchWinner.TIE;
 
       // convert to number
       this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
       this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
 
       if (this.internalMatch.home.score > this.internalMatch.away.score) {
-        winner = 1;
+        winner = matchWinner.HOME;
       } else if (
         this.internalMatch.home.score < this.internalMatch.away.score
       ) {
-        winner = 2;
+        winner = matchWinner.AWAY;
       }
 
       this.$emit("update", {
@@ -71,6 +80,8 @@ export default {
         state: matchStates.DONE,
         winner
       });
+
+      event.stopPropagation();
     }
   }
 };

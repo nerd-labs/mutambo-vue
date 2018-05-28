@@ -9,6 +9,7 @@ import createTeam from './components/create-team.vue';
 import match from './components/match.vue';
 import matches from './components/matches.vue';
 import knockoutMatch from './components/knockout-match.vue';
+import table from './components/table.vue';
 
 import router from './router';
 import store from './store';
@@ -20,6 +21,7 @@ Vue.component('mut-create-team', createTeam);
 Vue.component('mut-match', match);
 Vue.component('mut-matches', matches);
 Vue.component('mut-knockout-match', knockoutMatch);
+Vue.component('mut-table', table);
 
 Vue.use(Vuetify, {
   theme: {
