@@ -19,20 +19,26 @@ export default {
   }),
 
   beforeMount() {
-    this.totalMatchesLeft = this.matches && this.matches.length;
+    if(this.allMatchedsPlayed()) {
+      this.$emit("done");
+    }
   },
 
   computed: {
     isTeamPlaying() {
       return team => this.activeTeams.indexOf(team) > -1;
-    },
-
-    allMatchedsPlayed() {
-      return this.totalMatchesLeft === 0;
     }
   },
 
   methods: {
+    allMatchedsPlayed() {
+      const hasRemainingMatches = this.matches.every((match) => {
+        return match.state === matchStates.DONE;
+      });
+
+      return hasRemainingMatches;
+    },
+
     matchUpdate(event) {
       const index = this.matches.findIndex(m => {
         return m.id === event.match.id;
@@ -68,16 +74,12 @@ export default {
         }
       });
 
-      if (event.state === matchStates.DONE) {
-        this.totalMatchesLeft--;
+      this.$emit("update", {
+        match: this.matches[index]
+      });
 
-        this.$emit("update", {
-          match: this.matches[index]
-        });
-
-        if(this.totalMatchesLeft === 0) {
-          this.$emit("done");
-        }
+      if(this.allMatchedsPlayed()) {
+        this.$emit("done");
       }
     },
   }
