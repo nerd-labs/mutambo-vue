@@ -11,9 +11,7 @@ export default {
 
     const rounds = Array.from({ length: totalRounds }).map((round, i) => {
       const matches = teams.length / Math.pow(2, totalRounds - (i + 1));
-      console.log('matches', Math.pow(2, totalRounds - (i + 1)));
-      // const totalMatchesPerRound = Math.floor((matches / (i + 1)));
-      console.log(matches);
+
       // create empty matches
       return Array.from({ length: matches / 2 }).map(i => ([generateMatch({}, {})]))
     });

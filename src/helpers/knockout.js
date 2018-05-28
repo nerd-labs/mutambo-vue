@@ -16,7 +16,6 @@ export function calculateTotalRounds(teams) {
 }
 
 export function getRoundName(matches) {
-  console.log(matches);
   switch (matches) {
     case 1:
       return 'Final';
@@ -29,6 +28,6 @@ export function getRoundName(matches) {
     case 16:
       return 'Round of 32';
     default:
-      // throw new Error('Number of rounds is not valid');
+      throw new Error('Number of rounds is not valid');
   }
 }
