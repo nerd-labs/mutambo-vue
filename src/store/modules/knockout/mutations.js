@@ -22,9 +22,6 @@ export default {
   },
 
   complete(state, { tournament, roundIndex, done}) {
-    tournament.knockout.activeRoundId++;
-
-    console.log('done', done);
-    if (done) tournament.knockout.done = done;
+    console.log('done');
   },
 }

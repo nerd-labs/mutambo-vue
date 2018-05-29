@@ -1,13 +1,13 @@
 <template lang="pug">
     div
-
       v-flex.mb-5(xs6 offset-xs3)
-       v-btn-toggle(v-model="view")
-        v-btn(color="primary white--text" flat value="matches") Matches
-        v-btn(color="primary white--text" flat value="tree") Tree
+        v-btn-toggle(v-model="view")
+          v-btn(color="primary white--text" flat value="matches") Matches
+          v-btn(color="primary white--text" flat value="tree") Tree
 
       v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
         mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed")
+        v-btn(v-if="completeRound" @click="complete()" color="primary white--text") Complete Round
 
       .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
         .round(v-for="round in internalRounds" :class="round.classes")
@@ -26,7 +26,8 @@ import { getRoundName } from '../helpers/knockout'
 export default {
   data: () => ({
     internalRounds: [],
-    view: "matches"
+    view: "tree",
+    completeRound: false,
   }),
 
   beforeMount() {
@@ -81,8 +82,13 @@ export default {
     },
 
     allMatchesPlayed() {
-      this.$store.dispatch('knockout/completeRound');
+      this.completeRound = true;
     },
+
+    complete() {
+      this.view = 'tree';
+      this.$store.dispatch('knockout/completeRound');
+    }
   }
 };
 </script>

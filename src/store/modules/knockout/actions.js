@@ -36,7 +36,6 @@ export default {
   },
 
   updateMatch({ dispatch }, match) {
-
     dispatch('updateMatchScore', match);
   },
 
@@ -49,15 +48,63 @@ export default {
     commit('updateMatchScore', { tournament, roundIndex, matchIndex, match });
   },
 
-  completeRound({ commit, getters }) {
+  completeRound({ commit, dispatch, getters }) {
     const tournament = getters.tournament;
     const roundIndex = getters.activeRoundId;
     const totalRounds = getters.rounds.length;
 
-    console.log(roundIndex, totalRounds);
-
     const done = roundIndex === (totalRounds - 1);
 
-    commit('complete', {tournament, roundIndex, done});
+    console.log('done', done);
+
+    if (done) {
+      commit('complete', {tournament, roundIndex, done});
+    } else {
+      dispatch('generateRound');
+    }
   },
+
+  generateRound({ commit, getters }) {
+    const tournament = getters.tournament;
+    const teams = tournament.teams;
+    const roundIndex = getters.activeRoundId;
+    const rounds = getters.rounds;
+
+    const winningTeams = [];
+    tournament.knockout.rounds[roundIndex].forEach(match => {
+      switch(match.winner) {
+        case 1:
+          winningTeams.push(match.home.id);
+          break;
+        case 2:
+          winningTeams.push(match.away.id);
+          break;
+      }
+    });
+
+    const teams = tournament.teams.filter(team => {
+      return winningTeams.includes(team.id);
+    });
+
+    const shuffeledTeams = JSON.parse(JSON.stringify(teams.sort((a, b) => 0.5 - Math.random())));
+
+    // new round
+    roundIndex++;
+
+    for (let i = 0; i < rounds[roundIndex].length; i++) {
+      const teamA = shuffeledTeams.shift();
+      const teamB = shuffeledTeams.shift();
+      rounds[roundIndex][i] = generateMatch(teamA, teamB);
+    }
+
+    commit('generate', {
+      tournament,
+      rounds
+    });
+
+    commit('setRound', {
+      tournament,
+      round: roundIndex
+    });
+  }
 }
