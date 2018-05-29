@@ -14,6 +14,7 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import { generateDefaultTeams } from '../helpers/migrations';
 
 export default {
   data: () => ({
@@ -27,6 +28,16 @@ export default {
       teams: 'currentTournament/teams',
     })
 
+  },
+
+  beforeMount() {
+      // JUST FOR DEVELOPMENT
+      const migratedTeams = generateDefaultTeams();
+
+      this.teams.forEach((team, index) => {
+        team = Object.assign(team, migratedTeams[index]);
+        this.addTeam(team);
+      });
   },
 
   methods: {
