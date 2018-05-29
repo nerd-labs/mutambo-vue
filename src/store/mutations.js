@@ -15,7 +15,8 @@ export default {
         done: false
       },
       knockout: {
-        rounds: []
+        rounds: [],
+        activeRound: 0,
       },
         groupstage: {},
       };

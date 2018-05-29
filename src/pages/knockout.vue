@@ -1,12 +1,14 @@
 <template lang="pug">
     div
       v-flex.mb-5(xs6 offset-xs3)
-        v-btn-toggle(v-model="view")
+        v-btn-toggle(v-model="view" v-if="tournamentStarted")
           v-btn(color="primary white--text" flat value="matches") Matches
           v-btn(color="primary white--text" flat value="tree") Tree
 
+        v-btn(color="primary white--text" @click="startTournament()" v-if="!tournamentStarted") Start next round
+
       v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
-        mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed")
+        mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
         v-btn(v-if="completeRound" @click="complete()" color="primary white--text") Complete Round
 
       .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
@@ -27,10 +29,14 @@ export default {
   data: () => ({
     internalRounds: [],
     view: "tree",
+    tournamentStarted: false,
     completeRound: false,
   }),
 
   beforeMount() {
+
+    if (this.activeRoundId !== 0) this.tournamentStarted = true;
+
     for (let i = 0; i < this.rounds.length; i++) {
       const round = this.rounds[i] || [];
 
@@ -65,6 +71,7 @@ export default {
     ...mapGetters({
       rounds: 'knockout/rounds',
       activeRound: 'knockout/round',
+      activeRoundId: 'knockout/activeRoundId',
     }),
 
     totalRoundsClass() {
@@ -88,12 +95,18 @@ export default {
     complete() {
       this.view = 'tree';
       this.$store.dispatch('knockout/completeRound');
+    },
+
+    startTournament() {
+      this.view = 'matches';
+      this.tournamentStarted = true;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
 .bracket {
   padding: 10px;
   box-sizing: border-box;
@@ -121,25 +134,6 @@ export default {
   }
 }
 
-.club {
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  height: 30px;
-  margin: 5px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 10px;
-
-  & > span:nth-child(2) {
-    margin-left: 5px;
-  }
-
-  span > span {
-    font-size: 13px;
-    color: lightgrey;
-  }
-}
 
 .winner {
   position: relative;
