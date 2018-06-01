@@ -28,8 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       slug: "currentTournament/slug",
-      name: "currentTournament/name",
-      type: "currentTournament/type",
+      name: "currentTournament/name"
     })
   },
 
