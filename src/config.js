@@ -100,7 +100,6 @@ export const routes = {
     path: 'knockout',
     fullPath: '/knockout/:slug',
     component: knockout,
-    props: true,
     meta: {
       save: true,
       fetchCurrentTournament: true
