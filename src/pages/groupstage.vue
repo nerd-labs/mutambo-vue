@@ -91,7 +91,7 @@ export default {
         teamsToProceed.push(...extraTeamsToProceed);
       }
 
-      this.$store.dispatch("groupstage/finish", {
+      this.$store.dispatch("groupstage/complete", {
         teamIds: teamsToProceed
       });
 

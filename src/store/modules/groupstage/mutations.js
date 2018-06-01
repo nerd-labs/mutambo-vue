@@ -17,7 +17,7 @@ export default {
     }
   },
 
-  finish(state, { tournament, proceedingTeams }) {
+  complete(state, { tournament, proceedingTeams }) {
     tournament.groupstage.proceedingTeams = proceedingTeams;
     tournament.groupstage.done = true;
   }

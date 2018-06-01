@@ -44,7 +44,7 @@ export default {
     commit('setGroups', { tournament, groups });
   },
 
-  finish({ commit, getters }, { teamIds }) {
+  complete({ commit, getters }, { teamIds }) {
     const tournament = getters.tournament;
     const teams = tournament.teams;
     const proceedingTeams = [];
@@ -54,7 +54,7 @@ export default {
       if (f) proceedingTeams.push(team);
     });
 
-    commit('finish', { tournament, proceedingTeams });
+    commit('complete', { tournament, proceedingTeams });
   },
 
   updateMatchScore({ commit, getters }, { groupIndex, match }) {
@@ -64,7 +64,7 @@ export default {
     commit('updateMatchScore', { tournament, matchIndex, groupIndex, match });
   },
 
-  updateMatch({ dispatch, getters }, { groupIndex, match }) {
+  updateMatch({ dispatch }, { groupIndex, match }) {
     dispatch('updateMatchScore', { groupIndex, match });
 
     dispatch('updateTable', { groupIndex });

@@ -60,6 +60,7 @@ export default {
       const groups = [];
 
       for(let i = 0; i < numberOfGroups; i++) {
+        //- create letter from index 1 = A, B = 2, ...
         const name = String.fromCharCode(97 + i).toUpperCase();
         groups[i] = {
           name: `Group ${name}`,
