@@ -12,7 +12,12 @@ export default {
   },
 
   setRound(state, { tournament, round }) {
-    tournament.knockout.activeRound = round;
+    tournament.knockout.activeRound.id = round;
+    tournament.knockout.activeRound.state = 0;
+  },
+
+  startRound(state, {tournament}) {
+    tournament.knockout.activeRound.state = 1;
   },
 
   updateMatchScore(state, { tournament, roundIndex, matchIndex, match }) {
@@ -22,6 +27,10 @@ export default {
   },
 
   complete(state, { tournament, roundIndex, done}) {
-    console.log('done');
+    tournament.knockout.done = done;
   },
+
+  setWinner(state, {tournament, winningTeamId}) {
+    tournament.knockout.winner = winningTeamId;
+  }
 }

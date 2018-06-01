@@ -55,10 +55,9 @@ export default {
 
     const done = roundIndex === (totalRounds - 1);
 
-    console.log('done', done);
-
     if (done) {
       commit('complete', {tournament, roundIndex, done});
+      dispatch('setWinner');
     } else {
       dispatch('generateRound');
     }
@@ -86,14 +85,14 @@ export default {
       return winningTeams.includes(team.id);
     });
 
-    const shuffeledTeams = JSON.parse(JSON.stringify(teams.sort((a, b) => 0.5 - Math.random())));
+    const copyOfTeams = JSON.parse(JSON.stringify(teams));
 
     // new round
     roundIndex++;
 
     for (let i = 0; i < rounds[roundIndex].length; i++) {
-      const teamA = shuffeledTeams.shift();
-      const teamB = shuffeledTeams.shift();
+      const teamA = copyOfTeams.shift();
+      const teamB = copyOfTeams.shift();
       rounds[roundIndex][i] = generateMatch(teamA, teamB);
     }
 
@@ -106,5 +105,22 @@ export default {
       tournament,
       round: roundIndex
     });
+  }
+
+  startRound({commit, getters}) {
+    commit('startRound', {
+      tournament: getters.tournament
+    });
+  });
+
+  setWinner({commit, getters}) {
+    const tournament = getters.tournament;
+    const rounds = tournament.knockout.rounds;
+    const final = rounds[rounds.length - 1][0];
+    const winner = final.winner;
+    console.log('fina;', final, winner);
+    const winningTeamId = winner === 1 ? final.home.id : final.away.id;
+    console.log('fina;', winningTeamId);
+    commit('setWinner', { tournament, winningTeamId })
   }
 }

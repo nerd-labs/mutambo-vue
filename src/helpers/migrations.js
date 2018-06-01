@@ -1,10 +1,10 @@
 import IdGenerator from '../services/id-generator';
 import * as faker from 'faker';
 
-export function generateDefaultTeams() {
+export function generateDefaultTeams(length) {
   const teams = [];
 
-  for (let i = 0; i < 32; i++) {
+  for (let i = 0; i < length; i++) {
       teams.push({
         id: IdGenerator.id(),
         player: faker.name.findName(),
