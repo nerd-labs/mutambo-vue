@@ -70,8 +70,6 @@ export default {
       const numberOfTeamsToProceed = 8;
       const qualifiedPositions = Math.floor(numberOfTeamsToProceed / this.groups.length);
 
-      console.log('qualifiedPositions', qualifiedPositions);
-
       const teamsToProceed = [];
       const teamsToExit = [];
 
@@ -92,10 +90,6 @@ export default {
         const extraTeamsToProceed = this.getRemainingTeams(teamsToExit, (numberOfTeamsToProceed - teamsToProceed.length));
         teamsToProceed.push(...extraTeamsToProceed);
       }
-
-      console.log('teamsToProceed', teamsToProceed);
-
-      //- save proceeding teams based on id's
 
       this.$store.dispatch("groupstage/finish", {
         teamIds: teamsToProceed
