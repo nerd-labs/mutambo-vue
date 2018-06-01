@@ -22,9 +22,9 @@ import berger from '../helpers/berger';
 
 export default {
   mounted () {
-    //- if (!this.groups.length) {
-    this.generateGroups();
-    //- }
+    if (!this.groups.length) {
+      this.generateGroups();
+    }
 
     this.startDraw();
   },
