@@ -45,7 +45,6 @@ export default {
     }),
 
     totalRoundsClass() {
-      console.log(this.rounds);
       return `bracket--${this.rounds.length}`;
     },
 

@@ -118,9 +118,7 @@ export default {
     const rounds = tournament.knockout.rounds;
     const final = rounds[rounds.length - 1][0];
     const winner = final.winner;
-    console.log('fina;', final, winner);
     const winningTeamId = winner === 1 ? final.home.id : final.away.id;
-    console.log('fina;', winningTeamId);
     commit('setWinner', { tournament, winningTeamId })
   }
 }
