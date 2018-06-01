@@ -45,7 +45,13 @@ export default {
       if (getters.tournament.details) {
         return getters.tournament.details.numberOfPlays
       }
-    }
+    },
+
+    numberOfProceedingPlayers: (state, getters) => {
+      if (getters.tournament.details) {
+        return getters.tournament.details.numberOfProceedingPlayers
+      }
+    },
 
   },
   mutations: {

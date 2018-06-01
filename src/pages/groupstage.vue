@@ -40,6 +40,7 @@ export default {
     ...mapGetters({
       teams: 'currentTournament/teams',
       name: 'currentTournament/name',
+      numberOfProceedingPlayers: 'currentTournament/numberOfProceedingPlayers',
       groups: 'groupstage/groups',
     }),
 
@@ -67,8 +68,8 @@ export default {
     },
 
     endGroupstage() {
-      const numberOfTeamsToProceed = 8;
-      const qualifiedPositions = Math.floor(numberOfTeamsToProceed / this.groups.length);
+    console.log(this.numberOfProceedingPlayers);
+      const qualifiedPositions = Math.floor(this.numberOfProceedingPlayers / this.groups.length);
 
       const teamsToProceed = [];
       const teamsToExit = [];
@@ -86,8 +87,8 @@ export default {
       });
 
 
-      if (numberOfTeamsToProceed !== teamsToProceed.length) {
-        const extraTeamsToProceed = this.getRemainingTeams(teamsToExit, (numberOfTeamsToProceed - teamsToProceed.length));
+      if (this.numberOfProceedingPlayers !== teamsToProceed.length) {
+        const extraTeamsToProceed = this.getRemainingTeams(teamsToExit, (this.numberOfProceedingPlayers - teamsToProceed.length));
         teamsToProceed.push(...extraTeamsToProceed);
       }
 

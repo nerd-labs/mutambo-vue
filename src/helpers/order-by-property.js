@@ -3,7 +3,7 @@ export function orderByProperty(prop) {
   return (a, b) => {
     const equality = a[prop] - b[prop];
     if (equality === 0 && arguments.length > 1) {
-      return this.orderByProperty.apply(null, args)(a, b);
+      return orderByProperty.apply(null, args)(a, b);
     }
     return equality;
   };
