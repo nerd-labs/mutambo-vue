@@ -1,5 +1,6 @@
 import { generateMatch } from '../../../helpers/match';
 import { calculateTotalRounds } from '../../../helpers/knockout';
+import { MatchWinners } from '../../../config'
 
 export default {
   generate({ commit, getters }) {
@@ -28,6 +29,97 @@ export default {
       tournament,
       rounds
     });
+
+    commit('setRound', {
+      tournament,
+      round: 0
+    });
+  },
+
+  updateMatch({ dispatch }, match) {
+    dispatch('updateMatchScore', match);
+  },
+
+  updateMatchScore({ commit, getters }, match) {
+    const tournament = getters.tournament;
+    const round = getters.round;
+    const roundIndex = getters.activeRoundId;
+    const matchIndex = round.findIndex(m => m.id === match.id);
+
+    commit('updateMatchScore', { tournament, roundIndex, matchIndex, match });
+  },
+
+  completeRound({ commit, dispatch, getters }) {
+    const tournament = getters.tournament;
+    const roundIndex = getters.activeRoundId;
+    const totalRounds = getters.rounds.length;
+
+    const done = roundIndex === (totalRounds - 1);
+
+    if (done) {
+      commit('complete', {tournament, roundIndex, done});
+      dispatch('setWinner');
+    } else {
+      dispatch('generateRound');
+    }
+  },
+
+  generateRound({ commit, getters }) {
+    const tournament = getters.tournament;
+    const teams = tournament.teams;
+    const roundIndex = getters.activeRoundId;
+    const rounds = getters.rounds;
+
+    const winningTeams = [];
+    tournament.knockout.rounds[roundIndex].forEach(match => {
+      switch(match.winner) {
+        case MatchWinners.HOME:
+          winningTeams.push(match.home.id);
+          break;
+        case MatchWinners.AWAY:
+          winningTeams.push(match.away.id);
+          break;
+      }
+    });
+
+    const teams = tournament.teams.filter(team => {
+      return winningTeams.includes(team.id);
+    });
+
+    const copyOfTeams = JSON.parse(JSON.stringify(teams));
+
+    // new round
+    roundIndex++;
+
+    for (let i = 0; i < rounds[roundIndex].length; i++) {
+      const teamA = copyOfTeams.shift();
+      const teamB = copyOfTeams.shift();
+      rounds[roundIndex][i] = generateMatch(teamA, teamB);
+    }
+
+    commit('generate', {
+      tournament,
+      rounds
+    });
+
+    commit('setRound', {
+      tournament,
+      round: roundIndex
+    });
   }
 
+  startRound({commit, getters}) {
+    commit('startRound', {
+      tournament: getters.tournament
+    });
+  });
+
+  setWinner({commit, getters}) {
+    const tournament = getters.tournament;
+    const rounds = tournament.knockout.rounds;
+    const final = rounds[rounds.length - 1][0];
+    const winner = final.winner;
+    const winningTeamId = winner === 1 ? final.home.id : final.away.id;
+    commit('setWinner', { tournament, winningTeamId })
+  }
 }

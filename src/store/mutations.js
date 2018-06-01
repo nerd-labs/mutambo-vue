@@ -15,7 +15,13 @@ export default {
         done: false
       },
       knockout: {
-        rounds: []
+        rounds: [],
+        done: false,
+        winner: undefined,
+        activeRound: {
+          id: 0,
+          state: 0,
+        }
       },
         groupstage: {},
       };
@@ -70,4 +76,3 @@ export default {
 
   },
 }
-

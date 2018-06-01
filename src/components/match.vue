@@ -1,28 +1,31 @@
 <template lang="pug">
-    .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}" @click="editMatch")
-      .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
-        .match__team
-          .match__club {{ internalMatch.home.club }}
-          .match__player {{ internalMatch.home.player }}
+    div.match-template
+      v-badge.internal-badge(right overlap  color="red" :value="alert" transition="slide-y-reverse-transition")
+        span(slot="badge") Tie is not allowed
+        .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}" @click="editMatch")
+          .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
+            .match__team
+              .match__club {{ internalMatch.home.club }}
+              .match__player {{ internalMatch.home.player }}
 
-        .match__score {{ internalMatch.home.score }}
+            .match__score {{ internalMatch.home.score }}
 
-        input.match__score--input(type="number" v-model="internalMatch.home.score" min="0")
+            input.match__score--input(type="number" v-model="internalMatch.home.score" min="0")
 
-      .match__center
-        .match__playing live
-        .match__divider -
-        button.match__button.match__button--start(@click="startMatch") start match
-        button.match__button.match__button--end(@click="endMatch") end match
+          .match__center
+            .match__playing live
+            .match__divider -
+            button.match__button.match__button--start(@click="startMatch") start match
+            button.match__button.match__button--end(@click="endMatch") end match
 
-      .math__side.match__side--away(:class="{'match__side--winner': internalMatch.winner ===  2, 'match__side--loser': internalMatch.winner === 1}")
-        .match__team
-          .match__club {{ internalMatch.away.club }}
-          .match__player {{ internalMatch.away.player }}
+          .math__side.match__side--away(:class="{'match__side--winner': internalMatch.winner ===  2, 'match__side--loser': internalMatch.winner === 1}")
+            .match__team
+              .match__club {{ internalMatch.away.club }}
+              .match__player {{ internalMatch.away.player }}
 
-        .match__score {{ internalMatch.away.score }}
+            .match__score {{ internalMatch.away.score }}
 
-        input.match__score--input(type="number" v-model="internalMatch.away.score" min="0")
+            input.match__score--input(type="number" v-model="internalMatch.away.score" min="0")
 </template>
 
 <script>
@@ -30,12 +33,16 @@ import { matchStates, matchWinner } from "../config";
 
 export default {
   data: () => ({
-    internalMatch: undefined
+    internalMatch: undefined,
+    alert: false,
   }),
 
   props: {
     match: {
       required: true
+    },
+    noTieAllowed: {
+      required: false,
     }
   },
 
@@ -75,6 +82,16 @@ export default {
         winner = matchWinner.AWAY;
       }
 
+      if (this.noTieAllowed && winner === matchWinner.TIE) {
+        this.alert = true;
+
+        setTimeout(() => {
+          this.alert = false;
+        }, 2000);
+
+        return;
+      }
+
       this.$emit("update", {
         match: this.internalMatch,
         state: matchStates.DONE,
@@ -87,7 +104,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+/* scoped broken for nested classes??? */
+
+.match-template {
+    position: relative;
+}
+
+.internal-badge .badge__badge {
+  // overwrite with custom css ;)
+  border-radius: 0 !important;
+  right: 0 !important;
+  top: -20px !important;
+  width: 200px !important;
+}
+
 .match {
   background-color: white;
   display: grid;

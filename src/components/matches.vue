@@ -1,6 +1,6 @@
 <template lang="pug">
   .matches
-    mut-match(v-for="match in matches" :match="match" @update="matchUpdate")
+    mut-match(v-for="match in matches" :match="match" @update="matchUpdate" :noTieAllowed="noTieAllowed")
 </template>
 
 <script>
@@ -10,6 +10,9 @@ export default {
   props: {
     matches: {
       required: true
+    },
+    noTieAllowed: {
+      required: false,
     }
   },
 
