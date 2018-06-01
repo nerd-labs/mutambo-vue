@@ -1,5 +1,6 @@
 import { generateMatch } from '../../../helpers/match';
 import { calculateTotalRounds } from '../../../helpers/knockout';
+import { MatchWinners } from '../../../config'
 
 export default {
   generate({ commit, getters }) {
@@ -72,10 +73,10 @@ export default {
     const winningTeams = [];
     tournament.knockout.rounds[roundIndex].forEach(match => {
       switch(match.winner) {
-        case 1:
+        case MatchWinners.HOME:
           winningTeams.push(match.home.id);
           break;
-        case 2:
+        case MatchWinners.AWAY:
           winningTeams.push(match.away.id);
           break;
       }
