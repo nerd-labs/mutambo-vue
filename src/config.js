@@ -7,6 +7,8 @@ import league from './pages/league.vue';
 import random from './pages/random.vue';
 import knockout from './pages/knockout.vue';
 import results from './pages/results.vue';
+import groupstage from './pages/groupstage.vue';
+import groupstageDraw from './pages/groupstage-draw.vue';
 
 export const matchStates = {
   NONE: '',
@@ -76,10 +78,29 @@ export const routes = {
       fetchCurrentTournament: true
     }
   },
+  GROUPSTAGE_DRAW: {
+    path: 'groupstage',
+    fullPath: '/groupstage/draw/:slug',
+    component: groupstageDraw,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
+  },
+  GROUPSTAGE: {
+    path: 'groupstage',
+    fullPath: '/groupstage/:slug',
+    component: groupstage,
+    meta: {
+      save: true,
+      fetchCurrentTournament: true
+    }
+  },
   KNOCKOUT: {
     path: 'knockout',
     fullPath: '/knockout/:slug',
     component: knockout,
+    props: true,
     meta: {
       save: true,
       fetchCurrentTournament: true

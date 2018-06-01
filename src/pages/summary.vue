@@ -24,7 +24,9 @@
                     v-list-tile-content
                       v-list-tile-title It will take ± {{ totalMinutes }} minutes to play all fixtures (6 minutes per half).
         v-flex(mt-3)
-          v-btn(color="primary" @click="submit") Start tournament
+          v-btn(color="primary" @click="submit")
+            span(v-if="type === 'groupstage'") Start draw
+            span(v-else) Start tournament
 </template>
 
  <script>
@@ -67,7 +69,11 @@ export default {
 
   methods: {
     submit() {
-      this.$router.push(`/${this.type}/${this.slug}`);
+      if (this.type === 'groupstage') {
+        this.$router.push(`/${this.type}/draw/${this.slug}`);
+      } else {
+        this.$router.push(`/${this.type}/${this.slug}`);
+      }
     },
 
     reverseFixtures(n) {

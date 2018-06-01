@@ -17,10 +17,14 @@ export default {
       knockout: {
         rounds: []
       },
-        groupstage: {},
-      };
+      groupstage: {
+        groups: {},
+        proceedingTeams: [],
+        done: false,
+      },
+    };
 
-      state.tournaments.push(t);
+    state.tournaments.push(t);
   },
 
   setProgress(state, { slug, page }) {
@@ -70,4 +74,3 @@ export default {
 
   },
 }
-

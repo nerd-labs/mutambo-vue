@@ -8,6 +8,9 @@
           v-flex(xs6 offset-xs3)
             v-text-field(label="Number of plays against each team" v-model="numberOfPlays" required :rules="numberOfPlaysRules" type="number")
 
+          //- v-flex(xs6 offset-xs3 v-if="type === 'groupstage'")
+          //-   v-text-field(label="Number of plays against each team" v-model="numberOfPlays" required :rules="numberOfPlaysRules" type="number")
+
           v-flex(xs6 offset-xs3)
               v-btn(color="primary" @click="submit" :disabled="!valid") Submit
 </template>
@@ -28,7 +31,8 @@ export default {
   computed: {
     ...mapGetters({
       slug: "currentTournament/slug",
-      name: "currentTournament/name"
+      name: "currentTournament/name",
+      type: "currentTournament/type",
     })
   },
 

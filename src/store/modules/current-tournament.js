@@ -93,6 +93,10 @@ export default {
 	    commit('knockout/set', tournamentId, {
         root: true
       });
+
+	    commit('groupstage/set', tournamentId, {
+        root: true
+      });
     },
 
     reset ({ commit }) {
@@ -103,8 +107,12 @@ export default {
       });
 
       commit('knockout/reset', null, {
-          root: true
-        });
+        root: true
+      });
+
+      commit('groupstage/reset', null, {
+        root: true
+      });
     },
 
     updateDetails ({ commit, state, rootState }, details) {

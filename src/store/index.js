@@ -10,6 +10,7 @@ import plugins from './plugins';
 import currentTournament from './modules/current-tournament';
 import league from './modules/league';
 import knockout from './modules/knockout';
+import groupstage from './modules/groupstage';
 
 Vue.use(Vuex)
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
   modules: {
     currentTournament,
     league,
-	  knockout
+	  knockout,
+    groupstage,
   }
 })

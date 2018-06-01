@@ -1,0 +1,153 @@
+<template lang="pug">
+  div
+    v-container(grid-list-md)
+      h2.display-2.accent--text.mb-5 {{ name }}
+
+      v-flex.mb-5(xs6 offset-xs3)
+       v-btn-toggle(v-model="view")
+        v-btn(color="primary white--text" flat value="matches") Matches
+        v-btn(color="primary white--text" flat value="table") Table
+
+      v-container(grid-list-md v-for="(group, index) in groups")
+        h3.mb-5 {{ group.name }}
+
+        v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+          mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
+
+        v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'table'")
+          mut-table(:data="results(group)")
+
+      v-btn(v-if="done" @click="endGroupstage") End groupstage
+
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+import { matchStates, routes } from "../config";
+import berger from "../helpers/berger";
+import { orderByProperty } from '../helpers/order-by-property'
+
+export default {
+  beforeMount () {
+    this.$store.dispatch('groupstage/updateTables');
+  },
+
+  data: () => ({
+    view: "matches"
+  }),
+
+  computed: {
+    ...mapGetters({
+      teams: 'currentTournament/teams',
+      name: 'currentTournament/name',
+      groups: 'groupstage/groups',
+    }),
+
+    done () {
+      const allGroupsCompleted = this.groups.every((match) => {
+        return match.completed === true;
+      });
+
+      return allGroupsCompleted;
+    }
+  },
+
+  methods: {
+    matchUpdate(index, event) {
+      this.$store.dispatch("groupstage/updateMatch", {
+        groupIndex: index,
+        match: event.match
+      });
+    },
+
+    allMatchesPlayed(index) {
+      this.$store.dispatch("groupstage/setGroupCompleted", {
+        groupIndex: index
+      });
+    },
+
+    endGroupstage() {
+      const numberOfTeamsToProceed = 8;
+      const qualifiedPositions = Math.floor(numberOfTeamsToProceed / this.groups.length);
+
+      console.log('qualifiedPositions', qualifiedPositions);
+
+      const teamsToProceed = [];
+      const teamsToExit = [];
+
+      this.groups.forEach((group) => {
+        const table = this.getTableOrder(group);
+
+        table.forEach((team, index) => {
+          if (index < qualifiedPositions) {
+            teamsToProceed.push(team.id);
+          } else {
+            teamsToExit.push(team);
+          }
+        });
+      });
+
+
+      if (numberOfTeamsToProceed !== teamsToProceed.length) {
+        const extraTeamsToProceed = this.getRemainingTeams(teamsToExit, (numberOfTeamsToProceed - teamsToProceed.length));
+        teamsToProceed.push(...extraTeamsToProceed);
+      }
+
+      console.log('teamsToProceed', teamsToProceed);
+
+      //- save proceeding teams based on id's
+
+      this.$store.dispatch("groupstage/finish", {
+        teamIds: teamsToProceed
+      });
+
+      //- this.$router.push({`/results/${this.$route.params.slug}`, params: { teams: teamsToProceed }});
+    },
+
+    getRemainingTeams(teamsToExit, numberOfTeamsToSelect) {
+      //- get all teams except already selected
+      const sorted = teamsToExit.sort(orderByProperty('pointsAverage', 'scored', 'difference', 'wins', 'draws')).reverse();
+      const extraTeamsToProceed = [];
+
+      for(let i = 0; i < numberOfTeamsToSelect; i++) {
+        extraTeamsToProceed.push(sorted[i].id);
+      }
+
+      return extraTeamsToProceed;
+    },
+
+    getTableOrder(group) {
+      const data = this.results(group);
+      return data.sort(orderByProperty('points', 'difference', 'scored')).reverse();
+    },
+
+    results(group) {
+      return group.table.map(t => {
+        return {
+          id: t.id,
+          team: `${t.club} (${t.player})`,
+          played: t.stats.played,
+          wins: t.stats.won,
+          draws: t.stats.draw,
+          losses: t.stats.lost,
+          scored: t.stats.goalsFor,
+          against: t.stats.goalsAgainst,
+          difference: t.stats.goalDifference,
+          points: t.stats.points,
+          pointsAverage: t.stats.points === 0 ? 0 : (t.stats.points / t.stats.played),
+        };
+      });
+    },
+  }
+
+};
+</script>
+
+<style lang="scss" scoped>
+.matches {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px;
+}
+</style>
