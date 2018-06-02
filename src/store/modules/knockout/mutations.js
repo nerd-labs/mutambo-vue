@@ -7,7 +7,8 @@ export default {
     state.id = undefined
   },
 
-  generate(state, { tournament, rounds }) {
+  generate(state, { tournament, rounds, teams }) {
+    tournament.knockout.teams = teams;
     tournament.knockout.rounds = rounds;
   },
 

@@ -16,6 +16,7 @@ export default {
       },
       knockout: {
         rounds: [],
+        teams: [],
         done: false,
         winner: undefined,
         activeRound: {

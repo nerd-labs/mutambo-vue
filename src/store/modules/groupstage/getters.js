@@ -14,4 +14,8 @@ export default {
   groups: (state, getters) => {
     if (getters.groupstage) return getters.groupstage.groups
   },
+
+  proceedingTeams: (state, getters) => {
+    if (getters.groupstage) return getters.groupstage.proceedingTeams
+  },
 }

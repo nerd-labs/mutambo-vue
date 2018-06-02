@@ -1,11 +1,13 @@
 import { generateMatch } from '../../../helpers/match';
 import { calculateTotalRounds } from '../../../helpers/knockout';
-import { MatchWinners } from '../../../config'
+import { matchWinner } from '../../../config'
 
 export default {
-  generate({ commit, getters }) {
+  generate({ commit, getters }, data) {
     const tournament = getters.tournament;
-    const teams = tournament.teams;
+    let teams = tournament.teams;
+
+    if (data && data.teams) teams = data.teams;
 
     const shuffeledTeams = JSON.parse(JSON.stringify(teams.sort((a, b) => 0.5 - Math.random())));
     const totalRounds = calculateTotalRounds(teams.length);
@@ -27,6 +29,7 @@ export default {
 
     commit('generate', {
       tournament,
+      teams,
       rounds
     });
 
@@ -66,17 +69,17 @@ export default {
 
   generateRound({ commit, getters }) {
     const tournament = getters.tournament;
-    const teams = tournament.teams;
+    const teams = getters.teams;
     const roundIndex = getters.activeRoundId;
     const rounds = getters.rounds;
 
     const winningTeams = [];
     tournament.knockout.rounds[roundIndex].forEach(match => {
       switch(match.winner) {
-        case MatchWinners.HOME:
+        case matchWinner.HOME:
           winningTeams.push(match.home.id);
           break;
-        case MatchWinners.AWAY:
+        case matchWinner.AWAY:
           winningTeams.push(match.away.id);
           break;
       }
