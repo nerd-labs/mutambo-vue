@@ -23,10 +23,14 @@ export default {
           state: 0,
         }
       },
-        groupstage: {},
-      };
+      groupstage: {
+        groups: {},
+        proceedingTeams: [],
+        done: false,
+      },
+    };
 
-      state.tournaments.push(t);
+    state.tournaments.push(t);
   },
 
   setProgress(state, { slug, page }) {

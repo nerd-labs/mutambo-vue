@@ -45,7 +45,13 @@ export default {
       if (getters.tournament.details) {
         return getters.tournament.details.numberOfPlays
       }
-    }
+    },
+
+    numberOfProceedingPlayers: (state, getters) => {
+      if (getters.tournament.details) {
+        return getters.tournament.details.numberOfProceedingPlayers
+      }
+    },
 
   },
   mutations: {
@@ -93,6 +99,10 @@ export default {
 	    commit('knockout/set', tournamentId, {
         root: true
       });
+
+	    commit('groupstage/set', tournamentId, {
+        root: true
+      });
     },
 
     reset ({ commit }) {
@@ -103,8 +113,12 @@ export default {
       });
 
       commit('knockout/reset', null, {
-          root: true
-        });
+        root: true
+      });
+
+      commit('groupstage/reset', null, {
+        root: true
+      });
     },
 
     updateDetails ({ commit, state, rootState }, details) {
