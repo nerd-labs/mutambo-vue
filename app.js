@@ -11,14 +11,18 @@ var app_vue_1 = require("./app.vue");
 var logo_vue_1 = require("./components/logo.vue");
 var create_team_vue_1 = require("./components/create-team.vue");
 var match_vue_1 = require("./components/match.vue");
+var matches_vue_1 = require("./components/matches.vue");
 var knockout_match_vue_1 = require("./components/knockout-match.vue");
+var table_vue_1 = require("./components/table.vue");
 var router_1 = require("./router");
 var store_1 = require("./store");
 require("./style/style.css");
 vue_1.default.component('mut-logo', logo_vue_1.default);
 vue_1.default.component('mut-create-team', create_team_vue_1.default);
 vue_1.default.component('mut-match', match_vue_1.default);
+vue_1.default.component('mut-matches', matches_vue_1.default);
 vue_1.default.component('mut-knockout-match', knockout_match_vue_1.default);
+vue_1.default.component('mut-table', table_vue_1.default);
 vue_1.default.use(vuetify_1.default, {
     theme: {
         primary: '#26A69A',
@@ -48,26 +52,10 @@ Object.assign(_options, {
       })
 "use strict";
 exports.__esModule = true;
-var config_1 = require("./config");
 exports["default"] = {
     methods: {
         goToRoute: function goToRoute(route) {
             this.$router.push(route);
-        }
-    },
-    watch: {
-        $route: function $route(to) {
-            var nextRoute = to.fullPath.split('/')[1];
-            var activePath = Object.keys(config_1.routes).find(function (r) {
-                return config_1.routes[r].path === nextRoute;
-            });
-            var routeConfig = config_1.routes[activePath];
-            if (routeConfig.meta && routeConfig.meta.save) {
-                this.$store.commit('setProgress', {
-                    slug: this.$route.params.slug,
-                    page: routeConfig.path
-                });
-            }
         }
     }
 };
@@ -88,6 +76,201 @@ Object.assign(exports.default.options||exports.default, _options)
         }
       
 });
+___scope___.file("components/logo.vue", function(exports, require, module, __filename, __dirname){
+
+var _options = { _vueModuleId: 'data-v-dd6e56bd'}
+Object.assign(_options, {_scopeId: 'data-v-dd6e56bd'})
+Object.assign(_options, {
+        _scopeId: "data-v-dd6e56bd",
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('svg',{staticClass:"logo",attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 500 500"}},[_c('path',{attrs:{"d":"M342.4,433.42a17.33,17.33,0,0,0,.25-17.33L284.34,310.23V233.41h17.48V188.05H198.18v45.35h17.48v76.82L157.32,416.09A17.48,17.48,0,0,0,172.58,442H327.42A17.33,17.33,0,0,0,342.4,433.42ZM196.51,376l9.64-17.48H247.5v-15H214.41l5.49-10h27.6v-15H228.17l2.5-4.47v-5.49H247.5v-15H230.65v-10H247.5v-15H230.65v-50.2H213.16V203h73.67v15.38H269.35V314.1L303.47,376Z"}}),_vm._v(" "),_c('path',{attrs:{"d":"M430.89,238.9c-12.71-5.1-27.59-8.12-44.25-9-6.61-.34-13.18-.5-19.69-.5a393,393,0,0,0-75.57,7.3c-5.11,1-10.27,2.35-15.45,3.69-8.72,2.26-17.73,4.59-25.58,5.22-8.56-.63-17.57-3-26.29-5.22-5.17-1.34-10.34-2.67-15.44-3.69a393,393,0,0,0-75.57-7.3c-6.51,0-13.09.17-19.7.5-16.66.86-31.53,3.87-44.24,9l-3.64,1.47.82,3.84a65.63,65.63,0,0,1,1,7.61c.47,4.79,1,9.74,3.14,14.49a17.87,17.87,0,0,0,5.73,6.79,9,9,0,0,1,2.55,2.58c2.79,5.25,4.39,11.2,5.94,16.95.91,3.39,1.81,6.69,2.9,9.78,6.3,17.88,12.83,33.36,29.11,42,14.41,7.6,44.73,11.89,62.23,8.12,30.3-6.52,52-28.88,64.42-66.47.3-.91.6-2,.92-3.11.5-1.82,1.55-5.62,2.28-6.33a8.8,8.8,0,0,1,3.32-.64,10.75,10.75,0,0,1,3.5.56c.87.8,1.91,4.6,2.41,6.42.31,1.12.61,2.19.92,3.11,12.43,37.59,34.12,60,64.42,66.47A76.19,76.19,0,0,0,337,354c16.27,0,35.77-4,46.36-9.62,16.28-8.59,22.81-24.08,29.11-42,1.09-3.08,2-6.39,2.9-9.78,1.55-5.75,3.15-11.7,5.94-16.95a9,9,0,0,1,2.55-2.58,17.87,17.87,0,0,0,5.73-6.79c2.18-4.75,2.67-9.7,3.14-14.49a63.89,63.89,0,0,1,1-7.61l.82-3.84Zm-339,19.4H84.74a6.25,6.25,0,1,1,0-12.51h7.19a6.25,6.25,0,1,1,0,12.51Zm121.83,37c-6.56,24.75-26.1,37.83-56.94,37.83-13-.06-27.44-3.55-34.35-8.31s-10.55-17.66-13-28.38c-5.25-23.32-2.35-32.45-.16-35.81,4.73-7.25,22.48-12.13,44.16-12.13,3.16,0,6.27.11,9.22.32,5.82.4,11.52.83,17.13,1.43,17,1.8,31.36,7.51,34.8,13.89C217.79,270,217.46,281.38,213.75,295.33Zm176.76,1.13c-2.43,10.73-6.11,23.66-13,28.39s-21.34,8.25-34.75,8.31c-30.42,0-50-13.09-56.53-37.84-3.71-13.95-4-25.31-.89-31.16,3.44-6.39,17.75-12.1,34.81-13.89,5.6-.6,11.29-1,17.11-1.43,3-.21,6-.31,9.19-.31,21.71,0,39.47,4.88,44.19,12.14C392.86,264,395.76,273.15,390.51,296.47Zm22.3-38.17h-7.19a6.25,6.25,0,1,1,0-12.51h7.19a6.25,6.25,0,1,1,0,12.51Z"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"226.63","cy":"153.88","r":"16.75"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"272.58","cy":"119.14","r":"16.75"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"239.07","cy":"74.74","r":"16.75"}})])])},
+        staticRenderFns: []
+      })
+exports.default = {}
+Object.assign(exports.default.options||exports.default, _options)
+
+require("~/components.css")
+
+        var process = FuseBox.import('process');
+
+        if (process.env.NODE_ENV !== "production") {
+          var api = require('vue-hot-reload-api');
+
+          process.env.vueHMR = process.env.vueHMR || {};
+
+          if (!process.env.vueHMR['data-v-dd6e56bd']) {
+            process.env.vueHMR['data-v-dd6e56bd'] = true;
+            api.createRecord('data-v-dd6e56bd', module.exports.default);
+          }
+        }
+      
+});
+___scope___.file("components/create-team.vue", function(exports, require, module, __filename, __dirname){
+
+var _options = { _vueModuleId: 'data-v-f18d2362'}
+Object.assign(_options, {
+        _scopeId: null,
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-form',{ref:"form",attrs:{"lazy-validation":"lazy-validation"},model:{value:(_vm.valid),callback:function ($$v) {_vm.valid=$$v},expression:"valid"}},[_c('v-card',[_c('v-card-title',{attrs:{"primary-title":"primary-title"}},[_c('v-container',{attrs:{"fluid":"fluid","grid-list-md":"grid-list-md"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap"}},[_c('div',{attrs:{"hidden":"hidden"}},[_c('v-text-field',{attrs:{"label":"id"},model:{value:(_vm.team.id),callback:function ($$v) {_vm.$set(_vm.team, "id", $$v)},expression:"team.id"}})],1),_c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12"}},[_c('v-text-field',{attrs:{"label":"Player","value":_vm.team.player},on:{"input":_vm.changePlayer}})],1),_c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12"}},[_c('v-text-field',{attrs:{"label":"Club","value":_vm.team.club},on:{"input":_vm.changeClub}})],1)],1)],1)],1)],1)],1)],1)},
+        staticRenderFns: []
+      })
+"use strict";
+exports.__esModule = true;
+var lodash_1 = require("lodash");
+var id_generator_1 = require("../services/id-generator");
+exports["default"] = {
+    props: {
+        team: {
+            type: Object | String,
+            "default": function _default() {
+                return {
+                    id: "",
+                    player: "",
+                    club: ""
+                };
+            }
+        }
+    },
+    methods: {
+        changePlayer: function changePlayer(player) {
+            this.team.player = player;
+            this.submit();
+        },
+        changeClub: function changeClub(club) {
+            this.team.club = club;
+            this.submit();
+        },
+        submit: lodash_1.debounce(function () {
+            if (!this.team.club || !this.team.player) {
+                return;
+            }
+            if (!this.team.id) {
+                this.team.id = id_generator_1["default"].id();
+            }
+            this.$emit("addTeam", this.team);
+        }, 300)
+    }
+};
+
+Object.assign(exports.default.options||exports.default, _options)
+
+        var process = FuseBox.import('process');
+
+        if (process.env.NODE_ENV !== "production") {
+          var api = require('vue-hot-reload-api');
+
+          process.env.vueHMR = process.env.vueHMR || {};
+
+          if (!process.env.vueHMR['data-v-f18d2362']) {
+            process.env.vueHMR['data-v-f18d2362'] = true;
+            api.createRecord('data-v-f18d2362', module.exports.default);
+          }
+        }
+      
+});
+___scope___.file("services/id-generator.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var IdGenerator = /** @class */ (function () {
+    function IdGenerator() {
+    }
+    IdGenerator.prototype.id = function () {
+        return "" + this.random4chars + this.random4chars + "-" + this.random4chars + "-" + this.random4chars + "-" + this.random4chars + "-" + this.random4chars + this.random4chars + this.random4chars;
+        ;
+    };
+    Object.defineProperty(IdGenerator.prototype, "random4chars", {
+        get: function () {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return IdGenerator;
+}());
+exports.default = new IdGenerator();
+//# sourceMappingURL=id-generator.js.map
+});
+___scope___.file("components/match.vue", function(exports, require, module, __filename, __dirname){
+
+var _options = { _vueModuleId: 'data-v-ca9d0d25'}
+Object.assign(_options, {_scopeId: 'data-v-ca9d0d25'})
+Object.assign(_options, {
+        _scopeId: "data-v-ca9d0d25",
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"match",class:{'match--playing': _vm.internalMatch.state === 'playing', 'match--done': _vm.internalMatch.state === 'done' , 'match--disabled': _vm.internalMatch.state === 'disabled'},on:{"click":_vm.editMatch}},[_c('div',{staticClass:"math__side match__side--home",class:{'match__side--winner': _vm.internalMatch.winner ===  1, 'match__side--loser': _vm.internalMatch.winner === 2}},[_c('div',{staticClass:"match__team"},[_c('div',{staticClass:"match__club"},[_vm._v(_vm._s(_vm.internalMatch.home.club))]),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(_vm.internalMatch.home.player))])]),_c('div',{staticClass:"match__score"},[_vm._v(_vm._s(_vm.internalMatch.home.score))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.home.score),expression:"internalMatch.home.score"}],staticClass:"match__score--input",attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.home.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.home, "score", $event.target.value)}}})]),_c('div',{staticClass:"match__center"},[_c('div',{staticClass:"match__playing"},[_vm._v("live")]),_c('div',{staticClass:"match__divider"},[_vm._v("-")]),_c('button',{staticClass:"match__button match__button--start",on:{"click":_vm.startMatch}},[_vm._v("start match")]),_c('button',{staticClass:"match__button match__button--end",on:{"click":_vm.endMatch}},[_vm._v("end match")])]),_c('div',{staticClass:"math__side match__side--away",class:{'match__side--winner': _vm.internalMatch.winner ===  2, 'match__side--loser': _vm.internalMatch.winner === 1}},[_c('div',{staticClass:"match__team"},[_c('div',{staticClass:"match__club"},[_vm._v(_vm._s(_vm.internalMatch.away.club))]),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(_vm.internalMatch.away.player))])]),_c('div',{staticClass:"match__score"},[_vm._v(_vm._s(_vm.internalMatch.away.score))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.away.score),expression:"internalMatch.away.score"}],staticClass:"match__score--input",attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.away.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.away, "score", $event.target.value)}}})])])},
+        staticRenderFns: []
+      })
+"use strict";
+exports.__esModule = true;
+var config_1 = require("../config");
+exports["default"] = {
+    data: function data() {
+        return {
+            internalMatch: undefined
+        };
+    },
+    props: {
+        match: {
+            required: true
+        }
+    },
+    beforeMount: function beforeMount() {
+        this.internalMatch = this.match;
+    },
+    methods: {
+        startMatch: function startMatch() {
+            this.$emit("update", {
+                match: this.internalMatch,
+                state: config_1.matchStates.PLAYING
+            });
+        },
+        editMatch: function editMatch() {
+            if (this.match.state === config_1.matchStates.DONE) {
+                this.$emit("update", {
+                    match: this.internalMatch,
+                    state: config_1.matchStates.PLAYING
+                });
+            }
+        },
+        endMatch: function endMatch(event) {
+            var winner = config_1.matchWinner.TIE;
+            // convert to number
+            this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
+            this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
+            if (this.internalMatch.home.score > this.internalMatch.away.score) {
+                winner = config_1.matchWinner.HOME;
+            }
+            else if (this.internalMatch.home.score < this.internalMatch.away.score) {
+                winner = config_1.matchWinner.AWAY;
+            }
+            this.$emit("update", {
+                match: this.internalMatch,
+                state: config_1.matchStates.DONE,
+                winner: winner
+            });
+            event.stopPropagation();
+        }
+    }
+};
+
+Object.assign(exports.default.options||exports.default, _options)
+
+require("~/components.css")
+
+        var process = FuseBox.import('process');
+
+        if (process.env.NODE_ENV !== "production") {
+          var api = require('vue-hot-reload-api');
+
+          process.env.vueHMR = process.env.vueHMR || {};
+
+          if (!process.env.vueHMR['data-v-ca9d0d25']) {
+            process.env.vueHMR['data-v-ca9d0d25'] = true;
+            api.createRecord('data-v-ca9d0d25', module.exports.default);
+          }
+        }
+      
+});
 ___scope___.file("config.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
@@ -99,12 +282,18 @@ var teams_vue_1 = require("./pages/teams.vue");
 var summary_vue_1 = require("./pages/summary.vue");
 var league_vue_1 = require("./pages/league.vue");
 var random_vue_1 = require("./pages/random.vue");
+var knockout_vue_1 = require("./pages/knockout.vue");
 var results_vue_1 = require("./pages/results.vue");
 exports.matchStates = {
     NONE: '',
     PLAYING: 'playing',
     DISABLED: 'disabled',
     DONE: 'done'
+};
+exports.matchWinner = {
+    TIE: 0,
+    HOME: 1,
+    AWAY: 2,
 };
 exports.routes = {
     HOME: {
@@ -161,11 +350,21 @@ exports.routes = {
             fetchCurrentTournament: true
         }
     },
+    KNOCKOUT: {
+        path: 'knockout',
+        fullPath: '/knockout/:slug',
+        component: knockout_vue_1.default,
+        meta: {
+            save: true,
+            fetchCurrentTournament: true
+        }
+    },
     RESULTS: {
         path: 'results',
         fullPath: '/results/:slug',
         component: results_vue_1.default,
         meta: {
+            save: true,
             fetchCurrentTournament: true
         }
     }
@@ -194,7 +393,7 @@ var config_1 = require("../config");
 var vuex_1 = require("vuex");
 exports["default"] = {
     beforeMount: function beforeMount() {
-        this.$store.commit("currentTournament/reset");
+        this.$store.dispatch("currentTournament/reset");
     },
     methods: {
         goToCreate: function goToCreate() {
@@ -202,7 +401,7 @@ exports["default"] = {
         },
         goToRoute: function goToRoute(id) {
             var tournament = this.$store.getters.tournamentById(id);
-            this.$router.push(tournament.page + "/" + tournament.slug);
+            this.$router.push(tournament.page);
         }
     },
     computed: _extends({}, vuex_1.mapGetters({
@@ -295,31 +494,6 @@ Object.assign(exports.default.options||exports.default, _options)
           }
         }
       
-});
-___scope___.file("services/id-generator.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var IdGenerator = /** @class */ (function () {
-    function IdGenerator() {
-    }
-    IdGenerator.prototype.id = function () {
-        return "" + this.random4chars + this.random4chars + "-" + this.random4chars + "-" + this.random4chars + "-" + this.random4chars + "-" + this.random4chars + this.random4chars + this.random4chars;
-        ;
-    };
-    Object.defineProperty(IdGenerator.prototype, "random4chars", {
-        get: function () {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return IdGenerator;
-}());
-exports.default = new IdGenerator();
-//# sourceMappingURL=id-generator.js.map
 });
 ___scope___.file("pages/detail.vue", function(exports, require, module, __filename, __dirname){
 
@@ -519,16 +693,10 @@ exports["default"] = {
                 match.away.score = 0;
                 match.home.score = 0;
             });
-            this.$store.commit("addMatches", {
-                matches: matches,
-                slug: this.slug
-            });
+            this.$store.dispatch("league/addMatches", matches);
         },
         generateKnockoutRounds: function generateKnockoutRounds() {
-            this.$store.commit('generateKORounds', {
-                teams: this.teams,
-                slug: this.slug
-            });
+            this.$store.dispatch('knockout/generate');
         }
     }
 };
@@ -605,80 +773,58 @@ var _options = { _vueModuleId: 'data-v-5ee00795'}
 Object.assign(_options, {_scopeId: 'data-v-5ee00795'})
 Object.assign(_options, {
         _scopeId: "data-v-5ee00795",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.tournamentName))])]),_c('div',{staticClass:"matches"},_vm._l((_vm.matches),function(match){return _c('mut-match',{attrs:{"match":match},on:{"update":_vm.matchUpdate}})})),(_vm.allMatchedsPlayed)?_c('v-btn',{on:{"click":_vm.endTournament}},[_vm._v("End tournament")]):_vm._e()],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.name))]),_c('v-flex',{staticClass:"mb-5",attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-btn-toggle',{model:{value:(_vm.view),callback:function ($$v) {_vm.view=$$v},expression:"view"}},[_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"matches"}},[_vm._v("Matches")]),_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"table"}},[_vm._v("Table")])],1)],1),(_vm.view === 'matches')?_c('v-flex',{staticClass:"mb-5",attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('mut-matches',{attrs:{"matches":_vm.matches},on:{"update":_vm.matchUpdate,"done":_vm.allMatchesPlayed}})],1):_vm._e(),(_vm.view === 'table')?_c('v-flex',{staticClass:"mb-5",attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('mut-table',{attrs:{"data":_vm.results}})],1):_vm._e(),(_vm.done)?_c('v-btn',{on:{"click":_vm.endTournament}},[_vm._v("End tournament")]):_vm._e()],1)],1)},
         staticRenderFns: []
       })
 "use strict";
 exports.__esModule = true;
-var config_1 = require("../config");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+        }
+    }
+} return target; };
+var vuex_1 = require("vuex");
 exports["default"] = {
+    beforeMount: function beforeMount() {
+        this.$store.dispatch('league/updateTable');
+    },
     data: function data() {
         return {
-            activeTeams: [],
-            totalMatchesLeft: 0
+            view: "matches"
         };
     },
-    beforeMount: function beforeMount() {
-        this.totalMatchesLeft = this.matches && this.matches.length;
-    },
-    computed: {
-        slug: function slug() {
-            return this.$route.params.slug;
-        },
-        tournament: function tournament() {
-            return this.$store.getters.tournament(this.slug);
-        },
-        tournamentName: function tournamentName() {
-            return this.tournament.name();
-        },
-        matches: function matches() {
-            return this.tournament.matchList();
-        },
-        isTeamPlaying: function isTeamPlaying() {
-            var _this = this;
-            return function (team) {
-                return _this.activeTeams.indexOf(team) > -1;
-            };
-        },
-        allMatchedsPlayed: function allMatchedsPlayed() {
-            return this.totalMatchesLeft === 0;
+    computed: _extends({}, vuex_1.mapGetters({
+        slug: 'currentTournament/slug',
+        name: 'currentTournament/name',
+        matches: 'league/matches',
+        done: 'league/completed',
+        table: 'league/table'
+    }), {
+        results: function results() {
+            return this.table.map(function (t) {
+                return {
+                    team: t.club + " (" + t.player + ")",
+                    played: t.stats.played,
+                    wins: t.stats.won,
+                    draws: t.stats.draw,
+                    losses: t.stats.lost,
+                    scored: t.stats.goalsFor,
+                    against: t.stats.goalsAgainst,
+                    difference: t.stats.goalDifference,
+                    points: t.stats.points
+                };
+            });
         }
-    },
+    }),
     methods: {
         matchUpdate: function matchUpdate(event) {
-            var _this2 = this;
-            var index = this.matches.findIndex(function (m) {
-                return m.id === event.match.id;
-            });
-            if (index === -1)
-                throw new Error("match not found");
-            this.matches[index].state = event.state;
-            this.matches[index].winner = event.winner;
-            this.activeTeams = [];
-            var activeMatches = this.matches.filter(function (m) {
-                return m.state === config_1.matchStates.PLAYING;
-            });
-            activeMatches.forEach(function (m) {
-                _this2.activeTeams.push(m.home.club);
-                _this2.activeTeams.push(m.away.club);
-            });
-            this.matches.forEach(function (m, i) {
-                if (m.state === config_1.matchStates.DONE)
-                    return;
-                if ((_this2.isTeamPlaying(m.home.club) || _this2.isTeamPlaying(m.away.club)) && m.state !== config_1.matchStates.PLAYING) {
-                    _this2.matches[i].state = config_1.matchStates.DISABLED;
-                }
-                else if (m.state === config_1.matchStates.DISABLED) {
-                    _this2.matches[i].state = config_1.matchStates.NONE;
-                }
-            });
-            if (event.state === config_1.matchStates.DONE) {
-                this.totalMatchesLeft--;
-                this.$store.dispatch("updateMatch", {
-                    match: this.matches[index],
-                    slug: this.slug
-                });
-            }
+            this.$store.dispatch("league/updateMatch", event.match);
+        },
+        allMatchesPlayed: function allMatchesPlayed() {
+            this.$store.dispatch('league/complete');
         },
         endTournament: function endTournament() {
             this.$router.push("/results/" + this.$route.params.slug);
@@ -801,12 +947,139 @@ Object.assign(exports.default.options||exports.default, _options)
         }
       
 });
+___scope___.file("pages/knockout.vue", function(exports, require, module, __filename, __dirname){
+
+var _options = { _vueModuleId: 'data-v-b08d76a6'}
+Object.assign(_options, {_scopeId: 'data-v-b08d76a6'})
+Object.assign(_options, {
+        _scopeId: "data-v-b08d76a6",
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"bracket",class:_vm.totalRoundsClass},_vm._l((_vm.internalRounds),function(round){return _c('div',{staticClass:"round",class:round.classes},[_c('h2',[_vm._v(_vm._s(_vm.getNameOfRound(round)))]),_c('div',{staticClass:"matches"},[_vm._l((round.matches),function(match){return _c('mut-knockout-match',{attrs:{"home":match.home,"away":match.away}})}),(_vm.getNameOfRound(round) === 'Final')?_c('div',{staticClass:"winner"},[_c('span',[_vm._v("🏆 As Roma 🏆")])]):_vm._e()],2)])}))])},
+        staticRenderFns: []
+      })
+"use strict";
+exports.__esModule = true;
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+        }
+    }
+} return target; };
+var vuex_1 = require("vuex");
+var knockout_1 = require("../helpers/knockout");
+exports["default"] = {
+    data: function data() {
+        return {
+            internalRounds: []
+        };
+    },
+    computed: _extends({}, vuex_1.mapGetters({
+        rounds: 'knockout/rounds'
+    }), {
+        totalRoundsClass: function totalRoundsClass() {
+            return 'bracket--' + this.rounds.length;
+        }
+    }),
+    beforeMount: function beforeMount() {
+        for (var i = 0; i < this.rounds.length; i++) {
+            var round = this.rounds[i] || [];
+            if (round.length % 2 === 0) {
+                var half = round.length / 2;
+                var full = round.length;
+                this.internalRounds.push({
+                    matches: round.slice(0, half),
+                    round: i + 1,
+                    totalTeams: round.length,
+                    classes: 'round' + (i + 1) + ' round--left'
+                });
+                this.internalRounds.push({
+                    matches: round.slice(half, full),
+                    round: i + 1,
+                    totalTeams: round.length,
+                    classes: 'round' + (i + 1) + ' round--right'
+                });
+            }
+            else {
+                this.internalRounds.push({
+                    matches: round,
+                    totalTeams: round.length,
+                    round: i + 1
+                });
+            }
+        }
+    },
+    methods: {
+        getNameOfRound: function getNameOfRound(round) {
+            return knockout_1.getRoundName(round.totalTeams);
+        }
+    }
+};
+
+Object.assign(exports.default.options||exports.default, _options)
+
+require("~/components.css")
+
+        var process = FuseBox.import('process');
+
+        if (process.env.NODE_ENV !== "production") {
+          var api = require('vue-hot-reload-api');
+
+          process.env.vueHMR = process.env.vueHMR || {};
+
+          if (!process.env.vueHMR['data-v-b08d76a6']) {
+            process.env.vueHMR['data-v-b08d76a6'] = true;
+            api.createRecord('data-v-b08d76a6', module.exports.default);
+          }
+        }
+      
+});
+___scope___.file("helpers/knockout.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function calculateTotalRounds(teams) {
+    switch (teams) {
+        case 2:
+            return 1;
+        case 4:
+            return 2;
+        case 8:
+            return 3;
+        case 16:
+            return 4;
+        case 32:
+            return 5;
+        default:
+            throw new Error('Number of teams is not valid');
+    }
+}
+exports.calculateTotalRounds = calculateTotalRounds;
+function getRoundName(matches) {
+    switch (matches) {
+        case 1:
+            return 'Final';
+        case 2:
+            return 'Semi-Final';
+        case 4:
+            return 'Quarter Final';
+        case 8:
+            return 'Round of 16';
+        case 16:
+            return 'Round of 32';
+        default:
+            throw new Error('Number of rounds is not valid');
+    }
+}
+exports.getRoundName = getRoundName;
+//# sourceMappingURL=knockout.js.map
+});
 ___scope___.file("pages/results.vue", function(exports, require, module, __filename, __dirname){
 
 var _options = { _vueModuleId: 'data-v-ab57f7f0'}
 Object.assign(_options, {
         _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.name)+" results")]),_c('v-flex',{attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.sortedResults,"hide-actions":"hide-actions"},scopedSlots:_vm._u([{key:"items",fn:function(props){return [_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.team))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.played))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.wins))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.draws))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.losses))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.scored))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.against))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.difference))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.points))])]}}])})],1)],1)],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.name)+" results")]),_c('v-flex',{attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('mut-table',{attrs:{"data":_vm.results}})],1)],1)],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -821,83 +1094,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 } return target; };
 var vuex_1 = require("vuex");
 exports["default"] = {
-    data: function data() {
-        return {
-            headers: [{
-                    text: "Team",
-                    value: "team",
-                    sortable: false
-                }, {
-                    text: "Played",
-                    value: "played",
-                    sortable: false
-                }, {
-                    text: "Wins",
-                    value: "wins",
-                    sortable: false
-                }, {
-                    text: "Draws",
-                    value: "draws",
-                    sortable: false
-                }, {
-                    text: "Losses",
-                    value: "losses",
-                    sortable: false
-                }, {
-                    text: "Scored",
-                    value: "scored",
-                    sortable: false
-                }, {
-                    text: "Against",
-                    value: "against",
-                    sortable: false
-                }, {
-                    text: "Difference",
-                    value: "difference",
-                    sortable: false
-                }, {
-                    text: "Points",
-                    value: "points",
-                    sortable: false
-                }]
-        };
-    },
     computed: _extends({}, vuex_1.mapGetters({
         name: 'currentTournament/name',
-        teams: 'currentTournament/teams'
+        table: 'league/table'
     }), {
         results: function results() {
-            return this.teams.map(function (t) {
+            return this.table.map(function (t) {
                 return {
-                    team: t.club + " (" + t.player + ")",
+                    team: t.club + ' (' + t.player + ')',
                     played: t.stats.played,
-                    wins: t.stats.wins,
-                    draws: t.stats.draws,
-                    losses: t.stats.loses,
-                    scored: t.stats.scored,
-                    against: t.stats.against,
-                    difference: t.stats.scored - t.stats.against,
+                    wins: t.stats.won,
+                    draws: t.stats.draw,
+                    losses: t.stats.lost,
+                    scored: t.stats.goalsFor,
+                    against: t.stats.goalsAgainst,
+                    difference: t.stats.goalDifference,
                     points: t.stats.points
                 };
             });
-        },
-        sortedResults: function sortedResults() {
-            return this.results.sort(this.orderByProperty('points', 'difference', 'scored')).reverse();
         }
-    }),
-    methods: {
-        orderByProperty: function orderByProperty(prop) {
-            var _arguments = arguments, _this = this;
-            var args = Array.prototype.slice.call(arguments, 1);
-            return function (a, b) {
-                var equality = a[prop] - b[prop];
-                if (equality === 0 && _arguments.length > 1) {
-                    return _this.orderByProperty.apply(null, args)(a, b);
-                }
-                return equality;
-            };
-        }
-    }
+    })
 };
 
 Object.assign(exports.default.options||exports.default, _options)
@@ -916,145 +1132,83 @@ Object.assign(exports.default.options||exports.default, _options)
         }
       
 });
-___scope___.file("components/logo.vue", function(exports, require, module, __filename, __dirname){
+___scope___.file("components/matches.vue", function(exports, require, module, __filename, __dirname){
 
-var _options = { _vueModuleId: 'data-v-dd6e56bd'}
-Object.assign(_options, {_scopeId: 'data-v-dd6e56bd'})
+var _options = { _vueModuleId: 'data-v-5f955cd3'}
+Object.assign(_options, {_scopeId: 'data-v-5f955cd3'})
 Object.assign(_options, {
-        _scopeId: "data-v-dd6e56bd",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('svg',{staticClass:"logo",attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 500 500"}},[_c('path',{attrs:{"d":"M342.4,433.42a17.33,17.33,0,0,0,.25-17.33L284.34,310.23V233.41h17.48V188.05H198.18v45.35h17.48v76.82L157.32,416.09A17.48,17.48,0,0,0,172.58,442H327.42A17.33,17.33,0,0,0,342.4,433.42ZM196.51,376l9.64-17.48H247.5v-15H214.41l5.49-10h27.6v-15H228.17l2.5-4.47v-5.49H247.5v-15H230.65v-10H247.5v-15H230.65v-50.2H213.16V203h73.67v15.38H269.35V314.1L303.47,376Z"}}),_vm._v(" "),_c('path',{attrs:{"d":"M430.89,238.9c-12.71-5.1-27.59-8.12-44.25-9-6.61-.34-13.18-.5-19.69-.5a393,393,0,0,0-75.57,7.3c-5.11,1-10.27,2.35-15.45,3.69-8.72,2.26-17.73,4.59-25.58,5.22-8.56-.63-17.57-3-26.29-5.22-5.17-1.34-10.34-2.67-15.44-3.69a393,393,0,0,0-75.57-7.3c-6.51,0-13.09.17-19.7.5-16.66.86-31.53,3.87-44.24,9l-3.64,1.47.82,3.84a65.63,65.63,0,0,1,1,7.61c.47,4.79,1,9.74,3.14,14.49a17.87,17.87,0,0,0,5.73,6.79,9,9,0,0,1,2.55,2.58c2.79,5.25,4.39,11.2,5.94,16.95.91,3.39,1.81,6.69,2.9,9.78,6.3,17.88,12.83,33.36,29.11,42,14.41,7.6,44.73,11.89,62.23,8.12,30.3-6.52,52-28.88,64.42-66.47.3-.91.6-2,.92-3.11.5-1.82,1.55-5.62,2.28-6.33a8.8,8.8,0,0,1,3.32-.64,10.75,10.75,0,0,1,3.5.56c.87.8,1.91,4.6,2.41,6.42.31,1.12.61,2.19.92,3.11,12.43,37.59,34.12,60,64.42,66.47A76.19,76.19,0,0,0,337,354c16.27,0,35.77-4,46.36-9.62,16.28-8.59,22.81-24.08,29.11-42,1.09-3.08,2-6.39,2.9-9.78,1.55-5.75,3.15-11.7,5.94-16.95a9,9,0,0,1,2.55-2.58,17.87,17.87,0,0,0,5.73-6.79c2.18-4.75,2.67-9.7,3.14-14.49a63.89,63.89,0,0,1,1-7.61l.82-3.84Zm-339,19.4H84.74a6.25,6.25,0,1,1,0-12.51h7.19a6.25,6.25,0,1,1,0,12.51Zm121.83,37c-6.56,24.75-26.1,37.83-56.94,37.83-13-.06-27.44-3.55-34.35-8.31s-10.55-17.66-13-28.38c-5.25-23.32-2.35-32.45-.16-35.81,4.73-7.25,22.48-12.13,44.16-12.13,3.16,0,6.27.11,9.22.32,5.82.4,11.52.83,17.13,1.43,17,1.8,31.36,7.51,34.8,13.89C217.79,270,217.46,281.38,213.75,295.33Zm176.76,1.13c-2.43,10.73-6.11,23.66-13,28.39s-21.34,8.25-34.75,8.31c-30.42,0-50-13.09-56.53-37.84-3.71-13.95-4-25.31-.89-31.16,3.44-6.39,17.75-12.1,34.81-13.89,5.6-.6,11.29-1,17.11-1.43,3-.21,6-.31,9.19-.31,21.71,0,39.47,4.88,44.19,12.14C392.86,264,395.76,273.15,390.51,296.47Zm22.3-38.17h-7.19a6.25,6.25,0,1,1,0-12.51h7.19a6.25,6.25,0,1,1,0,12.51Z"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"226.63","cy":"153.88","r":"16.75"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"272.58","cy":"119.14","r":"16.75"}}),_vm._v(" "),_c('circle',{attrs:{"cx":"239.07","cy":"74.74","r":"16.75"}})])])},
-        staticRenderFns: []
-      })
-exports.default = {}
-Object.assign(exports.default.options||exports.default, _options)
-
-require("~/components.css")
-
-        var process = FuseBox.import('process');
-
-        if (process.env.NODE_ENV !== "production") {
-          var api = require('vue-hot-reload-api');
-
-          process.env.vueHMR = process.env.vueHMR || {};
-
-          if (!process.env.vueHMR['data-v-dd6e56bd']) {
-            process.env.vueHMR['data-v-dd6e56bd'] = true;
-            api.createRecord('data-v-dd6e56bd', module.exports.default);
-          }
-        }
-      
-});
-___scope___.file("components/create-team.vue", function(exports, require, module, __filename, __dirname){
-
-var _options = { _vueModuleId: 'data-v-f18d2362'}
-Object.assign(_options, {
-        _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-form',{ref:"form",attrs:{"lazy-validation":"lazy-validation"},model:{value:(_vm.valid),callback:function ($$v) {_vm.valid=$$v},expression:"valid"}},[_c('v-card',[_c('v-card-title',{attrs:{"primary-title":"primary-title"}},[_c('v-container',{attrs:{"fluid":"fluid","grid-list-md":"grid-list-md"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap"}},[_c('div',{attrs:{"hidden":"hidden"}},[_c('v-text-field',{attrs:{"label":"id"},model:{value:(_vm.team.id),callback:function ($$v) {_vm.$set(_vm.team, "id", $$v)},expression:"team.id"}})],1),_c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12"}},[_c('v-text-field',{attrs:{"label":"Player","value":_vm.team.player},on:{"input":_vm.changePlayer}})],1),_c('v-flex',{attrs:{"d-flex":"d-flex","xs12":"xs12"}},[_c('v-text-field',{attrs:{"label":"Club","value":_vm.team.club},on:{"input":_vm.changeClub}})],1)],1)],1)],1)],1)],1)],1)},
-        staticRenderFns: []
-      })
-"use strict";
-exports.__esModule = true;
-var lodash_1 = require("lodash");
-var id_generator_1 = require("../services/id-generator");
-exports["default"] = {
-    props: {
-        team: {
-            type: Object | String,
-            "default": function _default() {
-                return {
-                    id: "",
-                    player: "",
-                    club: ""
-                };
-            }
-        }
-    },
-    methods: {
-        changePlayer: function changePlayer(player) {
-            this.team.player = player;
-            this.submit();
-        },
-        changeClub: function changeClub(club) {
-            this.team.club = club;
-            this.submit();
-        },
-        submit: lodash_1.debounce(function () {
-            if (!this.team.club || !this.team.player) {
-                return;
-            }
-            if (!this.team.id) {
-                this.team.id = id_generator_1["default"].id();
-            }
-            this.$emit("addTeam", this.team);
-        }, 300)
-    }
-};
-
-Object.assign(exports.default.options||exports.default, _options)
-
-        var process = FuseBox.import('process');
-
-        if (process.env.NODE_ENV !== "production") {
-          var api = require('vue-hot-reload-api');
-
-          process.env.vueHMR = process.env.vueHMR || {};
-
-          if (!process.env.vueHMR['data-v-f18d2362']) {
-            process.env.vueHMR['data-v-f18d2362'] = true;
-            api.createRecord('data-v-f18d2362', module.exports.default);
-          }
-        }
-      
-});
-___scope___.file("components/match.vue", function(exports, require, module, __filename, __dirname){
-
-var _options = { _vueModuleId: 'data-v-ca9d0d25'}
-Object.assign(_options, {_scopeId: 'data-v-ca9d0d25'})
-Object.assign(_options, {
-        _scopeId: "data-v-ca9d0d25",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"match",class:{'match--playing': _vm.internalMatch.state === 'playing', 'match--done': _vm.internalMatch.state === 'done' , 'match--disabled': _vm.internalMatch.state === 'disabled'}},[_c('div',{staticClass:"math__side match__side--home",class:{'match__side--winner': _vm.internalMatch.winner ===  1, 'match__side--loser': _vm.internalMatch.winner === 2}},[_c('div',{staticClass:"match__team"},[_c('div',{staticClass:"match__club"},[_vm._v(_vm._s(_vm.internalMatch.home.club))]),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(_vm.internalMatch.home.player))])]),_c('div',{staticClass:"match__score"},[_vm._v(_vm._s(_vm.internalMatch.home.score))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.home.score),expression:"internalMatch.home.score"}],staticClass:"match__score--input",attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.home.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.home, "score", $event.target.value)}}})]),_c('div',{staticClass:"match__center"},[_c('div',{staticClass:"match__playing"},[_vm._v("live")]),_c('div',{staticClass:"match__divider"},[_vm._v("-")]),_c('button',{staticClass:"match__button match__button--start",on:{"click":_vm.startMatch}},[_vm._v("start match")]),_c('button',{staticClass:"match__button match__button--end",on:{"click":_vm.endMatch}},[_vm._v("end match")])]),_c('div',{staticClass:"math__side match__side--away",class:{'match__side--winner': _vm.internalMatch.winner ===  2, 'match__side--loser': _vm.internalMatch.winner === 1}},[_c('div',{staticClass:"match__team"},[_c('div',{staticClass:"match__club"},[_vm._v(_vm._s(_vm.internalMatch.away.club))]),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(_vm.internalMatch.away.player))])]),_c('div',{staticClass:"match__score"},[_vm._v(_vm._s(_vm.internalMatch.away.score))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.away.score),expression:"internalMatch.away.score"}],staticClass:"match__score--input",attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.away.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.away, "score", $event.target.value)}}})])])},
+        _scopeId: "data-v-5f955cd3",
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"matches"},_vm._l((_vm.matches),function(match){return _c('mut-match',{attrs:{"match":match},on:{"update":_vm.matchUpdate}})}))},
         staticRenderFns: []
       })
 "use strict";
 exports.__esModule = true;
 var config_1 = require("../config");
 exports["default"] = {
-    data: function data() {
-        return {
-            internalMatch: undefined
-        };
-    },
     props: {
-        match: {
+        matches: {
             required: true
         }
     },
+    data: function data() {
+        return {
+            activeTeams: [],
+            totalMatchesLeft: 0
+        };
+    },
     beforeMount: function beforeMount() {
-        this.internalMatch = this.match;
+        if (this.allMatchedsPlayed()) {
+            this.$emit("done");
+        }
+    },
+    computed: {
+        isTeamPlaying: function isTeamPlaying() {
+            var _this = this;
+            return function (team) {
+                return _this.activeTeams.indexOf(team) > -1;
+            };
+        }
     },
     methods: {
-        startMatch: function startMatch() {
-            this.$emit("update", {
-                match: this.internalMatch,
-                state: config_1.matchStates.PLAYING
+        allMatchedsPlayed: function allMatchedsPlayed() {
+            var hasRemainingMatches = this.matches.every(function (match) {
+                return match.state === config_1.matchStates.DONE;
             });
+            return hasRemainingMatches;
         },
-        endMatch: function endMatch() {
-            var winner = 0;
-            // convert to number
-            this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
-            this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
-            if (this.internalMatch.home.score > this.internalMatch.away.score) {
-                winner = 1;
-            }
-            else if (this.internalMatch.home.score < this.internalMatch.away.score) {
-                winner = 2;
-            }
-            this.$emit("update", {
-                match: this.internalMatch,
-                state: config_1.matchStates.DONE,
-                winner: winner
+        matchUpdate: function matchUpdate(event) {
+            var _this2 = this;
+            var index = this.matches.findIndex(function (m) {
+                return m.id === event.match.id;
             });
+            if (index === -1)
+                throw new Error("match not found");
+            this.matches[index].state = event.state;
+            this.matches[index].winner = event.winner;
+            this.activeTeams = [];
+            var activeMatches = this.matches.filter(function (m) {
+                return m.state === config_1.matchStates.PLAYING;
+            });
+            activeMatches.forEach(function (m) {
+                _this2.activeTeams.push(m.home.club);
+                _this2.activeTeams.push(m.away.club);
+            });
+            this.matches.forEach(function (m, i) {
+                if (m.state === config_1.matchStates.DONE)
+                    return;
+                if ((_this2.isTeamPlaying(m.home.club) || _this2.isTeamPlaying(m.away.club)) && m.state !== config_1.matchStates.PLAYING) {
+                    _this2.matches[i].state = config_1.matchStates.DISABLED;
+                }
+                else if (m.state === config_1.matchStates.DISABLED) {
+                    _this2.matches[i].state = config_1.matchStates.NONE;
+                }
+            });
+            this.$emit("update", {
+                match: this.matches[index]
+            });
+            if (this.allMatchedsPlayed()) {
+                this.$emit("done");
+            }
         }
     }
 };
@@ -1070,9 +1224,9 @@ require("~/components.css")
 
           process.env.vueHMR = process.env.vueHMR || {};
 
-          if (!process.env.vueHMR['data-v-ca9d0d25']) {
-            process.env.vueHMR['data-v-ca9d0d25'] = true;
-            api.createRecord('data-v-ca9d0d25', module.exports.default);
+          if (!process.env.vueHMR['data-v-5f955cd3']) {
+            process.env.vueHMR['data-v-5f955cd3'] = true;
+            api.createRecord('data-v-5f955cd3', module.exports.default);
           }
         }
       
@@ -1117,6 +1271,99 @@ require("~/components.css")
         }
       
 });
+___scope___.file("components/table.vue", function(exports, require, module, __filename, __dirname){
+
+var _options = { _vueModuleId: 'data-v-c19e09a8'}
+Object.assign(_options, {
+        _scopeId: null,
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-data-table',{staticClass:"elevation-1",attrs:{"headers":_vm.headers,"items":_vm.sortedResults,"hide-actions":"hide-actions"},scopedSlots:_vm._u([{key:"items",fn:function(props){return [_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.team))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.played))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.wins))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.draws))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.losses))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.scored))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.against))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.difference))]),_c('td',{staticClass:"text-xs-left"},[_vm._v(_vm._s(props.item.points))])]}}])})},
+        staticRenderFns: []
+      })
+"use strict";
+exports.__esModule = true;
+exports["default"] = {
+    props: {
+        data: {
+            required: true
+        }
+    },
+    data: function data() {
+        return {
+            headers: [{
+                    text: "Team",
+                    value: "team",
+                    sortable: false
+                }, {
+                    text: "Played",
+                    value: "played",
+                    sortable: false
+                }, {
+                    text: "Wins",
+                    value: "wins",
+                    sortable: false
+                }, {
+                    text: "Draws",
+                    value: "draws",
+                    sortable: false
+                }, {
+                    text: "Losses",
+                    value: "losses",
+                    sortable: false
+                }, {
+                    text: "Scored",
+                    value: "scored",
+                    sortable: false
+                }, {
+                    text: "Against",
+                    value: "against",
+                    sortable: false
+                }, {
+                    text: "Difference",
+                    value: "difference",
+                    sortable: false
+                }, {
+                    text: "Points",
+                    value: "points",
+                    sortable: false
+                }]
+        };
+    },
+    computed: {
+        sortedResults: function sortedResults() {
+            return this.data.sort(this.orderByProperty('points', 'difference', 'scored')).reverse();
+        }
+    },
+    methods: {
+        orderByProperty: function orderByProperty(prop) {
+            var _arguments = arguments, _this = this;
+            var args = Array.prototype.slice.call(arguments, 1);
+            return function (a, b) {
+                var equality = a[prop] - b[prop];
+                if (equality === 0 && _arguments.length > 1) {
+                    return _this.orderByProperty.apply(null, args)(a, b);
+                }
+                return equality;
+            };
+        }
+    }
+};
+
+Object.assign(exports.default.options||exports.default, _options)
+
+        var process = FuseBox.import('process');
+
+        if (process.env.NODE_ENV !== "production") {
+          var api = require('vue-hot-reload-api');
+
+          process.env.vueHMR = process.env.vueHMR || {};
+
+          if (!process.env.vueHMR['data-v-c19e09a8']) {
+            process.env.vueHMR['data-v-c19e09a8'] = true;
+            api.createRecord('data-v-c19e09a8', module.exports.default);
+          }
+        }
+      
+});
 ___scope___.file("router/index.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
@@ -1141,12 +1388,20 @@ var router = new vue_router_1.default({
     routes: buildRouteConfig()
 });
 router.beforeEach(function (to, from, next) {
-    if (to.meta && to.meta.fetchCurrentTournament) {
-        var tournament = store_1.default.getters.tournamentBySlug(to.params.slug);
-        if (Object.keys(tournament).length === 0) {
-            next('/');
+    if (to.meta) {
+        if (to.meta.fetchCurrentTournament) {
+            var tournament = store_1.default.getters.tournamentBySlug(to.params.slug);
+            if (Object.keys(tournament).length === 0) {
+                next('/');
+            }
+            var currentTournamentId = store_1.default.getters['currentTournament/id'];
+            if (tournament.id !== currentTournamentId) {
+                store_1.default.dispatch('currentTournament/set', tournament.id);
+            }
         }
-        store_1.default.commit('currentTournament/set', tournament.id);
+        if (to.meta.save) {
+            store_1.default.dispatch('currentTournament/setProgress', to.path);
+        }
     }
     next();
 });
@@ -1164,7 +1419,10 @@ var mutations_1 = require("./mutations");
 var actions_1 = require("./actions");
 var getters_1 = require("./getters");
 var plugins_1 = require("./plugins");
+// modules
 var current_tournament_1 = require("./modules/current-tournament");
+var league_1 = require("./modules/league");
+var knockout_1 = require("./modules/knockout");
 vue_1.default.use(vuex_1.default);
 exports.default = new vuex_1.default.Store({
     state: state_1.default,
@@ -1173,7 +1431,9 @@ exports.default = new vuex_1.default.Store({
     plugins: plugins_1.default,
     getters: getters_1.default,
     modules: {
-        currentTournament: current_tournament_1.default
+        currentTournament: current_tournament_1.default,
+        league: league_1.default,
+        knockout: knockout_1.default
     }
 });
 //# sourceMappingURL=index.js.map
@@ -1199,18 +1459,27 @@ ___scope___.file("store/mutations.js", function(exports, require, module, __file
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var match_1 = require("../helpers/match");
 exports.default = {
     addTournament: function (state, _a) {
         var id = _a.id, slug = _a.slug, name = _a.name, teams = _a.teams, type = _a.type;
-        state.tournaments.push({
+        var t = {
             id: id,
             slug: slug,
             name: name,
             teams: teams,
             type: type,
-            details: {}
-        });
+            details: {},
+            league: {
+                matches: [],
+                table: [],
+                done: false
+            },
+            knockout: {
+                rounds: []
+            },
+            groupstage: {},
+        };
+        state.tournaments.push(t);
     },
     setProgress: function (state, _a) {
         var slug = _a.slug, page = _a.page;
@@ -1222,122 +1491,49 @@ exports.default = {
             throw new Error("Tournament " + slug + " not found");
         }
     },
-    addMatches: function (state, _a) {
-        var matches = _a.matches, slug = _a.slug;
-        var tournament = state.tournaments.find(function (t) { return t.slug === slug; });
+    updateDetails: function (state, _a) {
+        var id = _a.id, details = _a.details;
+        var tournament = state.tournaments.find(function (t) { return t.id === id; });
         if (tournament) {
-            tournament.matches = matches;
-        }
-    },
-    updateMatchScore: function (state, _a) {
-        var match = _a.match, slug = _a.slug;
-        var tournament = state.tournaments.find(function (t) { return t.slug === slug; });
-        if (tournament) {
-            var index = tournament.matches.findIndex(function (m) { return m.id === match.id; });
-            if (index > -1) {
-                tournament.matches[index] = match;
-            }
+            tournament.details = Object.assign({}, tournament.details, details);
         }
         else {
-            throw new Error("Tournament " + slug + " not found");
+            throw new Error("Tournament " + id + " not found");
         }
     },
-    updateTeamStat: function (state, _a) {
-        var teamId = _a.teamId, score = _a.score, scoreOpponent = _a.scoreOpponent, slug = _a.slug;
-        var tournament = state.tournaments.find(function (t) { return t.slug === slug; });
-        if (tournament) {
-            var team = tournament.teams.find(function (t) { return t.id === teamId; });
-            if (team) {
-                if (!team.stats) {
-                    team.stats = {
-                        played: 0,
-                        wins: 0,
-                        draws: 0,
-                        loses: 0,
-                        scored: 0,
-                        against: 0,
-                        points: 0,
-                    };
-                }
-                team.stats.played++;
-                team.stats.scored += score;
-                team.stats.against += scoreOpponent;
-                if (score > scoreOpponent) {
-                    team.stats.wins++;
-                    team.stats.points += 3;
-                }
-                else if (score === scoreOpponent) {
-                    team.stats.draws++;
-                    team.stats.points += 1;
-                }
-                else if (score < scoreOpponent) {
-                    team.stats.loses++;
-                }
+    addTeam: function (state, _a) {
+        var team = _a.team, tournament = _a.tournament;
+        var tournament = state.tournaments.find(function (t) { return t.slug === tournament; });
+        if (tournament.name) {
+            if (!tournament.teams)
+                tournament.teams = [];
+            var index = tournament.teams.findIndex(function (t) { return t.id === team.id; });
+            if (index < 0) {
+                tournament.teams.push(team);
             }
-        }
-        else {
-            throw new Error("Tournament " + slug + " not found");
+            else {
+                tournament.teams[index] = team;
+            }
         }
     },
-    generateKORounds: function (state, _a) {
-        var teams = _a.teams, slug = _a.slug;
+    randomizeTeams: function (state, _a) {
+        var slug = _a.slug, newTeams = _a.newTeams;
         var tournament = state.tournaments.find(function (t) { return t.slug === slug; });
         if (tournament) {
-            var shuffeledTeams = teams.sort(function (a, b) { return 0.5 - Math.random(); });
-            tournament.knockout = {};
-            tournament.knockout.rounds = [];
-            var matches = [];
-            for (var i = 0; i < shuffeledTeams.length; i = i + 2) {
-                matches.push(match_1.generateMatch(shuffeledTeams[i], shuffeledTeams[i + 1]));
-            }
-            tournament.knockout.rounds.push(matches);
+            tournament.teams = newTeams;
         }
         else {
-            throw new Error("Tournament " + slug + " not found");
+            throw new Error("No tournament " + slug + " found.");
         }
-    }
+    },
 };
 //# sourceMappingURL=mutations.js.map
-});
-___scope___.file("helpers/match.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function generateMatch(teamA, teamB) {
-    return {
-        home: teamA,
-        away: teamB
-    };
-}
-exports.generateMatch = generateMatch;
-//# sourceMappingURL=match.js.map
 });
 ___scope___.file("store/actions.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
-    updateMatch: function (_a, _b) {
-        var commit = _a.commit;
-        var match = _b.match, slug = _b.slug;
-        commit("updateMatchScore", {
-            match: match,
-            slug: slug
-        });
-        commit("updateTeamStat", {
-            teamId: match.home.id,
-            score: match.home.score,
-            scoreOpponent: match.away.score,
-            slug: slug
-        });
-        commit("updateTeamStat", {
-            teamId: match.away.id,
-            score: match.away.score,
-            scoreOpponent: match.home.score,
-            slug: slug
-        });
-    },
-};
+exports.default = {};
 //# sourceMappingURL=actions.js.map
 });
 ___scope___.file("store/getters.js", function(exports, require, module, __filename, __dirname){
@@ -1350,6 +1546,7 @@ exports.default = {
     },
     tournamentById: function (state) { return function (id) {
         var tournament = state.tournaments.find(function (tournament) { return tournament.id === id; });
+        // if (!tournament) throw new Error('Tournament not found');
         return tournament || {};
     }; },
     tournamentBySlug: function (state) { return function (slug) {
@@ -1374,39 +1571,14 @@ exports.default = {
             teams: function () {
                 return tournament.teams;
             },
-            matchList: function () {
-                return tournament.matches;
-            },
             page: function () {
                 return tournament.page;
             },
             numberOfPlays: function () {
                 return tournament.details.numberOfPlays;
             },
-            knockoutRounds: function () {
-                return tournament.knockout.round;
-            },
-            koRounds: function () {
-                var rounds = [];
-                var totalTeams = tournament.teams.length;
-                var totalRounds = 0;
-                for (var i = totalTeams; i >= 2; i = i / 2) {
-                    rounds.push({
-                        matches: []
-                    });
-                    var matches = [];
-                    var totalMatches = i / 2;
-                    for (var y = 0; y < totalMatches; y++) {
-                        var round = tournament.knockout.rounds[totalRounds] || [];
-                        matches.push(round[y] || {});
-                    }
-                    rounds[totalRounds].matches = matches;
-                    totalRounds++;
-                }
-                return rounds;
-            },
         };
-    }; }
+    }; },
 };
 //# sourceMappingURL=getters.js.map
 });
@@ -1456,7 +1628,8 @@ exports.default = {
             return getters.tournament.teams;
         },
         totalTeams: function (state, getters) {
-            return getters.teams.length;
+            if (getters.teams)
+                return getters.teams.length;
         },
         matchList: function (state, getters) {
             return getters.tournament.matches;
@@ -1493,9 +1666,33 @@ exports.default = {
             else {
                 tournament.teams[index] = team;
             }
-        }
+        },
+        setProgress: function (state, _a) {
+            var tournament = _a.tournament, page = _a.page;
+            tournament.page = page;
+        },
     },
     actions: {
+        set: function (_a, tournamentId) {
+            var commit = _a.commit;
+            commit('set', tournamentId);
+            commit('league/set', tournamentId, {
+                root: true
+            });
+            commit('knockout/set', tournamentId, {
+                root: true
+            });
+        },
+        reset: function (_a) {
+            var commit = _a.commit;
+            commit('reset');
+            commit('league/reset', null, {
+                root: true
+            });
+            commit('knockout/reset', null, {
+                root: true
+            });
+        },
         updateDetails: function (_a, details) {
             var commit = _a.commit, state = _a.state, rootState = _a.rootState;
             var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
@@ -1525,10 +1722,265 @@ exports.default = {
                     team: team
                 });
             }
-        }
+        },
+        setProgress: function (_a, page) {
+            var state = _a.state, getters = _a.getters, commit = _a.commit;
+            var tournament = getters.tournament;
+            commit('setProgress', {
+                tournament: tournament,
+                page: page
+            });
+        },
     }
 };
 //# sourceMappingURL=current-tournament.js.map
+});
+___scope___.file("store/modules/league.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var config_1 = require("../../config");
+exports.default = {
+    namespaced: true,
+    state: {
+        id: undefined
+    },
+    getters: {
+        id: function (state) {
+            return state.id;
+        },
+        tournament: function (state, getters, rootState, rootGetters) {
+            return rootGetters.tournamentById(state.id);
+        },
+        league: function (state, getters) {
+            if (getters.tournament)
+                return getters.tournament.league;
+        },
+        matches: function (state, getters) {
+            if (getters.league)
+                return getters.league.matches;
+        },
+        completed: function (state, getters) {
+            if (getters.league)
+                return getters.league.done;
+        },
+        table: function (state, getters) {
+            if (getters.league)
+                return getters.league.table;
+        },
+    },
+    mutations: {
+        set: function (state, tournamentId) {
+            state.id = tournamentId;
+        },
+        reset: function (state) {
+            state.id = undefined;
+        },
+        complete: function (state, tournament) {
+            tournament.league.done = true;
+        },
+        updateMatchScore: function (state, _a) {
+            var tournament = _a.tournament, matchIndex = _a.matchIndex, match = _a.match;
+            if (matchIndex > -1) {
+                tournament.league.matches[matchIndex] = match;
+            }
+        },
+        addMatches: function (state, _a) {
+            var tournament = _a.tournament, matches = _a.matches;
+            tournament.league.matches = matches;
+        },
+        updateTable: function (state, _a) {
+            var tournament = _a.tournament, table = _a.table;
+            tournament.league.table = table;
+        }
+    },
+    actions: {
+        complete: function (_a) {
+            var commit = _a.commit, getters = _a.getters;
+            var tournament = getters.tournament;
+            commit('complete', tournament);
+        },
+        updateMatchScore: function (_a, match) {
+            var commit = _a.commit, getters = _a.getters;
+            var tournament = getters.tournament;
+            var matchIndex = tournament.league.matches.findIndex(function (m) { return m.id === match.id; });
+            commit('updateMatchScore', { tournament: tournament, matchIndex: matchIndex, match: match });
+        },
+        addMatches: function (_a, matches) {
+            var commit = _a.commit, getters = _a.getters;
+            var tournament = getters.tournament;
+            commit('addMatches', { tournament: tournament, matches: matches });
+        },
+        updateTable: function (_a) {
+            var commit = _a.commit, getters = _a.getters;
+            var tournament = getters.tournament;
+            var completedMatches = tournament.league.matches.filter(function (match) {
+                return match.state === config_1.matchStates.DONE;
+            });
+            var table = [];
+            tournament.teams.forEach(function (team) {
+                table.push({
+                    id: team.id,
+                    club: team.club,
+                    player: team.player,
+                    stats: {
+                        won: 0,
+                        draw: 0,
+                        lost: 0,
+                        played: 0,
+                        goalsFor: 0,
+                        goalsAgainst: 0,
+                        goalDifference: 0,
+                        points: 0,
+                    }
+                });
+            });
+            completedMatches.forEach(function (match) {
+                var homeIndex = table.findIndex(function (team) {
+                    return team.id === match.home.id;
+                });
+                var awayIndex = table.findIndex(function (team) {
+                    return team.id === match.away.id;
+                });
+                table[homeIndex].stats.goalsFor += match.home.score;
+                table[homeIndex].stats.goalsAgainst += match.away.score;
+                table[awayIndex].stats.goalsFor += match.away.score;
+                table[awayIndex].stats.goalsAgainst += match.home.score;
+                table[homeIndex].stats.played += 1;
+                table[awayIndex].stats.played += 1;
+                table[homeIndex].stats.goalDifference = table[homeIndex].stats.goalsFor - table[homeIndex].stats.goalsAgainst;
+                table[awayIndex].stats.goalDifference = table[awayIndex].stats.goalsFor - table[awayIndex].stats.goalsAgainst;
+                switch (match.winner) {
+                    case config_1.matchWinner.HOME:
+                        table[homeIndex].stats.won += 1;
+                        table[homeIndex].stats.points += 3;
+                        table[awayIndex].stats.lost += 1;
+                        break;
+                    case config_1.matchWinner.AWAY:
+                        table[awayIndex].stats.won += 1;
+                        table[awayIndex].stats.points += 3;
+                        table[homeIndex].stats.lost += 1;
+                        break;
+                    case config_1.matchWinner.TIE:
+                        table[homeIndex].stats.draw += 1;
+                        table[homeIndex].stats.points += 1;
+                        table[awayIndex].stats.draw += 1;
+                        table[awayIndex].stats.points += 1;
+                        break;
+                }
+            });
+            commit('updateTable', { tournament: tournament, table: table });
+        },
+        updateMatch: function (_a, match) {
+            var commit = _a.commit, dispatch = _a.dispatch, state = _a.state;
+            dispatch('updateMatchScore', match);
+            dispatch('updateTable');
+        },
+    }
+};
+//# sourceMappingURL=league.js.map
+});
+___scope___.file("store/modules/knockout/index.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var getters_1 = require("./getters");
+var actions_1 = require("./actions");
+var mutations_1 = require("./mutations");
+exports.default = {
+    namespaced: true,
+    state: {
+        id: undefined
+    },
+    getters: getters_1.default,
+    mutations: mutations_1.default,
+    actions: actions_1.default
+};
+//# sourceMappingURL=index.js.map
+});
+___scope___.file("store/modules/knockout/getters.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    id: function (state) {
+        return state.id;
+    },
+    tournament: function (state, getters, rootState, rootGetters) {
+        return rootGetters.tournamentById(state.id);
+    },
+    ko: function (state, getters) {
+        return getters.tournament.knockout;
+    },
+    rounds: function (state, getters) {
+        if (getters.ko)
+            return getters.ko.rounds;
+    },
+};
+//# sourceMappingURL=getters.js.map
+});
+___scope___.file("store/modules/knockout/actions.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var match_1 = require("../../../helpers/match");
+var knockout_1 = require("../../../helpers/knockout");
+exports.default = {
+    generate: function (_a) {
+        var commit = _a.commit, getters = _a.getters;
+        var tournament = getters.tournament;
+        var teams = tournament.teams;
+        var shuffeledTeams = JSON.parse(JSON.stringify(teams.sort(function (a, b) { return 0.5 - Math.random(); })));
+        var totalRounds = knockout_1.calculateTotalRounds(teams.length);
+        var rounds = Array.from({ length: totalRounds }).map(function (round, i) {
+            var matches = teams.length / Math.pow(2, totalRounds - (i + 1));
+            // create empty matches
+            return Array.from({ length: matches / 2 }).map(function (i) { return ([match_1.generateMatch({}, {})]); });
+        });
+        rounds.reverse();
+        for (var i = 0; i < rounds[0].length; i++) {
+            var teamA = shuffeledTeams.shift();
+            var teamB = shuffeledTeams.shift();
+            rounds[0][i] = match_1.generateMatch(teamA, teamB);
+        }
+        commit('generate', {
+            tournament: tournament,
+            rounds: rounds
+        });
+    }
+};
+//# sourceMappingURL=actions.js.map
+});
+___scope___.file("helpers/match.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function generateMatch(teamA, teamB) {
+    return {
+        home: teamA,
+        away: teamB
+    };
+}
+exports.generateMatch = generateMatch;
+//# sourceMappingURL=match.js.map
+});
+___scope___.file("store/modules/knockout/mutations.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    set: function (state, tournamentId) {
+        state.id = tournamentId;
+    },
+    reset: function (state) {
+        state.id = undefined;
+    },
+    generate: function (state, _a) {
+        var tournament = _a.tournament, rounds = _a.rounds;
+        tournament.knockout.rounds = rounds;
+    }
+};
+//# sourceMappingURL=mutations.js.map
 });
 ___scope___.file("style/style.css", function(exports, require, module, __filename, __dirname){
 
@@ -1538,7 +1990,7 @@ require("fuse-box-css")("style/style.css", "@import url('https://fonts.googleapi
 ___scope___.file("components.css", function(exports, require, module, __filename, __dirname){
 
 
-require("fuse-box-css")("components.css", "\n.matches[data-v-5ee00795] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n\n.logo[data-v-dd6e56bd] {\n  --logo-size: 30px;\n  bottom: 5px;\n  fill: var(--color-white);\n  height: var(--logo-size);\n  right: 10px;\n  position: absolute;\n  width: var(--logo-size);\n}\n.logo circle[data-v-dd6e56bd] {\n  animation-duration: 2s;\n  animation-fill-mode: backwards;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-play-state: paused;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(1) {\n  animation-delay: 1s;\n  animation-name: bubble1-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(2) {\n  animation-delay: 1.5s;\n  animation-name: bubble2-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(3) {\n  animation-name: bubble3-data-v-dd6e56bd;\n}\n.logo:hover circle[data-v-dd6e56bd] {\n  animation-play-state: running;\n}\n@keyframes bubble1-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(10%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble2-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(20%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble3-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(30%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-10%);\n}\n}\n\n.match[data-v-ca9d0d25] {\n  background-color: white;\n  display: grid;\n  grid-template-columns: 2fr 1fr 2fr;\n  height: 100px;\n  padding: 20px;\n}\n.match--playing .match__playing[data-v-ca9d0d25],\n.match--playing .match__score--input[data-v-ca9d0d25],\n.match--playing .match__button--end[data-v-ca9d0d25] {\n  display: block;\n}\n.match--playing .match__button--start[data-v-ca9d0d25] {\n  display: none;\n}\n.match--disabled[data-v-ca9d0d25] {\n  opacity: 0.25;\n}\n.match--disabled .match__button[data-v-ca9d0d25],\n  .match--disabled .match__score[data-v-ca9d0d25] {\n    display: none;\n}\n.match--done[data-v-ca9d0d25] {\n  background-color: limegreen;\n  color: white;\n}\n.match--done .match__score[data-v-ca9d0d25] {\n    color: white;\n}\n.match--done .match__side--loser .match__team[data-v-ca9d0d25] {\n    opacity: 0.5;\n}\n.match--done .match__button[data-v-ca9d0d25],\n  .match--done .match__playing[data-v-ca9d0d25] {\n    display: none;\n}\n.match--done .match__score[data-v-ca9d0d25],\n  .match--done .match__divider[data-v-ca9d0d25] {\n    display: block;\n}\n.match__center[data-v-ca9d0d25] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  font-size: 12px;\n  justify-content: center;\n}\n.match__button[data-v-ca9d0d25] {\n  background-color: transparent;\n  color: limegreen;\n  cursor: pointer;\n  border: 1px solid limegreen;\n  border-radius: 5px;\n  padding: 4px;\n}\n.match__button--end[data-v-ca9d0d25] {\n  border: none;\n  color: #999;\n  display: none;\n  margin-top: 10px;\n  text-decoration: underline;\n}\n.match__divider[data-v-ca9d0d25] {\n  display: none;\n  font-size: 40px;\n  font-weight: 300;\n}\n.match__playing[data-v-ca9d0d25] {\n  color: red;\n  display: none;\n  position: relative;\n}\n.match__playing[data-v-ca9d0d25]::after {\n    animation-name: move-data-v-ca9d0d25;\n    animation-duration: 0.5s;\n    animation-timing-function: linear;\n    animation-iteration-count: infinite;\n    animation-direction: alternate;\n    background-color: currentColor;\n    border-radius: 50%;\n    content: \"\";\n    display: block;\n    height: 3px;\n    right: -10px;\n    position: absolute;\n    top: 50%;\n    width: 3px;\n}\n.math__side[data-v-ca9d0d25] {\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  text-align: left;\n}\n.match__side--away[data-v-ca9d0d25] {\n  flex-direction: row-reverse;\n  text-align: right;\n}\n.match__team[data-v-ca9d0d25] {\n  font-size: 20px;\n  font-weight: 300;\n}\n.match__player[data-v-ca9d0d25] {\n  font-size: 12px;\n  line-height: 20px;\n  opacity: 0.5;\n}\n.match__score[data-v-ca9d0d25],\n.match__score--input[data-v-ca9d0d25] {\n  display: none;\n  color: limegreen;\n  font-size: 40px;\n  font-weight: 100;\n  text-align: center;\n  width: 100px;\n}\n.match__score[data-v-ca9d0d25]:focus,\n  .match__score--input[data-v-ca9d0d25]:focus {\n    outline: none;\n}\n@keyframes move-data-v-ca9d0d25 {\nfrom {\n    transform: translateY(-200%);\n}\nto {\n    transform: translateY(200%);\n}\n}\n\n.knockout-match__club[data-v-15b41224] {\n  background-color: #fff;\n  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);\n  height: 30px;\n  margin: 5px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px 10px;\n}\n.knockout-match__score[data-v-15b41224] {\n  margin-left: 5px;\n}\n.knockout-match__penalty-score[data-v-15b41224] {\n  font-size: 13px;\n  color: lightgrey;\n  margin-left: 5px;\n}");
+require("fuse-box-css")("components.css", "\n.logo[data-v-dd6e56bd] {\n  --logo-size: 30px;\n  bottom: 5px;\n  fill: var(--color-white);\n  height: var(--logo-size);\n  right: 10px;\n  position: absolute;\n  width: var(--logo-size);\n}\n.logo circle[data-v-dd6e56bd] {\n  animation-duration: 2s;\n  animation-fill-mode: backwards;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-play-state: paused;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(1) {\n  animation-delay: 1s;\n  animation-name: bubble1-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(2) {\n  animation-delay: 1.5s;\n  animation-name: bubble2-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(3) {\n  animation-name: bubble3-data-v-dd6e56bd;\n}\n.logo:hover circle[data-v-dd6e56bd] {\n  animation-play-state: running;\n}\n@keyframes bubble1-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(10%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble2-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(20%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble3-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(30%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-10%);\n}\n}\n\n.match[data-v-ca9d0d25] {\n  background-color: white;\n  display: grid;\n  grid-template-columns: 2fr 1fr 2fr;\n  height: 100px;\n  padding: 20px;\n}\n.match--playing .match__playing[data-v-ca9d0d25],\n.match--playing .match__score--input[data-v-ca9d0d25],\n.match--playing .match__button--end[data-v-ca9d0d25] {\n  display: block;\n}\n.match--playing .match__button--start[data-v-ca9d0d25] {\n  display: none;\n}\n.match--disabled[data-v-ca9d0d25] {\n  opacity: 0.25;\n}\n.match--disabled .match__button[data-v-ca9d0d25],\n  .match--disabled .match__score[data-v-ca9d0d25] {\n    display: none;\n}\n.match--done[data-v-ca9d0d25] {\n  background-color: limegreen;\n  color: white;\n}\n.match--done .match__score[data-v-ca9d0d25] {\n    color: white;\n}\n.match--done .match__side--loser .match__team[data-v-ca9d0d25] {\n    opacity: 0.5;\n}\n.match--done .match__button[data-v-ca9d0d25],\n  .match--done .match__playing[data-v-ca9d0d25] {\n    display: none;\n}\n.match--done .match__score[data-v-ca9d0d25],\n  .match--done .match__divider[data-v-ca9d0d25] {\n    display: block;\n}\n.match__center[data-v-ca9d0d25] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  font-size: 12px;\n  justify-content: center;\n}\n.match__button[data-v-ca9d0d25] {\n  background-color: transparent;\n  color: limegreen;\n  cursor: pointer;\n  border: 1px solid limegreen;\n  border-radius: 5px;\n  padding: 4px;\n}\n.match__button--end[data-v-ca9d0d25] {\n  border: none;\n  color: #999;\n  display: none;\n  margin-top: 10px;\n  text-decoration: underline;\n}\n.match__divider[data-v-ca9d0d25] {\n  display: none;\n  font-size: 40px;\n  font-weight: 300;\n}\n.match__playing[data-v-ca9d0d25] {\n  color: red;\n  display: none;\n  position: relative;\n}\n.match__playing[data-v-ca9d0d25]::after {\n    animation-name: move-data-v-ca9d0d25;\n    animation-duration: 0.5s;\n    animation-timing-function: linear;\n    animation-iteration-count: infinite;\n    animation-direction: alternate;\n    background-color: currentColor;\n    border-radius: 50%;\n    content: \"\";\n    display: block;\n    height: 3px;\n    right: -10px;\n    position: absolute;\n    top: 50%;\n    width: 3px;\n}\n.math__side[data-v-ca9d0d25] {\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  text-align: left;\n}\n.match__side--away[data-v-ca9d0d25] {\n  flex-direction: row-reverse;\n  text-align: right;\n}\n.match__team[data-v-ca9d0d25] {\n  font-size: 20px;\n  font-weight: 300;\n}\n.match__player[data-v-ca9d0d25] {\n  font-size: 12px;\n  line-height: 20px;\n  opacity: 0.5;\n}\n.match__score[data-v-ca9d0d25],\n.match__score--input[data-v-ca9d0d25] {\n  display: none;\n  color: limegreen;\n  font-size: 40px;\n  font-weight: 100;\n  text-align: center;\n  width: 100px;\n}\n.match__score[data-v-ca9d0d25]:focus,\n  .match__score--input[data-v-ca9d0d25]:focus {\n    outline: none;\n}\n@keyframes move-data-v-ca9d0d25 {\nfrom {\n    transform: translateY(-200%);\n}\nto {\n    transform: translateY(200%);\n}\n}\n\n.matches[data-v-5ee00795] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n\n.bracket[data-v-b08d76a6] {\n  padding: 10px;\n  box-sizing: border-box;\n  min-height: calc(100vh - 136px);\n  color: #2c7399;\n  font-family: \"Roboto Condensed\", sans-serif;\n}\n.matches[data-v-b08d76a6] {\n  display: grid;\n  grid-gap: 10px;\n  grid-auto-columns: 1fr;\n  align-content: space-around;\n}\n.round h1[data-v-b08d76a6] {\n  font-size: 20px;\n  margin: 5px 0;\n  text-align: center;\n}\n.round--right h1[data-v-b08d76a6] {\n  display: none;\n}\n.club[data-v-b08d76a6] {\n  background-color: #fff;\n  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);\n  height: 30px;\n  margin: 5px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px 10px;\n}\n.club > span[data-v-b08d76a6]:nth-child(2) {\n    margin-left: 5px;\n}\n.club span > span[data-v-b08d76a6] {\n    font-size: 13px;\n    color: lightgrey;\n}\n.winner[data-v-b08d76a6] {\n  position: relative;\n  margin: 10px auto 0;\n  font-size: 20px;\n}\n.winner span[data-v-b08d76a6] {\n    color: goldenrod;\n    text-align: center;\n}\n@media screen and (min-width: 768px) {\n.bracket[data-v-b08d76a6] {\n    display: grid;\n    grid-auto-columns: minmax(50px, 1fr);\n    grid-template-rows: 1fr minmax(1fr, 200px);\n    grid-template-areas: \"round1-left round1-right\" \"round2-left round2-right\" \"round3-left round3-right\" \"round4-left round4-right\" \"round5 .\";\n    grid-gap: 10px;\n}\n.round[data-v-b08d76a6] {\n    display: grid;\n    grid-template-rows: 100px 1fr;\n}\n.round h1[data-v-b08d76a6] {\n      align-self: start;\n}\n.round--right h1[data-v-b08d76a6] {\n    display: block;\n}\n.round1.round--left[data-v-b08d76a6] {\n    grid-area: round1-left;\n}\n.round1.round--right[data-v-b08d76a6] {\n    grid-area: round1-right;\n}\n.round2.round--left[data-v-b08d76a6] {\n    grid-area: round2-left;\n}\n.round2.round--right[data-v-b08d76a6] {\n    grid-area: round2-right;\n}\n.round3.round--left[data-v-b08d76a6] {\n    grid-area: round3-left;\n}\n.round3.round--right[data-v-b08d76a6] {\n    grid-area: round3-right;\n}\n.round4.round--left[data-v-b08d76a6] {\n    grid-area: round4-left;\n}\n.round4.round--right[data-v-b08d76a6] {\n    grid-area: round4-right;\n}\n.round5[data-v-b08d76a6] {\n    grid-area: round5;\n}\n}\n@media screen and (min-width: 1640px) {\n.bracket[data-v-b08d76a6] {\n    grid-auto-columns: minmax(50px, 1fr);\n}\n.bracket--1[data-v-b08d76a6] {\n    grid-template-areas: \"round1\";\n}\n.bracket--2[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2 round1-right\";\n}\n.bracket--3[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3 round2-right round1-right\";\n}\n.bracket--4[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3-left round4 round3-right round2-right round1-right\";\n}\n.bracket--5[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3-left round4-left round5 round4-right round3-right round2-right round1-right\";\n}\n.round.finals .matches[data-v-b08d76a6] {\n    align-content: center;\n}\n}\n\n.matches[data-v-5f955cd3] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n\n.knockout-match__club[data-v-15b41224] {\n  background-color: #fff;\n  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);\n  height: 30px;\n  margin: 5px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px 10px;\n}\n.knockout-match__score[data-v-15b41224] {\n  margin-left: 5px;\n}\n.knockout-match__penalty-score[data-v-15b41224] {\n  font-size: 13px;\n  color: lightgrey;\n  margin-left: 5px;\n}");
 });
 return ___scope___.entry = "main.js";
 });
