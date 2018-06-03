@@ -15,12 +15,23 @@ export default {
         done: false
       },
       knockout: {
-        rounds: []
+        rounds: [],
+        teams: [],
+        done: false,
+        winner: undefined,
+        activeRound: {
+          id: 0,
+          state: 0,
+        }
       },
-        groupstage: {},
-      };
+      groupstage: {
+        groups: {},
+        proceedingTeams: [],
+        done: false,
+      },
+    };
 
-      state.tournaments.push(t);
+    state.tournaments.push(t);
   },
 
   setProgress(state, { slug, page }) {
@@ -70,4 +81,3 @@ export default {
 
   },
 }
-

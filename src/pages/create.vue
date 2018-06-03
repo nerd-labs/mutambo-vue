@@ -13,7 +13,7 @@
               v-btn-toggle(v-model="type")
                   v-btn(color="primary white--text" flat value="knockout") Knockout
                   v-btn(color="primary white--text" flat value="league") League
-                  v-btn(color="primary white--text" flat value="groupstage-knockout") Groupstate & Knockout
+                  v-btn(color="primary white--text" flat value="groupstage") Groupstage & Knockout
 
           v-flex(xs6 offset-xs3)
               v-btn(color="primary" @click="submit" :disabled="!valid") Submit

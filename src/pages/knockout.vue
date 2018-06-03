@@ -1,12 +1,17 @@
 <template lang="pug">
     div
-      .bracket(:class="totalRoundsClass")
-        .round(v-for="round in internalRounds" :class="round.classes")
-          h2 {{ getNameOfRound(round) }}
+      v-btn.next-round(color="primary white--text" large @click="startRound" v-if="startRoundState") Start next round
+
+      v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+        mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
+        v-btn(v-if="completeRound" @click="complete" color="primary white--text") Complete Round
+
+      .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
+        .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
+          h5 {{ getNameOfRound(round) }}
           .matches
             mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
-            .winner(v-if="getNameOfRound(round) === 'Final'")
-                span 🏆 As Roma 🏆
+      .winner(v-if="winner") 🏆 {{ winner.player }} ({{winner.club}}) 🏆
 </template>
 
 <script>
@@ -17,19 +22,76 @@ import { getRoundName } from '../helpers/knockout'
 export default {
   data: () => ({
     internalRounds: [],
+    view: undefined,
+    completeRound: false,
   }),
 
-  computed: {
+  beforeMount() {
+    this.splitRounds();
+  },
 
+  created() {
+    this.view = this.startRoundState || this.tournamentComplete ? 'tree' : 'matches';
+  },
+
+  computed: {
     ...mapGetters({
       rounds: 'knockout/rounds',
+      activeRound: 'knockout/round',
+      activeRoundId: 'knockout/activeRoundId',
+      activeRoundState: 'knockout/activeRoundState',
+      winner: 'knockout/winner',
+      tournamentComplete: 'knockout/complete'
     }),
 
     totalRoundsClass() {
       return `bracket--${this.rounds.length}`;
-    }
+    },
+
+    startRoundState() {
+      return this.activeRoundState === 0;
+    },
+
   },
-  beforeMount() {
+
+  watch: {
+      activeRoundId: function (val) {
+        this.completeRound = false;
+         this.splitRounds();
+       }
+  },
+
+  methods: {
+    getNameOfRound(round) {
+      return getRoundName(round.totalTeams);
+    },
+
+    matchUpdate(event) {
+      this.$store.dispatch("knockout/updateMatch", event.match);
+    },
+
+    allMatchesPlayed() {
+      this.completeRound = true;
+    },
+
+    complete() {
+      this.view = 'tree';
+      this.$store.dispatch('knockout/completeRound');
+    },
+
+    startRound() {
+      this.view = 'matches';
+      this.$store.dispatch('knockout/startRound');
+    },
+
+    isInactive(round) {
+      return round > this.activeRoundId ? 'round--inactive' : '';
+    },
+
+  splitRounds() {
+    this.internalRounds = [];
+
+    // TODO :: inactive state does not get updated on next round...
     for (let i = 0; i < this.rounds.length; i++) {
       const round = this.rounds[i] || [];
 
@@ -39,14 +101,14 @@ export default {
 
         this.internalRounds.push({
           matches: round.slice(0, half),
-          round: i + 1,
+          round: i,
           totalTeams: round.length,
           classes: `round${i + 1} round--left`
         });
 
         this.internalRounds.push({
           matches: round.slice(half, full),
-          round: i + 1,
+          round: i,
           totalTeams: round.length,
           classes: `round${i + 1} round--right`
         });
@@ -54,27 +116,36 @@ export default {
         this.internalRounds.push({
           matches: round,
           totalTeams: round.length,
-          round: i + 1
+          round: i,
         });
       }
     }
-  },
-
-  methods: {
-    getNameOfRound(round) {
-      return getRoundName(round.totalTeams);
-    }
+  }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
 .bracket {
   padding: 10px;
   box-sizing: border-box;
   min-height: calc(100vh - 136px); // height of header, footer and padding
   color: #2c7399;
   font-family: "Roboto Condensed", sans-serif;
+}
+
+.round--inactive {
+  opacity: 0.5;
+}
+
+.next-round {
+  position: absolute;
+top: 70%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 4;
+margin: 0 !important;
 }
 
 .matches {
@@ -96,25 +167,6 @@ export default {
   }
 }
 
-.club {
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  height: 30px;
-  margin: 5px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 10px;
-
-  & > span:nth-child(2) {
-    margin-left: 5px;
-  }
-
-  span > span {
-    font-size: 13px;
-    color: lightgrey;
-  }
-}
 
 .winner {
   position: relative;
@@ -143,7 +195,7 @@ export default {
 
   .round {
     display: grid;
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 30px 1fr;
 
     h1 {
       align-self: start;
