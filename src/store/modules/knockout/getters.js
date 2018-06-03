@@ -15,6 +15,10 @@ export default {
     if (getters.ko) return getters.ko.rounds;
   },
 
+  teams: (state, getters) => {
+    if (getters.ko) return getters.ko.teams;
+  },
+
   round: (state, getters) => {
     if (getters.ko) return getters.ko.rounds[getters.activeRoundId];
   },
@@ -36,7 +40,6 @@ export default {
       const winningTeam = getters.tournament.teams.find(team => {
           return team.id === getters.ko.winner;
       });
-      console.log('winning', winningTeam);
       return winningTeam;
     }
   },

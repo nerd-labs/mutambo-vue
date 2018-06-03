@@ -38,10 +38,12 @@ export default {
 
   computed: {
     ...mapGetters({
+      slug: 'currentTournament/slug',
       teams: 'currentTournament/teams',
       name: 'currentTournament/name',
       numberOfProceedingPlayers: 'currentTournament/numberOfProceedingPlayers',
       groups: 'groupstage/groups',
+      proceedingTeams: 'groupstage/proceedingTeams',
     }),
 
     done () {
@@ -68,7 +70,6 @@ export default {
     },
 
     endGroupstage() {
-    console.log(this.numberOfProceedingPlayers);
       const qualifiedPositions = Math.floor(this.numberOfProceedingPlayers / this.groups.length);
 
       const teamsToProceed = [];
@@ -96,7 +97,11 @@ export default {
         teamIds: teamsToProceed
       });
 
-      //- this.$router.push({`/results/${this.$route.params.slug}`, params: { teams: teamsToProceed }});
+      this.$store.dispatch("knockout/generate", {
+        teams: this.proceedingTeams
+      });
+
+      this.$router.push(`/knockout/${this.slug}`);
     },
 
     getRemainingTeams(teamsToExit, numberOfTeamsToSelect) {
