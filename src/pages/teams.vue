@@ -63,6 +63,11 @@ export default {
 </script>
 
 <style scoped>
+
+  .teams .page__content {
+    flex-direction: row;
+  }
+
   .create-teams {
     align-items: center;
     display: flex;

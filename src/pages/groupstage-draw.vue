@@ -1,21 +1,40 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ name }}
+  //- div
+  //-   v-container(grid-list-md)
+  //-     h2.display-2.accent--text.mb-5 {{ name }}
+  //-
+  //-     h1.loading(v-show="loading && !showAllTeams") 🥁
+  //-     h1.name(v-show="!loading && !showAllTeams") {{currentTeam.club}} ({{currentTeam.player}})
+  //-
+  //-     .groups(v-bind:class="{'groups--active': showAllTeams}")
+  //-       .group(v-for="group in animatedGroups")
+  //-         h3 {{group.name}}
+  //-
+          //- .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}")
+          //-   | {{team.club}} ({{team.player}})
 
+
+  .page.groupstage-draw
+    .page__header.u-background--gradient
+      h1.page__title(@click="goToHome()") Mutambo
+      h2.page__subtitle {{ name }}
+
+    .page__content
       h1.loading(v-show="loading && !showAllTeams") 🥁
       h1.name(v-show="!loading && !showAllTeams") {{currentTeam.club}} ({{currentTeam.player}})
+      h1.name(v-show="done") 🦄 Draw finished 🦄
 
       .groups(v-bind:class="{'groups--active': showAllTeams}")
         .group(v-for="group in animatedGroups")
           h3 {{group.name}}
 
           .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}")
-            | {{team.club}} ({{team.player}})
+            p {{team.club}} ({{team.player}})
 
-      v-btn(color="primary" @click="startGroupstage" v-if="done") Start groupstage
-      v-btn(color="primary" @click="skip" v-if="!done") Skip
-
+      a.button.button--tertiary(@click="startGroupstage" v-if="done")
+        | Start groupstage
+      a.button.button--tertiary(@click="skip" v-if="!done")
+        | Skip
 
 </template>
 
@@ -56,6 +75,10 @@ export default {
   },
 
   methods: {
+    goToHome() {
+      this.$router.push('/');
+    },
+
     getNumberOfGroups() {
       const numberOfTeams = this.teams.length;
       let numberOfGroups = numberOfTeams / 4;
@@ -177,6 +200,11 @@ export default {
     }
 }
 
+
+.groupstage-draw .page__content {
+  justify-content: space-between;
+}
+
 .groups {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -187,25 +215,39 @@ export default {
   margin-bottom: 20px;
 }
 
+.group h3 {
+  margin-bottom: 15px;
+}
+
+.loading, .name {
+  align-items: center;
+  display: flex;
+  height: 150px;
+}
+
 .loading {
   animation-name: drumroll;
   animation-duration: .2s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  font-size: 144px;
 }
 
 .team {
   opacity: 0;
   transition: opacity .2s linear;
+  margin-bottom: 10px;
+}
+
+.name {
+  color: var(--light-sea-green);
 }
 
 .team--active {
   opacity: 1;
 }
 
-.groups--active {
-  .team {
+.groups--active .team {
     opacity: 1;
-  }
 }
 </style>
