@@ -338,22 +338,30 @@ input {
   min-height: 150px;
 }
 
+.group__team {
+  flex-basis: 33%
+}
+
+.group__team:last-child {
+  text-align: right;
+}
 
 .team__name {
   color: var(--greyish-brown);
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 5px;
 }
 
 .team__player {
   color: var(--warm-grey);
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .group__info {
   align-items: center;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .group__live {
@@ -399,7 +407,7 @@ input {
   top: 0;
 }
 
-.group__start, group__end {
+.group__start, .group__end {
   font-size: 12px;
   text-decoration: underline;
 }
