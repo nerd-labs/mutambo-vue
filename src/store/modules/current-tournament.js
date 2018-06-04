@@ -67,6 +67,10 @@ export default {
       tournament.details = Object.assign({}, tournament.details, details)
     },
 
+    addEmptyTeams (state, { tournament, teams }) {
+        tournament.teams = teams;
+    },
+
     randomizeTeams (state, { tournament, randomizedTeams }) {
       tournament.teams = randomizedTeams
     },
@@ -127,6 +131,16 @@ export default {
         commit('updateDetails', {
           tournament,
           details
+        })
+      }
+    },
+
+    addEmptyTeams ({ commit, state, rootState }, teams) {
+      const tournament = rootState.tournaments.find(t => t.id === state.id)
+      if (tournament) {
+        commit('addEmptyTeams', {
+          tournament,
+          teams
         })
       }
     },

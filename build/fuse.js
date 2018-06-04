@@ -47,9 +47,6 @@ Sparky.task("config", () => {
           engine: 'pug'
         }),
         style: [
-          SassPlugin({
-            importer: true
-          }),
           CSSResourcePlugin(),
           CSSPlugin({
             group: 'components.css',
@@ -86,7 +83,3 @@ Sparky.task("default", ["clean", "watch-assets", "watch-style", "config"], () =>
 Sparky.task("dist", ["clean", "copy-assets", "copy-style", "config"], () => {
   return fuse.run();
 });
-
-
-
-

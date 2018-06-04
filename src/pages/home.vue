@@ -1,24 +1,20 @@
 <template lang="pug">
-  div
-    v-btn(color="primary" @click="goToCreate()") Create tournament
+  .page.home.u-background--gradient.u-height--full
+    .page__content
+      h1 Mutambo
+      .button(color="primary" @click="goToCreate()") Create tournament
 
-    br
-    br
-
-    v-list(v-if="tournaments.length")
-      v-container(grid-list-md fluid)
-        v-layout(row wrap justify-space-between)
-          template(v-for="(tournament, index) in tournaments")
-            v-flex(xs12 v-if="index !== 0")
-              .pl-3.pr-3
-                v-divider
-            v-flex(xs12 sm7)
-              v-subheader(@click="goToRoute(tournament.id)")
-                | {{ tournament.name }}
-            v-flex.text-xs-left.text-sm-right(xs12 sm5)
-              v-chip(color='secondary' text-color='white' disabled) {{tournament.type}}
-              v-chip(color='accent' text-color='white' disabled) {{tournament.teams.length}}
-
+      //- .tournament-list(v-if="tournaments.length")
+        .tournament.u-box(v-for="(tournament, index) in tournaments" @click="goToRoute(tournament.id)")
+          h3.tournament__name {{ tournament.name }}
+          .tournament__info
+            .tournament__type
+              span type:
+              | {{ tournament.type }}
+            .tournament__players
+              span players:
+              | {{ tournament.teams.length }}
+          .tournament__icon {{ tournament[tournament.type].done ? '🏆' : '🎮' }}
 </template>
 
 <script>
@@ -49,3 +45,61 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.home {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.tournament-list {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1410px;
+}
+
+.tournament {
+  position: relative;
+  margin: 10px;
+}
+
+.tournament__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 14px;
+  max-width: 80%;
+}
+
+.tournament__info {
+  align-items: center;
+  color: var(--warm-grey);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 70%;
+}
+
+.tournament__info span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.tournament__icon {
+  font-size: 40px;
+  height: 50px;
+  position: absolute;
+  right: 25px;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+}
+</style>

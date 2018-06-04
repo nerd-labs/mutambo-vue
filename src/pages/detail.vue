@@ -1,18 +1,37 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ name }}
+  .page.detail
+    .page__header.u-background--gradient
+      h1.page__title(@click="goToHome()") Mutambo
 
-      v-form(v-model="valid" lazy-validation ref="form")
-        v-layout(row wrap)
-          v-flex(xs6 offset-xs3)
-            v-text-field(label="Number of plays against each team" v-model="numberOfPlays" required :rules="numberOfPlaysRules" type="number")
+    .page__content
+      h3 ⚙️ {{ type }} settings ⚙️
 
-          v-flex(xs6 offset-xs3 v-if="type === 'groupstage'")
-            v-select(:items="numberOfProceedingPlayersOptions" v-model="numberOfProceedingPlayers" label="Number of proceeding players" single-line)
+      template(v-if="type === 'league'")
+        .form__group
+          label Total players
+          input(type='number' v-model="totalPlayers")
+        .form__group
+          label Number of plays against each team
+          input(type='number' v-model="numberOfPlays")
 
-          v-flex(xs6 offset-xs3)
-              v-btn(color="primary" @click="submit" :disabled="!valid") Submit
+      template(v-if="type === 'knockout'")
+        .form__group
+          label Total players
+          select(v-model="totalPlayers")
+            option(v-for="totalPlayers in knockoutTotalPlayerOptions" :value="totalPlayers") {{ totalPlayers }}
+
+      template(v-if="type === 'groupstage'")
+        .form__group
+          label Total players
+          input(type='number' v-model="totalPlayers")
+
+        .form__group
+          label Number of proceeding players
+          select(v-model="numberOfProceedingPlayers")
+            option(v-for="totalPlayers in numberOfProceedingPlayersOptions" :value="totalPlayers") {{ totalPlayers }}
+
+      a.button.button--tertiary(@click="submit")
+        | submit
 </template>
 
 <script>
@@ -20,16 +39,27 @@ import { mapGetters } from "vuex";
 
 export default {
   data: () => ({
-    valid: true,
-    numberOfPlays: 1,
-    numberOfPlaysRules: [
-      v => !!v || "Number of plays is required",
-      v => v >= 1 || "There should be at least 1 play"
-    ],
-
+    totalPlayers: undefined,
+    numberOfPlays: undefined,
     numberOfProceedingPlayers: undefined,
-    numberOfProceedingPlayersOptions: [2, 4, 8, 16, 32],
+    knockoutTotalPlayerOptions: [2, 4, 8, 16, 32],
   }),
+
+  beforeMount() {
+    switch (this.type) {
+      case 'knockout':
+        this.totalPlayers = this.knockoutTotalPlayerOptions[0];
+        break;
+      case 'groupstage':
+          this.totalPlayers = this.knockoutTotalPlayerOptions[1];
+          this.numberOfProceedingPlayers = this.knockoutTotalPlayerOptions[0];
+          break;
+      case 'league':
+          this.totalPlayers = 2;
+          this.numberOfPlays = 1;
+          break;
+    }
+  },
 
   computed: {
     ...mapGetters({
@@ -37,19 +67,40 @@ export default {
       name: "currentTournament/name",
       totalTeams: "currentTournament/totalTeams",
       type: "currentTournament/type",
-    })
+    }),
+
+    numberOfProceedingPlayersOptions() {
+      if (this.type === 'groupstage') {
+        return this.knockoutTotalPlayerOptions.filter(totalPlayers => {
+          return totalPlayers <= this.totalPlayers;
+        });
+      } else {
+        return 0;
+      }
+    },
   },
 
   methods: {
+    goToHome() {
+        this.$router.push('/');
+    },
+
     submit() {
-      if (!this.$refs.form.validate()) {
-        return;
+      // remove from details if undefined :)
+      const details = JSON.parse(JSON.stringify({
+        numberOfPlays: this.numberOfPlays,
+        numberOfProceedingPlayers: this.numberOfProceedingPlayers
+      }));
+
+      if (details) {
+        this.$store.dispatch("currentTournament/updateDetails", details);
       }
 
-      this.$store.dispatch("currentTournament/updateDetails", {
-        numberOfPlays: parseInt(this.numberOfPlays),
-        numberOfProceedingPlayers: this.numberOfProceedingPlayers,
-      });
+      // create array of total players
+      const teams = Array.from({length: this.totalPlayers}).map(() => ({}))
+      if (teams) {
+        this.$store.dispatch("currentTournament/addEmptyTeams", teams);
+      }
 
       this.$router.push(`/teams/${this.slug}`);
     }

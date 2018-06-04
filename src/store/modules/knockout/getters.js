@@ -36,7 +36,7 @@ export default {
   },
 
   winner: (state, getters, rootState) => {
-    if (getters.ko) {
+    if (getters.ko && getters.tournament.teams && getters.tournament.teams.length) {
       const winningTeam = getters.tournament.teams.find(team => {
           return team.id === getters.ko.winner;
       });

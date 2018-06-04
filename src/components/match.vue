@@ -103,10 +103,8 @@ export default {
   }
 };
 </script>
-
+<!--
 <style lang="scss">
-/* scoped broken for nested classes??? */
-
 .match-template {
     position: relative;
 }
@@ -270,4 +268,4 @@ export default {
     transform: translateY(200%);
   }
 }
-</style>
+</style> -->

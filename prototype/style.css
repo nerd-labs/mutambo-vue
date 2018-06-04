@@ -369,6 +369,7 @@ input {
   color: var(--live-red);
   display: flex;
   font-size: 12px;
+  flex-shrink: 0;
 }
 
 .group__live::after {
@@ -409,6 +410,7 @@ input {
 
 .group__start, .group__end {
   font-size: 12px;
+  flex-basis: 33%;
   text-decoration: underline;
 }
 

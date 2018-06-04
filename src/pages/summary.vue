@@ -1,32 +1,44 @@
 <template lang="pug">
-  div
+  //- div
+  //-
+  //-   v-container(grid-list-md)
+  //-       v-layout(row wrap justify-space-between)
+  //-         v-flex(md8 offset-md2)
+  //-           v-card
+  //-             v-card-title.accent.white--text Summary
+  //-             v-card-text
+  //-               v-list
+  //-                 v-list-tile
+  //-                   v-list-tile-content
+  //-                     v-list-tile-title Your tournament will contain {{ totalTeams }} players.
+  //-                 v-list-tile
+  //-                   v-list-tile-content
+  //-                     v-list-tile-title Every player will play with 1 team.
+  //-                 v-list-tile
+  //-                   v-list-tile-content
+  //-                     v-list-tile-title All teams will play {{ numberOfPlays }} {{numberOfPlays > 1 ? 'times' : 'time' }} against all other player's teams.
+  //-                 v-list-tile
+  //-                   v-list-tile-content
+  //-                     v-list-tile-title The tournament will consist of {{ totalFixtures }} fixtures.
+  //-                 v-list-tile
+  //-                   v-list-tile-content
+  //-                     v-list-tile-title It will take ± {{ totalMinutes }} minutes to play all fixtures (6 minutes per half).
+  //-       v-flex(mt-3)
+  //-         v-btn(color="primary" @click="submit")
+  //-           span(v-if="type === 'groupstage'") Start draw
+  //-           span(v-else) Start tournament
 
-    v-container(grid-list-md)
-        v-layout(row wrap justify-space-between)
-          v-flex(md8 offset-md2)
-            v-card
-              v-card-title.accent.white--text Summary
-              v-card-text
-                v-list
-                  v-list-tile
-                    v-list-tile-content
-                      v-list-tile-title Your tournament will contain {{ totalTeams }} players.
-                  v-list-tile
-                    v-list-tile-content
-                      v-list-tile-title Every player will play with 1 team.
-                  v-list-tile
-                    v-list-tile-content
-                      v-list-tile-title All teams will play {{ numberOfPlays }} {{numberOfPlays > 1 ? 'times' : 'time' }} against all other player's teams.
-                  v-list-tile
-                    v-list-tile-content
-                      v-list-tile-title The tournament will consist of {{ totalFixtures }} fixtures.
-                  v-list-tile
-                    v-list-tile-content
-                      v-list-tile-title It will take ± {{ totalMinutes }} minutes to play all fixtures (6 minutes per half).
-        v-flex(mt-3)
-          v-btn(color="primary" @click="submit")
-            span(v-if="type === 'groupstage'") Start draw
-            span(v-else) Start tournament
+  .page.summary
+    .page__header.u-background--gradient
+      h1.page__title(@click="goToHome()") Mutambo
+      h2.page__subtitle {{ name }}
+
+    .page__content
+      //- h3 🤓 A little summary  🤓
+
+      a.button.button--tertiary(@click="submit")
+        span(v-if="type === 'groupstage'") Start draw
+        span(v-else) Start tournament
 </template>
 
  <script>
@@ -35,9 +47,9 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-
     ...mapGetters({
       slug: 'currentTournament/slug',
+      name: 'currentTournament/name',
       teams: 'currentTournament/teams',
       totalTeams: 'currentTournament/totalTeams',
       type: 'currentTournament/type',
@@ -68,6 +80,10 @@ export default {
   },
 
   methods: {
+    goToHome() {
+        this.$router.push('/');
+    },
+
     submit() {
       if (this.type === 'groupstage') {
         this.$router.push(`/${this.type}/draw/${this.slug}`);
