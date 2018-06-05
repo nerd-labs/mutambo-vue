@@ -82,11 +82,16 @@ p.text--large {
 }
 
 .u-box {
-    background-color: var(--white);
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
-    padding: 25px;
-    min-width: 450px;
+  background-color: var(--white);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  padding: 25px;
+  min-width: 450px;
+}
+
+.u-box .form__group {
+  min-width: auto;
+  width: 100%;
 }
 
 
