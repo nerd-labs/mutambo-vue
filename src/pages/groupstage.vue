@@ -1,24 +1,43 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ name }}
+  //- div
+  //-   v-container(grid-list-md)
+  //-     h2.display-2.accent--text.mb-5 {{ name }}
+  //-
+  //-     v-flex.mb-5(xs6 offset-xs3)
+  //-      v-btn-toggle(v-model="view")
+  //-       v-btn(color="primary white--text" flat value="matches") Matches
+  //-       v-btn(color="primary white--text" flat value="table") Table
+  //-
+  //-     v-container(grid-list-md v-for="(group, index) in groups")
+  //-       h3.mb-5 {{ group.name }}
+  //-
+  //-       v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+  //-         mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
+  //-
+  //-       v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'table'")
+  //-         mut-table(:data="results(group)")
+  //-
+  //-     v-btn(v-if="done" @click="endGroupstage") End groupstage
 
-      v-flex.mb-5(xs6 offset-xs3)
-       v-btn-toggle(v-model="view")
-        v-btn(color="primary white--text" flat value="matches") Matches
-        v-btn(color="primary white--text" flat value="table") Table
 
-      v-container(grid-list-md v-for="(group, index) in groups")
+  .page.groupstage
+    .page__header.u-background--gradient
+      h1.page__title(@click="goToHome()") Mutambo
+      h2.page__subtitle {{ name }}
+
+    .page__content
+
+      div(v-for="(group, index) in groups")
         h3.mb-5 {{ group.name }}
 
-        v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+        div(v-if="view === 'matches'")
           mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
 
-        v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'table'")
+        div(v-if="view === 'table'")
           mut-table(:data="results(group)")
 
-      v-btn(v-if="done" @click="endGroupstage") End groupstage
-
+      a.button.button--tertiary(@click="endGroupstage" v-if="done")
+        | End groupstage
 </template>
 
 <script>
@@ -56,6 +75,10 @@ export default {
   },
 
   methods: {
+    goToHome() {
+      this.$router.push('/');
+    },
+
     matchUpdate(index, event) {
       this.$store.dispatch("groupstage/updateMatch", {
         groupIndex: index,

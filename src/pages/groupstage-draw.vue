@@ -1,19 +1,4 @@
 <template lang="pug">
-  //- div
-  //-   v-container(grid-list-md)
-  //-     h2.display-2.accent--text.mb-5 {{ name }}
-  //-
-  //-     h1.loading(v-show="loading && !showAllTeams") 🥁
-  //-     h1.name(v-show="!loading && !showAllTeams") {{currentTeam.club}} ({{currentTeam.player}})
-  //-
-  //-     .groups(v-bind:class="{'groups--active': showAllTeams}")
-  //-       .group(v-for="group in animatedGroups")
-  //-         h3 {{group.name}}
-  //-
-          //- .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}")
-          //-   | {{team.club}} ({{team.player}})
-
-
   .page.groupstage-draw
     .page__header.u-background--gradient
       h1.page__title(@click="goToHome()") Mutambo
@@ -35,7 +20,6 @@
         | Start groupstage
       a.button.button--tertiary(@click="skip" v-if="!done")
         | Skip
-
 </template>
 
 <script>
