@@ -1,31 +1,29 @@
 <template lang="pug">
     div.match-template
-      v-badge.internal-badge(right overlap  color="red" :value="alert" transition="slide-y-reverse-transition")
-        span(slot="badge") Tie is not allowed
-        .match(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}" @click="editMatch")
-          .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
-            .match__team
-              .match__club {{ internalMatch.home.club }}
-              .match__player {{ internalMatch.home.player }}
+      .match.u-box(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}" @click="editMatch")
+        .math__side.match__side--home(:class="{'match__side--winner': internalMatch.winner ===  1, 'match__side--loser': internalMatch.winner === 2}")
+          .match__team
+            .match__club {{ internalMatch.home.club }}
+            .match__player {{ internalMatch.home.player }}
 
-            .match__score {{ internalMatch.home.score }}
+          .match__score {{ internalMatch.home.score }}
 
-            input.match__score--input(type="number" v-model="internalMatch.home.score" min="0")
+          input.match__score--input(type="number" v-model="internalMatch.home.score" min="0")
 
-          .match__center
-            .match__playing live
-            .match__divider -
-            button.match__button.match__button--start(@click="startMatch") start match
-            button.match__button.match__button--end(@click="endMatch") end match
+        .match__center
+          .match__playing live
+          .match__divider -
+          button.match__button.match__button--start(@click="startMatch") start match
+          button.match__button.match__button--end(@click="endMatch") end match
 
-          .math__side.match__side--away(:class="{'match__side--winner': internalMatch.winner ===  2, 'match__side--loser': internalMatch.winner === 1}")
-            .match__team
-              .match__club {{ internalMatch.away.club }}
-              .match__player {{ internalMatch.away.player }}
+        .math__side.match__side--away(:class="{'match__side--winner': internalMatch.winner ===  2, 'match__side--loser': internalMatch.winner === 1}")
+          .match__team
+            .match__club {{ internalMatch.away.club }}
+            .match__player {{ internalMatch.away.player }}
 
-            .match__score {{ internalMatch.away.score }}
+          .match__score {{ internalMatch.away.score }}
 
-            input.match__score--input(type="number" v-model="internalMatch.away.score" min="0")
+          input.match__score--input(type="number" v-model="internalMatch.away.score" min="0")
 </template>
 
 <script>
@@ -103,19 +101,19 @@ export default {
   }
 };
 </script>
-<!--
-<style lang="scss">
+
+<style>
 .match-template {
     position: relative;
 }
 
-.internal-badge .badge__badge {
-  // overwrite with custom css ;)
-  border-radius: 0 !important;
-  right: 0 !important;
-  top: -20px !important;
-  width: 200px !important;
-}
+/* // .internal-badge .badge__badge {
+//   // overwrite with custom css ;)
+//   border-radius: 0 !important;
+//   right: 0 !important;
+//   top: -20px !important;
+//   width: 200px !important;
+// } */
 
 .match {
   background-color: white;
@@ -125,48 +123,46 @@ export default {
   padding: 20px;
 }
 
-.match--playing {
-  .match__playing,
-  .match__score--input,
-  .match__button--end {
-    display: block;
-  }
+.match--playing .match__playing,
+.match--playing .match__score--input,
+.match--playing  .match__button--end {
+  display: block;
+}
 
-  .match__button--start {
-    display: none;
-  }
+.match--playing .match__button--start {
+  display: none;
 }
 
 .match--disabled {
   opacity: 0.25;
+}
 
-  .match__button,
-  .match__score {
+.match--disabled .match__button,
+.match--disabled .match__score {
     display: none;
-  }
 }
 
 .match--done {
   background-color: limegreen;
   color: white;
+}
 
-  .match__score {
-    color: white;
-  }
+.match--done .match__score {
+  color: white;
+}
 
-  .match__side--loser .match__team {
+.match--done .match__side--loser .match__team {
     opacity: 0.5;
-  }
+}
 
-  .match__button,
-  .match__playing {
+.match--done  .match__button,
+.match--done .match__playing {
     display: none;
-  }
+}
 
-  .match__score,
-  .match__divider {
+.match--done  .match__score,
+.match--done .match__divider {
     display: block;
-  }
 }
 
 .match__center {
@@ -204,8 +200,9 @@ export default {
   color: red;
   display: none;
   position: relative;
+}
 
-  &::after {
+.match__playing::after {
     animation-name: move;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -220,7 +217,6 @@ export default {
     position: absolute;
     top: 50%;
     width: 3px;
-  }
 }
 
 .math__side {
@@ -254,10 +250,11 @@ export default {
   font-weight: 100;
   text-align: center;
   width: 100px;
+}
 
-  &:focus {
-    outline: none;
-  }
+.match__score:focus,
+.match__score--input:focus {
+  outline: none;
 }
 
 @keyframes move {
@@ -268,4 +265,4 @@ export default {
     transform: translateY(200%);
   }
 }
-</style> -->
+</style>

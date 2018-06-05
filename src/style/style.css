@@ -35,7 +35,7 @@ body {
 */
 
 
-h1, h2, h3, p, label {
+h1, h2, h3, p, label, span {
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
@@ -62,7 +62,7 @@ h3 {
   text-transform: uppercase;
 }
 
-p, label {
+p, label, span {
   color: var(--warm-grey);
 }
 

@@ -34,11 +34,9 @@
       h2.page__subtitle {{ name }}
 
     .page__content
-      //- h3 🤓 A little summary  🤓
-
       a.button.button--tertiary(@click="submit")
-        span(v-if="type === 'groupstage'") Start draw
-        span(v-else) Start tournament
+        template(v-if="type === 'groupstage'") Start draw
+        template(v-else) Start tournament
 </template>
 
  <script>
