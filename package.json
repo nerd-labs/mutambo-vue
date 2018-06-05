@@ -1,14 +1,18 @@
 {
-  "name": "mutambo",
+  "name": "Mutambo",
   "version": "1.0.0",
   "description": "The Game",
   "author": "WartClaes <wart.claes@gmail.com>",
   "private": true,
+  "main": "main.js",
   "scripts": {
     "fuse": "node build/fuse.js",
+    "build": "node build/fuse.js dist",
     "start": "npm run fuse",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "deploy": "bash deploy.sh"
+    "deploy": "bash deploy.sh",
+    "electron": "npm run build && electron .",
+    "package:mac": "npm run build && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=static/img/logo/appIcon.icns --prune=true --out=release-builds"
   },
   "dependencies": {
     "vue": "^2.5.15",
@@ -29,6 +33,8 @@
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0",
     "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",

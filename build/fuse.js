@@ -19,6 +19,7 @@ const {
 } = require("fuse-box");
 
 let fuse;
+let app;
 
 const DIRS = {
   src: '../src',
@@ -65,28 +66,27 @@ Sparky.task("config", () => {
     ]
   });
 
+  const vendor = fuse.bundle("vendor")
+    .instructions("~ main.js");
+
+  app = fuse.bundle("app")
+    .instructions("> [main.js]");
+
+})
+
+Sparky.task("serve", () => {
   fuse.dev({
     open: true,
     port: 4545
   });
 
-  const vendor = fuse.bundle("vendor")
-    .instructions("~ main.js");
-
-  const app = fuse.bundle("app")
-    .instructions("> [main.js]");
-
   app.watch().hmr();
 })
 
-Sparky.task("default", ["clean", "watch-assets", "watch-style", "config"], () => {
+Sparky.task("default", ["clean", "watch-assets", "watch-style", "config", "serve"], () => {
   return fuse.run();
 });
 
 Sparky.task("dist", ["clean", "copy-assets", "copy-style", "config"], () => {
   return fuse.run();
 });
-
-
-
-
