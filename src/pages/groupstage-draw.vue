@@ -5,7 +5,9 @@
 
     .page__content
       h1.loading(v-show="loading && !showAllTeams") 🥁
-      h1.name(v-show="!loading && !showAllTeams") {{currentTeam.club}} ({{currentTeam.player}})
+      .name(v-show="!loading && !showAllTeams && !done")
+        h1 {{currentTeam.club}}
+        .player {{currentTeam.player}}
       h1.name(v-show="done") 🦄 Draw finished 🦄
 
       .groups(v-bind:class="{'groups--active': showAllTeams}")
@@ -139,7 +141,9 @@ export default {
         }
 
         if (currentGroupIndex >= this.groups.length) {
-          this.done = true;
+          setTimeout(() => {
+            this.done = true;
+          }, ANIMATION_TIME);
           return;
         }
 
@@ -200,10 +204,13 @@ export default {
   margin-bottom: 15px;
 }
 
-.loading, .name {
+.loading,
+.name {
   align-items: center;
   display: flex;
+  flex-direction: column;
   height: 150px;
+  justify-content: center;
 }
 
 .loading {
@@ -220,8 +227,15 @@ export default {
   margin-bottom: 10px;
 }
 
-.name {
+.name,
+.name h1 {
   color: var(--light-sea-green);
+  font-size: 72px;
+}
+
+.player {
+  color: var(--greyish-brown);
+  font-size: 36px;
 }
 
 .team--active {

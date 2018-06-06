@@ -1,25 +1,4 @@
 <template lang="pug">
-  //- div
-  //-   v-container(grid-list-md)
-  //-     h2.display-2.accent--text.mb-5 {{ name }}
-  //-
-  //-     v-flex.mb-5(xs6 offset-xs3)
-  //-      v-btn-toggle(v-model="view")
-  //-       v-btn(color="primary white--text" flat value="matches") Matches
-  //-       v-btn(color="primary white--text" flat value="table") Table
-  //-
-  //-     v-container(grid-list-md v-for="(group, index) in groups")
-  //-       h3.mb-5 {{ group.name }}
-  //-
-  //-       v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
-  //-         mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
-  //-
-  //-       v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'table'")
-  //-         mut-table(:data="results(group)")
-  //-
-  //-     v-btn(v-if="done" @click="endGroupstage") End groupstage
-
-
   .page.groupstage
     mut-header
 
