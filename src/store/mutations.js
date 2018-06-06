@@ -1,5 +1,3 @@
-import { pages } from '../config';
-
 export default {
   addTournament(state, { id, slug, name, teams, type }) {
     const t = {
