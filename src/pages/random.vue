@@ -91,8 +91,6 @@ export default {
 
         this.currentTeam = this.animatedTeams[index];
 
-        console.log(this.animatedTeams[index]);
-
         this.animatedTeams[index].active = true;
 
         index++;
