@@ -2,22 +2,22 @@
   .page__header.u-background--gradient
     .page__header-left
       h1.page__title(@click="goToHome()") Mutambo
-      h2.page__subtitle(v-if="subtitle") {{ subtitle }}
+      h2.page__subtitle(v-if="name") {{ name }}
 
     .page__header-right
       slot
 </template>
 
 <script>
-import { debounce } from "lodash";
 
-import IdGenerator from '../services/id-generator';
+import { mapGetters } from 'vuex';
 
 export default {
-  props: {
-    subtitle: {
-      required: false
-    }
+
+  computed: {
+    ...mapGetters({
+      name: 'currentTournament/name'
+    }),
   },
 
   methods: {

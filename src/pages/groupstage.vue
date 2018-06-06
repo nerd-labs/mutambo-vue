@@ -21,7 +21,7 @@
 
 
   .page.groupstage
-    mut-header(:subtitle="name")
+    mut-header
 
     .page__content
 
@@ -57,7 +57,6 @@ export default {
     ...mapGetters({
       slug: 'currentTournament/slug',
       teams: 'currentTournament/teams',
-      name: 'currentTournament/name',
       numberOfProceedingPlayers: 'currentTournament/numberOfProceedingPlayers',
       groups: 'groupstage/groups',
       proceedingTeams: 'groupstage/proceedingTeams',

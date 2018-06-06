@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.teams
-    mut-header(:subtitle="name")
+    mut-header
 
     .page__content
       h3 🙏🏻 Give us some teams plz 🙏🏻
@@ -28,7 +28,6 @@ export default {
   computed: {
     ...mapGetters({
       slug: 'currentTournament/slug',
-      name: 'currentTournament/name',
       teams: 'currentTournament/teams',
     })
   },

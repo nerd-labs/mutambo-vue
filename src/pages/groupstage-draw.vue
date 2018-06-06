@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.groupstage-draw
-    mut-header(:subtitle="name")
+    mut-header
       .button.button--small.button--secondary test
 
     .page__content
@@ -51,7 +51,6 @@ export default {
       teams: 'currentTournament/teams',
       type: 'currentTournament/type',
       slug: 'currentTournament/slug',
-      name: 'currentTournament/name',
       groups: 'groupstage/groups',
     })
   },
@@ -186,7 +185,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin-top: 50px;
-  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
 }
 
 .group {

@@ -29,7 +29,7 @@
   //-           span(v-else) Start tournament
 
   .page.summary
-    mut-header(:subtitle="name")
+    mut-header
 
     .page__content
       a.button.button--tertiary(@click="submit")
