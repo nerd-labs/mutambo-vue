@@ -1,6 +1,7 @@
 <template lang="pug">
   .table.u-box
     .table__row
+      .table__item #
       .table__item Team
       .table__item Played
       .table__item Wins
@@ -10,7 +11,8 @@
       .table__item Against
       .table__item Difference
       .table__item Points
-    .table__row(v-for="result in sortedResults")
+    .table__row(v-for="(result, index) in sortedResults")
+      .table__item {{ index + 1 }}
       .table__item {{ result.team }}
       .table__item {{ result.played }}
       .table__item {{ result.wins }}
@@ -56,7 +58,7 @@ export default {
   border-bottom: 1px solid #e5e5e5;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 300px repeat(8, 1fr);
+  grid-template-columns: 20px 300px repeat(8, 1fr);
   justify-content: space-around;
   padding: 10px 0;
   text-align: right;
@@ -72,7 +74,7 @@ export default {
   padding-bottom: 0;
 }
 
-.table__item:first-child {
+.table__item:nth-child(2) {
   text-align: left;
 }
 

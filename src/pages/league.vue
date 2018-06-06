@@ -1,20 +1,17 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ name }}
+  .page.groupstage
+    mut-header
+      .button.button--small.button--secondary(v-if="view === 'matches'" @click="toggleView('table')") switch to table view
+      .button.button--small.button--secondary(v-if="view === 'table'" @click="toggleView('matches')") switch to matches view
 
-      v-flex.mb-5(xs6 offset-xs3)
-       v-btn-toggle(v-model="view")
-        v-btn(color="primary white--text" flat value="matches") Matches
-        v-btn(color="primary white--text" flat value="table") Table
-
-      v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+    .page__content
+      template(v-if="view === 'matches'")
         mut-matches(:matches="matches" @update="matchUpdate" @done="allMatchesPlayed")
 
-      v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'table'")
+      template(v-if="view === 'table'")
         mut-table(:data="results")
 
-      v-btn(v-if="done" @click="endTournament") End tournament
+      a.button.button--tertiary(@click="endTournament" v-if="done") End tournament
 
 </template>
 
@@ -68,6 +65,10 @@ export default {
 
     endTournament() {
       this.$router.push(`/results/${this.$route.params.slug}`);
+    },
+
+    toggleView(state) {
+      this.view = state;
     },
   }
 
