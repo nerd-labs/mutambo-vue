@@ -13,7 +13,7 @@
               | {{ tournament.type }}
             .tournament__players
               span players:
-              | {{ tournament.teams.length }}
+              | {{ tournament.teams ? tournament.teams.length : '0' }}
           .tournament__icon {{ tournament[tournament.type].done ? '🏆' : '🎮' }}
 </template>
 

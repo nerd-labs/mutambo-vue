@@ -30,11 +30,12 @@ export default {
     },
 
     teams: (state, getters) => {
-      return getters.tournament.teams
+      if (getters.tournament.teams)
+        return getters.tournament.teams
     },
 
     totalTeams: (state, getters) => {
-      if (getters.teams) return getters.teams.length
+      if (getters.tournament.teams) return getters.tournament.teams.length;
     },
 
     matchList: (state, getters) => {
