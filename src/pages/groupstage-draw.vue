@@ -13,8 +13,7 @@
         .group(v-for="group in animatedGroups")
           h3 {{group.name}}
 
-          .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}")
-            p {{team.club}} ({{team.player}})
+          .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}") {{team.club}} ({{team.player}})
 
       a.button.button--tertiary(@click="startGroupstage" v-if="done")
         | Start groupstage
@@ -184,19 +183,22 @@ export default {
     }
 }
 
-
-.groupstage-draw .page__content {
-  justify-content: space-between;
+.page__content {
+  padding-top: 100px;
 }
 
 .groups {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  justify-content: space-between;
 }
 
 .group {
-  margin-bottom: 20px;
+  box-sizing: border-box;
+  margin-top: 50px;
+  padding-right: 20px;
+  width: 25%;
 }
 
 .group h3 {

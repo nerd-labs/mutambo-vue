@@ -27,13 +27,13 @@
 
     .page__content
 
-      div(v-for="(group, index) in groups")
-        h3.mb-5 {{ group.name }}
+      template(v-for="(group, index) in groups")
+        h3.group__title {{ group.name }}
 
-        div(v-if="view === 'matches'")
+        template(v-if="view === 'matches'")
           mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
 
-        div(v-if="view === 'table'")
+        template(v-if="view === 'table'")
           mut-table(:data="results(group)")
 
       a.button.button--tertiary(@click="endGroupstage" v-if="done")
@@ -172,5 +172,14 @@ export default {
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   margin: 20px;
+}
+
+.group__title {
+  margin: 70px 0 35px;
+  text-transform: uppercase;
+}
+
+.group__title::before {
+  content: '// ';
 }
 </style>

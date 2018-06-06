@@ -1,10 +1,10 @@
 <template lang="pug">
   .page.home.u-background--gradient.u-height--full
-    .page__content
+    .page__content.page__content--center
       h1 Mutambo
       .button(color="primary" @click="goToCreate()") Create tournament
 
-      //- .tournament-list(v-if="tournaments.length")
+      .tournament-list(v-if="tournaments.length")
         .tournament.u-box(v-for="(tournament, index) in tournaments" @click="goToRoute(tournament.id)")
           h3.tournament__name {{ tournament.name }}
           .tournament__info
@@ -88,7 +88,7 @@ export default {
 }
 
 .tournament__info span {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   margin-right: 5px;
 }
 
