@@ -73,10 +73,6 @@ export default {
   },
 
   methods: {
-    goToHome() {
-      this.$router.push('/');
-    },
-
     matchUpdate(index, event) {
       this.$store.dispatch("groupstage/updateMatch", {
         groupIndex: index,

@@ -33,10 +33,6 @@ export default {
     type: "knockout"
   }),
   methods: {
-    goToHome() {
-      this.$router.push('/');
-    },
-
     submit() {
       const slugged = slug(this.name.toLowerCase());
 

@@ -44,10 +44,6 @@ export default {
   },
 
   methods: {
-    goToHome() {
-        this.$router.push('/');
-    },
-
     addTeam(team) {
       this.$store.dispatch("currentTournament/addTeam", team);
     },

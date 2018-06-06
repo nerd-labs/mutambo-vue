@@ -76,10 +76,6 @@ export default {
   },
 
   methods: {
-    goToHome() {
-        this.$router.push('/');
-    },
-
     submit() {
       if (this.type === 'groupstage') {
         this.$router.push(`/${this.type}/draw/${this.slug}`);

@@ -80,10 +80,6 @@ export default {
   },
 
   methods: {
-    goToHome() {
-        this.$router.push('/');
-    },
-
     submit() {
       // remove from details if undefined :)
       const details = JSON.parse(JSON.stringify({
