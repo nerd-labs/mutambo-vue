@@ -55,7 +55,7 @@ export default {
 
 .table__row {
   align-items: center;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--white-two);
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 20px 300px repeat(8, 1fr);

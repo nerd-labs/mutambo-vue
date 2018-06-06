@@ -5,6 +5,8 @@
   --light-sea-green: #90ee90;
   --live-red: #d0021b;
   --warm-grey: #9b9b9b;
+  --pinkish-grey: #cecece;
+  --white-two: #e5e5e5;
   --white: #ffffff;
   --greyish-brown: #4a4a4a;
   --font-main: 'Montserrat', sans-serif;
@@ -163,7 +165,7 @@ p.text--large {
 input, select {
   background-color: var(--white);
   border-radius: 8px;
-  border: solid 2px var(--warm-grey);
+  border: solid 2px var(--pinkish-grey);
   box-sizing: border-box;
   color: var(--warm-grey);
   font-size: 16px;
