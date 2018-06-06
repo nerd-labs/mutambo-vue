@@ -1,18 +1,13 @@
 <template lang="pug">
-  div
-    v-form(v-model="valid" lazy-validation ref="form")
-        v-card
-          v-card-title(primary-title)
-            v-container(fluid grid-list-md)
-              v-layout(row wrap)
-                div(hidden)
-                  v-text-field(label="id" v-model='team.id')
-                v-flex(d-flex xs12)
-                  v-text-field(label='Player' :value='team.player' @input="changePlayer")
-                v-flex(d-flex xs12)
-                  v-text-field(label='Club' :value='team.club' @input="changeClub")
-
-
+  .u-box.create-team
+    .form__group
+      label Player
+      input(type='text' :value='team.player' @input="changePlayer")
+    .form__group
+      label Club
+      input(type='text'  :value='team.club' @input="changeClub")
+    div(hidden)
+      span(v-model='team.id')
 </template>
 
 <script>
@@ -55,3 +50,17 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .create-team {
+    margin: 10px;
+  }
+
+  .create-team .form__group {
+    margin-top: 30px;
+  }
+
+  .create-team .form__group:first-child {
+    margin-top: 0;
+  }
+</style>

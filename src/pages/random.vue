@@ -1,78 +1,59 @@
 <template lang="pug">
-  div
-    v-container(grid-list-lg)
-        v-layout(row wrap align-center justify-center)
-            v-flex(md2 v-for="(team, index) in newTeams")
-              v-jumbotron(:gradient="gradient" dark height="200")
-                .math__side.match__side--home.pa-2
-                  .match__team
-                      | {{ team.club }}
-                      .match__player {{ team.player }}
+  .page.groupstage-draw
+    mut-header
+      .button.button--small.button--secondary test
 
-        v-flex(mt-3 v-if="!draw")
-          v-btn(color="primary" @click="startDraw") Draw
+    .page__content
+      h1.loading(v-show="loading && !showAllTeams") 🥁
 
-        v-flex(mt-3 v-if="submitable")
-          v-btn(color="primary" @click="submit") Submit
+      .name(v-show="!loading && !showAllTeams && !done")
+        h1 {{currentTeam.club}}
+        .player {{currentTeam.player}}
 
+      h1.name(v-show="done") 🦄 Draw finished 🦄
+
+      .teams(v-bind:class="{'teams--active': showAllTeams}")
+        .team(v-for="team in animatedTeams" v-bind:class="{'team--active': team.active}")
+          .u-box
+            div {{ team.club }}
+            div {{ team.player }}
+
+      a.button.button--tertiary(@click="start" v-if="done")
+        | Start {{ type }}
+      a.button.button--tertiary(@click="skip" v-if="!done")
+        | Skip
 </template>
 
  <script>
 
 import IdGenerator from "../services/id-generator";
 import { mapGetters } from 'vuex';
+import { shuffle } from '../helpers/shuffle';
+
+const ANIMATION_TIME = 2000;
 
 export default {
-  data: () => ({
-    draw: false,
-    newTeams: [],
-    gradient: "to top, #7B1FA2, #E1BEE7",
-    submitable: false
-  }),
-  methods: {
-    getRandomPlayer() {
-      return this.players.splice(
-        (this.players.length * Math.random()) | 0,
-        1
-      )[0];
-    },
+  mounted () {
+    this.randomizeTeams();
 
-    getRandomClub() {
-      return this.clubs.splice((this.clubs.length * Math.random()) | 0, 1)[0];
-    },
-
-    startDraw() { // TODO: redraw??
-      this.draw = true;
-      this.random();
-    },
-
-    random(i = 0) {
-      setTimeout(() => {
-        this.newTeams.push({
-          club: this.getRandomClub(),
-          player: this.getRandomPlayer(),
-          id: IdGenerator.id(),
-        });
-
-        if (i < this.teams.length - 1) {
-          i++;
-          this.random(i);
-        } else {
-          this.submitable = true;
-        }
-      }, 500);
-    },
-
-    submit() {
-      this.$store.dispatch("currentTournament/randomizeTeams", this.newTeams);
-      this.$router.push(`/summary/${this.slug}`);
-    }
+    this.startDraw();
   },
-  computed: {
 
+  data: () => ({
+    animatedTeams: [],
+    currentTeam: {},
+    loading: true,
+    done: false,
+    showAllTeams: false,
+    loadingTimeout: undefined,
+    nameTimeout: undefined,
+  }),
+
+  computed: {
     ...mapGetters({
       slug: 'currentTournament/slug',
       teams: 'currentTournament/teams',
+      type: 'currentTournament/type',
     }),
 
     clubs() {
@@ -82,6 +63,145 @@ export default {
     players() {
       return this.teams.map(t => t.player);
     }
-  }
+  },
+
+  methods: {
+    randomizeTeams() {
+      const shuffledClubs = shuffle(this.clubs);
+      const shuffledPlayers = shuffle(this.players);
+
+      const shuffledTeams = [];
+
+      shuffledPlayers.forEach((club, index) => {
+        shuffledTeams.push({
+          club: shuffledClubs[index],
+          player: shuffledPlayers[index],
+          id: IdGenerator.id(),
+        });
+      });
+
+      this.$store.dispatch("currentTournament/randomizeTeams", shuffledTeams);
+    },
+
+    animate(index) {
+      this.loading = true;
+
+      this.loadingTimeout = setTimeout(() => {
+        this.loading = false;
+
+        this.currentTeam = this.animatedTeams[index];
+
+        this.animatedTeams[index].active = true;
+
+        index++;
+
+        if (index >= this.teams.length) {
+          setTimeout(() => {
+            this.done = true;
+          }, ANIMATION_TIME);
+          return;
+        }
+
+        this.nameTimeout = setTimeout(() => {
+          this.animate(index);
+        }, ANIMATION_TIME);
+      }, ANIMATION_TIME / 2);
+    },
+
+    skip() {
+      clearTimeout(this.loadingTimeout);
+      clearTimeout(this.nameTimeout);
+
+      this.showAllTeams = true;
+      this.done = true;
+    },
+
+    startDraw() {
+      const tmp = JSON.parse(JSON.stringify(this.teams));
+
+      tmp.forEach((team) => {
+        team.active = false;
+      });
+
+      this.animatedTeams = tmp;
+
+      this.animate(0);
+    },
+
+    start() {
+      this.$router.push(`/summary/${this.slug}`);
+    }
+  },
 };
 </script>
+
+<style scoped>
+@keyframes drumroll {
+    0%,
+    49% {
+        transform: scaleX(1);
+    }
+    50%,
+    100% {
+        transform: scaleX(-1);
+    }
+}
+
+
+.loading,
+.name {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
+}
+
+.loading {
+  animation-name: drumroll;
+  animation-duration: .2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  font-size: 144px;
+}
+
+.name,
+.name h1 {
+  color: var(--light-sea-green);
+  font-size: 72px;
+}
+
+.player {
+  color: var(--greyish-brown);
+  font-size: 36px;
+}
+
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  justify-content: center;
+  width: 100%;
+}
+
+.team {
+  margin-bottom: 10px;
+  opacity: 0;
+  padding-right: 20px;
+  transition: opacity .2s linear;
+  width: 25%;
+}
+
+.team .u-box {
+  height: 100%;
+  min-width: auto;
+}
+
+.team--active {
+  opacity: 1;
+}
+
+.teams--active .team {
+    opacity: 1;
+}
+</style>

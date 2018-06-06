@@ -1,22 +1,25 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      v-form(v-model="valid" lazy-validation ref="form")
-        v-layout(row wrap)
-          v-flex(xs6 offset-xs3)
-            v-text-field(label="Name" v-model="name" required :rules="nameRules")
+  .page.create
+    mut-header
 
-          v-flex(xs6 offset-xs3)
-            v-text-field(label="Number of players" v-model="totalPlayers" required :rules="totalPlayerRules" type="number")
+    .page__content
+      h3 🎉 Create new tournament  🎉
+      .form__group
+        label Tournament name
+        input(type='text' v-model="name" )
+      .form__group
+        label Tournament type
+        .button-group
+          .button-group-item(value="league" @click="setType('league')" :class="{ 'button-group-item--active': type === 'league'}")
+            | League
+          .button-group-item(value="knockout" @click="setType('knockout')" :class="{ 'button-group-item--active': type === 'knockout'}")
+            | Knockout
+          .button-group-item(value="groupstage" @click="setType('groupstage')" :class="{ 'button-group-item--active': type === 'groupstage'}")
+            | Groupstage & Knockout
+      a.button.button--tertiary( @click="submit")
+        | create
 
-          v-flex(xs6 offset-xs3)
-              v-btn-toggle(v-model="type")
-                  v-btn(color="primary white--text" flat value="knockout") Knockout
-                  v-btn(color="primary white--text" flat value="league") League
-                  v-btn(color="primary white--text" flat value="groupstage") Groupstage & Knockout
 
-          v-flex(xs6 offset-xs3)
-              v-btn(color="primary" @click="submit" :disabled="!valid") Submit
 </template>
 
  <script>
@@ -26,43 +29,66 @@ import idGenerator from "../services/id-generator";
 
 export default {
   data: () => ({
-    valid: false,
     name: "",
-    nameRules: [v => !!v || "Name is required"],
-    totalPlayers: 2,
-    totalPlayerRules: [
-      v => !!v || "Number of players is required",
-      v => v >= 2 || "There should be at least 2 players"
-    ],
     type: "knockout"
   }),
   methods: {
     submit() {
-      if (!this.$refs.form.validate()) {
-        return;
-      }
-
       const slugged = slug(this.name.toLowerCase());
-
-      // create array of total players
-      // const teams = Array.from({length: this.totalPlayers}).map(() => ({}))
-      const teams = []; //TODO: fix with array.from
-      for(let i = 0; i < this.totalPlayers; i++) {
-        teams.push({});
-      }
 
       const tournament = {
         id: idGenerator.id(),
         name: this.name,
-        type: this.type,
-        teams
+        type: this.type
       };
 
       tournament.slug = `${slugged}-${idGenerator.random4chars}`
 
       this.$store.commit("addTournament", tournament);
       this.$router.push(`/detail/${tournament.slug}`);
+    },
+
+    setType(type) {
+      this.type = type;
     }
   }
 };
 </script>
+
+<style scoped>
+.button-group {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    justify-content: center;
+    text-align: center;
+}
+
+.button-group-item {
+    align-items: center;
+    border: 1px solid var(--bright-sky-blue);
+    border-left: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: var(--bright-sky-blue);
+    display: flex;
+    flex-grow: 1;
+    height: 50px;
+    justify-content: center;
+    padding: 15px 30px;
+}
+
+.button-group-item:first-child {
+    border-left: 1px solid var(--bright-sky-blue);
+    border-radius: 8px 0 0 8px;
+}
+
+.button-group-item:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.button-group-item--active {
+    background-color: var(--bright-sky-blue);
+    color: var(--white);
+}
+</style>

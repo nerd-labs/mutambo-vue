@@ -30,11 +30,12 @@ export default {
     },
 
     teams: (state, getters) => {
-      return getters.tournament.teams
+      if (getters.tournament.teams)
+        return getters.tournament.teams
     },
 
     totalTeams: (state, getters) => {
-      if (getters.teams) return getters.teams.length
+      if (getters.tournament.teams) return getters.tournament.teams.length;
     },
 
     matchList: (state, getters) => {
@@ -65,6 +66,10 @@ export default {
 
     updateDetails (state, { tournament, details }) {
       tournament.details = Object.assign({}, tournament.details, details)
+    },
+
+    addEmptyTeams (state, { tournament, teams }) {
+        tournament.teams = teams;
     },
 
     randomizeTeams (state, { tournament, randomizedTeams }) {
@@ -127,6 +132,16 @@ export default {
         commit('updateDetails', {
           tournament,
           details
+        })
+      }
+    },
+
+    addEmptyTeams ({ commit, state, rootState }, teams) {
+      const tournament = rootState.tournaments.find(t => t.id === state.id)
+      if (tournament) {
+        commit('addEmptyTeams', {
+          tournament,
+          teams
         })
       }
     },

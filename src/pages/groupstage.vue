@@ -1,24 +1,20 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ name }}
+  .page.groupstage
+    mut-header
 
-      v-flex.mb-5(xs6 offset-xs3)
-       v-btn-toggle(v-model="view")
-        v-btn(color="primary white--text" flat value="matches") Matches
-        v-btn(color="primary white--text" flat value="table") Table
+    .page__content
 
-      v-container(grid-list-md v-for="(group, index) in groups")
-        h3.mb-5 {{ group.name }}
+      template(v-for="(group, index) in groups")
+        h3.group__title {{ group.name }}
 
-        v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+        template(v-if="view === 'matches'")
           mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
 
-        v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'table'")
+        template(v-if="view === 'table'")
           mut-table(:data="results(group)")
 
-      v-btn(v-if="done" @click="endGroupstage") End groupstage
-
+      a.button.button--tertiary(@click="endGroupstage" v-if="done")
+        | End groupstage
 </template>
 
 <script>
@@ -40,7 +36,6 @@ export default {
     ...mapGetters({
       slug: 'currentTournament/slug',
       teams: 'currentTournament/teams',
-      name: 'currentTournament/name',
       numberOfProceedingPlayers: 'currentTournament/numberOfProceedingPlayers',
       groups: 'groupstage/groups',
       proceedingTeams: 'groupstage/proceedingTeams',
@@ -149,5 +144,14 @@ export default {
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   margin: 20px;
+}
+
+.group__title {
+  margin: 70px 0 35px;
+  text-transform: uppercase;
+}
+
+.group__title::before {
+  content: '// ';
 }
 </style>

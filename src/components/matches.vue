@@ -89,11 +89,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .matches {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 </style>
