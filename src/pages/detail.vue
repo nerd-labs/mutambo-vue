@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.detail
-    mut-header(:subtitle="name")
+    mut-header
 
     .page__content
       h3 ⚙️ {{ type }} settings ⚙️
