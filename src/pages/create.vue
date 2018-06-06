@@ -1,7 +1,6 @@
 <template lang="pug">
   .page.create
-    .page__header.u-background--gradient
-      h1.page__title(@click="goToHome()") Mutambo
+    mut-header
 
     .page__content
       h3 🎉 Create new tournament  🎉

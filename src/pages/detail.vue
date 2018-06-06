@@ -1,7 +1,6 @@
 <template lang="pug">
   .page.detail
-    .page__header.u-background--gradient
-      h1.page__title(@click="goToHome()") Mutambo
+    mut-header(:subtitle="name")
 
     .page__content
       h3 ⚙️ {{ type }} settings ⚙️

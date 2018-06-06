@@ -1,8 +1,6 @@
 <template lang="pug">
   .page.teams
-    .page__header.u-background--gradient
-      h1.page__title(@click="goToHome()") Mutambo
-      h2.page__subtitle {{ name }}
+    mut-header(:subtitle="name")
 
     .page__content
       h3 🙏🏻 Give us some teams plz 🙏🏻

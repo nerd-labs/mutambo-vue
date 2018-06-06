@@ -14,8 +14,8 @@
     //-   .winner(v-if="winner") 🏆 {{ winner.player }} ({{winner.club}}) 🏆
 
     .page.knockout
-      .page__header.u-background--gradient
-        h1.page__title(@click="goToHome()") Mutambo
+      mut-header
+
 
       .page__content
         .button.button--tertiary.next-round(@click="startRound" v-if="startRoundState") Start next round

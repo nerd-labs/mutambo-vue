@@ -29,9 +29,7 @@
   //-           span(v-else) Start tournament
 
   .page.summary
-    .page__header.u-background--gradient
-      h1.page__title(@click="goToHome()") Mutambo
-      h2.page__subtitle {{ name }}
+    mut-header(:subtitle="name")
 
     .page__content
       a.button.button--tertiary(@click="submit")
