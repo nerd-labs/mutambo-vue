@@ -57,10 +57,6 @@ export default {
   },
 
   methods: {
-    goToHome() {
-      this.$router.push('/');
-    },
-
     getNumberOfGroups() {
       const numberOfTeams = this.teams.length;
       let numberOfGroups = numberOfTeams / 4;

@@ -79,11 +79,6 @@ export default {
   },
 
   methods: {
-
-    goToHome() {
-      this.$router.push('/');
-    },
-
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
     },
