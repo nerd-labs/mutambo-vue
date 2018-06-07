@@ -38,5 +38,5 @@ export default {
     dispatch('updateMatchScore', match);
 
     dispatch('updateTable');
-  },
+  }
 }

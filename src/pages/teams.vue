@@ -1,14 +1,19 @@
 <template lang="pug">
-    div
-      v-container(grid-list-md)
-        h2.display-2.accent--text.mb-5 {{ tournamentName }}
-        v-layout(row wrap justify-center align-center)
-          v-flex(d-flex xs12 sm6 md4 lg3 xl2 my-2 v-for="team in teams")
-            mut-create-team(@addTeam="addTeam" :team="team")
+  .page.teams
+    mut-header
 
-        .mt-5.text-xs-left
-          v-checkbox(label='Randomly mix players and teams' v-model='randomly')
-          v-btn(color="success" @click="submit") Submit
+    .page__content
+      h3 🙏🏻 Give us some teams plz 🙏🏻
+
+      .create-teams
+        mut-create-team(@addTeam="addTeam" :team="team" v-for="team in teams")
+
+      .form__group
+        label(for="randomize") Randomly mix players and teams
+        input(type="checkbox" id="randomize" v-model='randomly')
+
+      a.button.button--tertiary(@click="submit")
+        | continue
 </template>
 
 <script>
@@ -21,13 +26,10 @@ export default {
     randomly: false
   }),
   computed: {
-
     ...mapGetters({
       slug: 'currentTournament/slug',
-      name: 'currentTournament/name',
       teams: 'currentTournament/teams',
     })
-
   },
 
   beforeMount() {
@@ -52,3 +54,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .create-teams {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    width: 100%;
+  }
+</style>

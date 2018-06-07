@@ -1,6 +1,6 @@
 export default {
   id: (state) => {
-    return state.id
+      return state.id
   },
 
   tournament: (state, getters, rootState, rootGetters) => {
@@ -21,5 +21,5 @@ export default {
 
   table: (state, getters) => {
     if (getters.league) return getters.league.table
-  },
+  }
 }

@@ -1,32 +1,36 @@
 export default {
   set (state, tournamentId) {
-    state.id = tournamentId
-  },
+      state.id = tournamentId
+    },
 
-  reset (state) {
-    state.id = undefined
-  },
+    reset (state) {
+      state.id = undefined
+    },
 
-  updateDetails (state, { tournament, details }) {
-    tournament.details = Object.assign({}, tournament.details, details)
-  },
+    updateDetails (state, { tournament, details }) {
+      tournament.details = Object.assign({}, tournament.details, details)
+    },
 
-  randomizeTeams (state, { tournament, randomizedTeams }) {
-    tournament.teams = randomizedTeams
-  },
+    addEmptyTeams (state, { tournament, teams }) {
+        tournament.teams = teams;
+    },
 
-  addTeam (state, { tournament, team }) {
-    if (!tournament.teams) tournament.teams = []
-    const index = tournament.teams.findIndex(t => t.id === team.id)
+    randomizeTeams (state, { tournament, randomizedTeams }) {
+      tournament.teams = randomizedTeams
+    },
 
-    if (index < 0) {
-      tournament.teams.push(team)
-    } else {
-      tournament.teams[index] = team
+    addTeam (state, { tournament, team }) {
+      if (!tournament.teams) tournament.teams = []
+      const index = tournament.teams.findIndex(t => t.id === team.id)
+
+      if (index < 0) {
+        tournament.teams.push(team)
+      } else {
+        tournament.teams[index] = team
+      }
+    },
+
+    setProgress(state, { tournament, page }) {
+      tournament.page = page;
     }
-  },
-
-  setProgress(state, { tournament, page }) {
-    tournament.page = page;
-  },
 }

@@ -1,26 +1,30 @@
 <template lang="pug">
-  v-app
-    v-toolbar(color='primary white--text')
-      v-toolbar-title(@click="goToRoute('/')") Mutambo
-    v-content
-      v-container(fluid fill-height)
-        v-layout(justify-center align-center)
-          v-flex(text-xs-center)
-            router-view
-
-    v-footer(color='accent')
-      mut-logo
-
+  #app
+    .statusbar.u-background--gradient
+    router-view
 </template>
 
-<script>
-import { routes } from './config';
+<style>
+  #app {
+    height: 100%;
+    width: 100%;
+  }
 
-export default {
-  methods: {
-    goToRoute(route) {
-      this.$router.push(route);
-    }
-  },
-};
-</script>
+  .statusbar {
+    -webkit-app-region: drag;
+    display: block;
+    height: 22px;
+    position: fixed;
+    width: 100%;
+  }
+
+  .statusbar::before {
+    background-color: rgba(255, 255, 255, .75);
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+</style>

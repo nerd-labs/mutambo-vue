@@ -48,9 +48,6 @@ Sparky.task("config", () => {
           engine: 'pug'
         }),
         style: [
-          SassPlugin({
-            importer: true
-          }),
           CSSResourcePlugin(),
           CSSPlugin({
             group: 'components.css',

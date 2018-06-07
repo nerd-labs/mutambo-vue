@@ -1,22 +1,25 @@
 <template lang="pug">
-  div
-    v-container(grid-list-md)
-      h2.display-2.accent--text.mb-5 {{ name }}
+  .page.groupstage-draw
+    mut-header
+      .button.button--small.button--secondary test
 
+    .page__content
       h1.loading(v-show="loading && !showAllTeams") 🥁
-      h1.name(v-show="!loading && !showAllTeams") {{currentTeam.club}} ({{currentTeam.player}})
+      .name(v-show="!loading && !showAllTeams && !done")
+        h1 {{currentTeam.club}}
+        .player {{currentTeam.player}}
+      h1.name(v-show="done") 🦄 Draw finished 🦄
 
       .groups(v-bind:class="{'groups--active': showAllTeams}")
         .group(v-for="group in animatedGroups")
           h3 {{group.name}}
 
-          .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}")
-            | {{team.club}} ({{team.player}})
+          .team(v-for="team in group.teams" v-bind:class="{'team--active': team.active}") {{team.club}} ({{team.player}})
 
-      v-btn(color="primary" @click="startGroupstage" v-if="done") Start groupstage
-      v-btn(color="primary" @click="skip" v-if="!done") Skip
-
-
+      a.button.button--tertiary(@click="startGroupstage" v-if="done")
+        | Start groupstage
+      a.button.button--tertiary(@click="skip" v-if="!done")
+        | Skip
 </template>
 
 <script>
@@ -50,7 +53,6 @@ export default {
       teams: 'currentTournament/teams',
       type: 'currentTournament/type',
       slug: 'currentTournament/slug',
-      name: 'currentTournament/name',
       groups: 'groupstage/groups',
     })
   },
@@ -139,7 +141,9 @@ export default {
         }
 
         if (currentGroupIndex >= this.groups.length) {
-          this.done = true;
+          setTimeout(() => {
+            this.done = true;
+          }, ANIMATION_TIME);
           return;
         }
 
@@ -177,14 +181,36 @@ export default {
     }
 }
 
+.page__content {
+  padding-top: 100px;
+}
+
 .groups {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
   justify-content: center;
+  width: 100%;
 }
 
 .group {
-  margin-bottom: 20px;
+  box-sizing: border-box;
+  margin-top: 50px;
+  padding-right: 20px;
+  width: 25%;
+}
+
+.group h3 {
+  margin-bottom: 15px;
+}
+
+.loading,
+.name {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
 }
 
 .loading {
@@ -192,20 +218,31 @@ export default {
   animation-duration: .2s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  font-size: 144px;
 }
 
 .team {
   opacity: 0;
   transition: opacity .2s linear;
+  margin-bottom: 10px;
+}
+
+.name,
+.name h1 {
+  color: var(--light-sea-green);
+  font-size: 72px;
+}
+
+.player {
+  color: var(--greyish-brown);
+  font-size: 36px;
 }
 
 .team--active {
   opacity: 1;
 }
 
-.groups--active {
-  .team {
+.groups--active .team {
     opacity: 1;
-  }
 }
 </style>

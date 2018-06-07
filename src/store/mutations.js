@@ -1,10 +1,9 @@
 export default {
-  addTournament(state, { id, slug, name, teams, type }) {
+  addTournament(state, { id, slug, name, type }) {
     const t = {
       id,
       slug,
       name,
-      teams,
       type,
       details: {},
       league: {

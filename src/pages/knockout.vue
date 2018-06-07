@@ -1,17 +1,34 @@
 <template lang="pug">
-    div
-      v-btn.next-round(color="primary white--text" large @click="startRound" v-if="startRoundState") Start next round
+    //- div
+      //- v-btn.next-round(color="primary white--text" large @click="startRound" v-if="startRoundState") Start next round
+    //-
+    //-   v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
+    //-     mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
+    //-     v-btn(v-if="completeRound" @click="complete" color="primary white--text") Complete Round
+    //-
+    //-   .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
+    //-     .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
+    //-       h5 {{ getNameOfRound(round) }}
+    //-       .matches
+    //-         mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
+    //-   .winner(v-if="winner") 🏆 {{ winner.player }} ({{winner.club}}) 🏆
 
-      v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
-        mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
-        v-btn(v-if="completeRound" @click="complete" color="primary white--text") Complete Round
+    .page.knockout
+      mut-header
 
-      .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
-        .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
-          h5 {{ getNameOfRound(round) }}
-          .matches
-            mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
-      .winner(v-if="winner") 🏆 {{ winner.player }} ({{winner.club}}) 🏆
+
+      .page__content
+        .button.button--tertiary.next-round(@click="startRound" v-if="startRoundState") Start next round
+
+        template(v-if="view === 'matches'")
+          mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
+
+        .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
+          .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
+            h3 {{ getNameOfRound(round) }}
+            .matches
+              mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
+
 </template>
 
 <script>
@@ -125,8 +142,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
 .bracket {
   padding: 10px;
   box-sizing: border-box;
@@ -141,11 +157,11 @@ export default {
 
 .next-round {
   position: absolute;
-top: 70%;
-left: 50%;
-transform: translate(-50%, -50%);
-z-index: 4;
-margin: 0 !important;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  margin: 0 !important;
 }
 
 .matches {
@@ -161,10 +177,8 @@ margin: 0 !important;
   text-align: center;
 }
 
-.round--right {
-  h1 {
+.round--right h1 {
     display: none;
-  }
 }
 
 
@@ -172,11 +186,11 @@ margin: 0 !important;
   position: relative;
   margin: 10px auto 0;
   font-size: 20px;
+}
 
-  span {
-    color: goldenrod;
-    text-align: center;
-  }
+.winner span {
+  color: goldenrod;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -191,61 +205,53 @@ margin: 0 !important;
       "round4-left round4-right"
       "round5 .";
     grid-gap: 10px;
+    width: 100%;
   }
 
   .round {
     display: grid;
     grid-template-rows: 30px 1fr;
 
-    h1 {
+    }
+
+    round h1 {
       align-self: start;
-    }
   }
 
-  .round--right {
-    h1 {
+  .round--right h1 {
       display: block;
-    }
   }
 
-  .round1 {
-    &.round--left {
+  .round1.round--left {
       grid-area: round1-left;
-    }
+  }
 
-    &.round--right {
+  .round.round--right {
       grid-area: round1-right;
     }
-  }
 
-  .round2 {
-    &.round--left {
+  .round2.round--left {
       grid-area: round2-left;
     }
 
-    &.round--right {
+  .round2.round--right {
       grid-area: round2-right;
     }
-  }
 
-  .round3 {
-    &.round--left {
+  .round3.round--left {
       grid-area: round3-left;
     }
 
-    &.round--right {
-      grid-area: round3-right;
-    }
+  .round3.round--right {
+    grid-area: round3-right;
   }
 
-  .round4 {
-    &.round--left {
+  .round4.round--left {
       grid-area: round4-left;
     }
 
-    &.round--right {
+  .round4.round--right {
       grid-area: round4-right;
-    }
   }
 
   .round5 {
@@ -278,10 +284,8 @@ margin: 0 !important;
     grid-template-areas: "round1-left round2-left round3-left round4-left round5 round4-right round3-right round2-right round1-right";
   }
 
-  .round.finals {
-    .matches {
+  .round.finals .matches {
       align-content: center;
-    }
   }
 }
 </style>

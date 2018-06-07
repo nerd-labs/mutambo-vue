@@ -1,7 +1,7 @@
 export default {
   id: (state) => {
-    return state.id
-  },
+  return state.id
+},
 
   tournament: (state, getters, rootState, rootGetters) => {
     return rootGetters.tournamentById(state.id)
@@ -24,11 +24,12 @@ export default {
   },
 
   teams: (state, getters) => {
-    return getters.tournament.teams
+    if (getters.tournament.teams)
+      return getters.tournament.teams
   },
 
   totalTeams: (state, getters) => {
-    if (getters.teams) return getters.teams.length
+    if (getters.tournament.teams) return getters.tournament.teams.length;
   },
 
   matchList: (state, getters) => {
@@ -45,5 +46,5 @@ export default {
     if (getters.tournament.details) {
       return getters.tournament.details.numberOfProceedingPlayers
     }
-  },
+  }
 }

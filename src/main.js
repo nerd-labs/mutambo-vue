@@ -1,7 +1,4 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify';
-import 'vuetify/dist/vuetify.min.css';
-
 import app from './app.vue';
 
 import logo from './components/logo.vue';
@@ -10,6 +7,7 @@ import match from './components/match.vue';
 import matches from './components/matches.vue';
 import knockoutMatch from './components/knockout-match.vue';
 import table from './components/table.vue';
+import header from './components/header.vue';
 
 import router from './router';
 import store from './store';
@@ -22,18 +20,7 @@ Vue.component('mut-match', match);
 Vue.component('mut-matches', matches);
 Vue.component('mut-knockout-match', knockoutMatch);
 Vue.component('mut-table', table);
-
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#26A69A',
-    secondary: '#00897B',
-    accent: '#F50057',
-    error: '#FF5252',
-    warning: '#FF8F00',
-    info: '#29B6F6',
-    success: '#00E676'
-  }
-})
+Vue.component('mut-header', header);
 
 new Vue({
   router,
