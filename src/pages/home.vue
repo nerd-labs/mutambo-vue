@@ -56,6 +56,11 @@ export default {
   width: 100%;
 }
 
+.page__content {
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+}
+
 .tournament-list {
   align-items: center;
   display: flex;
