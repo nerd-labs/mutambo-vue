@@ -1,7 +1,6 @@
 <template lang="pug">
   .page.groupstage-draw
     mut-header
-      .button.button--small.button--secondary test
 
     .page__content
       h1.loading(v-show="loading && !showAllTeams") 🥁

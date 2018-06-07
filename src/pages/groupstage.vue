@@ -1,6 +1,8 @@
 <template lang="pug">
   .page.groupstage
     mut-header
+      .button.button--small.button--secondary(v-if="view === 'matches'" @click="toggleView('table')") switch to table view
+      .button.button--small.button--secondary(v-if="view === 'table'" @click="toggleView('matches')") switch to matches view
 
     .page__content
 
@@ -132,6 +134,10 @@ export default {
           pointsAverage: t.stats.points === 0 ? 0 : (t.stats.points / t.stats.played),
         };
       });
+    },
+
+    toggleView(state) {
+      this.view = state;
     },
   }
 
