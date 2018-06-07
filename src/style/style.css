@@ -34,6 +34,10 @@ body {
   color: var(--warm-grey);
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 /*
   TYPOGRAPHY
 */

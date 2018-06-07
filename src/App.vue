@@ -16,6 +16,7 @@
     height: 22px;
     position: fixed;
     width: 100%;
+    z-index: 10;
   }
 
   .statusbar::before {
