@@ -166,6 +166,24 @@ p.text--large {
   min-width: 550px;
 }
 
+.form__group--checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__group--checkbox label {
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.form__group--checkbox input[type="checkbox"] {
+  height: auto;
+  width: auto;
+}
+
 input, select {
   background-color: var(--white);
   border-radius: 8px;

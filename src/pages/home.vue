@@ -71,6 +71,7 @@ export default {
 }
 
 .tournament {
+  cursor: pointer;
   position: relative;
   margin: 10px;
 }

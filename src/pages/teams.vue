@@ -8,7 +8,7 @@
       .create-teams
         mut-create-team(@addTeam="addTeam" :team="team" v-for="team in teams")
 
-      .form__group
+      .form__group.form__group--checkbox
         label(for="randomize") Randomly mix players and teams
         input(type="checkbox" id="randomize" v-model='randomly')
 
