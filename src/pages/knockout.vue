@@ -205,6 +205,7 @@ export default {
       "round4-left round4-right"
       "round5 .";
     grid-gap: 10px;
+    width: 100%;
   }
 
   .round {
