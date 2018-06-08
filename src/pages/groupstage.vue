@@ -6,8 +6,11 @@
 
     .page__content
 
+      .groupstage__shortcuts(ref="shortcuts")
+        span(@click="scrollToGroup(group.name)" v-for="group in groups") {{ group.name }}
+
       template(v-for="(group, index) in groups")
-        h3.group__title {{ group.name }}
+        h3.group__title(:ref="generateId(group.name)") {{ group.name }}
 
         template(v-if="view === 'matches'")
           mut-matches(:matches="group.matches" @update="matchUpdate(index, $event)" @done="allMatchesPlayed(index)")
@@ -24,6 +27,8 @@ import { mapGetters } from "vuex";
 import { matchStates, routes } from "../config";
 import berger from "../helpers/berger";
 import { orderByProperty } from '../helpers/order-by-property'
+
+import slug from 'slug';
 
 export default {
   beforeMount () {
@@ -53,6 +58,18 @@ export default {
   },
 
   methods: {
+
+    generateId(group) {
+      return `${slug(group.toLowerCase())}`;
+    },
+
+    scrollToGroup(group) {
+      const element = this.$refs[this.generateId(group)];
+      const shortCutElement = this.$refs['shortcuts'];
+      const top = element[0].offsetTop - (shortCutElement.offsetTop + 100); // scroll to 100px below the shortcut ;)
+      window.scrollTo(0, top);
+    },
+
     matchUpdate(index, event) {
       this.$store.dispatch("groupstage/updateMatch", {
         groupIndex: index,
@@ -160,4 +177,30 @@ export default {
 .group__title::before {
   content: '// ';
 }
+
+.groupstage__shortcuts {
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  position: fixed;
+  top: 84px; /* header + statusbar; */
+}
+
+.groupstage__shortcuts span {
+  color: var(--bright-sky-blue);
+  cursor: pointer;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.groupstage__shortcuts span::after {
+    content: '-';
+    padding-left: 20px;
+}
+
+
+.groupstage__shortcuts span:last-child::after {
+    content: none;
+}
+
 </style>
