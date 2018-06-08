@@ -1,5 +1,5 @@
 <template lang="pug">
-  .page.home.u-background--gradient.u-height--full
+  .page.results.u-background--gradient.u-height--full
     .page__content.page__content--center
       .icon 🏆
       h1 {{winner.team}}
@@ -32,7 +32,6 @@ export default {
 
   computed: {
     ...mapGetters({
-      name: 'currentTournament/name',
       type: 'currentTournament/type',
       leagueTable: 'league/table',
       knockoutWinner: 'knockout/winner',
