@@ -2,10 +2,10 @@
   .u-box.create-team
     .form__group
       label Player
-      input(type='text' :value='team.player' @input="changePlayer")
+      input(type='text' v-model='team.player' @input="submit")
     .form__group
       label Club
-      input(type='text'  :value='team.club' @input="changeClub")
+      input(type='text' v-model="team.club" @input="submit")
     div(hidden)
       span(v-model='team.id')
 </template>
@@ -27,14 +27,6 @@ export default {
     }
   },
   methods: {
-    changePlayer(player) {
-      this.team.player = player;
-      this.submit();
-    },
-    changeClub(club) {
-      this.team.club = club;
-      this.submit();
-    },
     submit: debounce(function() {
       if (!this.team.club || !this.team.player) {
         return;
@@ -45,7 +37,7 @@ export default {
       }
 
       this.$emit("addTeam", this.team);
-    }, 300),
+    }, 500),
 
   }
 };
