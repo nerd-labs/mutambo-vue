@@ -1,6 +1,6 @@
 <template lang="pug">
-  .match.u-box.u-box--large(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled'}")
-    .match__team(:class="{'match__team--winner': internalMatch.winner ===  1, 'match__team--loser': internalMatch.winner === 2}")
+  .match.u-box.u-box--large(:class="{'match--playing': internalMatch.state === 'playing', 'match--done': internalMatch.state === 'done' , 'match--disabled': internalMatch.state === 'disabled', 'match--error': alert}")
+    .match__team(:class="{'match__team--winner': internalMatch.winner ===  1, 'match__team--loser': internalMatch.winner === 2 }")
       .team__name {{ internalMatch.home.club }}
       .team__player {{ internalMatch.home.player }}
 
@@ -300,4 +300,11 @@ export default {
 .match--done .match__info {
   cursor: pointer;
 }
+
+/* STATE // ERROR */
+
+.match--error {
+  background-color: #d0021b33;
+}
+
 </style>

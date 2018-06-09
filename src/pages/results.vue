@@ -13,6 +13,8 @@
         .icon--small 🛡
         h2 {{topdefence.team}}
         h2 {{topdefence.against}} goals against
+
+      .button(@click="endTournament") End tournament
 </template>
 
 <script>
@@ -39,6 +41,10 @@ export default {
   },
 
   methods: {
+    endTournament() {
+        this.$router.push('/');
+    },
+
     table() {
       switch (this.type) {
         case 'league':
@@ -55,12 +61,15 @@ export default {
           break;
 
         case 'knockout':
-          this.winner = knockoutWinner;
+          this.winner = {
+            team: `${this.knockoutWinner.club} (${this.knockoutWinner.player})`,
+          };
           break;
 
         case 'groupstage':
-          this.winner = knockoutWinner;
-
+          this.winner = {
+            team: `${this.knockoutWinner.club} (${this.knockoutWinner.player})`,
+          };
           // get all group tables and join them
 
           // get all knockout stats
