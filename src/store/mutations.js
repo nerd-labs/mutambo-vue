@@ -4,6 +4,7 @@ export default {
       id,
       slug,
       name,
+      teams: [],
       type,
       details: {},
       league: {

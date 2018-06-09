@@ -1,27 +1,13 @@
 <template lang="pug">
-    //- div
-      //- v-btn.next-round(color="primary white--text" large @click="startRound" v-if="startRoundState") Start next round
-    //-
-    //-   v-flex.mb-5(xs12 xl8 offset-xl2 v-if="view === 'matches'")
-    //-     mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
-    //-     v-btn(v-if="completeRound" @click="complete" color="primary white--text") Complete Round
-    //-
-    //-   .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
-    //-     .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
-    //-       h5 {{ getNameOfRound(round) }}
-    //-       .matches
-    //-         mut-knockout-match(v-for="match in round.matches" :home="match.home" :away="match.away")
-    //-   .winner(v-if="winner") 🏆 {{ winner.player }} ({{winner.club}}) 🏆
-
     .page.knockout
       mut-header
-
 
       .page__content
         .button.button--tertiary.next-round(@click="startRound" v-if="startRoundState") Start next round
 
         template(v-if="view === 'matches'")
           mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
+          .button.button--tertiary(@click="complete" v-if="completeRound") Complete Round
 
         .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
           .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
@@ -53,6 +39,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      slug: 'currentTournament/slug',
       rounds: 'knockout/rounds',
       activeRound: 'knockout/round',
       activeRoundId: 'knockout/activeRoundId',
@@ -74,7 +61,7 @@ export default {
   watch: {
       activeRoundId: function (val) {
         this.completeRound = false;
-         this.splitRounds();
+        this.splitRounds();
        }
   },
 
@@ -93,7 +80,12 @@ export default {
 
     complete() {
       this.view = 'tree';
-      this.$store.dispatch('knockout/completeRound');
+      this.$store.dispatch('knockout/completeRound')
+        .then(() => {
+          if (this.winner) {
+            this.$router.push(`/results/${this.slug}`);
+          }
+        });
     },
 
     startRound() {
