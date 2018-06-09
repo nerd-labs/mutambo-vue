@@ -28,4 +28,10 @@
     right: 0;
     top: 0;
   }
+
+  .statusbar + .page {
+    height: calc(100% - 22px) !important;
+    position: relative;
+    top: 22px; /* same height as statusbar */
+  }
 </style>
