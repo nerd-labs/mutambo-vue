@@ -36,7 +36,7 @@ ___scope___.file("app.vue", function(exports, require, module, __filename, __dir
 var _options = { _vueModuleId: 'data-v-1bece084'}
 Object.assign(_options, {
         _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('router-view')],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('div',{staticClass:"statusbar u-background--gradient"}),_c('router-view')],1)},
         staticRenderFns: []
       })
 exports.default = {}
@@ -92,7 +92,7 @@ var _options = { _vueModuleId: 'data-v-f18d2362'}
 Object.assign(_options, {_scopeId: 'data-v-f18d2362'})
 Object.assign(_options, {
         _scopeId: "data-v-f18d2362",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"u-box create-team"},[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Player")]),_c('input',{attrs:{"type":"text"},domProps:{"value":_vm.team.player},on:{"input":_vm.changePlayer}})]),_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Club")]),_c('input',{attrs:{"type":"text"},domProps:{"value":_vm.team.club},on:{"input":_vm.changeClub}})]),_c('div',{attrs:{"hidden":"hidden"}},[_c('span',{model:{value:(_vm.team.id),callback:function ($$v) {_vm.$set(_vm.team, "id", $$v)},expression:"team.id"}})])])},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"u-box create-team"},[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Player")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.team.player),expression:"team.player"}],attrs:{"type":"text"},domProps:{"value":(_vm.team.player)},on:{"input":[function($event){if($event.target.composing){ return; }_vm.$set(_vm.team, "player", $event.target.value)},_vm.submit]}})]),_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Club")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.team.club),expression:"team.club"}],attrs:{"type":"text"},domProps:{"value":(_vm.team.club)},on:{"input":[function($event){if($event.target.composing){ return; }_vm.$set(_vm.team, "club", $event.target.value)},_vm.submit]}})]),_c('div',{attrs:{"hidden":"hidden"}},[_c('span',{model:{value:(_vm.team.id),callback:function ($$v) {_vm.$set(_vm.team, "id", $$v)},expression:"team.id"}})])])},
         staticRenderFns: []
       })
 "use strict";
@@ -113,14 +113,6 @@ exports["default"] = {
         }
     },
     methods: {
-        changePlayer: function changePlayer(player) {
-            this.team.player = player;
-            this.submit();
-        },
-        changeClub: function changeClub(club) {
-            this.team.club = club;
-            this.submit();
-        },
         submit: lodash_1.debounce(function () {
             if (!this.team.club || !this.team.player) {
                 return;
@@ -129,7 +121,7 @@ exports["default"] = {
                 this.team.id = id_generator_1["default"].id();
             }
             this.$emit("addTeam", this.team);
-        }, 300)
+        }, 500)
     }
 };
 
@@ -182,7 +174,7 @@ var _options = { _vueModuleId: 'data-v-ca9d0d25'}
 Object.assign(_options, {_scopeId: 'data-v-ca9d0d25'})
 Object.assign(_options, {
         _scopeId: "data-v-ca9d0d25",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"match u-box u-box--large",class:{'match--playing': _vm.internalMatch.state === 'playing', 'match--done': _vm.internalMatch.state === 'done' , 'match--disabled': _vm.internalMatch.state === 'disabled'}},[_c('div',{staticClass:"match__team",class:{'match__team--winner': _vm.internalMatch.winner ===  1, 'match__team--loser': _vm.internalMatch.winner === 2}},[_c('div',{staticClass:"team__name"},[_vm._v(_vm._s(_vm.internalMatch.home.club))]),_c('div',{staticClass:"team__player"},[_vm._v(_vm._s(_vm.internalMatch.home.player))])]),_c('div',{staticClass:"match__info",on:{"click":_vm.editMatch}},[_c('div',{staticClass:"match__live"},[_vm._v("live")]),_c('div',{staticClass:"match__score"},[_c('span',{class:{'match__score--winner': _vm.internalMatch.winner ===  1, 'match__score--loser': _vm.internalMatch.winner === 2}},[_vm._v(_vm._s(_vm.internalMatch.home.score))]),_c('span',{class:{'match__score--loser': _vm.internalMatch.winner ===  1, 'match__score--winner': _vm.internalMatch.winner === 2}},[_vm._v(_vm._s(_vm.internalMatch.away.score))])]),_c('div',{staticClass:"match__score--input"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.home.score),expression:"internalMatch.home.score"}],attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.home.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.home, "score", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.away.score),expression:"internalMatch.away.score"}],attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.away.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.away, "score", $event.target.value)}}})]),_c('a',{staticClass:"match__start",on:{"click":_vm.startMatch}},[_vm._v("start match")]),_c('a',{staticClass:"match__end",on:{"click":_vm.endMatch}},[_vm._v("end match")])]),_c('div',{staticClass:"match__team",class:{'match__team--loser': _vm.internalMatch.winner ===  1, 'match__team--winner': _vm.internalMatch.winner === 2}},[_c('div',{staticClass:"team__name"},[_vm._v(_vm._s(_vm.internalMatch.away.club))]),_c('div',{staticClass:"team__player"},[_vm._v(_vm._s(_vm.internalMatch.away.player))])])])},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"match u-box u-box--large",class:{'match--playing': _vm.internalMatch.state === 'playing', 'match--done': _vm.internalMatch.state === 'done' , 'match--disabled': _vm.internalMatch.state === 'disabled', 'match--error': _vm.alert}},[_c('div',{staticClass:"match__team",class:{'match__team--winner': _vm.internalMatch.winner ===  1, 'match__team--loser': _vm.internalMatch.winner === 2 }},[_c('div',{staticClass:"team__name"},[_vm._v(_vm._s(_vm.internalMatch.home.club))]),_c('div',{staticClass:"team__player"},[_vm._v(_vm._s(_vm.internalMatch.home.player))])]),_c('div',{staticClass:"match__info",on:{"click":_vm.editMatch}},[_c('div',{staticClass:"match__live"},[_vm._v("live")]),_c('div',{staticClass:"match__score"},[_c('span',{class:{'match__score--winner': _vm.internalMatch.winner ===  1, 'match__score--loser': _vm.internalMatch.winner === 2}},[_vm._v(_vm._s(_vm.internalMatch.home.score))]),_c('span',{class:{'match__score--loser': _vm.internalMatch.winner ===  1, 'match__score--winner': _vm.internalMatch.winner === 2}},[_vm._v(_vm._s(_vm.internalMatch.away.score))])]),_c('div',{staticClass:"match__score--input"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.home.score),expression:"internalMatch.home.score"}],attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.home.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.home, "score", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.internalMatch.away.score),expression:"internalMatch.away.score"}],attrs:{"type":"number","min":"0"},domProps:{"value":(_vm.internalMatch.away.score)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.internalMatch.away, "score", $event.target.value)}}})]),_c('a',{staticClass:"match__start",on:{"click":_vm.startMatch}},[_vm._v("start match")]),_c('a',{staticClass:"match__end",on:{"click":_vm.endMatch}},[_vm._v("end match")])]),_c('div',{staticClass:"match__team",class:{'match__team--loser': _vm.internalMatch.winner ===  1, 'match__team--winner': _vm.internalMatch.winner === 2}},[_c('div',{staticClass:"team__name"},[_vm._v(_vm._s(_vm.internalMatch.away.club))]),_c('div',{staticClass:"team__player"},[_vm._v(_vm._s(_vm.internalMatch.away.player))])])])},
         staticRenderFns: []
       })
 "use strict";
@@ -506,7 +498,7 @@ ___scope___.file("pages/detail.vue", function(exports, require, module, __filena
 var _options = { _vueModuleId: 'data-v-8d3f1e3b'}
 Object.assign(_options, {
         _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page detail"},[_c('mut-header',{attrs:{"subtitle":_vm.name}}),_c('div',{staticClass:"page__content"},[_c('h3',[_vm._v("⚙️ "+_vm._s(_vm.type)+" settings ⚙️")]),(_vm.type === 'league')?[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Total players")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.totalPlayers),expression:"totalPlayers"}],attrs:{"type":"number"},domProps:{"value":(_vm.totalPlayers)},on:{"input":function($event){if($event.target.composing){ return; }_vm.totalPlayers=$event.target.value}}})]),_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Number of plays against each team")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.numberOfPlays),expression:"numberOfPlays"}],attrs:{"type":"number"},domProps:{"value":(_vm.numberOfPlays)},on:{"input":function($event){if($event.target.composing){ return; }_vm.numberOfPlays=$event.target.value}}})])]:_vm._e(),(_vm.type === 'knockout')?[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Total players")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.totalPlayers),expression:"totalPlayers"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.totalPlayers=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.knockoutTotalPlayerOptions),function(totalPlayers){return _c('option',{domProps:{"value":totalPlayers}},[_vm._v(_vm._s(totalPlayers))])}))])]:_vm._e(),(_vm.type === 'groupstage')?[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Total players")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.totalPlayers),expression:"totalPlayers"}],attrs:{"type":"number"},domProps:{"value":(_vm.totalPlayers)},on:{"input":function($event){if($event.target.composing){ return; }_vm.totalPlayers=$event.target.value}}})]),_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Number of proceeding players")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.numberOfProceedingPlayers),expression:"numberOfProceedingPlayers"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.numberOfProceedingPlayers=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.numberOfProceedingPlayersOptions),function(totalPlayers){return _c('option',{domProps:{"value":totalPlayers}},[_vm._v(_vm._s(totalPlayers))])}))])]:_vm._e(),_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.submit}},[_vm._v("submit")])],2)],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page detail"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[_c('h3',[_vm._v("⚙️ "+_vm._s(_vm.type)+" settings ⚙️")]),(_vm.type === 'league')?[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Total players")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.totalPlayers),expression:"totalPlayers"}],attrs:{"type":"number"},domProps:{"value":(_vm.totalPlayers)},on:{"input":function($event){if($event.target.composing){ return; }_vm.totalPlayers=$event.target.value}}})]),_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Number of plays against each team")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.numberOfPlays),expression:"numberOfPlays"}],attrs:{"type":"number"},domProps:{"value":(_vm.numberOfPlays)},on:{"input":function($event){if($event.target.composing){ return; }_vm.numberOfPlays=$event.target.value}}})])]:_vm._e(),(_vm.type === 'knockout')?[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Total players")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.totalPlayers),expression:"totalPlayers"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.totalPlayers=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.knockoutTotalPlayerOptions),function(totalPlayers){return _c('option',{domProps:{"value":totalPlayers}},[_vm._v(_vm._s(totalPlayers))])}))])]:_vm._e(),(_vm.type === 'groupstage')?[_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Total players")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.totalPlayers),expression:"totalPlayers"}],attrs:{"type":"number"},domProps:{"value":(_vm.totalPlayers)},on:{"input":function($event){if($event.target.composing){ return; }_vm.totalPlayers=$event.target.value}}})]),_c('div',{staticClass:"form__group"},[_c('label',[_vm._v("Number of proceeding players")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.numberOfProceedingPlayers),expression:"numberOfProceedingPlayers"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.numberOfProceedingPlayers=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.numberOfProceedingPlayersOptions),function(totalPlayers){return _c('option',{domProps:{"value":totalPlayers}},[_vm._v(_vm._s(totalPlayers))])}))])]:_vm._e(),_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.submit}},[_vm._v("submit")])],2)],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -606,7 +598,7 @@ var _options = { _vueModuleId: 'data-v-3aa42064'}
 Object.assign(_options, {_scopeId: 'data-v-3aa42064'})
 Object.assign(_options, {
         _scopeId: "data-v-3aa42064",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page teams"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[_c('h3',[_vm._v("🙏🏻 Give us some teams plz 🙏🏻")]),_c('div',{staticClass:"create-teams"},_vm._l((_vm.teams),function(team){return _c('mut-create-team',{attrs:{"team":team},on:{"addTeam":_vm.addTeam}})})),_c('div',{staticClass:"form__group"},[_c('label',{attrs:{"for":"randomize"}},[_vm._v("Randomly mix players and teams")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.randomly),expression:"randomly"}],attrs:{"type":"checkbox","id":"randomize"},domProps:{"checked":Array.isArray(_vm.randomly)?_vm._i(_vm.randomly,null)>-1:(_vm.randomly)},on:{"change":function($event){var $$a=_vm.randomly,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.randomly=$$a.concat([$$v]))}else{$$i>-1&&(_vm.randomly=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.randomly=$$c}}}})]),_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.submit}},[_vm._v("continue")])])],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page teams"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[_c('h3',[_vm._v("🙏🏻 Give us some teams plz 🙏🏻")]),_c('div',{staticClass:"create-teams"},_vm._l((_vm.teams),function(team){return _c('mut-create-team',{attrs:{"team":team},on:{"addTeam":_vm.addTeam}})})),_c('div',{staticClass:"form__group form__group--checkbox"},[_c('label',{attrs:{"for":"randomize"}},[_vm._v("Randomly mix players and teams")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.randomly),expression:"randomly"}],attrs:{"type":"checkbox","id":"randomize"},domProps:{"checked":Array.isArray(_vm.randomly)?_vm._i(_vm.randomly,null)>-1:(_vm.randomly)},on:{"change":function($event){var $$a=_vm.randomly,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.randomly=$$a.concat([$$v]))}else{$$i>-1&&(_vm.randomly=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.randomly=$$c}}}})]),_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.submit}},[_vm._v("continue")])])],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -620,7 +612,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
 } return target; };
 var vuex_1 = require("vuex");
-var migrations_1 = require("../helpers/migrations");
 exports["default"] = {
     data: function data() {
         return {
@@ -632,13 +623,13 @@ exports["default"] = {
         teams: 'currentTournament/teams'
     })),
     beforeMount: function beforeMount() {
-        var _this = this;
-        // JUST FOR DEVELOPMENT
-        var migratedTeams = migrations_1.generateDefaultTeams(this.teams.length);
-        this.teams.forEach(function (team, index) {
-            team = Object.assign(team, migratedTeams[index]);
-            _this.addTeam(team);
-        });
+        // // JUST FOR DEVELOPMENT
+        // const migratedTeams = generateDefaultTeams(this.teams.length);
+        //
+        // this.teams.forEach((team, index) => {
+        //   team = Object.assign(team, migratedTeams[index]);
+        //   this.addTeam(team);
+        // });
     },
     methods: {
         addTeam: function addTeam(team) {
@@ -670,26 +661,6 @@ require("~/components.css")
           }
         }
       
-});
-___scope___.file("helpers/migrations.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var id_generator_1 = require("../services/id-generator");
-var faker = require("faker");
-function generateDefaultTeams(length) {
-    var teams = [];
-    for (var i = 0; i < length; i++) {
-        teams.push({
-            id: id_generator_1.default.id(),
-            player: faker.name.findName(),
-            club: faker.address.country(),
-        });
-    }
-    return teams;
-}
-exports.generateDefaultTeams = generateDefaultTeams;
-//# sourceMappingURL=migrations.js.map
 });
 ___scope___.file("pages/summary.vue", function(exports, require, module, __filename, __dirname){
 
@@ -852,7 +823,7 @@ var _options = { _vueModuleId: 'data-v-5ee00795'}
 Object.assign(_options, {_scopeId: 'data-v-5ee00795'})
 Object.assign(_options, {
         _scopeId: "data-v-5ee00795",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.name))]),_c('v-flex',{staticClass:"mb-5",attrs:{"xs6":"xs6","offset-xs3":"offset-xs3"}},[_c('v-btn-toggle',{model:{value:(_vm.view),callback:function ($$v) {_vm.view=$$v},expression:"view"}},[_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"matches"}},[_vm._v("Matches")]),_c('v-btn',{attrs:{"color":"primary white--text","flat":"flat","value":"table"}},[_vm._v("Table")])],1)],1),(_vm.view === 'matches')?_c('v-flex',{staticClass:"mb-5",attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('mut-matches',{attrs:{"matches":_vm.matches},on:{"update":_vm.matchUpdate,"done":_vm.allMatchesPlayed}})],1):_vm._e(),(_vm.view === 'table')?_c('v-flex',{staticClass:"mb-5",attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('mut-table',{attrs:{"data":_vm.results}})],1):_vm._e(),(_vm.done)?_c('v-btn',{on:{"click":_vm.endTournament}},[_vm._v("End tournament")]):_vm._e()],1)],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page groupstage"},[_c('mut-header',[(_vm.view === 'matches')?_c('div',{staticClass:"button button--small button--secondary",on:{"click":function($event){_vm.toggleView('table')}}},[_vm._v("switch to table view")]):_vm._e(),(_vm.view === 'table')?_c('div',{staticClass:"button button--small button--secondary",on:{"click":function($event){_vm.toggleView('matches')}}},[_vm._v("switch to matches view")]):_vm._e()]),_c('div',{staticClass:"page__content"},[(_vm.view === 'matches')?[_c('mut-matches',{attrs:{"matches":_vm.matches},on:{"update":_vm.matchUpdate,"done":_vm.allMatchesPlayed}})]:_vm._e(),(_vm.view === 'table')?[_c('mut-table',{attrs:{"data":_vm.results}})]:_vm._e(),(_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.endTournament}},[_vm._v("End tournament")]):_vm._e()],2)],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -907,6 +878,9 @@ exports["default"] = {
         },
         endTournament: function endTournament() {
             this.$router.push("/results/" + this.$route.params.slug);
+        },
+        toggleView: function toggleView(state) {
+            this.view = state;
         }
     }
 };
@@ -932,9 +906,10 @@ require("~/components.css")
 ___scope___.file("pages/random.vue", function(exports, require, module, __filename, __dirname){
 
 var _options = { _vueModuleId: 'data-v-99bac771'}
+Object.assign(_options, {_scopeId: 'data-v-99bac771'})
 Object.assign(_options, {
-        _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-lg":"grid-list-lg"}},[_c('v-layout',{attrs:{"row":"row","wrap":"wrap","align-center":"align-center","justify-center":"justify-center"}},_vm._l((_vm.newTeams),function(team,index){return _c('v-flex',{attrs:{"md2":"md2"}},[_c('v-jumbotron',{attrs:{"gradient":_vm.gradient,"dark":"dark","height":"200"}},[_c('div',{staticClass:"math__side match__side--home pa-2"},[_c('div',{staticClass:"match__team"},[_vm._v(_vm._s(team.club)),_c('div',{staticClass:"match__player"},[_vm._v(_vm._s(team.player))])])])])],1)})),(!_vm.draw)?_c('v-flex',{attrs:{"mt-3":"mt-3"}},[_c('v-btn',{attrs:{"color":"primary"},on:{"click":_vm.startDraw}},[_vm._v("Draw")])],1):_vm._e(),(_vm.submitable)?_c('v-flex',{attrs:{"mt-3":"mt-3"}},[_c('v-btn',{attrs:{"color":"primary"},on:{"click":_vm.submit}},[_vm._v("Submit")])],1):_vm._e()],1)],1)},
+        _scopeId: "data-v-99bac771",
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page groupstage-draw"},[_c('mut-header',[(!_vm.done)?_c('a',{staticClass:"button button--small button--secondary",on:{"click":_vm.skip}},[_vm._v("Skip")]):_vm._e()]),_c('div',{staticClass:"page__content"},[_c('h1',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading && !_vm.showAllTeams),expression:"loading && !showAllTeams"}],staticClass:"loading"},[_vm._v("🥁")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.loading && !_vm.showAllTeams && !_vm.done),expression:"!loading && !showAllTeams && !done"}],staticClass:"name"},[_c('h1',[_vm._v(_vm._s(_vm.currentTeam.club))]),_c('div',{staticClass:"player"},[_vm._v(_vm._s(_vm.currentTeam.player))])]),_c('h1',{directives:[{name:"show",rawName:"v-show",value:(_vm.done),expression:"done"}],staticClass:"name"},[_vm._v("🦄 Draw finished 🦄")]),_c('div',{staticClass:"teams",class:{'teams--active': _vm.showAllTeams}},_vm._l((_vm.animatedTeams),function(team){return _c('div',{staticClass:"team",class:{'team--active': team.active}},[_c('div',{staticClass:"u-box"},[_c('div',[_vm._v(_vm._s(team.club))]),_c('div',[_vm._v(_vm._s(team.player))])])])})),(_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.start}},[_vm._v("Start "+_vm._s(_vm.type))]):_vm._e()])],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -949,53 +924,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 } return target; };
 var id_generator_1 = require("../services/id-generator");
 var vuex_1 = require("vuex");
+var shuffle_1 = require("../helpers/shuffle");
+var ANIMATION_TIME = 2000;
 exports["default"] = {
+    mounted: function mounted() {
+        this.randomizeTeams();
+        this.startDraw();
+    },
     data: function data() {
         return {
-            draw: false,
-            newTeams: [],
-            gradient: "to top, #7B1FA2, #E1BEE7",
-            submitable: false
+            animatedTeams: [],
+            currentTeam: {},
+            loading: true,
+            done: false,
+            showAllTeams: false,
+            loadingTimeout: undefined,
+            nameTimeout: undefined
         };
-    },
-    methods: {
-        getRandomPlayer: function getRandomPlayer() {
-            return this.players.splice(this.players.length * Math.random() | 0, 1)[0];
-        },
-        getRandomClub: function getRandomClub() {
-            return this.clubs.splice(this.clubs.length * Math.random() | 0, 1)[0];
-        },
-        startDraw: function startDraw() {
-            // TODO: redraw??
-            this.draw = true;
-            this.random();
-        },
-        random: function random() {
-            var _this = this;
-            var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-            setTimeout(function () {
-                _this.newTeams.push({
-                    club: _this.getRandomClub(),
-                    player: _this.getRandomPlayer(),
-                    id: id_generator_1["default"].id()
-                });
-                if (i < _this.teams.length - 1) {
-                    i++;
-                    _this.random(i);
-                }
-                else {
-                    _this.submitable = true;
-                }
-            }, 500);
-        },
-        submit: function submit() {
-            this.$store.dispatch("currentTournament/randomizeTeams", this.newTeams);
-            this.$router.push("/summary/" + this.slug);
-        }
     },
     computed: _extends({}, vuex_1.mapGetters({
         slug: 'currentTournament/slug',
-        teams: 'currentTournament/teams'
+        teams: 'currentTournament/teams',
+        type: 'currentTournament/type'
     }), {
         clubs: function clubs() {
             return this.teams.map(function (t) {
@@ -1007,10 +957,63 @@ exports["default"] = {
                 return t.player;
             });
         }
-    })
+    }),
+    methods: {
+        randomizeTeams: function randomizeTeams() {
+            var shuffledClubs = shuffle_1.shuffle(this.clubs);
+            var shuffledPlayers = shuffle_1.shuffle(this.players);
+            var shuffledTeams = [];
+            shuffledPlayers.forEach(function (club, index) {
+                shuffledTeams.push({
+                    club: shuffledClubs[index],
+                    player: shuffledPlayers[index],
+                    id: id_generator_1["default"].id()
+                });
+            });
+            this.$store.dispatch("currentTournament/randomizeTeams", shuffledTeams);
+        },
+        animate: function animate(index) {
+            var _this = this;
+            this.loading = true;
+            this.loadingTimeout = setTimeout(function () {
+                _this.loading = false;
+                _this.currentTeam = _this.animatedTeams[index];
+                _this.animatedTeams[index].active = true;
+                index++;
+                if (index >= _this.teams.length) {
+                    setTimeout(function () {
+                        _this.done = true;
+                    }, ANIMATION_TIME);
+                    return;
+                }
+                _this.nameTimeout = setTimeout(function () {
+                    _this.animate(index);
+                }, ANIMATION_TIME);
+            }, ANIMATION_TIME / 2);
+        },
+        skip: function skip() {
+            clearTimeout(this.loadingTimeout);
+            clearTimeout(this.nameTimeout);
+            this.showAllTeams = true;
+            this.done = true;
+        },
+        startDraw: function startDraw() {
+            var tmp = JSON.parse(JSON.stringify(this.teams));
+            tmp.forEach(function (team) {
+                team.active = false;
+            });
+            this.animatedTeams = tmp;
+            this.animate(0);
+        },
+        start: function start() {
+            this.$router.push('/summary/' + this.slug);
+        }
+    }
 };
 
 Object.assign(exports.default.options||exports.default, _options)
+
+require("~/components.css")
 
         var process = FuseBox.import('process');
 
@@ -1026,13 +1029,34 @@ Object.assign(exports.default.options||exports.default, _options)
         }
       
 });
+___scope___.file("helpers/shuffle.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
+}
+exports.shuffle = shuffle;
+//# sourceMappingURL=shuffle.js.map
+});
 ___scope___.file("pages/knockout.vue", function(exports, require, module, __filename, __dirname){
 
 var _options = { _vueModuleId: 'data-v-b08d76a6'}
 Object.assign(_options, {_scopeId: 'data-v-b08d76a6'})
 Object.assign(_options, {
         _scopeId: "data-v-b08d76a6",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page knockout"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[(_vm.startRoundState)?_c('div',{staticClass:"button button--tertiary next-round",on:{"click":_vm.startRound}},[_vm._v("Start next round")]):_vm._e(),(_vm.view === 'matches')?[_c('mut-matches',{attrs:{"matches":_vm.activeRound,"noTieAllowed":true},on:{"update":_vm.matchUpdate,"done":_vm.allMatchesPlayed}})]:_vm._e(),(_vm.view === 'tree')?_c('div',{staticClass:"bracket",class:_vm.totalRoundsClass},_vm._l((_vm.internalRounds),function(round){return _c('div',{staticClass:"round",class:[round.classes, _vm.isInactive(round.round)]},[_c('h3',[_vm._v(_vm._s(_vm.getNameOfRound(round)))]),_c('div',{staticClass:"matches"},_vm._l((round.matches),function(match){return _c('mut-knockout-match',{attrs:{"home":match.home,"away":match.away}})}))])})):_vm._e()],2)],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page knockout"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[(_vm.startRoundState)?_c('div',{staticClass:"button button--tertiary next-round",on:{"click":_vm.startRound}},[_vm._v("Start next round")]):_vm._e(),(_vm.view === 'matches')?[_c('mut-matches',{attrs:{"matches":_vm.activeRound,"noTieAllowed":true},on:{"update":_vm.matchUpdate,"done":_vm.allMatchesPlayed}}),(_vm.completeRound)?_c('div',{staticClass:"button button--tertiary",on:{"click":_vm.complete}},[_vm._v("Complete Round")]):_vm._e()]:_vm._e(),(_vm.view === 'tree')?_c('div',{staticClass:"bracket",class:_vm.totalRoundsClass},_vm._l((_vm.internalRounds),function(round){return _c('div',{staticClass:"round",class:[round.classes, _vm.isInactive(round.round)]},[_c('h3',[_vm._v(_vm._s(_vm.getNameOfRound(round)))]),_c('div',{staticClass:"matches"},_vm._l((round.matches),function(match){return _c('mut-knockout-match',{attrs:{"home":match.home,"away":match.away}})}))])})):_vm._e()],2)],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -1062,6 +1086,7 @@ exports["default"] = {
         this.view = this.startRoundState || this.tournamentComplete ? 'tree' : 'matches';
     },
     computed: _extends({}, vuex_1.mapGetters({
+        slug: 'currentTournament/slug',
         rounds: 'knockout/rounds',
         activeRound: 'knockout/round',
         activeRoundId: 'knockout/activeRoundId',
@@ -1093,8 +1118,13 @@ exports["default"] = {
             this.completeRound = true;
         },
         complete: function complete() {
+            var _this = this;
             this.view = 'tree';
-            this.$store.dispatch('knockout/completeRound');
+            this.$store.dispatch('knockout/completeRound').then(function () {
+                if (_this.winner) {
+                    _this.$router.push('/results/' + _this.slug);
+                }
+            });
         },
         startRound: function startRound() {
             this.view = 'matches';
@@ -1197,9 +1227,10 @@ exports.getRoundName = getRoundName;
 ___scope___.file("pages/results.vue", function(exports, require, module, __filename, __dirname){
 
 var _options = { _vueModuleId: 'data-v-ab57f7f0'}
+Object.assign(_options, {_scopeId: 'data-v-ab57f7f0'})
 Object.assign(_options, {
-        _scopeId: null,
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('v-container',{attrs:{"grid-list-md":"grid-list-md"}},[_c('h2',{staticClass:"display-2 accent--text mb-5"},[_vm._v(_vm._s(_vm.name)+" results")]),_c('v-flex',{attrs:{"xs12":"xs12","xl8":"xl8","offset-xl2":"offset-xl2"}},[_c('mut-table',{attrs:{"data":_vm.results}})],1)],1)],1)},
+        _scopeId: "data-v-ab57f7f0",
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page results u-background--gradient u-height--full"},[_c('div',{staticClass:"page__content page__content--center"},[_c('div',{staticClass:"icon"},[_vm._v("🏆")]),_c('h1',[_vm._v(_vm._s(_vm.winner.team))]),(_vm.type === 'league')?[_c('div',{staticClass:"icon--small"},[_vm._v("⚽️")]),_c('h2',[_vm._v(_vm._s(_vm.topscorer.team))]),_c('h2',[_vm._v(_vm._s(_vm.topscorer.scored)+" goals scored")])]:_vm._e(),(_vm.type === 'league')?[_c('div',{staticClass:"icon--small"},[_vm._v("🛡")]),_c('h2',[_vm._v(_vm._s(_vm.topdefence.team))]),_c('h2',[_vm._v(_vm._s(_vm.topdefence.against)+" goals against")])]:_vm._e(),_c('div',{staticClass:"button",on:{"click":_vm.endTournament}},[_vm._v("End tournament")])],2)])},
         staticRenderFns: []
       })
 "use strict";
@@ -1213,13 +1244,54 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
 } return target; };
 var vuex_1 = require("vuex");
+var order_by_property_1 = require("../helpers/order-by-property");
 exports["default"] = {
+    mounted: function mounted() {
+        this.table();
+    },
+    data: function data() {
+        return {
+            winner: {},
+            topscorer: {},
+            topdefence: {}
+        };
+    },
     computed: _extends({}, vuex_1.mapGetters({
-        name: 'currentTournament/name',
-        table: 'league/table'
-    }), {
-        results: function results() {
-            return this.table.map(function (t) {
+        type: 'currentTournament/type',
+        leagueTable: 'league/table',
+        knockoutWinner: 'knockout/winner'
+    })),
+    methods: {
+        endTournament: function endTournament() {
+            this.$router.push('/');
+        },
+        table: function table() {
+            switch (this.type) {
+                case 'league':
+                    var flattenedTable = this.flattenTable(this.leagueTable);
+                    var winnerTable = flattenedTable.sort(order_by_property_1.orderByProperty('points', 'difference', 'scored')).reverse();
+                    this.winner = winnerTable[0];
+                    var scoredTable = winnerTable.sort(order_by_property_1.orderByProperty('scored', 'difference')).reverse();
+                    this.topscorer = scoredTable[0];
+                    var defenceTable = scoredTable.sort(order_by_property_1.orderByProperty('against', 'difference'));
+                    this.topdefence = defenceTable[0];
+                    break;
+                case 'knockout':
+                    this.winner = {
+                        team: this.knockoutWinner.club + ' (' + this.knockoutWinner.player + ')'
+                    };
+                    break;
+                case 'groupstage':
+                    this.winner = {
+                        team: this.knockoutWinner.club + ' (' + this.knockoutWinner.player + ')'
+                    };
+                    // get all group tables and join them
+                    // get all knockout stats
+                    break;
+            }
+        },
+        flattenTable: function flattenTable(table) {
+            return table.map(function (t) {
                 return {
                     team: t.club + ' (' + t.player + ')',
                     played: t.stats.played,
@@ -1233,10 +1305,12 @@ exports["default"] = {
                 };
             });
         }
-    })
+    }
 };
 
 Object.assign(exports.default.options||exports.default, _options)
+
+require("~/components.css")
 
         var process = FuseBox.import('process');
 
@@ -1252,13 +1326,30 @@ Object.assign(exports.default.options||exports.default, _options)
         }
       
 });
+___scope___.file("helpers/order-by-property.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function orderByProperty(prop) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function (a, b) {
+        var equality = a[prop] - b[prop];
+        if (equality === 0 && arguments.length > 1) {
+            return orderByProperty.apply(null, args)(a, b);
+        }
+        return equality;
+    };
+}
+exports.orderByProperty = orderByProperty;
+//# sourceMappingURL=order-by-property.js.map
+});
 ___scope___.file("pages/groupstage.vue", function(exports, require, module, __filename, __dirname){
 
 var _options = { _vueModuleId: 'data-v-a464e7f1'}
 Object.assign(_options, {_scopeId: 'data-v-a464e7f1'})
 Object.assign(_options, {
         _scopeId: "data-v-a464e7f1",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page groupstage"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[_vm._l((_vm.groups),function(group,index){return [_c('h3',{staticClass:"group__title"},[_vm._v(_vm._s(group.name))]),(_vm.view === 'matches')?[_c('mut-matches',{attrs:{"matches":group.matches},on:{"update":function($event){_vm.matchUpdate(index, $event)},"done":function($event){_vm.allMatchesPlayed(index)}}})]:_vm._e(),(_vm.view === 'table')?[_c('mut-table',{attrs:{"data":_vm.results(group)}})]:_vm._e()]}),(_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.endGroupstage}},[_vm._v("End groupstage")]):_vm._e()],2)],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page groupstage"},[_c('mut-header',[(_vm.view === 'matches')?_c('div',{staticClass:"button button--small button--secondary",on:{"click":function($event){_vm.toggleView('table')}}},[_vm._v("switch to table view")]):_vm._e(),(_vm.view === 'table')?_c('div',{staticClass:"button button--small button--secondary",on:{"click":function($event){_vm.toggleView('matches')}}},[_vm._v("switch to matches view")]):_vm._e()]),_c('div',{staticClass:"page__content"},[_c('div',{ref:"shortcuts",staticClass:"groupstage__shortcuts"},_vm._l((_vm.groups),function(group){return _c('span',{on:{"click":function($event){_vm.scrollToGroup(group.name)}}},[_vm._v(_vm._s(group.name))])})),_vm._l((_vm.groups),function(group,index){return [_c('h3',{ref:_vm.generateId(group.name),refInFor:true,staticClass:"group__title"},[_vm._v(_vm._s(group.name))]),(_vm.view === 'matches')?[_c('mut-matches',{attrs:{"matches":group.matches},on:{"update":function($event){_vm.matchUpdate(index, $event)},"done":function($event){_vm.allMatchesPlayed(index)}}})]:_vm._e(),(_vm.view === 'table')?[_c('mut-table',{attrs:{"data":_vm.results(group)}})]:_vm._e()]}),(_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.endGroupstage}},[_vm._v("End groupstage")]):_vm._e()],2)],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -1282,6 +1373,7 @@ else {
 } }
 var vuex_1 = require("vuex");
 var order_by_property_1 = require("../helpers/order-by-property");
+var slug_1 = require("slug");
 exports["default"] = {
     beforeMount: function beforeMount() {
         this.$store.dispatch('groupstage/updateTables');
@@ -1306,6 +1398,15 @@ exports["default"] = {
         }
     }),
     methods: {
+        generateId: function generateId(group) {
+            return "" + slug_1["default"](group.toLowerCase());
+        },
+        scrollToGroup: function scrollToGroup(group) {
+            var element = this.$refs[this.generateId(group)];
+            var shortCutElement = this.$refs['shortcuts'];
+            var top = element[0].offsetTop - (shortCutElement.offsetTop + 100); // scroll to 100px below the shortcut ;)
+            window.scrollTo(0, top);
+        },
         matchUpdate: function matchUpdate(index, event) {
             this.$store.dispatch("groupstage/updateMatch", {
                 groupIndex: index,
@@ -1374,6 +1475,9 @@ exports["default"] = {
                     pointsAverage: t.stats.points === 0 ? 0 : t.stats.points / t.stats.played
                 };
             });
+        },
+        toggleView: function toggleView(state) {
+            this.view = state;
         }
     }
 };
@@ -1396,30 +1500,13 @@ require("~/components.css")
         }
       
 });
-___scope___.file("helpers/order-by-property.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function orderByProperty(prop) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return function (a, b) {
-        var equality = a[prop] - b[prop];
-        if (equality === 0 && arguments.length > 1) {
-            return orderByProperty.apply(null, args)(a, b);
-        }
-        return equality;
-    };
-}
-exports.orderByProperty = orderByProperty;
-//# sourceMappingURL=order-by-property.js.map
-});
 ___scope___.file("pages/groupstage-draw.vue", function(exports, require, module, __filename, __dirname){
 
 var _options = { _vueModuleId: 'data-v-ea9d0fdc'}
 Object.assign(_options, {_scopeId: 'data-v-ea9d0fdc'})
 Object.assign(_options, {
         _scopeId: "data-v-ea9d0fdc",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page groupstage-draw"},[_c('mut-header',[_c('div',{staticClass:"button button--small button--secondary"},[_vm._v("test")])]),_c('div',{staticClass:"page__content"},[_c('h1',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading && !_vm.showAllTeams),expression:"loading && !showAllTeams"}],staticClass:"loading"},[_vm._v("🥁")]),_c('h1',{directives:[{name:"show",rawName:"v-show",value:(!_vm.loading && !_vm.showAllTeams),expression:"!loading && !showAllTeams"}],staticClass:"name"},[_vm._v(_vm._s(_vm.currentTeam.club)+" ("+_vm._s(_vm.currentTeam.player)+")")]),_c('h1',{directives:[{name:"show",rawName:"v-show",value:(_vm.done),expression:"done"}],staticClass:"name"},[_vm._v("🦄 Draw finished 🦄")]),_c('div',{staticClass:"groups",class:{'groups--active': _vm.showAllTeams}},_vm._l((_vm.animatedGroups),function(group){return _c('div',{staticClass:"group"},[_c('h3',[_vm._v(_vm._s(group.name))]),_vm._l((group.teams),function(team){return _c('div',{staticClass:"team",class:{'team--active': team.active}},[_vm._v(_vm._s(team.club)+" ("+_vm._s(team.player)+")")])})],2)})),(_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.startGroupstage}},[_vm._v("Start groupstage")]):_vm._e(),(!_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.skip}},[_vm._v("Skip")]):_vm._e()])],1)},
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"page groupstage-draw"},[_c('mut-header'),_c('div',{staticClass:"page__content"},[_c('h1',{directives:[{name:"show",rawName:"v-show",value:(_vm.loading && !_vm.showAllTeams),expression:"loading && !showAllTeams"}],staticClass:"loading"},[_vm._v("🥁")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.loading && !_vm.showAllTeams && !_vm.done),expression:"!loading && !showAllTeams && !done"}],staticClass:"name"},[_c('h1',[_vm._v(_vm._s(_vm.currentTeam.club))]),_c('div',{staticClass:"player"},[_vm._v(_vm._s(_vm.currentTeam.player))])]),_c('h1',{directives:[{name:"show",rawName:"v-show",value:(_vm.done),expression:"done"}],staticClass:"name"},[_vm._v("🦄 Draw finished 🦄")]),_c('div',{staticClass:"groups",class:{'groups--active': _vm.showAllTeams}},_vm._l((_vm.animatedGroups),function(group){return _c('div',{staticClass:"group"},[_c('h3',[_vm._v(_vm._s(group.name))]),_vm._l((group.teams),function(team){return _c('div',{staticClass:"team",class:{'team--active': team.active}},[_vm._v(_vm._s(team.club)+" ("+_vm._s(team.player)+")")])})],2)})),(_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.startGroupstage}},[_vm._v("Start groupstage")]):_vm._e(),(!_vm.done)?_c('a',{staticClass:"button button--tertiary",on:{"click":_vm.skip}},[_vm._v("Skip")]):_vm._e()])],1)},
         staticRenderFns: []
       })
 "use strict";
@@ -1532,7 +1619,9 @@ exports["default"] = {
                     currentGroupIndex++;
                 }
                 if (currentGroupIndex >= _this.groups.length) {
-                    _this.done = true;
+                    setTimeout(function () {
+                        _this.done = true;
+                    }, ANIMATION_TIME);
                     return;
                 }
                 _this.nameTimeout = setTimeout(function () {
@@ -1569,27 +1658,6 @@ require("~/components.css")
           }
         }
       
-});
-___scope___.file("helpers/shuffle.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-    return array;
-}
-exports.shuffle = shuffle;
-//# sourceMappingURL=shuffle.js.map
 });
 ___scope___.file("components/matches.vue", function(exports, require, module, __filename, __dirname){
 
@@ -1739,8 +1807,8 @@ var _options = { _vueModuleId: 'data-v-c19e09a8'}
 Object.assign(_options, {_scopeId: 'data-v-c19e09a8'})
 Object.assign(_options, {
         _scopeId: "data-v-c19e09a8",
-        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"table u-box"},[_vm._m(0),_vm._l((_vm.sortedResults),function(result){return _c('div',{staticClass:"table__row"},[_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.team))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.played))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.wins))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.draws))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.losses))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.scored))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.against))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.difference))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.points))])])})],2)},
-        staticRenderFns: [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"table__row"},[_c('div',{staticClass:"table__item"},[_vm._v("Team")]),_c('div',{staticClass:"table__item"},[_vm._v("Played")]),_c('div',{staticClass:"table__item"},[_vm._v("Wins")]),_c('div',{staticClass:"table__item"},[_vm._v("Draws")]),_c('div',{staticClass:"table__item"},[_vm._v("Losses")]),_c('div',{staticClass:"table__item"},[_vm._v("Scored")]),_c('div',{staticClass:"table__item"},[_vm._v("Against")]),_c('div',{staticClass:"table__item"},[_vm._v("Difference")]),_c('div',{staticClass:"table__item"},[_vm._v("Points")])])}]
+        render: function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"table u-box"},[_vm._m(0),_vm._l((_vm.sortedResults),function(result,index){return _c('div',{staticClass:"table__row"},[_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(index + 1))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.team))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.played))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.wins))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.draws))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.losses))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.scored))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.against))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.difference))]),_c('div',{staticClass:"table__item"},[_vm._v(_vm._s(result.points))])])})],2)},
+        staticRenderFns: [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"table__row"},[_c('div',{staticClass:"table__item"},[_vm._v("#")]),_c('div',{staticClass:"table__item"},[_vm._v("Team")]),_c('div',{staticClass:"table__item"},[_vm._v("Played")]),_c('div',{staticClass:"table__item"},[_vm._v("Wins")]),_c('div',{staticClass:"table__item"},[_vm._v("Draws")]),_c('div',{staticClass:"table__item"},[_vm._v("Losses")]),_c('div',{staticClass:"table__item"},[_vm._v("Scored")]),_c('div',{staticClass:"table__item"},[_vm._v("Against")]),_c('div',{staticClass:"table__item"},[_vm._v("Difference")]),_c('div',{staticClass:"table__item"},[_vm._v("Points")])])}]
       })
 "use strict";
 exports.__esModule = true;
@@ -1929,6 +1997,7 @@ exports.default = {
             id: id,
             slug: slug,
             name: name,
+            teams: [],
             type: type,
             details: {},
             league: {
@@ -2025,33 +2094,7 @@ exports.default = {
     tournamentBySlug: function (state) { return function (slug) {
         var tournament = state.tournaments.find(function (tournament) { return tournament.slug === slug; });
         return tournament || {};
-    }; },
-    tournament: function (state) { return function (slug) {
-        var tournament = state.tournaments.find(function (tournament) { return tournament.slug === slug; });
-        if (!tournament) {
-            throw new Error("Tournament with name " + slug + " not find");
-        }
-        return {
-            name: function () {
-                return tournament.name;
-            },
-            type: function () {
-                return tournament.type;
-            },
-            slug: function () {
-                return tournament.slug;
-            },
-            teams: function () {
-                return tournament.teams;
-            },
-            page: function () {
-                return tournament.page;
-            },
-            numberOfPlays: function () {
-                return tournament.details.numberOfPlays;
-            },
-        };
-    }; },
+    }; }
 };
 //# sourceMappingURL=getters.js.map
 });
@@ -2069,265 +2112,282 @@ var localStoragePlugin = function (store) {
 exports.default = [localStoragePlugin];
 //# sourceMappingURL=plugins.js.map
 });
-___scope___.file("store/modules/current-tournament.js", function(exports, require, module, __filename, __dirname){
+___scope___.file("store/modules/current-tournament/index.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var getters_1 = require("./getters");
+var actions_1 = require("./actions");
+var mutations_1 = require("./mutations");
 exports.default = {
     namespaced: true,
     state: {
         id: undefined
     },
-    getters: {
-        id: function (state) {
-            return state.id;
-        },
-        tournament: function (state, getters, rootState, rootGetters) {
-            return rootGetters.tournamentById(state.id);
-        },
-        page: function (state, getters) {
-            return getters.tournament.page;
-        },
-        name: function (state, getters) {
-            return getters.tournament.name;
-        },
-        type: function (state, getters) {
-            return getters.tournament.type;
-        },
-        slug: function (state, getters) {
-            return getters.tournament.slug;
-        },
-        teams: function (state, getters) {
-            if (getters.tournament.teams)
-                return getters.tournament.teams;
-        },
-        totalTeams: function (state, getters) {
-            if (getters.tournament.teams)
-                return getters.tournament.teams.length;
-        },
-        matchList: function (state, getters) {
-            return getters.tournament.matches;
-        },
-        numberOfPlays: function (state, getters) {
-            if (getters.tournament.details) {
-                return getters.tournament.details.numberOfPlays;
-            }
-        },
-        numberOfProceedingPlayers: function (state, getters) {
-            if (getters.tournament.details) {
-                return getters.tournament.details.numberOfProceedingPlayers;
-            }
-        },
-    },
-    mutations: {
-        set: function (state, tournamentId) {
-            state.id = tournamentId;
-        },
-        reset: function (state) {
-            state.id = undefined;
-        },
-        updateDetails: function (state, _a) {
-            var tournament = _a.tournament, details = _a.details;
-            tournament.details = Object.assign({}, tournament.details, details);
-        },
-        addEmptyTeams: function (state, _a) {
-            var tournament = _a.tournament, teams = _a.teams;
-            tournament.teams = teams;
-        },
-        randomizeTeams: function (state, _a) {
-            var tournament = _a.tournament, randomizedTeams = _a.randomizedTeams;
-            tournament.teams = randomizedTeams;
-        },
-        addTeam: function (state, _a) {
-            var tournament = _a.tournament, team = _a.team;
-            if (!tournament.teams)
-                tournament.teams = [];
-            var index = tournament.teams.findIndex(function (t) { return t.id === team.id; });
-            if (index < 0) {
-                tournament.teams.push(team);
-            }
-            else {
-                tournament.teams[index] = team;
-            }
-        },
-        setProgress: function (state, _a) {
-            var tournament = _a.tournament, page = _a.page;
-            tournament.page = page;
-        },
-    },
-    actions: {
-        set: function (_a, tournamentId) {
-            var commit = _a.commit;
-            commit('set', tournamentId);
-            commit('league/set', tournamentId, {
-                root: true
-            });
-            commit('knockout/set', tournamentId, {
-                root: true
-            });
-            commit('groupstage/set', tournamentId, {
-                root: true
-            });
-        },
-        reset: function (_a) {
-            var commit = _a.commit;
-            commit('reset');
-            commit('league/reset', null, {
-                root: true
-            });
-            commit('knockout/reset', null, {
-                root: true
-            });
-            commit('groupstage/reset', null, {
-                root: true
-            });
-        },
-        updateDetails: function (_a, details) {
-            var commit = _a.commit, state = _a.state, rootState = _a.rootState;
-            var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
-            if (tournament) {
-                commit('updateDetails', {
-                    tournament: tournament,
-                    details: details
-                });
-            }
-        },
-        addEmptyTeams: function (_a, teams) {
-            var commit = _a.commit, state = _a.state, rootState = _a.rootState;
-            var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
-            if (tournament) {
-                commit('addEmptyTeams', {
-                    tournament: tournament,
-                    teams: teams
-                });
-            }
-        },
-        randomizeTeams: function (_a, randomizedTeams) {
-            var commit = _a.commit, state = _a.state, rootState = _a.rootState;
-            var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
-            if (tournament) {
-                commit('randomizeTeams', {
-                    tournament: tournament,
-                    randomizedTeams: randomizedTeams
-                });
-            }
-        },
-        addTeam: function (_a, team) {
-            var commit = _a.commit, state = _a.state, rootState = _a.rootState;
-            var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
-            if (tournament) {
-                commit('addTeam', {
-                    tournament: tournament,
-                    team: team
-                });
-            }
-        },
-        setProgress: function (_a, page) {
-            var state = _a.state, getters = _a.getters, commit = _a.commit;
-            var tournament = getters.tournament;
-            commit('setProgress', {
-                tournament: tournament,
-                page: page
-            });
-        },
-    }
+    getters: getters_1.default,
+    mutations: mutations_1.default,
+    actions: actions_1.default
 };
-//# sourceMappingURL=current-tournament.js.map
+//# sourceMappingURL=index.js.map
 });
-___scope___.file("store/modules/league.js", function(exports, require, module, __filename, __dirname){
+___scope___.file("store/modules/current-tournament/getters.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var config_1 = require("../../config");
-var table_1 = require("../../helpers/table");
 exports.default = {
-    namespaced: true,
-    state: {
-        id: undefined
+    id: function (state) {
+        return state.id;
     },
-    getters: {
-        id: function (state) {
-            return state.id;
-        },
-        tournament: function (state, getters, rootState, rootGetters) {
-            return rootGetters.tournamentById(state.id);
-        },
-        league: function (state, getters) {
-            if (getters.tournament)
-                return getters.tournament.league;
-        },
-        matches: function (state, getters) {
-            if (getters.league)
-                return getters.league.matches;
-        },
-        completed: function (state, getters) {
-            if (getters.league)
-                return getters.league.done;
-        },
-        table: function (state, getters) {
-            if (getters.league)
-                return getters.league.table;
-        },
+    tournament: function (state, getters, rootState, rootGetters) {
+        return rootGetters.tournamentById(state.id);
     },
-    mutations: {
-        set: function (state, tournamentId) {
-            state.id = tournamentId;
-        },
-        reset: function (state) {
-            state.id = undefined;
-        },
-        complete: function (state, tournament) {
-            tournament.league.done = true;
-        },
-        updateMatchScore: function (state, _a) {
-            var tournament = _a.tournament, matchIndex = _a.matchIndex, match = _a.match;
-            if (matchIndex > -1) {
-                tournament.league.matches[matchIndex] = match;
-            }
-        },
-        addMatches: function (state, _a) {
-            var tournament = _a.tournament, matches = _a.matches;
-            tournament.league.matches = matches;
-        },
-        updateTable: function (state, _a) {
-            var tournament = _a.tournament, table = _a.table;
-            tournament.league.table = table;
+    page: function (state, getters) {
+        return getters.tournament.page;
+    },
+    name: function (state, getters) {
+        return getters.tournament.name;
+    },
+    type: function (state, getters) {
+        return getters.tournament.type;
+    },
+    slug: function (state, getters) {
+        return getters.tournament.slug;
+    },
+    teams: function (state, getters) {
+        if (getters.tournament.teams)
+            return getters.tournament.teams;
+    },
+    totalTeams: function (state, getters) {
+        if (getters.tournament.teams)
+            return getters.tournament.teams.length;
+    },
+    matchList: function (state, getters) {
+        return getters.tournament.matches;
+    },
+    numberOfPlays: function (state, getters) {
+        if (getters.tournament.details) {
+            return getters.tournament.details.numberOfPlays;
         }
     },
-    actions: {
-        complete: function (_a) {
-            var commit = _a.commit, getters = _a.getters;
-            var tournament = getters.tournament;
-            commit('complete', tournament);
-        },
-        updateMatchScore: function (_a, match) {
-            var commit = _a.commit, getters = _a.getters;
-            var tournament = getters.tournament;
-            var matchIndex = tournament.league.matches.findIndex(function (m) { return m.id === match.id; });
-            commit('updateMatchScore', { tournament: tournament, matchIndex: matchIndex, match: match });
-        },
-        addMatches: function (_a, matches) {
-            var commit = _a.commit, getters = _a.getters;
-            var tournament = getters.tournament;
-            commit('addMatches', { tournament: tournament, matches: matches });
-        },
-        updateTable: function (_a) {
-            var commit = _a.commit, getters = _a.getters;
-            var tournament = getters.tournament;
-            var completedMatches = tournament.league.matches.filter(function (match) {
-                return match.state === config_1.matchStates.DONE;
-            });
-            var table = table_1.getTable(tournament.teams, completedMatches);
-            commit('updateTable', { tournament: tournament, table: table });
-        },
-        updateMatch: function (_a, match) {
-            var commit = _a.commit, dispatch = _a.dispatch, state = _a.state;
-            dispatch('updateMatchScore', match);
-            dispatch('updateTable');
-        },
+    numberOfProceedingPlayers: function (state, getters) {
+        if (getters.tournament.details) {
+            return getters.tournament.details.numberOfProceedingPlayers;
+        }
     }
 };
-//# sourceMappingURL=league.js.map
+//# sourceMappingURL=getters.js.map
+});
+___scope___.file("store/modules/current-tournament/actions.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    set: function (_a, tournamentId) {
+        var commit = _a.commit;
+        commit('set', tournamentId);
+        commit('league/set', tournamentId, {
+            root: true
+        });
+        commit('knockout/set', tournamentId, {
+            root: true
+        });
+        commit('groupstage/set', tournamentId, {
+            root: true
+        });
+    },
+    reset: function (_a) {
+        var commit = _a.commit;
+        commit('reset');
+        commit('league/reset', null, {
+            root: true
+        });
+        commit('knockout/reset', null, {
+            root: true
+        });
+        commit('groupstage/reset', null, {
+            root: true
+        });
+    },
+    updateDetails: function (_a, details) {
+        var commit = _a.commit, state = _a.state, rootState = _a.rootState;
+        var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
+        if (tournament) {
+            commit('updateDetails', {
+                tournament: tournament,
+                details: details
+            });
+        }
+    },
+    addEmptyTeams: function (_a, teams) {
+        var commit = _a.commit, state = _a.state, rootState = _a.rootState;
+        var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
+        if (tournament) {
+            commit('addEmptyTeams', {
+                tournament: tournament,
+                teams: teams
+            });
+        }
+    },
+    randomizeTeams: function (_a, randomizedTeams) {
+        var commit = _a.commit, state = _a.state, rootState = _a.rootState;
+        var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
+        if (tournament) {
+            commit('randomizeTeams', {
+                tournament: tournament,
+                randomizedTeams: randomizedTeams
+            });
+        }
+    },
+    addTeam: function (_a, team) {
+        var commit = _a.commit, state = _a.state, rootState = _a.rootState;
+        var tournament = rootState.tournaments.find(function (t) { return t.id === state.id; });
+        if (tournament) {
+            commit('addTeam', {
+                tournament: tournament,
+                team: team
+            });
+        }
+    },
+    setProgress: function (_a, page) {
+        var state = _a.state, getters = _a.getters, commit = _a.commit;
+        var tournament = getters.tournament;
+        commit('setProgress', {
+            tournament: tournament,
+            page: page
+        });
+    }
+};
+//# sourceMappingURL=actions.js.map
+});
+___scope___.file("store/modules/current-tournament/mutations.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    set: function (state, tournamentId) {
+        state.id = tournamentId;
+    },
+    reset: function (state) {
+        state.id = undefined;
+    },
+    updateDetails: function (state, _a) {
+        var tournament = _a.tournament, details = _a.details;
+        tournament.details = Object.assign({}, tournament.details, details);
+    },
+    addEmptyTeams: function (state, _a) {
+        var tournament = _a.tournament, teams = _a.teams;
+        tournament.teams = teams;
+    },
+    randomizeTeams: function (state, _a) {
+        var tournament = _a.tournament, randomizedTeams = _a.randomizedTeams;
+        tournament.teams = randomizedTeams;
+    },
+    addTeam: function (state, _a) {
+        var tournament = _a.tournament, team = _a.team;
+        if (!tournament.teams)
+            tournament.teams = [];
+        var index = tournament.teams.findIndex(function (t) { return t.id === team.id; });
+        if (index < 0) {
+            tournament.teams.push(team);
+        }
+        else {
+            tournament.teams[index] = team;
+        }
+    },
+    setProgress: function (state, _a) {
+        var tournament = _a.tournament, page = _a.page;
+        tournament.page = page;
+    }
+};
+//# sourceMappingURL=mutations.js.map
+});
+___scope___.file("store/modules/league/index.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var getters_1 = require("./getters");
+var actions_1 = require("./actions");
+var mutations_1 = require("./mutations");
+exports.default = {
+    namespaced: true,
+    state: {
+        id: undefined
+    },
+    getters: getters_1.default,
+    mutations: mutations_1.default,
+    actions: actions_1.default
+};
+//# sourceMappingURL=index.js.map
+});
+___scope___.file("store/modules/league/getters.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    id: function (state) {
+        return state.id;
+    },
+    tournament: function (state, getters, rootState, rootGetters) {
+        return rootGetters.tournamentById(state.id);
+    },
+    league: function (state, getters) {
+        if (getters.tournament)
+            return getters.tournament.league;
+    },
+    matches: function (state, getters) {
+        if (getters.league)
+            return getters.league.matches;
+    },
+    completed: function (state, getters) {
+        if (getters.league)
+            return getters.league.done;
+    },
+    table: function (state, getters) {
+        if (getters.league)
+            return getters.league.table;
+    }
+};
+//# sourceMappingURL=getters.js.map
+});
+___scope___.file("store/modules/league/actions.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var config_1 = require("../../../config");
+var table_1 = require("../../../helpers/table");
+exports.default = {
+    complete: function (_a) {
+        var commit = _a.commit, getters = _a.getters;
+        var tournament = getters.tournament;
+        commit('complete', tournament);
+    },
+    updateMatchScore: function (_a, match) {
+        var commit = _a.commit, getters = _a.getters;
+        var tournament = getters.tournament;
+        var matchIndex = tournament.league.matches.findIndex(function (m) { return m.id === match.id; });
+        commit('updateMatchScore', { tournament: tournament, matchIndex: matchIndex, match: match });
+    },
+    addMatches: function (_a, matches) {
+        var commit = _a.commit, getters = _a.getters;
+        var tournament = getters.tournament;
+        commit('addMatches', { tournament: tournament, matches: matches });
+    },
+    updateTable: function (_a) {
+        var commit = _a.commit, getters = _a.getters;
+        var tournament = getters.tournament;
+        var completedMatches = tournament.league.matches.filter(function (match) {
+            return match.state === config_1.matchStates.DONE;
+        });
+        var table = table_1.getTable(tournament.teams, completedMatches);
+        commit('updateTable', { tournament: tournament, table: table });
+    },
+    updateMatch: function (_a, match) {
+        var commit = _a.commit, dispatch = _a.dispatch, state = _a.state;
+        dispatch('updateMatchScore', match);
+        dispatch('updateTable');
+    }
+};
+//# sourceMappingURL=actions.js.map
 });
 ___scope___.file("helpers/table.js", function(exports, require, module, __filename, __dirname){
 
@@ -2391,6 +2451,37 @@ function getTable(teams, matches) {
 }
 exports.getTable = getTable;
 //# sourceMappingURL=table.js.map
+});
+___scope___.file("store/modules/league/mutations.js", function(exports, require, module, __filename, __dirname){
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    set: function (state, tournamentId) {
+        state.id = tournamentId;
+    },
+    reset: function (state) {
+        state.id = undefined;
+    },
+    complete: function (state, tournament) {
+        tournament.league.done = true;
+    },
+    updateMatchScore: function (state, _a) {
+        var tournament = _a.tournament, matchIndex = _a.matchIndex, match = _a.match;
+        if (matchIndex > -1) {
+            tournament.league.matches[matchIndex] = match;
+        }
+    },
+    addMatches: function (state, _a) {
+        var tournament = _a.tournament, matches = _a.matches;
+        tournament.league.matches = matches;
+    },
+    updateTable: function (state, _a) {
+        var tournament = _a.tournament, table = _a.table;
+        tournament.league.table = table;
+    }
+};
+//# sourceMappingURL=mutations.js.map
 });
 ___scope___.file("store/modules/knockout/index.js", function(exports, require, module, __filename, __dirname){
 
@@ -2791,548 +2882,14 @@ exports.default = {
 ___scope___.file("style/style.css", function(exports, require, module, __filename, __dirname){
 
 
-require("fuse-box-css")("style/style.css", "@import url('https://fonts.googleapis.com/css?family=Montserrat:500,600,900');\n\n:root {\n  --bright-sky-blue: #00bfff;\n  --light-sea-green: #90ee90;\n  --live-red: #d0021b;\n  --warm-grey: #9b9b9b;\n  --white: #ffffff;\n  --greyish-brown: #4a4a4a;\n  --font-main: 'Montserrat', sans-serif;\n  --font-weight-medium: 500;\n  --font-weight-bold: 600;\n  --font-weight-black: 900;\n}\n\n/*\n  DEFAULT\n*/\n\nhtml,\nbody {\n  font-family: var(--font-main);\n  font-size: 16px;\n  font-weight: var(--font-weight-medium);\n  height: 100%;\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  background-color: var(--white);\n  color: var(--warm-grey);\n}\n\n/*\n  TYPOGRAPHY\n*/\n\n\nh1, h2, h3, p, label, span {\n  font-stretch: normal;\n  font-style: normal;\n  letter-spacing: normal;\n  line-height: normal;\n  margin: 0;\n  text-align: left;\n}\n\nh1 {\n  color: var(--white);\n  font-size: 40px;\n  font-weight: var(--font-weight-black);\n}\n\nh2 {\n  color: var(--white);\n  font-size: 24px;\n  font-weight: var(--font-weight-medium);\n}\n\nh3 {\n  color: var(--bright-sky-blue);\n  font-size: 20px;\n  font-weight: var(--font-weight-bold);\n  text-transform: uppercase;\n}\n\np, label, span {\n  color: var(--warm-grey);\n}\n\np.text--large {\n  color: var(--greyish-brown);\n  font-size: 20px;\n}\n\n/* Helpers */\n\n.u-background--gradient {\n   background-image: linear-gradient(to left, var(--light-sea-green), var(--bright-sky-blue));\n}\n\n.u-height--full {\n  height: 100%;\n}\n\n.u-box {\n  background-color: var(--white);\n  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);\n  box-sizing: border-box;\n  padding: 25px;\n  min-width: 450px;\n}\n\n.u-box--large {\n  width: 550px;\n}\n\n.u-box .form__group {\n  min-width: auto;\n  width: 100%;\n}\n\n\n/* Buttons */\n\n.button {\n  background-color: transparent;\n  border-radius: 8px;\n  border: solid 2px var(--white);\n  color: var(--white);\n  cursor: pointer;\n  display: inline-block;\n  font-size: 20px;\n  margin: 50px 0;\n  min-width: 110px;\n  padding: 13px;\n  text-align: center;\n  text-decoration: none;\n  transition-duration: .1s;\n  transition-property: background-color, color, border-color;\n  transition-timing-function: ease-in-out;\n  -webkit-appearance: none;\n}\n\n.button:hover {\n  background-color: rgba(255, 255, 255, 0.9);\n  color: var(--bright-sky-blue);\n}\n\n.button--secondary {\n    background-color: rgba(255, 255, 255, 0.9);\n    color: var(--bright-sky-blue);\n}\n\n.button--secondary:hover {\n  background-color: transparent;\n  border-color: var(--white);\n  color: var(--white);\n}\n\n.button--tertiary {\n    background-color: var(--light-sea-green);\n    border-color: var(--light-sea-green);\n}\n\n.button--tertiary:hover {\n  color: var(--light-sea-green);\n}\n\n.button--small {\n  font-size: 16px;\n  padding: 8px;\n}\n\n/* Form */\n\n.form__group {\n  margin-top: 50px;\n  min-width: 550px;\n}\n\ninput, select {\n  background-color: var(--white);\n  border-radius: 8px;\n  border: solid 2px var(--warm-grey);\n  box-sizing: border-box;\n  color: var(--warm-grey);\n  font-size: 16px;\n  height: 50px;\n  line-height: 40px;\n  outline: none;\n  padding: 5px 10px;\n  width: 100%;\n}\n\nlabel {\n    display: block;\n    margin-bottom: 10px;\n}\n\n/* Page setup */\n\n.page {\n  align-items: center;\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 65px 1fr;\n  grid-template-areas:\n    \"header\"\n    \"content\";\n  height: 100%;\n  justify-content: center;\n  width: 100%;\n}\n\n.page__content {\n  align-items: center;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  grid-area: content;\n  padding: 50px;\n  height: 100%;\n  width: 100%;\n}\n\n.page__content--center {\n  justify-content: center;\n}\n")
+require("fuse-box-css")("style/style.css", "@import url('https://fonts.googleapis.com/css?family=Montserrat:500,600,900');\n\n:root {\n  --bright-sky-blue: #00bfff;\n  --light-sea-green: #90ee90;\n  --live-red: #d0021b;\n  --warm-grey: #9b9b9b;\n  --pinkish-grey: #cecece;\n  --white-two: #e5e5e5;\n  --white: #ffffff;\n  --greyish-brown: #4a4a4a;\n  --font-main: 'Montserrat', sans-serif;\n  --font-weight-medium: 500;\n  --font-weight-bold: 600;\n  --font-weight-black: 900;\n}\n\n/*\n  DEFAULT\n*/\n\nhtml,\nbody {\n  font-family: var(--font-main);\n  font-size: 16px;\n  font-weight: var(--font-weight-medium);\n  height: 100%;\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  background-color: var(--white);\n  color: var(--warm-grey);\n}\n\n::-webkit-scrollbar {\n    display: none;\n}\n\n/*\n  TYPOGRAPHY\n*/\n\n\nh1, h2, h3, p, label, span {\n  font-stretch: normal;\n  font-style: normal;\n  letter-spacing: normal;\n  line-height: normal;\n  margin: 0;\n  text-align: left;\n}\n\nh1 {\n  color: var(--white);\n  font-size: 40px;\n  font-weight: var(--font-weight-black);\n}\n\nh2 {\n  color: var(--white);\n  font-size: 24px;\n  font-weight: var(--font-weight-medium);\n}\n\nh3 {\n  color: var(--bright-sky-blue);\n  font-size: 20px;\n  font-weight: var(--font-weight-bold);\n  text-transform: uppercase;\n}\n\np, label, span {\n  color: var(--warm-grey);\n}\n\np.text--large {\n  color: var(--greyish-brown);\n  font-size: 20px;\n}\n\n/* Helpers */\n\n.u-background--gradient {\n   background-image: linear-gradient(to left, var(--light-sea-green), var(--bright-sky-blue));\n}\n\n.u-height--full {\n  height: 100%;\n}\n\n.u-box {\n  background-color: var(--white);\n  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);\n  box-sizing: border-box;\n  padding: 25px;\n  min-width: 450px;\n}\n\n.u-box--large {\n  width: 550px;\n}\n\n.u-box .form__group {\n  min-width: auto;\n  width: 100%;\n}\n\n\n/* Buttons */\n\n.button {\n  background-color: transparent;\n  border-radius: 8px;\n  border: solid 2px var(--white);\n  color: var(--white);\n  cursor: pointer;\n  display: inline-block;\n  font-size: 20px;\n  margin: 50px 0;\n  min-width: 110px;\n  padding: 13px;\n  text-align: center;\n  text-decoration: none;\n  transition-duration: .1s;\n  transition-property: background-color, color, border-color;\n  transition-timing-function: ease-in-out;\n  -webkit-appearance: none;\n}\n\n.button:hover {\n  background-color: rgba(255, 255, 255, 0.9);\n  color: var(--bright-sky-blue);\n}\n\n.button--secondary {\n    background-color: rgba(255, 255, 255, 0.9);\n    color: var(--bright-sky-blue);\n}\n\n.button--secondary:hover {\n  background-color: transparent;\n  border-color: var(--white);\n  color: var(--white);\n}\n\n.button--tertiary {\n    background-color: var(--light-sea-green);\n    border-color: var(--light-sea-green);\n}\n\n.button--tertiary:hover {\n  color: var(--light-sea-green);\n}\n\n.button--small {\n  font-size: 16px;\n  padding: 8px;\n}\n\n/* Form */\n\n.form__group {\n  margin-top: 50px;\n  min-width: 550px;\n}\n\n.form__group--checkbox {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.form__group--checkbox label {\n    cursor: pointer;\n    flex-shrink: 0;\n    margin-bottom: 0;\n    margin-right: 10px;\n}\n\n.form__group--checkbox input[type=\"checkbox\"] {\n  height: auto;\n  width: auto;\n}\n\ninput, select {\n  background-color: var(--white);\n  border-radius: 8px;\n  border: solid 2px var(--pinkish-grey);\n  box-sizing: border-box;\n  color: var(--warm-grey);\n  font-size: 16px;\n  height: 50px;\n  line-height: 40px;\n  outline: none;\n  padding: 5px 10px;\n  width: 100%;\n}\n\nlabel {\n    display: block;\n    margin-bottom: 10px;\n}\n\n/* Page setup */\n\n.page {\n  align-items: center;\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 65px 1fr;\n  grid-template-areas:\n    \"header\"\n    \"content\";\n  height: 100%;\n  justify-content: center;\n  width: 100%;\n}\n\n.page__content {\n  align-items: center;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  grid-area: content;\n  padding: 50px;\n  height: 100%;\n  width: 100%;\n}\n\n.page__content--center {\n  justify-content: center;\n}\n")
 });
 ___scope___.file("components.css", function(exports, require, module, __filename, __dirname){
 
 
-require("fuse-box-css")("components.css", "\n#app {\n  height: 100%;\n  width: 100%;\n}\n\n\n.logo[data-v-dd6e56bd] {\n  --logo-size: 30px;\n  bottom: 5px;\n  fill: var(--color-white);\n  height: var(--logo-size);\n  right: 10px;\n  position: absolute;\n  width: var(--logo-size);\n}\n.logo circle[data-v-dd6e56bd] {\n  animation-duration: 2s;\n  animation-fill-mode: backwards;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-play-state: paused;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(1) {\n  animation-delay: 1s;\n  animation-name: bubble1-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(2) {\n  animation-delay: 1.5s;\n  animation-name: bubble2-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(3) {\n  animation-name: bubble3-data-v-dd6e56bd;\n}\n.logo:hover circle[data-v-dd6e56bd] {\n  animation-play-state: running;\n}\n@keyframes bubble1-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(10%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble2-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(20%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble3-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(30%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-10%);\n}\n}\n\n\n.create-team[data-v-f18d2362] {\n  margin: 10px;\n}\n.create-team .form__group[data-v-f18d2362] {\n  margin-top: 30px;\n}\n.create-team .form__group[data-v-f18d2362]:first-child {\n  margin-top: 0;\n}\n\n\n@keyframes move-data-v-ca9d0d25 {\nfrom {\n    transform: translateY(-200%);\n}\nto {\n    transform: translateY(200%);\n}\n}\n.match[data-v-ca9d0d25] {\n  align-items: center;\n  box-sizing: border-box;;\n  display: flex;\n  justify-content: space-between;\n  margin: 10px;\n  min-height: 150px;\n}\n.match__team[data-v-ca9d0d25] {\n  flex-basis: 33%;\n  flex-shrink: 0;\n}\n.match__team[data-v-ca9d0d25]:last-child {\n  text-align: right;\n}\n.team__name[data-v-ca9d0d25] {\n  color: var(--greyish-brown);\n  font-size: 16px;\n  margin-bottom: 5px;\n}\n.team__player[data-v-ca9d0d25] {\n  color: var(--warm-grey);\n  font-size: 14px;\n}\n.match__info[data-v-ca9d0d25] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  flex-shrink: 0;\n}\n.match__live[data-v-ca9d0d25] {\n  align-items: center;\n  color: var(--live-red);\n  display: none;\n  font-size: 12px;\n  flex-shrink: 0;\n  position: relative;\n  top: -15px;\n}\n.match__live[data-v-ca9d0d25]::after {\n  animation-name: move-data-v-ca9d0d25;\n  animation-duration: 0.5s;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-direction: alternate;\n  border-radius: 3px;\n  background-color: var(--live-red);\n  content: '';\n  display: inline-block;;\n  height: 3px;\n  margin-left: 5px;\n  width: 3px;\n}\n.match__score[data-v-ca9d0d25] {\n  color: var(--light-sea-green);\n  display: none;\n  font-size: 50px;\n  position: relative;\n  text-align: center;\n}\n.match__score span[data-v-ca9d0d25] {\n  display: inline-block;\n  margin-left: 10px;\n  text-align: center;\n  width: 70px;\n}\n.match__score span[data-v-ca9d0d25]:first-child {\n  margin-left: 0;\n  margin-right: 10px;\n}\n.match__score[data-v-ca9d0d25]::after,\n.match__score--input[data-v-ca9d0d25]::after {\n  content: '-';\n  color: var(--warm-grey);\n  font-size: 50px;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.match__score--input[data-v-ca9d0d25] {\n  display: none;\n  position: relative;\n}\n.match__score--input input[data-v-ca9d0d25] {\n  -webkit-appearance: none;\n  border: none;\n  color: var(--light-sea-green);\n  font-family: var(--font-main);\n  font-size: 50px;\n  margin-left: 10px;\n  padding: 0;\n  text-align: center;\n  width: 70px;\n}\n.match__score--input input[data-v-ca9d0d25]:first-child {\n  margin-left: 0;\n  margin-right: 10px;\n}\n.match__score--input input[data-v-ca9d0d25]::-webkit-inner-spin-button,\n.match__score--input input[data-v-ca9d0d25]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n.match__score--input input[data-v-ca9d0d25]:focus {\n  outline: none;\n}\n.match__start[data-v-ca9d0d25],\n.match__end[data-v-ca9d0d25] {\n  cursor: pointer;\n  font-size: 12px;\n  flex-basis: 33%;\n  text-decoration: underline;\n}\n.match__start[data-v-ca9d0d25] {\n  color: var(--bright-sky-blue);\n}\n.match__end[data-v-ca9d0d25] {\n  color: var(--warm-grey);\n  display: none;\n  position: relative;\n  bottom: -15px;\n}\n\n/* STATE // PLAYING */\n.match--playing .match__score--input[data-v-ca9d0d25],\n.match--playing  .match__end[data-v-ca9d0d25] {\n  display: block;\n}\n.match--playing .match__live[data-v-ca9d0d25] {\n  display: flex;\n}\n.match--playing .match__score[data-v-ca9d0d25],\n.match--playing .match__start[data-v-ca9d0d25] {\n  display: none;\n}\n\n/* STATE // DISABLED */\n.match--disabled[data-v-ca9d0d25] {\n  opacity: 0.25;\n}\n.match--disabled .match__start[data-v-ca9d0d25] {\n  display: none;\n}\n\n/* STATE // DONE */\n.match--done[data-v-ca9d0d25] {\n  background-color: #90ee9033;\n}\n.match--done .match__team--loser[data-v-ca9d0d25],\n.match--done .match__score--loser[data-v-ca9d0d25] {\n    opacity: 0.4;\n}\n.match--done .match__start[data-v-ca9d0d25],\n.match--done .match__end[data-v-ca9d0d25],\n.match--done .match__playing[data-v-ca9d0d25] {\n    display: none;\n}\n.match--done .match__score[data-v-ca9d0d25],\n.match--done .match__divider[data-v-ca9d0d25] {\n    display: block;\n}\n.match--done .match__info[data-v-ca9d0d25] {\n  cursor: pointer;\n}\n\n\n.home[data-v-db7e27a5] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  height: 100%;\n  width: 100%;\n}\n.tournament-list[data-v-db7e27a5] {\n  align-items: center;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  max-width: 1410px;\n}\n.tournament[data-v-db7e27a5] {\n  position: relative;\n  margin: 10px;\n}\n.tournament__name[data-v-db7e27a5] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  margin-bottom: 14px;\n  max-width: 80%;\n}\n.tournament__info[data-v-db7e27a5] {\n  align-items: center;\n  color: var(--warm-grey);\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  max-width: 70%;\n}\n.tournament__info span[data-v-db7e27a5] {\n  font-weight: var(--font-weight-bold);\n  margin-right: 5px;\n}\n.tournament__icon[data-v-db7e27a5] {\n  font-size: 40px;\n  height: 50px;\n  position: absolute;\n  right: 25px;\n  text-align: center;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 50px;\n}\n\n\n.button-group[data-v-79d97cee] {\n    display: flex;\n    flex-direction: row;\n    font-size: 16px;\n    justify-content: center;\n    text-align: center;\n}\n.button-group-item[data-v-79d97cee] {\n    align-items: center;\n    border: 1px solid var(--bright-sky-blue);\n    border-left: 0;\n    box-sizing: border-box;\n    cursor: pointer;\n    color: var(--bright-sky-blue);\n    display: flex;\n    flex-grow: 1;\n    height: 50px;\n    justify-content: center;\n    padding: 15px 30px;\n}\n.button-group-item[data-v-79d97cee]:first-child {\n    border-left: 1px solid var(--bright-sky-blue);\n    border-radius: 8px 0 0 8px;\n}\n.button-group-item[data-v-79d97cee]:last-child {\n    border-radius: 0 8px 8px 0;\n}\n.button-group-item--active[data-v-79d97cee] {\n    background-color: var(--bright-sky-blue);\n    color: var(--white);\n}\n\n\n.create-teams[data-v-3aa42064] {\n  align-items: center;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin-top: 50px;\n  width: 100%;\n}\n\n\n.matches[data-v-5ee00795] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n\n\n.bracket[data-v-b08d76a6] {\n  padding: 10px;\n  box-sizing: border-box;\n  min-height: calc(100vh - 136px); // height of header, footer and padding\n  color: #2c7399;\n  font-family: \"Roboto Condensed\", sans-serif;\n}\n.round--inactive[data-v-b08d76a6] {\n  opacity: 0.5;\n}\n.next-round[data-v-b08d76a6] {\n  position: absolute;\n  top: 70%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 4;\n  margin: 0 !important;\n}\n.matches[data-v-b08d76a6] {\n  display: grid;\n  grid-gap: 10px;\n  grid-auto-columns: 1fr;\n  align-content: space-around;\n}\n.round h1[data-v-b08d76a6] {\n  font-size: 20px;\n  margin: 5px 0;\n  text-align: center;\n}\n.round--right h1[data-v-b08d76a6] {\n    display: none;\n}\n.winner[data-v-b08d76a6] {\n  position: relative;\n  margin: 10px auto 0;\n  font-size: 20px;\n}\n.winner span[data-v-b08d76a6] {\n  color: goldenrod;\n  text-align: center;\n}\n@media screen and (min-width: 768px) {\n.bracket[data-v-b08d76a6] {\n    display: grid;\n    grid-auto-columns: minmax(50px, 1fr);\n    grid-template-rows: 1fr minmax(1fr, 200px);\n    grid-template-areas:\n      \"round1-left round1-right\"\n      \"round2-left round2-right\"\n      \"round3-left round3-right\"\n      \"round4-left round4-right\"\n      \"round5 .\";\n    grid-gap: 10px;\n}\n.round[data-v-b08d76a6] {\n    display: grid;\n    grid-template-rows: 30px 1fr;\n}\nround h1[data-v-b08d76a6] {\n      align-self: start;\n}\n.round--right h1[data-v-b08d76a6] {\n      display: block;\n}\n.round1.round--left[data-v-b08d76a6] {\n      grid-area: round1-left;\n}\n.round.round--right[data-v-b08d76a6] {\n      grid-area: round1-right;\n}\n.round2.round--left[data-v-b08d76a6] {\n      grid-area: round2-left;\n}\n.round2.round--right[data-v-b08d76a6] {\n      grid-area: round2-right;\n}\n.round3.round--left[data-v-b08d76a6] {\n      grid-area: round3-left;\n}\n.round3.round--right[data-v-b08d76a6] {\n    grid-area: round3-right;\n}\n.round4.round--left[data-v-b08d76a6] {\n      grid-area: round4-left;\n}\n.round4.round--right[data-v-b08d76a6] {\n      grid-area: round4-right;\n}\n.round5[data-v-b08d76a6] {\n    grid-area: round5;\n}\n}\n@media screen and (min-width: 1640px) {\n.bracket[data-v-b08d76a6] {\n    grid-auto-columns: minmax(50px, 1fr);\n}\n.bracket--1[data-v-b08d76a6] {\n    grid-template-areas: \"round1\";\n}\n.bracket--2[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2 round1-right\";\n}\n.bracket--3[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3 round2-right round1-right\";\n}\n.bracket--4[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3-left round4 round3-right round2-right round1-right\";\n}\n.bracket--5[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3-left round4-left round5 round4-right round3-right round2-right round1-right\";\n}\n.round.finals .matches[data-v-b08d76a6] {\n      align-content: center;\n}\n}\n\n\n.matches[data-v-a464e7f1] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n.group__title[data-v-a464e7f1] {\n  margin: 70px 0 35px;\n  text-transform: uppercase;\n}\n.group__title[data-v-a464e7f1]::before {\n  content: '// ';\n}\n\n\n@keyframes drumroll-data-v-ea9d0fdc {\n0%,\n    49% {\n        transform: scaleX(1);\n}\n50%,\n    100% {\n        transform: scaleX(-1);\n}\n}\n.page__content[data-v-ea9d0fdc] {\n  padding-top: 100px;\n}\n.groups[data-v-ea9d0fdc] {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 50px;\n  justify-content: center;\n  width: 100%;\n}\n.group[data-v-ea9d0fdc] {\n  box-sizing: border-box;\n  margin-top: 50px;\n  padding-right: 20px;\n  width: 25%;\n}\n.group h3[data-v-ea9d0fdc] {\n  margin-bottom: 15px;\n}\n.loading[data-v-ea9d0fdc], .name[data-v-ea9d0fdc] {\n  align-items: center;\n  display: flex;\n  height: 150px;\n}\n.loading[data-v-ea9d0fdc] {\n  animation-name: drumroll-data-v-ea9d0fdc;\n  animation-duration: .2s;\n  animation-iteration-count: infinite;\n  animation-direction: alternate;\n  font-size: 144px;\n}\n.team[data-v-ea9d0fdc] {\n  opacity: 0;\n  transition: opacity .2s linear;\n  margin-bottom: 10px;\n}\n.name[data-v-ea9d0fdc] {\n  color: var(--light-sea-green);\n}\n.team--active[data-v-ea9d0fdc] {\n  opacity: 1;\n}\n.groups--active .team[data-v-ea9d0fdc] {\n    opacity: 1;\n}\n\n\n.matches[data-v-5f955cd3] {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  width: 100%;\n}\n\n\n.knockout-match__club-name[data-v-15b41224] {\n  text-align: left;\n@media screen and (min-width: 1640px) {\n    max-width: 130px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n}\n.knockout-match__club[data-v-15b41224] {\n  background-color: #fff;\n  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);\n  height: 30px;\n  margin: 5px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px 10px;\n.knockout-match__score {\n    font-size: 13px;\n    color: lightgrey;\n    margin-left: 5px;\n}\n}\n.knockout-match__score[data-v-15b41224] {\n  margin-left: 5px;\n}\n.knockout-match__penalty-score[data-v-15b41224] {\n  font-size: 13px;\n  color: lightgrey;\n  margin-left: 5px;\n}\n\n\n.table[data-v-c19e09a8] {\n  display: grid;\n  font-size: 14px;\n  grid-template-columns: 1fr;\n  grid-template-rows: 40px 1fr;\n  margin: 20px;\n  max-width: 1024px;\n}\n.table__row[data-v-c19e09a8] {\n  align-items: center;\n  border-bottom: 1px solid #e5e5e5;\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: 300px repeat(8, 1fr);\n  justify-content: space-around;\n  padding: 10px 0;\n  text-align: right;\n}\n.table__row[data-v-c19e09a8]:first-child {\n  color: var(--bright-sky-blue);\n  padding: 0;\n}\n.table__row[data-v-c19e09a8]:last-child {\n  border: 0;\n  padding-bottom: 0;\n}\n.table__item[data-v-c19e09a8]:first-child {\n  text-align: left;\n}\n\n\n\n\n.page__header[data-v-489fc649] {\n  box-sizing: border-box;\n  display: flex;\n  grid-area: header;\n  height: 65px;\n  padding: 8px;\n  position: fixed;\n  width: 100%;\n  z-index: 10;\n}\n.page__header-left[data-v-489fc649] {\n  align-items: flex-end;\n  box-sizing: border-box;\n  display: flex;\n  flex-grow: 1;\n}\n.page__header-right[data-v-489fc649] {\n  align-items: center;\n  box-sizing: border-box;\n  display: flex;\n  flex-grow: 0;\n}\n.page__header-right .button[data-v-489fc649] {\n  margin: 0;\n}\n.page__title[data-v-489fc649] {\n  cursor: pointer;\n}\n.page__subtitle[data-v-489fc649] {\n  line-height: 40px;\n  margin-left: 15px;\n}\n.page__subtitle[data-v-489fc649]::before {\n    content: '// ';\n}\n");
+require("fuse-box-css")("components.css", "\n#app {\n  height: 100%;\n  width: 100%;\n}\n\n.statusbar {\n  -webkit-app-region: drag;\n  display: block;\n  height: 22px;\n  position: fixed;\n  width: 100%;\n  z-index: 10;\n}\n\n.statusbar::before {\n  background-color: rgba(255, 255, 255, .75);\n  bottom: 0;\n  content: '';\n  left: 0;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.statusbar + .page {\n  height: calc(100% - 22px) !important;\n  position: relative;\n  top: 22px; /* same height as statusbar */\n}\n\n\n.logo[data-v-dd6e56bd] {\n  --logo-size: 30px;\n  bottom: 5px;\n  fill: var(--color-white);\n  height: var(--logo-size);\n  right: 10px;\n  position: absolute;\n  width: var(--logo-size);\n}\n.logo circle[data-v-dd6e56bd] {\n  animation-duration: 2s;\n  animation-fill-mode: backwards;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-play-state: paused;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(1) {\n  animation-delay: 1s;\n  animation-name: bubble1-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(2) {\n  animation-delay: 1.5s;\n  animation-name: bubble2-data-v-dd6e56bd;\n}\n.logo circle[data-v-dd6e56bd]:nth-of-type(3) {\n  animation-name: bubble3-data-v-dd6e56bd;\n}\n.logo:hover circle[data-v-dd6e56bd] {\n  animation-play-state: running;\n}\n@keyframes bubble1-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(10%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble2-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(20%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-20%);\n}\n}\n@keyframes bubble3-data-v-dd6e56bd {\n0% {\n    opacity: 0;\n    transform: translateY(30%);\n}\n75% {\n    opacity: .75;\n}\n100% {\n    opacity: 0;\n    transform: translateY(-10%);\n}\n}\n\n\n.create-team[data-v-f18d2362] {\n  margin: 10px;\n}\n.create-team .form__group[data-v-f18d2362] {\n  margin-top: 30px;\n}\n.create-team .form__group[data-v-f18d2362]:first-child {\n  margin-top: 0;\n}\n\n\n@keyframes move-data-v-ca9d0d25 {\nfrom {\n    transform: translateY(-200%);\n}\nto {\n    transform: translateY(200%);\n}\n}\n.match[data-v-ca9d0d25] {\n  align-items: center;\n  box-sizing: border-box;;\n  display: flex;\n  justify-content: space-between;\n  margin: 10px;\n  min-height: 150px;\n}\n.match__team[data-v-ca9d0d25] {\n  flex-basis: 33%;\n  flex-shrink: 0;\n}\n.match__team[data-v-ca9d0d25]:last-child {\n  text-align: right;\n}\n.team__name[data-v-ca9d0d25] {\n  color: var(--greyish-brown);\n  font-size: 16px;\n  margin-bottom: 5px;\n}\n.team__player[data-v-ca9d0d25] {\n  color: var(--warm-grey);\n  font-size: 14px;\n}\n.match__info[data-v-ca9d0d25] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  flex-shrink: 0;\n}\n.match__live[data-v-ca9d0d25] {\n  align-items: center;\n  color: var(--live-red);\n  display: none;\n  font-size: 12px;\n  flex-shrink: 0;\n  position: relative;\n  top: -15px;\n}\n.match__live[data-v-ca9d0d25]::after {\n  animation-name: move-data-v-ca9d0d25;\n  animation-duration: 0.5s;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n  animation-direction: alternate;\n  border-radius: 3px;\n  background-color: var(--live-red);\n  content: '';\n  display: inline-block;;\n  height: 3px;\n  margin-left: 5px;\n  width: 3px;\n}\n.match__score[data-v-ca9d0d25] {\n  color: var(--light-sea-green);\n  display: none;\n  font-size: 50px;\n  position: relative;\n  text-align: center;\n}\n.match__score span[data-v-ca9d0d25] {\n  display: inline-block;\n  margin-left: 10px;\n  text-align: center;\n  width: 70px;\n}\n.match__score span[data-v-ca9d0d25]:first-child {\n  margin-left: 0;\n  margin-right: 10px;\n}\n.match__score[data-v-ca9d0d25]::after,\n.match__score--input[data-v-ca9d0d25]::after {\n  content: '-';\n  color: var(--warm-grey);\n  font-size: 50px;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.match__score--input[data-v-ca9d0d25] {\n  display: none;\n  position: relative;\n}\n.match__score--input input[data-v-ca9d0d25] {\n  -webkit-appearance: none;\n  border: none;\n  color: var(--light-sea-green);\n  font-family: var(--font-main);\n  font-size: 50px;\n  margin-left: 10px;\n  padding: 0;\n  text-align: center;\n  width: 70px;\n}\n.match__score--input input[data-v-ca9d0d25]:first-child {\n  margin-left: 0;\n  margin-right: 10px;\n}\n.match__score--input input[data-v-ca9d0d25]::-webkit-inner-spin-button,\n.match__score--input input[data-v-ca9d0d25]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n.match__score--input input[data-v-ca9d0d25]:focus {\n  outline: none;\n}\n.match__start[data-v-ca9d0d25],\n.match__end[data-v-ca9d0d25] {\n  cursor: pointer;\n  font-size: 12px;\n  flex-basis: 33%;\n  text-decoration: underline;\n}\n.match__start[data-v-ca9d0d25] {\n  color: var(--bright-sky-blue);\n}\n.match__end[data-v-ca9d0d25] {\n  color: var(--warm-grey);\n  display: none;\n  position: relative;\n  bottom: -15px;\n}\n\n/* STATE // PLAYING */\n.match--playing .match__score--input[data-v-ca9d0d25],\n.match--playing  .match__end[data-v-ca9d0d25] {\n  display: block;\n}\n.match--playing .match__live[data-v-ca9d0d25] {\n  display: flex;\n}\n.match--playing .match__score[data-v-ca9d0d25],\n.match--playing .match__start[data-v-ca9d0d25] {\n  display: none;\n}\n\n/* STATE // DISABLED */\n.match--disabled[data-v-ca9d0d25] {\n  opacity: 0.25;\n}\n.match--disabled .match__start[data-v-ca9d0d25] {\n  display: none;\n}\n\n/* STATE // DONE */\n.match--done[data-v-ca9d0d25] {\n  background-color: #90ee9033;\n}\n.match--done .match__team--loser[data-v-ca9d0d25],\n.match--done .match__score--loser[data-v-ca9d0d25] {\n    opacity: 0.4;\n}\n.match--done .match__start[data-v-ca9d0d25],\n.match--done .match__end[data-v-ca9d0d25],\n.match--done .match__playing[data-v-ca9d0d25] {\n    display: none;\n}\n.match--done .match__score[data-v-ca9d0d25],\n.match--done .match__divider[data-v-ca9d0d25] {\n    display: block;\n}\n.match--done .match__info[data-v-ca9d0d25] {\n  cursor: pointer;\n}\n\n/* STATE // ERROR */\n.match--error[data-v-ca9d0d25] {\n  background-color: #d0021b33;\n}\n\n\n\n.home[data-v-db7e27a5] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  height: 100%;\n  width: 100%;\n}\n.page__content[data-v-db7e27a5] {\n  flex-wrap: nowrap;\n  overflow-y: scroll;\n}\n.tournament-list[data-v-db7e27a5] {\n  align-items: center;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  max-width: 1410px;\n}\n.tournament[data-v-db7e27a5] {\n  cursor: pointer;\n  position: relative;\n  margin: 10px;\n}\n.tournament__name[data-v-db7e27a5] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  margin-bottom: 14px;\n  max-width: 80%;\n}\n.tournament__info[data-v-db7e27a5] {\n  align-items: center;\n  color: var(--warm-grey);\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  max-width: 70%;\n}\n.tournament__info span[data-v-db7e27a5] {\n  font-weight: var(--font-weight-bold);\n  margin-right: 5px;\n}\n.tournament__icon[data-v-db7e27a5] {\n  font-size: 40px;\n  height: 50px;\n  position: absolute;\n  right: 25px;\n  text-align: center;\n  top: 50%;\n  transform: translateY(-50%);\n  width: 50px;\n}\n\n\n.button-group[data-v-79d97cee] {\n    display: flex;\n    flex-direction: row;\n    font-size: 16px;\n    justify-content: center;\n    text-align: center;\n}\n.button-group-item[data-v-79d97cee] {\n    align-items: center;\n    border: 1px solid var(--bright-sky-blue);\n    border-left: 0;\n    box-sizing: border-box;\n    cursor: pointer;\n    color: var(--bright-sky-blue);\n    display: flex;\n    flex-grow: 1;\n    height: 50px;\n    justify-content: center;\n    padding: 15px 30px;\n}\n.button-group-item[data-v-79d97cee]:first-child {\n    border-left: 1px solid var(--bright-sky-blue);\n    border-radius: 8px 0 0 8px;\n}\n.button-group-item[data-v-79d97cee]:last-child {\n    border-radius: 0 8px 8px 0;\n}\n.button-group-item--active[data-v-79d97cee] {\n    background-color: var(--bright-sky-blue);\n    color: var(--white);\n}\n\n\n.create-teams[data-v-3aa42064] {\n  align-items: center;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin-top: 50px;\n  width: 100%;\n}\n\n\n.matches[data-v-5ee00795] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n\n\n@keyframes drumroll-data-v-99bac771 {\n0%,\n    49% {\n        transform: scaleX(1);\n}\n50%,\n    100% {\n        transform: scaleX(-1);\n}\n}\n.loading[data-v-99bac771],\n.name[data-v-99bac771] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n}\n.loading[data-v-99bac771] {\n  animation-name: drumroll-data-v-99bac771;\n  animation-duration: .2s;\n  animation-iteration-count: infinite;\n  animation-direction: alternate;\n  font-size: 144px;\n}\n.name[data-v-99bac771],\n.name h1[data-v-99bac771] {\n  color: var(--light-sea-green);\n  font-size: 72px;\n}\n.player[data-v-99bac771] {\n  color: var(--greyish-brown);\n  font-size: 36px;\n}\n.teams[data-v-99bac771] {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 100px;\n  justify-content: center;\n  width: 100%;\n}\n.team[data-v-99bac771] {\n  margin-bottom: 10px;\n  opacity: 0;\n  padding-right: 20px;\n  transition: opacity .2s linear;\n  width: 25%;\n}\n.team .u-box[data-v-99bac771] {\n  height: 100%;\n  min-width: auto;\n}\n.team--active[data-v-99bac771] {\n  opacity: 1;\n}\n.teams--active .team[data-v-99bac771] {\n    opacity: 1;\n}\n\n\n.bracket[data-v-b08d76a6] {\n  padding: 10px;\n  box-sizing: border-box;\n  min-height: calc(100vh - 136px); // height of header, footer and padding\n  color: #2c7399;\n  font-family: \"Roboto Condensed\", sans-serif;\n}\n.round--inactive[data-v-b08d76a6] {\n  opacity: 0.5;\n}\n.next-round[data-v-b08d76a6] {\n  position: absolute;\n  top: 70%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 4;\n  margin: 0 !important;\n}\n.matches[data-v-b08d76a6] {\n  display: grid;\n  grid-gap: 10px;\n  grid-auto-columns: 1fr;\n  align-content: space-around;\n}\n.round h1[data-v-b08d76a6] {\n  font-size: 20px;\n  margin: 5px 0;\n  text-align: center;\n}\n.round--right h1[data-v-b08d76a6] {\n    display: none;\n}\n.winner[data-v-b08d76a6] {\n  position: relative;\n  margin: 10px auto 0;\n  font-size: 20px;\n}\n.winner span[data-v-b08d76a6] {\n  color: goldenrod;\n  text-align: center;\n}\n@media screen and (min-width: 768px) {\n.bracket[data-v-b08d76a6] {\n    display: grid;\n    grid-auto-columns: minmax(50px, 1fr);\n    grid-template-rows: 1fr minmax(1fr, 200px);\n    grid-template-areas:\n      \"round1-left round1-right\"\n      \"round2-left round2-right\"\n      \"round3-left round3-right\"\n      \"round4-left round4-right\"\n      \"round5 .\";\n    grid-gap: 10px;\n    width: 100%;\n}\n.round[data-v-b08d76a6] {\n    display: grid;\n    grid-template-rows: 30px 1fr;\n}\nround h1[data-v-b08d76a6] {\n      align-self: start;\n}\n.round--right h1[data-v-b08d76a6] {\n      display: block;\n}\n.round1.round--left[data-v-b08d76a6] {\n      grid-area: round1-left;\n}\n.round.round--right[data-v-b08d76a6] {\n      grid-area: round1-right;\n}\n.round2.round--left[data-v-b08d76a6] {\n      grid-area: round2-left;\n}\n.round2.round--right[data-v-b08d76a6] {\n      grid-area: round2-right;\n}\n.round3.round--left[data-v-b08d76a6] {\n      grid-area: round3-left;\n}\n.round3.round--right[data-v-b08d76a6] {\n    grid-area: round3-right;\n}\n.round4.round--left[data-v-b08d76a6] {\n      grid-area: round4-left;\n}\n.round4.round--right[data-v-b08d76a6] {\n      grid-area: round4-right;\n}\n.round5[data-v-b08d76a6] {\n    grid-area: round5;\n}\n}\n@media screen and (min-width: 1640px) {\n.bracket[data-v-b08d76a6] {\n    grid-auto-columns: minmax(50px, 1fr);\n}\n.bracket--1[data-v-b08d76a6] {\n    grid-template-areas: \"round1\";\n}\n.bracket--2[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2 round1-right\";\n}\n.bracket--3[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3 round2-right round1-right\";\n}\n.bracket--4[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3-left round4 round3-right round2-right round1-right\";\n}\n.bracket--5[data-v-b08d76a6] {\n    grid-template-areas: \"round1-left round2-left round3-left round4-left round5 round4-right round3-right round2-right round1-right\";\n}\n.round.finals .matches[data-v-b08d76a6] {\n      align-content: center;\n}\n}\n\n\n.icon[data-v-ab57f7f0] {\n  font-size: 100px;\n}\n.icon--small[data-v-ab57f7f0] {\n  font-size: 50px;\n  margin-top: 50px;\n}\n\n\n.matches[data-v-a464e7f1] {\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  margin: 20px;\n}\n.group__title[data-v-a464e7f1] {\n  margin: 70px 0 35px;\n  text-transform: uppercase;\n}\n.group__title[data-v-a464e7f1]::before {\n  content: '// ';\n}\n.groupstage__shortcuts[data-v-a464e7f1] {\n  background: var(--white);\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 10px;\n  position: fixed;\n  top: 84px; /* header + statusbar; */\n}\n.groupstage__shortcuts span[data-v-a464e7f1] {\n  color: var(--bright-sky-blue);\n  cursor: pointer;\n  padding: 10px;\n  text-decoration: none;\n}\n.groupstage__shortcuts span[data-v-a464e7f1]::after {\n    content: '-';\n    padding-left: 20px;\n}\n.groupstage__shortcuts span[data-v-a464e7f1]:last-child::after {\n    content: none;\n}\n\n\n\n@keyframes drumroll-data-v-ea9d0fdc {\n0%,\n    49% {\n        transform: scaleX(1);\n}\n50%,\n    100% {\n        transform: scaleX(-1);\n}\n}\n.page__content[data-v-ea9d0fdc] {\n  padding-top: 100px;\n}\n.groups[data-v-ea9d0fdc] {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 50px;\n  justify-content: center;\n  width: 100%;\n}\n.group[data-v-ea9d0fdc] {\n  box-sizing: border-box;\n  margin-top: 50px;\n  padding-right: 20px;\n  width: 25%;\n}\n.group h3[data-v-ea9d0fdc] {\n  margin-bottom: 15px;\n}\n.loading[data-v-ea9d0fdc],\n.name[data-v-ea9d0fdc] {\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  justify-content: center;\n}\n.loading[data-v-ea9d0fdc] {\n  animation-name: drumroll-data-v-ea9d0fdc;\n  animation-duration: .2s;\n  animation-iteration-count: infinite;\n  animation-direction: alternate;\n  font-size: 144px;\n}\n.team[data-v-ea9d0fdc] {\n  opacity: 0;\n  transition: opacity .2s linear;\n  margin-bottom: 10px;\n}\n.name[data-v-ea9d0fdc],\n.name h1[data-v-ea9d0fdc] {\n  color: var(--light-sea-green);\n  font-size: 72px;\n}\n.player[data-v-ea9d0fdc] {\n  color: var(--greyish-brown);\n  font-size: 36px;\n}\n.team--active[data-v-ea9d0fdc] {\n  opacity: 1;\n}\n.groups--active .team[data-v-ea9d0fdc] {\n    opacity: 1;\n}\n\n\n.matches[data-v-5f955cd3] {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  width: 100%;\n}\n\n\n.knockout-match__club-name[data-v-15b41224] {\n  text-align: left;\n@media screen and (min-width: 1640px) {\n    max-width: 130px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n}\n.knockout-match__club[data-v-15b41224] {\n  background-color: #fff;\n  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);\n  height: 30px;\n  margin: 5px 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px 10px;\n.knockout-match__score {\n    font-size: 13px;\n    color: lightgrey;\n    margin-left: 5px;\n}\n}\n.knockout-match__score[data-v-15b41224] {\n  margin-left: 5px;\n}\n.knockout-match__penalty-score[data-v-15b41224] {\n  font-size: 13px;\n  color: lightgrey;\n  margin-left: 5px;\n}\n\n\n.table[data-v-c19e09a8] {\n  display: grid;\n  font-size: 14px;\n  grid-template-columns: 1fr;\n  grid-template-rows: 40px 1fr;\n  margin: 20px;\n  max-width: 1024px;\n}\n.table__row[data-v-c19e09a8] {\n  align-items: center;\n  border-bottom: 1px solid var(--white-two);\n  display: grid;\n  grid-gap: 20px;\n  grid-template-columns: 20px 300px repeat(8, 1fr);\n  justify-content: space-around;\n  padding: 10px 0;\n  text-align: right;\n}\n.table__row[data-v-c19e09a8]:first-child {\n  color: var(--bright-sky-blue);\n  padding: 0;\n}\n.table__row[data-v-c19e09a8]:last-child {\n  border: 0;\n  padding-bottom: 0;\n}\n.table__item[data-v-c19e09a8]:nth-child(2) {\n  text-align: left;\n}\n\n\n\n\n.page__header[data-v-489fc649] {\n  box-sizing: border-box;\n  display: flex;\n  grid-area: header;\n  height: 65px;\n  padding: 8px;\n  position: fixed;\n  width: 100%;\n  z-index: 10;\n}\n.page__header-left[data-v-489fc649] {\n  align-items: flex-end;\n  box-sizing: border-box;\n  display: flex;\n  flex-grow: 1;\n}\n.page__header-right[data-v-489fc649] {\n  align-items: center;\n  box-sizing: border-box;\n  display: flex;\n  flex-grow: 0;\n}\n.page__header-right .button[data-v-489fc649] {\n  margin: 0;\n}\n.page__title[data-v-489fc649] {\n  cursor: pointer;\n}\n.page__subtitle[data-v-489fc649] {\n  line-height: 40px;\n  margin-left: 15px;\n}\n.page__subtitle[data-v-489fc649]::before {\n    content: '// ';\n}\n");
 });
 return ___scope___.entry = "main.js";
-});
-FuseBox.pkg("fusebox-hot-reload", {}, function(___scope___){
-___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-/**
- * @module listens to `source-changed` socket events and actions hot reload
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var Client = require('fusebox-websocket').SocketClient, bundleErrors = {}, outputElement = document.createElement('div'), styleElement = document.createElement('style'), minimizeToggleId = 'fuse-box-toggle-minimized', hideButtonId = 'fuse-box-hide', expandedOutputClass = 'fuse-box-expanded-output', localStoragePrefix = '__fuse-box_';
-function storeSetting(key, value) {
-    localStorage[localStoragePrefix + key] = value;
-}
-function getSetting(key) {
-    return localStorage[localStoragePrefix + key] === 'true' ? true : false;
-}
-var outputInBody = false, outputMinimized = getSetting(minimizeToggleId), outputHidden = false;
-outputElement.id = 'fuse-box-output';
-styleElement.innerHTML = "\n    #" + outputElement.id + ", #" + outputElement.id + " * {\n        box-sizing: border-box;\n    }\n    #" + outputElement.id + " {\n        z-index: 999999999999;\n        position: fixed;\n        top: 10px;\n        right: 10px;\n        width: 400px;\n        overflow: auto;\n        background: #fdf3f1;\n        border: 1px solid #eca494;\n        border-radius: 5px;\n        font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        box-shadow: 0px 3px 6px 1px rgba(0,0,0,.15);\n    }\n    #" + outputElement.id + "." + expandedOutputClass + " {\n        height: auto;\n        width: auto;\n        left: 10px;\n        max-height: calc(100vh - 50px);\n    }\n    #" + outputElement.id + " .fuse-box-errors {\n        display: none;\n    }\n    #" + outputElement.id + "." + expandedOutputClass + " .fuse-box-errors {\n        display: block;\n        border-top: 1px solid #eca494;\n        padding: 0 10px;\n    }\n    #" + outputElement.id + " button {\n        border: 1px solid #eca494;\n        padding: 5px 10px;\n        border-radius: 4px;\n        margin-left: 5px;\n        background-color: white;\n        color: black;\n        box-shadow: 0px 2px 2px 0px rgba(0,0,0,.05);\n    }\n    #" + outputElement.id + " .fuse-box-header {\n        padding: 10px;\n    }\n    #" + outputElement.id + " .fuse-box-header h4 {\n        display: inline-block;\n        margin: 4px;\n    }";
-styleElement.type = 'text/css';
-document.getElementsByTagName('head')[0].appendChild(styleElement);
-function displayBundleErrors() {
-    var errorMessages = Object.keys(bundleErrors).reduce(function (allMessages, bundleName) {
-        var bundleMessages = bundleErrors[bundleName];
-        return allMessages.concat(bundleMessages.map(function (message) {
-            var messageOutput = message
-                .replace(/\n/g, '<br>')
-                .replace(/\t/g, '&nbsp;&nbps;&npbs;&nbps;')
-                .replace(/ /g, '&nbsp;');
-            return "<pre>" + messageOutput + "</pre>";
-        }));
-    }, []), errorOutput = errorMessages.join('');
-    if (errorOutput && !outputHidden) {
-        outputElement.innerHTML = "\n        <div class=\"fuse-box-header\" style=\"\">\n            <h4 style=\"\">Fuse Box Bundle Errors (" + errorMessages.length + "):</h4>\n            <div style=\"float: right;\">\n                <button id=\"" + minimizeToggleId + "\">" + (outputMinimized ? 'Expand' : 'Minimize') + "</button>\n                <button id=\"" + hideButtonId + "\">Hide</button>\n            </div>\n        </div>\n        <div class=\"fuse-box-errors\">\n            " + errorOutput + "\n        </div>\n        ";
-        document.body.appendChild(outputElement);
-        outputElement.className = outputMinimized ? '' : expandedOutputClass;
-        outputInBody = true;
-        document.getElementById(minimizeToggleId).onclick = function () {
-            outputMinimized = !outputMinimized;
-            storeSetting(minimizeToggleId, outputMinimized);
-            displayBundleErrors();
-        };
-        document.getElementById(hideButtonId).onclick = function () {
-            outputHidden = true;
-            displayBundleErrors();
-        };
-    }
-    else if (outputInBody) {
-        document.body.removeChild(outputElement);
-        outputInBody = false;
-    }
-}
-exports.connect = function (port, uri, reloadFullPage) {
-    if (FuseBox.isServer) {
-        return;
-    }
-    port = port || window.location.port;
-    var client = new Client({
-        port: port,
-        uri: uri,
-    });
-    client.connect();
-    client.on('source-changed', function (data) {
-        console.info("%cupdate \"" + data.path + "\"", 'color: #237abe');
-        if (reloadFullPage) {
-            return window.location.reload();
-        }
-        /**
-         * If a plugin handles this request then we don't have to do anything
-         **/
-        for (var index = 0; index < FuseBox.plugins.length; index++) {
-            var plugin = FuseBox.plugins[index];
-            if (plugin.hmrUpdate && plugin.hmrUpdate(data)) {
-                return;
-            }
-        }
-        if (data.type === "hosted-css") {
-            var fileId = data.path.replace(/^\//, '').replace(/[\.\/]+/g, '-');
-            var existing = document.getElementById(fileId);
-            if (existing) {
-                existing.setAttribute("href", data.path + "?" + new Date().getTime());
-            }
-            else {
-                var node = document.createElement('link');
-                node.id = fileId;
-                node.type = 'text/css';
-                node.rel = 'stylesheet';
-                node.href = data.path;
-                document.getElementsByTagName('head')[0].appendChild(node);
-            }
-        }
-        if (data.type === 'js' || data.type === "css") {
-            FuseBox.flush();
-            FuseBox.dynamic(data.path, data.content);
-            if (FuseBox.mainFile) {
-                try {
-                    FuseBox.import(FuseBox.mainFile);
-                }
-                catch (e) {
-                    if (typeof e === 'string') {
-                        if (/not found/.test(e)) {
-                            return window.location.reload();
-                        }
-                    }
-                    console.error(e);
-                }
-            }
-        }
-    });
-    client.on('error', function (error) {
-        console.log(error);
-    });
-    client.on('bundle-error', function (_a) {
-        var bundleName = _a.bundleName, message = _a.message;
-        console.error("Bundle error in " + bundleName + ": " + message);
-        var errorsForBundle = bundleErrors[bundleName] || [];
-        errorsForBundle.push(message);
-        bundleErrors[bundleName] = errorsForBundle;
-        displayBundleErrors();
-    });
-    client.on('update-bundle-errors', function (_a) {
-        var bundleName = _a.bundleName, messages = _a.messages;
-        messages.forEach(function (message) { return console.error("Bundle error in " + bundleName + ": " + message); });
-        bundleErrors[bundleName] = messages;
-        displayBundleErrors();
-    });
-};
-
-require('fuse-heresy-default')(module.exports)
-});
-return ___scope___.entry = "index.js";
-});
-FuseBox.pkg("fuse-heresy-default", {}, function(___scope___){
-___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
-
-module.exports = function(input) {
-    return ['function', 'object', 'array']
-        .indexOf(typeof input) > -1 && input.default === undefined ? 
-             Object.isFrozen(input) ? input.default = input : Object.defineProperty(input, "default", {value : input, enumerable : false}) : void 0;
-}
-});
-return ___scope___.entry = "index.js";
-});
-FuseBox.pkg("fusebox-websocket", {}, function(___scope___){
-___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var events = require('events');
-var SocketClient = /** @class */ (function () {
-    function SocketClient(opts) {
-        opts = opts || {};
-        var port = opts.port || window.location.port;
-        var protocol = location.protocol === 'https:' ? 'wss://' : 'ws://';
-        var domain = location.hostname || 'localhost';
-        this.url = opts.host || "" + protocol + domain + ":" + port;
-        if (opts.uri) {
-            this.url = opts.uri;
-        }
-        this.authSent = false;
-        this.emitter = new events.EventEmitter();
-    }
-    SocketClient.prototype.reconnect = function (fn) {
-        var _this = this;
-        setTimeout(function () {
-            _this.emitter.emit('reconnect', { message: 'Trying to reconnect' });
-            _this.connect(fn);
-        }, 5000);
-    };
-    SocketClient.prototype.on = function (event, fn) {
-        this.emitter.on(event, fn);
-    };
-    SocketClient.prototype.connect = function (fn) {
-        var _this = this;
-        console.log('%cConnecting to fusebox HMR at ' + this.url, 'color: #237abe');
-        setTimeout(function () {
-            _this.client = new WebSocket(_this.url);
-            _this.bindEvents(fn);
-        }, 0);
-    };
-    SocketClient.prototype.close = function () {
-        this.client.close();
-    };
-    SocketClient.prototype.send = function (eventName, data) {
-        if (this.client.readyState === 1) {
-            this.client.send(JSON.stringify({ event: eventName, data: data || {} }));
-        }
-    };
-    SocketClient.prototype.error = function (data) {
-        this.emitter.emit('error', data);
-    };
-    /** Wires up the socket client messages to be emitted on our event emitter */
-    SocketClient.prototype.bindEvents = function (fn) {
-        var _this = this;
-        this.client.onopen = function (event) {
-            console.log('%cConnected', 'color: #237abe');
-            if (fn) {
-                fn(_this);
-            }
-        };
-        this.client.onerror = function (event) {
-            _this.error({ reason: event.reason, message: 'Socket error' });
-        };
-        this.client.onclose = function (event) {
-            _this.emitter.emit('close', { message: 'Socket closed' });
-            if (event.code !== 1011) {
-                _this.reconnect(fn);
-            }
-        };
-        this.client.onmessage = function (event) {
-            var data = event.data;
-            if (data) {
-                var item = JSON.parse(data);
-                _this.emitter.emit(item.type, item.data);
-                _this.emitter.emit('*', item);
-            }
-        };
-    };
-    return SocketClient;
-}());
-exports.SocketClient = SocketClient;
-
-require('fuse-heresy-default')(module.exports)
-});
-return ___scope___.entry = "index.js";
-});
-FuseBox.pkg("events", {}, function(___scope___){
-___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
-
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-if (FuseBox.isServer) {
-    module.exports = global.require("events");
-} else {
-    function EventEmitter() {
-        this._events = this._events || {};
-        this._maxListeners = this._maxListeners || undefined;
-    }
-    module.exports = EventEmitter;
-
-    // Backwards-compat with node 0.10.x
-    EventEmitter.EventEmitter = EventEmitter;
-
-    EventEmitter.prototype._events = undefined;
-    EventEmitter.prototype._maxListeners = undefined;
-
-    // By default EventEmitters will print a warning if more than 10 listeners are
-    // added to it. This is a useful default which helps finding memory leaks.
-    EventEmitter.defaultMaxListeners = 10;
-
-    // Obviously not all Emitters should be limited to 10. This function allows
-    // that to be increased. Set to zero for unlimited.
-    EventEmitter.prototype.setMaxListeners = function(n) {
-        if (!isNumber(n) || n < 0 || isNaN(n))
-            throw TypeError("n must be a positive number");
-        this._maxListeners = n;
-        return this;
-    };
-
-    EventEmitter.prototype.emit = function(type) {
-        var er, handler, len, args, i, listeners;
-
-        if (!this._events)
-            this._events = {};
-
-        // If there is no 'error' event listener then throw.
-        if (type === "error") {
-            if (!this._events.error ||
-                (isObject(this._events.error) && !this._events.error.length)) {
-                er = arguments[1];
-                if (er instanceof Error) {
-                    throw er; // Unhandled 'error' event
-                }
-                throw TypeError("Uncaught, unspecified \"error\" event.");
-            }
-        }
-
-        handler = this._events[type];
-
-        if (isUndefined(handler))
-            return false;
-
-        if (isFunction(handler)) {
-            switch (arguments.length) {
-                // fast cases
-                case 1:
-                    handler.call(this);
-                    break;
-                case 2:
-                    handler.call(this, arguments[1]);
-                    break;
-                case 3:
-                    handler.call(this, arguments[1], arguments[2]);
-                    break;
-                    // slower
-                default:
-                    args = Array.prototype.slice.call(arguments, 1);
-                    handler.apply(this, args);
-            }
-        } else if (isObject(handler)) {
-            args = Array.prototype.slice.call(arguments, 1);
-            listeners = handler.slice();
-            len = listeners.length;
-            for (i = 0; i < len; i++)
-                listeners[i].apply(this, args);
-        }
-
-        return true;
-    };
-
-    EventEmitter.prototype.addListener = function(type, listener) {
-        var m;
-
-        if (!isFunction(listener))
-            throw TypeError("listener must be a function");
-
-        if (!this._events)
-            this._events = {};
-
-        // To avoid recursion in the case that type === "newListener"! Before
-        // adding it to the listeners, first emit "newListener".
-        if (this._events.newListener)
-            this.emit("newListener", type,
-                isFunction(listener.listener) ?
-                listener.listener : listener);
-
-        if (!this._events[type])
-        // Optimize the case of one listener. Don't need the extra array object.
-            this._events[type] = listener;
-        else if (isObject(this._events[type]))
-        // If we've already got an array, just append.
-            this._events[type].push(listener);
-        else
-        // Adding the second element, need to change to array.
-            this._events[type] = [this._events[type], listener];
-
-        // Check for listener leak
-        if (isObject(this._events[type]) && !this._events[type].warned) {
-            if (!isUndefined(this._maxListeners)) {
-                m = this._maxListeners;
-            } else {
-                m = EventEmitter.defaultMaxListeners;
-            }
-
-            if (m && m > 0 && this._events[type].length > m) {
-                this._events[type].warned = true;
-                console.error("(node) warning: possible EventEmitter memory " +
-                    "leak detected. %d listeners added. " +
-                    "Use emitter.setMaxListeners() to increase limit.",
-                    this._events[type].length);
-                if (typeof console.trace === "function") {
-                    // not supported in IE 10
-                    console.trace();
-                }
-            }
-        }
-
-        return this;
-    };
-
-    EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-    EventEmitter.prototype.once = function(type, listener) {
-        if (!isFunction(listener))
-            throw TypeError("listener must be a function");
-
-        var fired = false;
-
-        function g() {
-            this.removeListener(type, g);
-
-            if (!fired) {
-                fired = true;
-                listener.apply(this, arguments);
-            }
-        }
-
-        g.listener = listener;
-        this.on(type, g);
-
-        return this;
-    };
-
-    // emits a 'removeListener' event iff the listener was removed
-    EventEmitter.prototype.removeListener = function(type, listener) {
-        var list, position, length, i;
-
-        if (!isFunction(listener))
-            throw TypeError("listener must be a function");
-
-        if (!this._events || !this._events[type])
-            return this;
-
-        list = this._events[type];
-        length = list.length;
-        position = -1;
-
-        if (list === listener ||
-            (isFunction(list.listener) && list.listener === listener)) {
-            delete this._events[type];
-            if (this._events.removeListener)
-                this.emit("removeListener", type, listener);
-
-        } else if (isObject(list)) {
-            for (i = length; i-- > 0;) {
-                if (list[i] === listener ||
-                    (list[i].listener && list[i].listener === listener)) {
-                    position = i;
-                    break;
-                }
-            }
-
-            if (position < 0)
-                return this;
-
-            if (list.length === 1) {
-                list.length = 0;
-                delete this._events[type];
-            } else {
-                list.splice(position, 1);
-            }
-
-            if (this._events.removeListener)
-                this.emit("removeListener", type, listener);
-        }
-
-        return this;
-    };
-
-    EventEmitter.prototype.removeAllListeners = function(type) {
-        var key, listeners;
-
-        if (!this._events)
-            return this;
-
-        // not listening for removeListener, no need to emit
-        if (!this._events.removeListener) {
-            if (arguments.length === 0)
-                this._events = {};
-            else if (this._events[type])
-                delete this._events[type];
-            return this;
-        }
-
-        // emit removeListener for all listeners on all events
-        if (arguments.length === 0) {
-            for (key in this._events) {
-                if (key === "removeListener") continue;
-                this.removeAllListeners(key);
-            }
-            this.removeAllListeners("removeListener");
-            this._events = {};
-            return this;
-        }
-
-        listeners = this._events[type];
-
-        if (isFunction(listeners)) {
-            this.removeListener(type, listeners);
-        } else if (listeners) {
-            // LIFO order
-            while (listeners.length)
-                this.removeListener(type, listeners[listeners.length - 1]);
-        }
-        delete this._events[type];
-
-        return this;
-    };
-
-    EventEmitter.prototype.listeners = function(type) {
-        var ret;
-        if (!this._events || !this._events[type])
-            ret = [];
-        else if (isFunction(this._events[type]))
-            ret = [this._events[type]];
-        else
-            ret = this._events[type].slice();
-        return ret;
-    };
-
-    EventEmitter.prototype.listenerCount = function(type) {
-        if (this._events) {
-            var evlistener = this._events[type];
-
-            if (isFunction(evlistener))
-                return 1;
-            else if (evlistener)
-                return evlistener.length;
-        }
-        return 0;
-    };
-
-    EventEmitter.listenerCount = function(emitter, type) {
-        return emitter.listenerCount(type);
-    };
-
-    function isFunction(arg) {
-        return typeof arg === "function";
-    }
-
-    function isNumber(arg) {
-        return typeof arg === "number";
-    }
-
-    function isObject(arg) {
-        return typeof arg === "object" && arg !== null;
-    }
-
-    function isUndefined(arg) {
-        return arg === void 0;
-    }
-}
-
-require('fuse-heresy-default')(module.exports)
-});
-return ___scope___.entry = "index.js";
 });
 
         var process = FuseBox.import('process');
@@ -3370,7 +2927,6 @@ return ___scope___.entry = "index.js";
           });
         }
         
-FuseBox.import("fusebox-hot-reload").connect(4545, "", false)
 FuseBox.target = "universal"
 
 FuseBox.import("default/main.js");
