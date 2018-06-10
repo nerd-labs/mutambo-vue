@@ -33,7 +33,14 @@
             {role: 'reload'},
             {role: 'toggledevtools'},
             {type: 'separator'},
-            {role: 'togglefullscreen'}
+            {role: 'togglefullscreen'},
+            {type: 'separator'},
+            {
+              click: () => {
+                window.history.back();
+              },
+              label: 'Back'
+            }
           ]
         }
       ];
