@@ -34,12 +34,12 @@ export default {
 
   beforeMount() {
       // JUST FOR DEVELOPMENT
-      const migratedTeams = generateDefaultTeams(this.teams.length);
-
-      this.teams.forEach((team, index) => {
-        team = Object.assign(team, migratedTeams[index]);
-        this.addTeam(team);
-      });
+      // const migratedTeams = generateDefaultTeams(this.teams.length);
+      //
+      // this.teams.forEach((team, index) => {
+      //   team = Object.assign(team, migratedTeams[index]);
+      //   this.addTeam(team);
+      // });
   },
 
   methods: {
