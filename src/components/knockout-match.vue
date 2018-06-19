@@ -2,14 +2,18 @@
   .knockout-match
     .knockout-match__club
       template(v-if="home")
-        span.knockout-match__club-name {{ home.club }}
+        span.knockout-match__club-name
+          | {{ home.club }}
+          span {{ home.player }}
         span.knockout-match__score
           | {{ home.score }}
           span.knockout-match__penalty-score(v-if="home.penaltyScore") {{ home.penaltyScore }}
     .knockout-match__club
       template(v-if="away")
-        span.knockout-match__club-name {{ away.club }}
-        span.knockout-match__score
+      span.knockout-match__club-name
+        | {{ away.club }}
+        span {{ away.player }}
+      span.knockout-match__score
           | {{ away.score }}
           span.knockout-match__penalty-score(v-if="away.penaltyScore") {{ away.penaltyScore }}
 </template>
@@ -29,7 +33,10 @@ export default {
 
 <style scoped>
 .knockout-match__club-name {
+  align-items: center;
+  display: flex;
   text-align: left;
+  width: 100%;
 
   @media screen and (min-width: 1640px) {
     max-width: 130px;
@@ -37,6 +44,12 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+}
+
+.knockout-match__club-name span {
+  color: var(--bright-sky-blue);
+  font-size: 10px;
+  margin-left: 10px;
 }
 
 .knockout-match__club {
