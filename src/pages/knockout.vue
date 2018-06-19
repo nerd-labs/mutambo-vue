@@ -6,6 +6,7 @@
         .button.button--tertiary.next-round(@click="startRound" v-if="startRoundState") Start next round
 
         template(v-if="view === 'matches'")
+          h3 {{ getActiveRoundName() }}
           mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
           .button.button--tertiary(@click="complete" v-if="completeRound") Complete Round
 
@@ -68,6 +69,10 @@ export default {
   methods: {
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
+    },
+
+    getActiveRoundName() {
+      return getRoundName(this.activeRound.length);
     },
 
     matchUpdate(event) {
@@ -141,6 +146,7 @@ export default {
   min-height: calc(100vh - 136px); // height of header, footer and padding
   color: #2c7399;
   font-family: "Roboto Condensed", sans-serif;
+  width: 100%;
 }
 
 .round--inactive {
@@ -157,6 +163,7 @@ export default {
 }
 
 .matches {
+  margin-top: 50px;
   display: grid;
   grid-gap: 10px;
   grid-auto-columns: 1fr;
