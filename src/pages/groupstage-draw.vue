@@ -1,6 +1,8 @@
 <template lang="pug">
   .page.groupstage-draw
     mut-header
+      a.button.button--small.button--secondary(@click="skip" v-if="!done")
+        | Skip
 
     .page__content
       h1.loading(v-show="loading && !showAllTeams") 🥁
@@ -17,8 +19,7 @@
 
       a.button.button--tertiary(@click="startGroupstage" v-if="done")
         | Start groupstage
-      a.button.button--tertiary(@click="skip" v-if="!done")
-        | Skip
+
 </template>
 
 <script>
