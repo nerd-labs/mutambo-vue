@@ -208,6 +208,7 @@ export default {
 
 .match__score--input input {
   -webkit-appearance: none;
+  background-color: transparent;
   border: none;
   color: var(--light-sea-green);
   font-family: var(--font-main);
@@ -278,7 +279,7 @@ export default {
 
 /* STATE // DONE */
 .match--done {
-  background-color: #90ee9033;
+  background-color: rgba(144, 238, 144, .25);
 }
 
 .match--done .match__team--loser,
@@ -304,7 +305,7 @@ export default {
 /* STATE // ERROR */
 
 .match--error {
-  background-color: #d0021b33;
+  background-color: rgba(208, 2, 27, .25);
 }
 
 </style>

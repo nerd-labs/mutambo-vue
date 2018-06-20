@@ -184,6 +184,7 @@ export default {
   padding: 10px;
   position: fixed;
   top: 84px; /* header + statusbar; */
+  z-index: 9; /* just below the header */
 }
 
 .groupstage__shortcuts span {
