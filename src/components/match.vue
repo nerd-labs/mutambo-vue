@@ -21,6 +21,9 @@
     .match__team(:class="{'match__team--loser': internalMatch.winner ===  1, 'match__team--winner': internalMatch.winner === 2}")
       .team__name {{ internalMatch.away.club }}
       .team__player {{ internalMatch.away.player }}
+
+    .match__error
+      ng-container(v-if="alert") match can’t end in a tie
 </template>
 
 <script>
@@ -116,6 +119,8 @@ export default {
   justify-content: space-between;
   margin: 10px;
   min-height: 150px;
+  position: relative;
+  overflow: hidden;
 }
 
 .match__team {
@@ -304,8 +309,29 @@ export default {
 
 /* STATE // ERROR */
 
-.match--error {
-  background-color: rgba(208, 2, 27, .25);
+.match--error .match__error {
+    transform: translateY(0);
+}
+
+.match__error {
+  align-items: center;
+  background-color: var(--live-red);
+  border-radius: 8px 8px 0 0;
+  bottom: 0;
+  box-sizing: border-box;
+  color: var(--white);
+  display: flex;
+  font-size: 12px;
+  height: 40px;
+  justify-content: center;
+  left: 0;
+  margin: 0 auto;
+  padding: 5px 30px;
+  position: absolute;
+  right: 0;
+  width: 210px;
+  transform: translateY(50px);
+  transition: transform 300ms linear;
 }
 
 </style>
