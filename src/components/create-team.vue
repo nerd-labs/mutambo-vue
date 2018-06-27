@@ -2,12 +2,12 @@
   .u-box.create-team
     .form__group
       label Player
-      input(type='text' v-model='team.player' @input="submit")
+      input(type='text' v-model='internalTeam.player' @input="submit")
     .form__group
       label Club
-      input(type='text' v-model="team.club" @input="submit")
+      input(type='text' v-model="internalTeam.club" @input="submit")
     div(hidden)
-      span(v-model='team.id')
+      span(v-model='internalTeam.id')
 </template>
 
 <script>
@@ -18,27 +18,38 @@ import IdGenerator from '../services/id-generator';
 export default {
   props: {
     team: {
-      type: Object | String,
-      default: () => ({
+      type: Object | String
+    }
+  },
+
+  computed: {
+    internalTeam() {
+      const defaultTeam = {
         id: "",
         player: "",
         club: ""
-      })
+      };
+
+      return this.team || defaultTeam;
     }
   },
+
   methods: {
-    submit: debounce(function() {
-      if (!this.team.club || !this.team.player) {
+    submit() {
+      if (!this.internalTeam.club || !this.internalTeam.player) {
         return;
       }
 
-      if (!this.team.id) {
-        this.team.id = IdGenerator.id();
+      if (!this.internalTeam.id) {
+        this.internalTeam.id = IdGenerator.id();
       }
 
-      this.$emit("addTeam", this.team);
-    }, 500),
+      this.emit();
+    },
 
+    emit: debounce(function() {
+      this.$emit("addTeam", this.internalTeam);
+    }, 400)
   }
 };
 </script>
