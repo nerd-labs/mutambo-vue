@@ -23,7 +23,7 @@
       .team__player {{ internalMatch.away.player }}
 
     .match__error
-      ng-container(v-if="alert") match can’t end in a tie
+      template(v-if="alert") match can’t end in a tie
 </template>
 
 <script>
