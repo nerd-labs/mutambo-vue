@@ -24,13 +24,7 @@ export default {
 
   computed: {
     internalTeam() {
-      const defaultTeam = {
-        id: "",
-        player: "",
-        club: ""
-      };
-
-      return this.team || defaultTeam;
+      return this.team;
     }
   },
 
