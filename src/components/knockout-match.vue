@@ -5,17 +5,17 @@
         span.knockout-match__club-name
           | {{ home.club }}
           span {{ home.player }}
-        span.knockout-match__score
+        span.knockout-match__score(v-if="home.club")
           | {{ home.score }}
           span.knockout-match__penalty-score(v-if="home.penaltyScore") {{ home.penaltyScore }}
     .knockout-match__club
       template(v-if="away")
-      span.knockout-match__club-name
-        | {{ away.club }}
-        span {{ away.player }}
-      span.knockout-match__score
-          | {{ away.score }}
-          span.knockout-match__penalty-score(v-if="away.penaltyScore") {{ away.penaltyScore }}
+        span.knockout-match__club-name
+          | {{ away.club }}
+          span {{ away.player }}
+        span.knockout-match__score(v-if="away.club")
+            | {{ away.score }}
+            span.knockout-match__penalty-score(v-if="away.penaltyScore") {{ away.penaltyScore }}
 </template>
 
 <script>
