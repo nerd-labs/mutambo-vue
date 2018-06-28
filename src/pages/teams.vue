@@ -12,7 +12,7 @@
         label(for="randomize") Randomly mix players and teams
         input(type="checkbox" id="randomize" v-model='randomly')
 
-      a.button.button--tertiary(@click="submit")
+      a.button.button--tertiary(@click="submit" v-if="allTeamsEntered")
         | continue
 </template>
 
@@ -29,7 +29,12 @@ export default {
     ...mapGetters({
       slug: 'currentTournament/slug',
       teams: 'currentTournament/teams',
-    })
+    }),
+
+    allTeamsEntered() {
+      // check if all teams have an id, a club and a player
+      return this.teams.filter(team => team.id && team.club && team.player).length === this.teams.length;
+    }
   },
 
   beforeMount() {
