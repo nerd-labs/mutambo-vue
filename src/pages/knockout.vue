@@ -6,11 +6,12 @@
 
       .page__content
         .button.button--tertiary.next-round(@click="startRound" v-if="startRoundState") Start next round
-        .button.button--tertiary.next-round(@click="complete" v-if="completeRound") Complete Round
+        .button.button--tertiary.next-round(@click="complete" v-if="completeRound && view === 'tree'") Complete Round
 
         template(v-if="view === 'matches'")
           h3 {{ getActiveRoundName() }}
           mut-matches(:matches="activeRound" @update="matchUpdate" @done="allMatchesPlayed" :noTieAllowed="true")
+          .button.button--tertiary(@click="complete" v-if="completeRound") Complete Round
 
         .bracket(:class="totalRoundsClass" v-if="view === 'tree'")
           .round(v-for="round in internalRounds" :class="[round.classes, isInactive(round.round)]")
