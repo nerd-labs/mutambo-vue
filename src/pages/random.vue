@@ -15,9 +15,8 @@
 
       .teams(v-bind:class="{'teams--active': showAllTeams}")
         .team(v-for="team in animatedTeams" v-bind:class="{'team--active': team.active}")
-          .u-box
-            div {{ team.club }}
-            div {{ team.player }}
+          h3.team__club {{ team.club }}
+          .team__player {{ team.player }}
 
       a.button.button--tertiary(@click="start" v-if="done")
         | Start {{ type }}
@@ -181,27 +180,24 @@ export default {
   flex-wrap: wrap;
   margin-top: 100px;
   justify-content: center;
-  width: 100%;
+  max-width: 1440px;
 }
 
 .team {
-  margin-bottom: 10px;
-  opacity: 0;
-  padding-right: 20px;
+  margin-bottom: 50px;
+  text-align: center;
   transition: opacity .2s linear;
-  width: 25%;
+  width: 300px;
 }
 
-.team .u-box {
-  height: 100%;
-  min-width: auto;
+.team__club {
+  margin-bottom: 15px;
+  opacity: 0;
+  text-align: center;
 }
 
-.team--active {
+.team--active .team__club {
   opacity: 1;
 }
 
-.teams--active .team {
-    opacity: 1;
-}
 </style>
