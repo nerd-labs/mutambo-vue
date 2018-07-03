@@ -1,9 +1,12 @@
 <template lang="pug">
     .page.knockout
       mut-header
+        .button.button--small.button--secondary(v-if="view === 'matches' && !startRoundState" @click="toggleView('tree')") switch to tree view
+        .button.button--small.button--secondary(v-if="view === 'tree' && !startRoundState" @click="toggleView('matches')") switch to matches view
 
       .page__content
         .button.button--tertiary.next-round(@click="startRound" v-if="startRoundState") Start next round
+        .button.button--tertiary.next-round(@click="complete" v-if="completeRound && view === 'tree'") Complete Round
 
         template(v-if="view === 'matches'")
           h3 {{ getActiveRoundName() }}
@@ -69,6 +72,10 @@ export default {
   methods: {
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
+    },
+
+    toggleView(state) {
+      this.view = state;
     },
 
     getActiveRoundName() {

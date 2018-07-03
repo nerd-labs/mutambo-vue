@@ -14,7 +14,7 @@
             .tournament__players
               span players:
               | {{ tournament.teams ? tournament.teams.length : '0' }}
-          .tournament__icon {{ tournament[tournament.type].done ? '🏆' : '🎮' }}
+          .tournament__icon {{ tournamentIcon(tournament) }}
 </template>
 
 <script>
@@ -35,6 +35,16 @@ export default {
     goToRoute(id) {
       const tournament = this.$store.getters.tournamentById(id);
       this.$router.push(tournament.page);
+    },
+
+    tournamentIcon(tournament) {
+      switch(tournament.type) {
+        case 'league':
+        case 'knockout':
+          return tournament[tournament.type].done ? '🏆' : '🎮'
+        case 'groupstage':
+          return tournament[tournament.type].done && tournament['knockout'].done ? '🏆' : '🎮'
+      }
     }
   },
 
