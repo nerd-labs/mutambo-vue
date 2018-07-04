@@ -18,10 +18,15 @@
 <script>
 import { mapGetters } from "vuex";
 import { matchStates, routes } from "../config";
+import berger from "../helpers/berger";
 
 export default {
   beforeMount () {
     this.$store.dispatch('league/updateTable');
+
+    if(!this.matches.length) {
+      this.generateMatches();
+    }
   },
 
   data: () => ({
@@ -35,6 +40,8 @@ export default {
       matches: 'league/matches',
       done: 'league/completed',
       table: 'league/table',
+      teams: 'currentTournament/teams',
+      numberOfPlays: 'currentTournament/numberOfPlays',
     }),
 
     results() {
@@ -69,6 +76,31 @@ export default {
 
     toggleView(state) {
       this.view = state;
+    },
+
+    reverseFixtures(n) {
+      return n % 2 === 0;
+    },
+
+    generateMatches() {
+      const matches = [];
+
+      for (let i = 1; i <= this.numberOfPlays; i++) {
+        const teams = JSON.parse(JSON.stringify(this.teams));
+
+        const bergerTable = berger.getTable(
+          teams,
+          this.reverseFixtures(i)
+        );
+        matches.push(...bergerTable);
+      }
+
+      matches.map(match => {
+        match.away.score = 0;
+        match.home.score = 0;
+      });
+
+      this.$store.dispatch("league/addMatches", matches);
     },
   }
 

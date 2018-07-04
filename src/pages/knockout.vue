@@ -35,6 +35,15 @@ export default {
 
   beforeMount() {
     this.splitRounds();
+
+    if (!this.rounds.length) {
+      this.$store.dispatch('knockout/generate')
+          .then(() => {
+              this.splitRounds();
+          });
+    } else {
+      this.splitRounds();
+    }
   },
 
   created() {
@@ -70,6 +79,11 @@ export default {
   },
 
   methods: {
+
+    generateKnockoutRounds() {
+      this.$store.dispatch('knockout/generate')
+    },
+
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
     },
