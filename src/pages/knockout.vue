@@ -80,10 +80,6 @@ export default {
 
   methods: {
 
-    generateKnockoutRounds() {
-      this.$store.dispatch('knockout/generate')
-    },
-
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
     },
