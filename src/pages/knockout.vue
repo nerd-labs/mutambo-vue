@@ -79,7 +79,6 @@ export default {
   },
 
   methods: {
-
     getNameOfRound(round) {
       return getRoundName(round.totalTeams);
     },
