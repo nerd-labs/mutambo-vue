@@ -34,8 +34,6 @@ export default {
   }),
 
   beforeMount() {
-    this.splitRounds();
-
     if (!this.rounds.length) {
       this.$store.dispatch('knockout/generate')
           .then(() => {

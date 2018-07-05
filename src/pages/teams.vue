@@ -56,8 +56,7 @@ export default {
     submit() {
       if (this.randomly) {
         this.$router.push(`/random/${this.slug}`);
-      }
-      else {
+      } else {
         if (this.type === 'groupstage') {
           this.$router.push(`/${this.type}/draw/${this.slug}`);
         } else {
