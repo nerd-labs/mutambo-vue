@@ -128,7 +128,11 @@ export default {
     },
 
     start() {
-      this.$router.push(`/summary/${this.slug}`);
+      if (this.type === 'groupstage') {
+        this.$router.push(`/${this.type}/draw/${this.slug}`);
+      } else {
+        this.$router.push(`/${this.type}/${this.slug}`);
+      }
     }
   },
 };
