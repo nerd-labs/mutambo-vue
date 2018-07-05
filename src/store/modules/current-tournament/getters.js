@@ -1,10 +1,14 @@
 export default {
   id: (state) => {
-  return state.id
-},
+    return state.id
+  },
 
   tournament: (state, getters, rootState, rootGetters) => {
-    return rootGetters.tournamentById(state.id)
+    if (state.id) {
+      return rootGetters.tournamentById(state.id)
+    } else {
+      return {}
+    }
   },
 
   page: (state, getters) => {

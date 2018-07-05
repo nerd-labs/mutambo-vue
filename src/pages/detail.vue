@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.detail
-    mut-header
+    mut-header(:back="'create'")
 
     .page__content
       h3 ⚙️ {{ type }} settings ⚙️
@@ -47,16 +47,16 @@ export default {
   beforeMount() {
     switch (this.type) {
       case 'knockout':
-        this.totalPlayers = this.knockoutTotalPlayerOptions[0];
+        this.totalPlayers = this.tournament.teams.length || this.knockoutTotalPlayerOptions[0];
         break;
       case 'groupstage':
-          this.totalPlayers = this.knockoutTotalPlayerOptions[1];
-          this.numberOfProceedingPlayers = this.knockoutTotalPlayerOptions[0];
-          break;
+        this.totalPlayers = this.tournament.teams.length || this.knockoutTotalPlayerOptions[1];
+        this.numberOfProceedingPlayers = this.tournament.details.numberOfProceedingPlayers || this.knockoutTotalPlayerOptions[0];
+        break;
       case 'league':
-          this.totalPlayers = 2;
-          this.numberOfPlays = 1;
-          break;
+        this.totalPlayers = this.tournament.teams.length || 2;
+        this.numberOfPlays = this.tournament.details.numberOfPlays || 1;
+        break;
     }
   },
 
@@ -66,6 +66,7 @@ export default {
       name: "currentTournament/name",
       totalTeams: "currentTournament/totalTeams",
       type: "currentTournament/type",
+      tournament: "currentTournament/tournament",
     }),
 
     numberOfProceedingPlayersOptions() {

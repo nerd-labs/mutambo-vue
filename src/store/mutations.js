@@ -1,35 +1,47 @@
 export default {
   addTournament(state, { id, slug, name, type }) {
-    const t = {
-      id,
-      slug,
-      name,
-      teams: [],
-      type,
-      details: {},
-      league: {
-        matches: [],
-        table: [],
-        done: false
-      },
-      knockout: {
-        rounds: [],
-        teams: [],
-        done: false,
-        winner: undefined,
-        activeRound: {
-          id: 0,
-          state: 0,
-        }
-      },
-      groupstage: {
-        groups: {},
-        proceedingTeams: [],
-        done: false,
-      },
-    };
+    const index = state.tournaments.findIndex(t => t.id === id);
 
-    state.tournaments.push(t);
+    if (index < 0) {
+      const t = {
+        id,
+        slug,
+        name,
+        teams: [],
+        type,
+        details: {},
+        league: {
+          matches: [],
+          table: [],
+          done: false
+        },
+        knockout: {
+          rounds: [],
+          teams: [],
+          done: false,
+          winner: undefined,
+          activeRound: {
+            id: 0,
+            state: 0,
+          }
+        },
+        groupstage: {
+          groups: {},
+          proceedingTeams: [],
+          done: false,
+        },
+      };
+
+      state.tournaments.push(t);
+    } else {
+      const tournament = state.tournaments.find(t => t.id === state.tournaments[index].id);
+
+      tournament.slug = slug;
+      tournament.name = name;
+      tournament.type = type;
+
+      state.tournaments[index] = tournament;
+    }
   },
 
   setProgress(state, { slug, page }) {

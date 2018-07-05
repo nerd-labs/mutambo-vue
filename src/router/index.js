@@ -29,12 +29,12 @@ router.beforeEach((to, from, next) => {
     if (to.meta.fetchCurrentTournament) {
       const tournament = store.getters.tournamentBySlug(to.params.slug)
 
-      if (Object.keys(tournament).length === 0) {
+      if (Object.keys(tournament).length === 0 && !to.meta.forceRoute) {
         next('/')
       }
 
       const currentTournamentId = store.getters['currentTournament/id'];
-      if (tournament.id !== currentTournamentId) {
+      if (tournament.id !== currentTournamentId && !to.meta.forceRoute) {
         store.dispatch('currentTournament/set', tournament.id);
       }
     }
