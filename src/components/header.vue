@@ -36,12 +36,8 @@ export default {
     },
 
     goBack() {
-      if (this.back) {
-        const route = this.back === '/' ? '' : this.back;
-        this.$router.push(`/${route}`);
-      } else {
-        history.back();
-      }
+      const route = this.back === '/' ? '' : this.back;
+      this.$router.push(`/${route}`);
     }
   }
 };
