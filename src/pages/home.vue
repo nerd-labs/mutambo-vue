@@ -18,7 +18,6 @@
           .tournament__delete(v-if="deleteMode" @click="deleteTournament(tournament)")
             i.material-icons delete_forever
 
-
       .tournaments__delete-button(v-if="tournaments.length" @click="toggleDelete()")
         span(v-if="!deleteMode") delete tournaments
         span(v-else) done
@@ -146,7 +145,7 @@ export default {
 
 .tournament__delete {
   align-items: center;
-  background:  rgba(0, 0, 0, 0.3);
+  background:  rgba(0, 0, 0, .3);
   cursor: pointer;
   display: flex;
   height: 100%;
