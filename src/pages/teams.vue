@@ -12,7 +12,7 @@
         .randomize-checkbox(:class="{ 'randomize-checkbox--checked': randomly }")
           i.material-icons(v-if="randomly") check_box
           i.material-icons(v-if="!randomly") check_box_outline_blank
-          input(type="checkbox" id="randomize" v-model='randomly')
+          input.checkbox(type="checkbox" id="randomize" v-model='randomly')
         label(for="randomize") randomize teams
 
       a.button.button--tertiary(@click="submit")
@@ -79,7 +79,7 @@ export default {
     color: var(--light-sea-green);
   }
 
-  #randomize {
+  .checkbox {
     bottom: 0;
     cursor: pointer;
     height: 100%;
