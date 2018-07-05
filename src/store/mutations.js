@@ -78,4 +78,14 @@ export default {
     }
 
   },
+
+  deleteTournament(state, tournament) {
+    const index = state.tournaments.findIndex(t => t.id === tournament.id);
+
+    if (index > -1) {
+      state.tournaments.splice(index, 1);
+    } else {
+      throw new Error(`No tournament ${tournament.id} found.`);
+    }
+  }
 }
