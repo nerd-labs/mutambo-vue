@@ -9,8 +9,11 @@
         mut-create-team(@addTeam="addTeam" :team="team" v-for="team in teams")
 
       .form__group.form__group--checkbox
-        label(for="randomize") Randomly mix players and teams
-        input(type="checkbox" id="randomize" v-model='randomly')
+        .randomize-checkbox(:class="{ 'randomize-checkbox--checked': randomly }")
+          i.material-icons(v-if="randomly") check_box
+          i.material-icons(v-if="!randomly") check_box_outline_blank
+          input.checkbox(type="checkbox" id="randomize" v-model='randomly')
+        label(for="randomize") randomize teams
 
       a.button.button--tertiary(@click="submit" v-if="allTeamsEntered")
         | continue
@@ -68,6 +71,29 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 50px;
+    width: 100%;
+  }
+
+  .randomize-checkbox {
+    position: relative;
+    line-height: 1px;
+    margin-right: 10px;
+  }
+
+  .randomize-checkbox--checked {
+    color: var(--light-sea-green);
+  }
+
+  .checkbox {
+    bottom: 0;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
     width: 100%;
   }
 </style>
