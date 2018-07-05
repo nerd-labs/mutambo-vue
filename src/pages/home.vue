@@ -15,6 +15,12 @@
               span players:
               | {{ tournament.teams ? tournament.teams.length : '0' }}
           .tournament__icon {{ tournamentIcon(tournament) }}
+          .tournament__delete(v-if="deleteMode" @click="deleteTournament(tournament)")
+            i.material-icons delete_forever
+
+      .tournaments__delete-button(v-if="tournaments.length" @click="toggleDelete()")
+        span(v-if="!deleteMode") delete tournaments
+        span(v-else) done
 </template>
 
 <script>
@@ -23,6 +29,13 @@ import { routes } from "../config";
 import { mapGetters } from "vuex";
 
 export default {
+
+  data: () => {
+    return {
+      deleteMode: false,
+    }
+  },
+
   beforeMount() {
     this.$store.dispatch("currentTournament/reset");
   },
@@ -33,6 +46,8 @@ export default {
     },
 
     goToRoute(id) {
+      if (this.deleteMode) return;
+
       const tournament = this.$store.getters.tournamentById(id);
       this.$router.push(tournament.page);
     },
@@ -45,6 +60,15 @@ export default {
         case 'groupstage':
           return tournament[tournament.type].done && tournament['knockout'].done ? '🏆' : '🎮'
       }
+    },
+
+    toggleDelete() {
+      this.deleteMode = !this.deleteMode;
+    },
+
+    deleteTournament(tournament) {
+      const result = confirm(`Are you sure you want to delete "${tournament.name}"`);
+      if (result) this.$store.dispatch('deleteTournament', tournament);
     }
   },
 
@@ -117,5 +141,34 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
+}
+
+.tournament__delete {
+  align-items: center;
+  background:  rgba(0, 0, 0, .3);
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.tournament__delete i {
+  color: white;
+  font-size: 60px;
+}
+
+
+.tournaments__delete-button {
+  margin-top: 50px;
+}
+
+.tournaments__delete-button span {
+  color: var(--white);
+  cursor: pointer;
+  text-decoration: underline;
 }
 </style>
