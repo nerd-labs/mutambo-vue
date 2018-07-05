@@ -159,12 +159,12 @@ export default {
 
 .tournament__delete i {
   color: white;
-    font-size: 60px;
+  font-size: 60px;
 }
 
 
 .tournaments__delete-button {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .tournaments__delete-button span {
