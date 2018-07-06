@@ -31,7 +31,11 @@ export const routes = {
   CREATE: {
     path: 'create',
     fullPath: '/create/',
-    component: create
+    component: create,
+    meta: {
+      forceRoute: true,
+      fetchCurrentTournament: true
+    }
   },
   DETAIL: {
     path: 'detail',

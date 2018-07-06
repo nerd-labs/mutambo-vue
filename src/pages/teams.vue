@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.teams
-    mut-header
+    mut-header(:back="'detail/' + slug")
 
     .page__content
       h3 🙏🏻 Give us some teams plz 🙏🏻

@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.create
-    mut-header
+    mut-header(:back="'/'")
 
     .page__content
       h3 🎉 Create new tournament  🎉
@@ -16,13 +16,15 @@
             | Knockout
           .button-group-item(value="groupstage" @click="setType('groupstage')" :class="{ 'button-group-item--active': type === 'groupstage'}")
             | Groupstage & Knockout
-      a.button.button--tertiary( @click="submit")
+      a.button.button--tertiary(v-if="_id" @click="submit")
+        | update
+      a.button.button--tertiary(v-else @click="submit")
         | create
-
-
 </template>
 
- <script>
+<script>
+
+import { mapGetters } from "vuex";
 
 import slug from "slug";
 import idGenerator from "../services/id-generator";
@@ -30,14 +32,32 @@ import idGenerator from "../services/id-generator";
 export default {
   data: () => ({
     name: "",
-    type: "knockout"
+    type: "knockout",
+    id: idGenerator.id()
   }),
+
+  computed: {
+    ...mapGetters({
+      _id: "currentTournament/id",
+      _name: "currentTournament/name",
+      _type: "currentTournament/type",
+    })
+  },
+
+  created() {
+    if (this._id) {
+      this.id = this._id;
+      this.name = this._name;
+      this.type = this._type;
+    }
+  },
+
   methods: {
     submit() {
       const slugged = slug(this.name.toLowerCase());
 
       const tournament = {
-        id: idGenerator.id(),
+        id: this.id,
         name: this.name,
         type: this.type
       };
@@ -52,6 +72,7 @@ export default {
       this.type = type;
     }
   }
+
 };
 </script>
 

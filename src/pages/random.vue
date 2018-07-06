@@ -38,6 +38,11 @@ export default {
     this.startDraw();
   },
 
+  beforeDestroy() {
+    if (this.loadingTimeout) clearTimeout(this.loadingTimeout);
+    if (this.nameTimeout) clearTimeout(this.nameTimeout);
+  },
+
   data: () => ({
     animatedTeams: [],
     currentTeam: {},

@@ -6,6 +6,10 @@
 
     .page__header-right
       slot
+
+    .page__header-back(v-if="back" @click="goBack()")
+      i.material-icons chevron_left
+      | back
 </template>
 
 <script>
@@ -13,6 +17,12 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  props: {
+    back: {
+      required: false,
+      type: String,
+    }
+  },
 
   computed: {
     ...mapGetters({
@@ -24,6 +34,11 @@ export default {
     goToHome() {
       this.$router.push('/');
     },
+
+    goBack() {
+      const route = this.back === '/' ? '' : this.back;
+      this.$router.push(`/${route}`);
+    }
   }
 };
 </script>
@@ -69,5 +84,17 @@ export default {
 
 .page__subtitle::before {
     content: '// ';
+}
+
+.page__header-back {
+  align-items: center;
+  bottom: -35px;
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+}
+
+.page__header-back i {
+  color: var(--bright-sky-blue);
 }
 </style>
