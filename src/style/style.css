@@ -206,7 +206,6 @@ label {
 /* Page setup */
 
 .page {
-  align-items: center;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 65px 1fr;
