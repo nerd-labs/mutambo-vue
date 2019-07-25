@@ -74,66 +74,7 @@ export default class Home extends Vue {
 }
 </script>
 
-
-// import { routes } from "../config";
-// import { mapGetters } from "vuex";
-
-// export default {
-//   data: () => {
-//     return {
-//       deleteMode: false
-//     };
-//   },
-
-//   beforeMount() {
-//     this.$store.dispatch("currentTournament/reset");
-//   },
-
-//   methods: {
-//     goToCreate() {
-//       this.$router.push(routes.CREATE.path);
-//     },
-
-//     goToRoute(id) {
-//       if (this.deleteMode) return;
-
-//       const tournament = this.$store.getters.tournamentById(id);
-//       this.$router.push(tournament.page);
-//     },
-
-//     tournamentIcon(tournament) {
-//       switch (tournament.type) {
-//         case "league":
-//         case "knockout":
-//           return tournament[tournament.type].done ? "🏆" : "🎮";
-//         case "groupstage":
-//           return tournament[tournament.type].done && tournament["knockout"].done
-//             ? "🏆"
-//             : "🎮";
-//       }
-//     },
-
-//     toggleDelete() {
-//       this.deleteMode = !this.deleteMode;
-//     },
-
-//     deleteTournament(tournament) {
-//       const result = confirm(
-//         `Are you sure you want to delete "${tournament.name}"`
-//       );
-//       if (result) this.$store.dispatch("deleteTournament", tournament);
-//     }
-//   },
-
-//   computed: {
-//     ...mapGetters({
-//       tournaments: "tournaments"
-//     })
-//   }
-// };
-//
-
-<style scoped>
+<style lang="scss" scoped>
 .home {
   align-items: center;
   display: flex;
