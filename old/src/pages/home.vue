@@ -23,115 +23,62 @@
         span(v-else) done
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { mapGetters  } from 'vuex';
+<script>
 
-@Component({
-    computed: {
-        ...mapGetters({ tournaments: 'tournaments' }),
+import { routes } from "../config";
+import { mapGetters } from "vuex";
+
+export default {
+
+  data: () => {
+    return {
+      deleteMode: false,
+    }
+  },
+
+  beforeMount() {
+    this.$store.dispatch("currentTournament/reset");
+  },
+
+  methods: {
+    goToCreate() {
+      this.$router.push(routes.CREATE.path);
     },
-})
-export default class Home extends Vue {
-    public deleteMode: boolean = false;
-    @Prop() private msg!: string;
 
-    public beforeMount(): void {
-        // this.$store.dispatch("currentTournament/reset");
-    }
-
-    public goToCreate() {
-        // this.$router.push(routes.CREATE.path);
-    }
-
-    public goToRoute(id: number) {
-      if (this.deleteMode) { return; }
+    goToRoute(id) {
+      if (this.deleteMode) return;
 
       const tournament = this.$store.getters.tournamentById(id);
       this.$router.push(tournament.page);
-    }
+    },
 
-    public tournamentIcon(tournament: any) {
-      switch (tournament.type) {
+    tournamentIcon(tournament) {
+      switch(tournament.type) {
         case 'league':
         case 'knockout':
-          return tournament[tournament.type].done ? '🏆' : '🎮';
+          return tournament[tournament.type].done ? '🏆' : '🎮'
         case 'groupstage':
-          return tournament[tournament.type].done && tournament.knockout.done
-            ? '🏆'
-            : '🎮';
+          return tournament[tournament.type].done && tournament['knockout'].done ? '🏆' : '🎮'
       }
-    }
+    },
 
-    public toggleDelete() {
+    toggleDelete() {
       this.deleteMode = !this.deleteMode;
-    }
+    },
 
-    public deleteTournament(tournament: any) {
+    deleteTournament(tournament) {
       const result = confirm(`Are you sure you want to delete "${tournament.name}"`);
-      if (result) { this.$store.dispatch('deleteTournament', tournament); }
+      if (result) this.$store.dispatch('deleteTournament', tournament);
     }
-}
+  },
+
+  computed: {
+    ...mapGetters({
+      tournaments: "tournaments"
+    })
+  }
+};
 </script>
-
-
-// import { routes } from "../config";
-// import { mapGetters } from "vuex";
-
-// export default {
-//   data: () => {
-//     return {
-//       deleteMode: false
-//     };
-//   },
-
-//   beforeMount() {
-//     this.$store.dispatch("currentTournament/reset");
-//   },
-
-//   methods: {
-//     goToCreate() {
-//       this.$router.push(routes.CREATE.path);
-//     },
-
-//     goToRoute(id) {
-//       if (this.deleteMode) return;
-
-//       const tournament = this.$store.getters.tournamentById(id);
-//       this.$router.push(tournament.page);
-//     },
-
-//     tournamentIcon(tournament) {
-//       switch (tournament.type) {
-//         case "league":
-//         case "knockout":
-//           return tournament[tournament.type].done ? "🏆" : "🎮";
-//         case "groupstage":
-//           return tournament[tournament.type].done && tournament["knockout"].done
-//             ? "🏆"
-//             : "🎮";
-//       }
-//     },
-
-//     toggleDelete() {
-//       this.deleteMode = !this.deleteMode;
-//     },
-
-//     deleteTournament(tournament) {
-//       const result = confirm(
-//         `Are you sure you want to delete "${tournament.name}"`
-//       );
-//       if (result) this.$store.dispatch("deleteTournament", tournament);
-//     }
-//   },
-
-//   computed: {
-//     ...mapGetters({
-//       tournaments: "tournaments"
-//     })
-//   }
-// };
-//
 
 <style scoped>
 .home {
@@ -198,7 +145,7 @@ export default class Home extends Vue {
 
 .tournament__delete {
   align-items: center;
-  background: rgba(0, 0, 0, 0.3);
+  background:  rgba(0, 0, 0, .3);
   cursor: pointer;
   display: flex;
   height: 100%;
@@ -213,6 +160,7 @@ export default class Home extends Vue {
   color: white;
   font-size: 60px;
 }
+
 
 .tournaments__delete-button {
   margin-top: 50px;
