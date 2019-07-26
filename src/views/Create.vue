@@ -29,6 +29,7 @@ import slug from 'slug';
 import { Component, Vue } from 'vue-property-decorator';
 import { IdGenerator } from '../store/helpers/id-generator';
 import { mapGetters } from 'vuex';
+import { Routes } from '../router';
 
 @Component({
   components: {
@@ -60,7 +61,7 @@ export default class Create extends Vue {
     tournament.slug = `${slugged}-${IdGenerator.r4c}`;
 
     this.$store.commit('addTournament', tournament);
-    this.$router.push(`/detail/${tournament.slug}`);
+    this.$router.push(`${Routes.Detail}/${tournament.slug}`);
   }
 
   public setType(type: any) {

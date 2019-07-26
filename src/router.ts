@@ -7,6 +7,7 @@ Vue.use(Router);
 export enum Routes {
   Home = '/',
   Create = '/create',
+  Detail = '/detail',
 }
 
 export default new Router({
