@@ -26,12 +26,9 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
+import { Routes } from '../router';
 
-@Component({
-  computed: {
-    ...mapGetters({ tournaments: 'tournaments' }),
-  },
-})
+@Component
 export default class Home extends Vue {
   public deleteMode = false;
 
@@ -40,7 +37,7 @@ export default class Home extends Vue {
   }
 
   public goToCreate() {
-    // this.$router.push(routes.CREATE.path);
+    this.$router.push(Routes.Create);
   }
 
   public goToRoute(id: any) {
@@ -70,7 +67,11 @@ export default class Home extends Vue {
     const result = confirm(
       `Are you sure you want to delete "${tournament.name}"`,
     );
-    if (result) {this.$store.dispatch('deleteTournament', tournament); }
+    if (result) { this.$store.dispatch('deleteTournament', tournament); }
+  }
+
+  private get tournaments() {
+    return this.$store.getters.tournaments;
   }
 }
 </script>

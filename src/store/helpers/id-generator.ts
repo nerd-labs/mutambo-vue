@@ -1,11 +1,13 @@
 export class IdGenerator {
 
   public static id() {
-    return `${this.r4c}${this.r4c}-${this.r4c}-${this.r4c}-${this.r4c}-${this.r4c}${this.r4c}${this.r4c}`;
+    return ['r4c', 'r4c', '-', 'r4c', '-', 'r4c', '-', 'r4c', '-', 'r4c', 'r4c', 'r4c']
+      .map((str) => str === 'r4c' ? this.r4c : str)
+      .join();
   }
 
-  // random 4 characters
-  private static get r4c() {
+  /** Random 4 characters */
+  static get r4c() {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);
