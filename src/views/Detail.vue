@@ -50,6 +50,7 @@ export default class Detail extends Vue {
   @currentTournament.Getter('name') public name!: string;
   @currentTournament.Getter('type') public type!: string;
   @currentTournament.Getter('tournament') public tournament!: any;
+  @currentTournament.Getter('totalTeams') public totalTeams!: any;
   @currentTournament.Getter('slug') private slug!: string;
 
   public readonly knockoutTotalPlayerOptions = [2, 4, 8, 16, 32];
@@ -71,6 +72,16 @@ export default class Detail extends Vue {
         this.totalPlayers = this.tournament.teams.length || 2;
         this.numberOfPlays = this.tournament.details.numberOfPlays || 1;
         break;
+    }
+  }
+
+  public get numberOfProceedingPlayersOptions() {
+    if (this.type === 'groupstage') {
+      return this.knockoutTotalPlayerOptions.filter((totalPlayers: any) => {
+        return totalPlayers <= this.totalPlayers;
+      });
+    } else {
+      return 0;
     }
   }
 
