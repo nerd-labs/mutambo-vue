@@ -1,7 +1,7 @@
 import { matchStates } from '../config';
 import { IdGenerator } from './id-generator';
 
-export function getTable(teams: any, reverseFixtures: any, useDummy = false, dummy = {}) {
+export function getTable(teams: any, reverseFixtures?: any, useDummy = false, dummy = {}) {
   if (!Array.isArray(teams)) {
     teams = Array.from({ length: teams }).map((_, i) => i);
   }

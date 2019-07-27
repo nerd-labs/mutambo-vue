@@ -23,6 +23,7 @@
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
     "variable-name": false,
-    "member-ordering": false
+    "member-ordering": false,
+    "no-string-literal": false
   }
 }

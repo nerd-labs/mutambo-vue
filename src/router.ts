@@ -65,6 +65,24 @@ const router = new Router({
       },
     },
     {
+      path: '/groupstage/draw/:slug',
+      name: 'groupstage',
+      component: () => import(/* webpackChunkName: "groupstage" */ './views/GroupstageDraw.vue'),
+      meta: {
+        save: true,
+        fetchCurrentTournament: true,
+      },
+    },
+    {
+      path: '/groupstage/:slug',
+      name: 'groupstage',
+      component: () => import(/* webpackChunkName: "groupstage" */ './views/Groupstage.vue'),
+      meta: {
+        save: true,
+        fetchCurrentTournament: true,
+      },
+    },
+    {
       path: '/knockout/:slug',
       name: 'knockout',
       component: () => import(/* webpackChunkName: "knockout" */ './views/Knockout.vue'),
