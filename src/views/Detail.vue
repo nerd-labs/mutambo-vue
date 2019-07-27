@@ -37,7 +37,6 @@
 import MutHeader from '@/components/header.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
 import { namespace } from 'vuex-class';
 
 const currentTournament = namespace('currentTournament');

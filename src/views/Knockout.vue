@@ -27,8 +27,7 @@ import MutKnockoutMatch from '@/components/knockout-match.vue';
 import MutMatches from '@/components/matches.vue';
 
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
-import { namespace, Getter } from 'vuex-class';
+import { namespace } from 'vuex-class';
 import { getRoundName } from '@/store/helpers/knockout';
 
 const currentTournament = namespace('currentTournament');
@@ -82,27 +81,27 @@ export default class Knockout extends Vue {
     return this.activeRoundState === 0;
   }
 
-  private getNameOfRound(round: any) {
+  public getNameOfRound(round: any) {
     return getRoundName(round.totalTeams);
   }
 
-  private toggleView(state: any) {
+  public toggleView(state: any) {
     this.view = state;
   }
 
-  private getActiveRoundName() {
+  public getActiveRoundName() {
     return getRoundName(this.activeRound.length);
   }
 
-  private matchUpdate(event: any) {
+  public matchUpdate(event: any) {
     this.$store.dispatch('knockout/updateMatch', event.match);
   }
 
-  private allMatchesPlayed() {
+  public allMatchesPlayed() {
     this.completeRound = true;
   }
 
-  private complete() {
+  public complete() {
     this.view = 'tree';
     this.$store.dispatch('knockout/completeRound').then(() => {
       if (this.winner) {
@@ -111,12 +110,12 @@ export default class Knockout extends Vue {
     });
   }
 
-  private startRound() {
+  public startRound() {
     this.view = 'matches';
     this.$store.dispatch('knockout/startRound');
   }
 
-  private isInactive(round: any) {
+  public isInactive(round: any) {
     return round > this.activeRoundId ? 'round--inactive' : '';
   }
 

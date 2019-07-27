@@ -24,9 +24,7 @@ import MutHeader from '@/components/header.vue';
 import MutCreateTeam from '@/components/create-team.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
 import { namespace } from 'vuex-class';
-import { generateDefaultTeams } from '@/store/helpers/migrations';
 
 const currentTournament = namespace('currentTournament');
 
@@ -42,16 +40,6 @@ export default class Temas extends Vue {
   @currentTournament.Getter('type') private type!: string;
 
   public randomly: boolean = false;
-
-  public beforeMount() {
-    // JUST FOR DEVELOPMENT
-    // const migratedTeams = generateDefaultTeams(this.teams.length);
-    //
-    // this.teams.forEach((team, index) => {
-    //   team = Object.assign(team, migratedTeams[index]);
-    //   this.addTeam(team);
-    // });
-  }
 
   get allTeamsEntered() {
     // check if all teams have an id, a club and a player

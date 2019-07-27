@@ -28,7 +28,6 @@ import MutHeader from '@/components/header.vue';
 import slug from 'slug';
 import { Component, Vue } from 'vue-property-decorator';
 import { IdGenerator } from '../store/helpers/id-generator';
-import { mapGetters } from 'vuex';
 import { Routes } from '../router';
 import { namespace } from 'vuex-class';
 

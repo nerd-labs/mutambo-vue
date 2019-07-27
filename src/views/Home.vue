@@ -26,7 +26,6 @@
 <script lang="ts">
 import { Getter } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
 import { Routes } from '../router';
 
 @Component

@@ -25,7 +25,7 @@ const router = new Router({
       name: 'create',
       component: () => import(/* webpackChunkName: "create" */ './views/Create.vue'),
       meta: {
-        save: true,
+        forceRoute: true,
         fetchCurrentTournament: true,
       },
     },
@@ -48,9 +48,35 @@ const router = new Router({
       },
     },
     {
+      path: '/random/:slug',
+      name: 'random',
+      component: () => import(/* webpackChunkName: "random" */ './views/Random.vue'),
+      meta: {
+        fetchCurrentTournament: true,
+      },
+    },
+    {
+      path: '/league/:slug',
+      name: 'league',
+      component: () => import(/* webpackChunkName: "league" */ './views/League.vue'),
+      meta: {
+        save: true,
+        fetchCurrentTournament: true,
+      },
+    },
+    {
       path: '/knockout/:slug',
       name: 'knockout',
       component: () => import(/* webpackChunkName: "knockout" */ './views/Knockout.vue'),
+      meta: {
+        save: true,
+        fetchCurrentTournament: true,
+      },
+    },
+    {
+      path: '/results/:slug',
+      name: 'results',
+      component: () => import(/* webpackChunkName: "results" */ './views/Results.vue'),
       meta: {
         save: true,
         fetchCurrentTournament: true,

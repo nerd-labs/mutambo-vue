@@ -1,5 +1,7 @@
-export function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
+export function shuffle(array: any) {
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
