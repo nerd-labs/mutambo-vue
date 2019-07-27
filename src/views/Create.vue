@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import MutHeader from '@/components/MutHeader.vue';
+import MutHeader from '@/components/header.vue';
 
 import slug from 'slug';
 import { Component, Vue } from 'vue-property-decorator';

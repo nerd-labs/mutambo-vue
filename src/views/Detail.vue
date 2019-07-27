@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import MutHeader from '@/components/MutHeader.vue';
+import MutHeader from '@/components/header.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
@@ -54,9 +54,9 @@ export default class Detail extends Vue {
   @currentTournament.Getter('slug') private slug!: string;
 
   public readonly knockoutTotalPlayerOptions = [2, 4, 8, 16, 32];
-  public totalPlayers!: number;
-  public numberOfPlays!: number;
-  public numberOfProceedingPlayers!: number;
+  public totalPlayers: number = 0;
+  public numberOfPlays: number = 0;
+  public numberOfProceedingPlayers: number = 0;
 
   public beforeMount() {
     switch (this.type) {
@@ -83,7 +83,6 @@ export default class Detail extends Vue {
     }));
 
     if (details) {
-      this.$store.dispatch('test');
       this.$store.dispatch('currentTournament/updateDetails', details);
     }
 

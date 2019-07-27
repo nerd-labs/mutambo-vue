@@ -47,6 +47,15 @@ const router = new Router({
         fetchCurrentTournament: true,
       },
     },
+    {
+      path: '/knockout/:slug',
+      name: 'knockout',
+      component: () => import(/* webpackChunkName: "knockout" */ './views/Knockout.vue'),
+      meta: {
+        save: true,
+        fetchCurrentTournament: true,
+      },
+    },
   ],
 });
 

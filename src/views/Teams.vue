@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-import MutHeader from '@/components/MutHeader.vue';
-import MutCreateTeam from '@/components/MutCreateTeam.vue';
+import MutHeader from '@/components/header.vue';
+import MutCreateTeam from '@/components/create-team.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
