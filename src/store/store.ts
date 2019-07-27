@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { StoreOptions } from 'vuex';
 import { actions } from './actions';
 import { getters } from './getters';
 import { currentTournament } from './modules/current-tournament/current-tournament.module';
@@ -8,11 +8,11 @@ import { knockout } from './modules/knockout/knockout.module';
 import { league } from './modules/league/league.module';
 import { mutations } from './mutations';
 import { localStoragePlugin } from './plugins';
-import { state } from './state';
+import { state, RootState } from './state';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store: StoreOptions<RootState> = {
   actions,
   getters,
   mutations,
@@ -26,4 +26,6 @@ export default new Vuex.Store({
     knockout,
     league,
   },
-});
+};
+
+export default new Vuex.Store<RootState>(store);

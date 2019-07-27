@@ -1,6 +1,7 @@
 import { MutationTree } from 'vuex';
+import { RootState } from './state';
 
-export const mutations: MutationTree<any> = {
+export const mutations: MutationTree<RootState> = {
   addTournament(state, { id, slug, name, type }) {
     const index = state.tournaments.findIndex((t: any) => t.id === id);
 

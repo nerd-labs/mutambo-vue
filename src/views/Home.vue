@@ -24,12 +24,15 @@
 </template>
 
 <script lang="ts">
+import { Getter } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 import { Routes } from '../router';
 
 @Component
 export default class Home extends Vue {
+  @Getter('tournaments') public tournaments!: any[];
+
   public deleteMode = false;
 
   public beforeMount() {
@@ -68,10 +71,6 @@ export default class Home extends Vue {
       `Are you sure you want to delete "${tournament.name}"`,
     );
     if (result) { this.$store.dispatch('deleteTournament', tournament); }
-  }
-
-  private get tournaments() {
-    return this.$store.getters.tournaments;
   }
 }
 </script>

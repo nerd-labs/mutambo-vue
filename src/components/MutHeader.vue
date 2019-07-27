@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from 'vuex';
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component

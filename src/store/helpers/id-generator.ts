@@ -3,7 +3,7 @@ export class IdGenerator {
   public static id() {
     return ['r4c', 'r4c', '-', 'r4c', '-', 'r4c', '-', 'r4c', '-', 'r4c', 'r4c', 'r4c']
       .map((str) => str === 'r4c' ? this.r4c : str)
-      .join();
+      .join('');
   }
 
   /** Random 4 characters */

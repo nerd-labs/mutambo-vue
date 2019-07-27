@@ -16,9 +16,9 @@
             | Knockout
           .button-group-item(value="groupstage" @click="setType('groupstage')" :class="{ 'button-group-item--active': type === 'groupstage'}")
             | Groupstage & Knockout
-      a.button.button--tertiary(v-if="_id" @click="submit")
+      a.button.button--tertiary(v-if="_id" @click="submit()")
         | update
-      a.button.button--tertiary(v-else @click="submit")
+      a.button.button--tertiary(v-else @click="submit()")
         | create
 </template>
 
@@ -30,6 +30,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import { IdGenerator } from '../store/helpers/id-generator';
 import { mapGetters } from 'vuex';
 import { Routes } from '../router';
+import { namespace } from 'vuex-class';
+
+const currentTournament = namespace('currentTournament');
 
 @Component({
   components: {
@@ -37,9 +40,14 @@ import { Routes } from '../router';
   },
 })
 export default class Create extends Vue {
+  @currentTournament.Getter('name') private _name!: string;
+  @currentTournament.Getter('type') private _type!: string;
+  @currentTournament.Getter('id') private _id!: string;
+
   public name = '';
   public type = 'knockout';
   public id = IdGenerator.id();
+
 
   public created() {
     if (this._id) {
@@ -66,16 +74,6 @@ export default class Create extends Vue {
 
   public setType(type: any) {
     this.type = type;
-  }
-
-  private get _id() {
-    return this.$store.state.currentTournament.id;
-  }
-  private get _name() {
-    return this.$store.state.currentTournament.name;
-  }
-  private get _type() {
-    return this.$store.state.currentTournament.type;
   }
 }
 </script>
