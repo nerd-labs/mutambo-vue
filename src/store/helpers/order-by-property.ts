@@ -1,4 +1,4 @@
-export function orderByProperty(...prop: any[]): any {
+export function orderByProperty(...prop: any): any {
   const args = Array.prototype.slice.call(arguments, 1);
   return (a: any, b: any) => {
     const equality = a[prop] - b[prop];
