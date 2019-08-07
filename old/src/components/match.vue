@@ -26,75 +26,83 @@
       template(v-if="alert") match can’t end in a tie
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import { matchWinner, matchStates } from '@/store/config';
+<script>
+import { matchStates, matchWinner } from "../config";
 
-@Component
-export default class MutMatch extends Vue {
-  @Prop({ required: true }) public match!: any;
-  @Prop({ required: true }) public noTieAllowed!: any;
+export default {
+  data: () => ({
+    internalMatch: undefined,
+    alert: false,
+  }),
 
-  public internalMatch: any;
-  public alert = false;
+  props: {
+    match: {
+      required: true
+    },
+    noTieAllowed: {
+      required: false,
+    }
+  },
 
-  public beforeMount() {
+  beforeMount() {
     this.internalMatch = this.match;
-  }
+  },
 
-  public startMatch() {
-    this.$emit('update', {
-      match: this.internalMatch,
-      state: matchStates.PLAYING,
-    });
-  }
-
-  public editMatch() {
-    if (this.match.state === matchStates.DONE) {
-      this.$emit('update', {
+  methods: {
+    startMatch() {
+      this.$emit("update", {
         match: this.internalMatch,
-        state: matchStates.PLAYING,
+        state: matchStates.PLAYING
       });
+    },
+
+    editMatch() {
+      if (this.match.state === matchStates.DONE) {
+        this.$emit("update", {
+          match: this.internalMatch,
+          state: matchStates.PLAYING
+        });
+      }
+    },
+
+    endMatch(event) {
+      let winner = matchWinner.TIE;
+
+      // convert to number
+      this.internalMatch.home.score = parseInt(this.internalMatch.home.score);
+      this.internalMatch.away.score = parseInt(this.internalMatch.away.score);
+
+      if (this.internalMatch.home.score > this.internalMatch.away.score) {
+        winner = matchWinner.HOME;
+      } else if (
+        this.internalMatch.home.score < this.internalMatch.away.score
+      ) {
+        winner = matchWinner.AWAY;
+      }
+
+      if (this.noTieAllowed && winner === matchWinner.TIE) {
+        this.alert = true;
+
+        setTimeout(() => {
+          this.alert = false;
+        }, 2000);
+
+        return;
+      }
+
+      this.$emit("update", {
+        match: this.internalMatch,
+        state: matchStates.DONE,
+        winner
+      });
+
+      event.stopPropagation();
     }
   }
-
-  public endMatch(event: any) {
-    let winner = matchWinner.TIE;
-
-    // convert to number
-    this.internalMatch.home.score = parseInt(this.internalMatch.home.score, 10);
-    this.internalMatch.away.score = parseInt(this.internalMatch.away.score, 10);
-
-    if (this.internalMatch.home.score > this.internalMatch.away.score) {
-      winner = matchWinner.HOME;
-    } else if (
-      this.internalMatch.home.score < this.internalMatch.away.score
-    ) {
-      winner = matchWinner.AWAY;
-    }
-
-    if (this.noTieAllowed && winner === matchWinner.TIE) {
-      this.alert = true;
-
-      setTimeout(() => {
-        this.alert = false;
-      }, 2000);
-
-      return;
-    }
-
-    this.$emit('update', {
-      match: this.internalMatch,
-      state: matchStates.DONE,
-      winner,
-    });
-
-    event.stopPropagation();
-  }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 @keyframes move {
   from {
     transform: translateY(-200%);
@@ -106,7 +114,7 @@ export default class MutMatch extends Vue {
 
 .match {
   align-items: center;
-  box-sizing: border-box;
+  box-sizing: border-box;;
   display: flex;
   justify-content: space-between;
   margin: 10px;
@@ -160,8 +168,8 @@ export default class MutMatch extends Vue {
   animation-direction: alternate;
   border-radius: 3px;
   background-color: var(--live-red);
-  content: "";
-  display: inline-block;
+  content: '';
+  display: inline-block;;
   height: 3px;
   margin-left: 5px;
   width: 3px;
@@ -189,7 +197,7 @@ export default class MutMatch extends Vue {
 
 .match__score::after,
 .match__score--input::after {
-  content: "-";
+  content: '-';
   color: var(--warm-grey);
   font-size: 50px;
   position: absolute;
@@ -223,8 +231,8 @@ export default class MutMatch extends Vue {
 
 .match__score--input input::-webkit-inner-spin-button,
 .match__score--input input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .match__score--input input:focus {
@@ -252,7 +260,7 @@ export default class MutMatch extends Vue {
 
 /* STATE // PLAYING */
 .match--playing .match__score--input,
-.match--playing .match__end {
+.match--playing  .match__end {
   display: block;
 }
 
@@ -276,23 +284,23 @@ export default class MutMatch extends Vue {
 
 /* STATE // DONE */
 .match--done {
-  background-color: rgba(144, 238, 144, 0.25);
+  background-color: rgba(144, 238, 144, .25);
 }
 
 .match--done .match__team--loser,
 .match--done .match__score--loser {
-  opacity: 0.4;
+    opacity: 0.4;
 }
 
 .match--done .match__start,
 .match--done .match__end,
 .match--done .match__playing {
-  display: none;
+    display: none;
 }
 
 .match--done .match__score,
 .match--done .match__divider {
-  display: block;
+    display: block;
 }
 
 .match--done .match__info {
@@ -302,7 +310,7 @@ export default class MutMatch extends Vue {
 /* STATE // ERROR */
 
 .match--error .match__error {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 .match__error {
@@ -325,4 +333,5 @@ export default class MutMatch extends Vue {
   transform: translateY(50px);
   transition: transform 300ms linear;
 }
+
 </style>

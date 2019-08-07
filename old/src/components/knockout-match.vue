@@ -18,17 +18,20 @@
             span.knockout-match__penalty-score(v-if="away.penaltyScore") {{ away.penaltyScore }}
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-
-@Component
-export default class MutKnockoutMatch extends Vue {
-  @Prop({ type: Object, required: true }) public home!: any;
-  @Prop({ type: Object, required: true }) public away!: any;
-}
+<script>
+export default {
+  props: {
+    home: {
+      required: true
+    },
+    away: {
+      required: true
+    }
+  }
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .knockout-match__club-name {
   align-items: center;
   display: flex;
@@ -59,12 +62,14 @@ export default class MutKnockoutMatch extends Vue {
   justify-content: space-between;
   padding: 5px 10px;
 
+
   .knockout-match__score {
     font-size: 13px;
     color: lightgrey;
     margin-left: 5px;
   }
 }
+
 
 .knockout-match__score {
   margin-left: 5px;

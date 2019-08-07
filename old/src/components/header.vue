@@ -12,29 +12,38 @@
       | back
 </template>
 
-<script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+<script>
 
-@Component
-export default class MutHeader extends Vue {
-  @Prop({ type: String, required: false }) public back!: string;
+import { mapGetters } from 'vuex';
 
-  get name() {
-    return this.$store.state.currentTournament.name;
+export default {
+  props: {
+    back: {
+      required: false,
+      type: String,
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      name: 'currentTournament/name'
+    }),
+  },
+
+  methods: {
+    goToHome() {
+      this.$router.push('/');
+    },
+
+    goBack() {
+      const route = this.back === '/' ? '' : this.back;
+      this.$router.push(`/${route}`);
+    }
   }
-
-  public goToHome() {
-    this.$router.push('/');
-  }
-
-  public goBack() {
-    const route = this.back === '/' ? '' : this.back;
-    this.$router.push(`/${route}`);
-  }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .page__header {
   box-sizing: border-box;
   display: flex;
@@ -74,7 +83,7 @@ export default class MutHeader extends Vue {
 }
 
 .page__subtitle::before {
-  content: "// ";
+    content: '// ';
 }
 
 .page__header-back {
