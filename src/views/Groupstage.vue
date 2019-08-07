@@ -25,6 +25,7 @@
 <script lang="ts">
 import MutHeader from '@/components/header.vue';
 import MutMatches from '@/components/matches.vue';
+import MutTable from '@/components/table.vue';
 
 import slug from 'slug';
 import { Component, Vue } from 'vue-property-decorator';
@@ -38,6 +39,7 @@ const groupstage = namespace('groupstage');
   components: {
     MutHeader,
     MutMatches,
+    MutTable,
   },
 })
 export default class League extends Vue {
