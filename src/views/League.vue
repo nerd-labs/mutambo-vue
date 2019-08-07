@@ -18,6 +18,7 @@
 <script lang ="ts">
 import MutHeader from '@/components/header.vue';
 import MutMatches from '@/components/matches.vue';
+import MutTable from '@/components/table.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
@@ -30,6 +31,7 @@ const league = namespace('league');
   components: {
     MutHeader,
     MutMatches,
+    MutTable,
   },
 })
 export default class League extends Vue {
