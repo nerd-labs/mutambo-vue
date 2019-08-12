@@ -21,6 +21,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { orderByProperty } from '@/store/helpers/order-by-property';
+import { MutTeam } from '../interfaces/teams';
 
 const currentTournament = namespace('currentTournament');
 const knockout = namespace('knockout');
@@ -28,9 +29,9 @@ const league = namespace('league');
 
 @Component
 export default class Results extends Vue {
-  @currentTournament.Getter('type') public type!: any;
+  @currentTournament.Getter('type') public type!: string;
   @league.Getter('table') public leagueTable!: any;
-  @knockout.Getter('winner') public knockoutWinner!: any;
+  @knockout.Getter('winner') public knockoutWinner!: MutTeam;
 
   public winner: any = {};
   public topscorer: any = {};

@@ -25,6 +25,7 @@ import MutCreateTeam from '@/components/create-team.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import { MutTeam } from '@/interfaces/teams';
 
 const currentTournament = namespace('currentTournament');
 
@@ -35,7 +36,7 @@ const currentTournament = namespace('currentTournament');
   },
 })
 export default class Temas extends Vue {
-  @currentTournament.Getter('teams') public teams!: any[];
+  @currentTournament.Getter('teams') public teams!: MutTeam[];
   @currentTournament.Getter('slug') public slug!: string;
   @currentTournament.Getter('type') private type!: string;
 
@@ -46,7 +47,7 @@ export default class Temas extends Vue {
     return this.teams.filter((team) => team.id && team.club && team.player).length === this.teams.length;
   }
 
-  public addTeam(team: any) {
+  public addTeam(team: MutTeam) {
     this.$store.dispatch('currentTournament/addTeam', team);
   }
 

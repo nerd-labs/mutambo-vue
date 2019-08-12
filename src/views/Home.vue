@@ -26,13 +26,14 @@
 <script lang="ts">
 import { Getter } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
-import { Routes } from '../router';
+import { Routes } from '@/router';
+import { MutTournament } from '@/interfaces/tournament';
 
 @Component
 export default class Home extends Vue {
-  @Getter('tournaments') public tournaments!: any[];
+  @Getter('tournaments') public tournaments!: MutTournament[];
 
-  public deleteMode = false;
+  public deleteMode: boolean = false;
 
   public beforeMount() {
     this.$store.dispatch('currentTournament/reset');
@@ -42,14 +43,14 @@ export default class Home extends Vue {
     this.$router.push(Routes.Create);
   }
 
-  public goToRoute(id: any) {
+  public goToRoute(id: string) {
     if (this.deleteMode) { return; }
 
     const tournament = this.$store.getters.tournamentById(id);
     this.$router.push(tournament.page);
   }
 
-  public tournamentIcon(tournament: any) {
+  public tournamentIcon(tournament: MutTournament) {
     switch (tournament.type) {
       case 'league':
       case 'knockout':
@@ -65,7 +66,7 @@ export default class Home extends Vue {
     this.deleteMode = !this.deleteMode;
   }
 
-  public deleteTournament(tournament: any) {
+  public deleteTournament(tournament: MutTournament) {
     const result = confirm(
       `Are you sure you want to delete "${tournament.name}"`,
     );

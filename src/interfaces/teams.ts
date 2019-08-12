@@ -3,4 +3,5 @@ export interface MutTeam {
   player: string;
   club: string;
   score: number;
+  active: boolean;
 }

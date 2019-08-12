@@ -31,6 +31,7 @@ import slug from 'slug';
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { orderByProperty } from '@/store/helpers/order-by-property';
+import { MutTeam } from '../interfaces/teams';
 
 const currentTournament = namespace('currentTournament');
 const groupstage = namespace('groupstage');
@@ -43,11 +44,11 @@ const groupstage = namespace('groupstage');
   },
 })
 export default class League extends Vue {
-  @currentTournament.Getter('slug') public slug!: any;
-  @currentTournament.Getter('teams') public teams!: any[];
-  @currentTournament.Getter('numberOfProceedingPlayers') public numberOfProceedingPlayers!: any;
+  @currentTournament.Getter('slug') public slug!: string;
+  @currentTournament.Getter('teams') public teams!: MutTeam[];
+  @currentTournament.Getter('numberOfProceedingPlayers') public numberOfProceedingPlayers!: number;
   @groupstage.Getter('groups') public groups!: any[];
-  @groupstage.Getter('proceedingTeams') public procedingTeams!: any;
+  @groupstage.Getter('proceedingTeams') public procedingTeams!: number;
 
   public view: string = 'matches';
 
@@ -64,18 +65,18 @@ export default class League extends Vue {
   }
 
 
-  public generateId(group: any) {
+  public generateId(group: string) {
     return `${slug(group.toLowerCase())}`;
   }
 
-  public scrollToGroup(group: any) {
+  public scrollToGroup(group: string) {
     const element: any = this.$refs[this.generateId(group)];
     const shortCutElement: any = this.$refs['shortcuts'];
     const top = element[0].offsetTop - (shortCutElement.offsetTop + 100); // scroll to 100px below the shortcut ;)
     window.scrollTo(0, top);
   }
 
-  public matchUpdate(index: any, event: any) {
+  public matchUpdate(index: number, event: any) {
     this.$store.dispatch('groupstage/updateMatch', {
       groupIndex: index,
       match: event.match,
@@ -124,7 +125,7 @@ export default class League extends Vue {
     this.$router.push(`/knockout/${this.slug}`);
   }
 
-  public getRemainingTeams(teamsToExit: any, numberOfTeamsToSelect: any) {
+  public getRemainingTeams(teamsToExit: MutTeam[], numberOfTeamsToSelect: number) {
     // - get all teams except already selected
     const sorted = teamsToExit
       .sort(orderByProperty('pointsAverage', 'scored', 'difference', 'wins', 'draws'))
@@ -161,7 +162,7 @@ export default class League extends Vue {
     });
   }
 
-  public toggleView(state: any) {
+  public toggleView(state: string) {
     this.view = state;
   }
 }

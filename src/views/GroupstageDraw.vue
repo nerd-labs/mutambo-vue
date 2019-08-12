@@ -29,6 +29,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { shuffle } from '@/store/helpers/shuffle';
 import { getTable } from '@/store/helpers/berger';
+import { MutTeam } from '@/interfaces/teams';
 
 const currentTournament = namespace('currentTournament');
 const groupstage = namespace('groupstage');
@@ -41,9 +42,9 @@ const ANIMATION_TIME = 2000;
   },
 })
 export default class Detail extends Vue {
-  @currentTournament.Getter('teams') public teams!: any;
-  @currentTournament.Getter('type') public type!: any;
-  @currentTournament.Getter('slug') public slug!: any;
+  @currentTournament.Getter('teams') public teams!: MutTeam[];
+  @currentTournament.Getter('type') public type!: string;
+  @currentTournament.Getter('slug') public slug!: string;
   @groupstage.Getter('groups') public groups!: any;
 
   public animatedGroups: any[] = [];
@@ -51,8 +52,8 @@ export default class Detail extends Vue {
   public loading: boolean = true;
   public done: boolean = false;
   public showAllTeams: boolean = false;
-  public loadingTimeout: any = undefined;
-  public nameTimeout: any = undefined;
+  public loadingTimeout: number|undefined = undefined;
+  public nameTimeout: number|undefined = undefined;
 
   public mounted() {
     if (!this.groups.length) {
@@ -120,7 +121,7 @@ export default class Detail extends Vue {
     const tmp = JSON.parse(JSON.stringify(this.groups));
 
     tmp.forEach((group: any) => {
-      group.teams.map((team: any) => {
+      group.teams.map((team: MutTeam) => {
         team.active = false;
       });
     });
@@ -130,7 +131,7 @@ export default class Detail extends Vue {
     this.animate(0, 0);
   }
 
-  public animate(currentGroupIndex: any, currentTeamIndex: any) {
+  public animate(currentGroupIndex: number, currentTeamIndex: number) {
     const currentGroup = this.groups[currentGroupIndex];
 
     this.loading = true;
