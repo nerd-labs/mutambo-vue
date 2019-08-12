@@ -13,10 +13,11 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { IdGenerator } from '@/store/helpers/id-generator';
+import { MutTeam } from '@/interfaces/teams';
 
 @Component
 export default class MutCreateTeam extends Vue {
-  @Prop({ type: Object }) public team!: any;
+  @Prop({ type: Object }) public team!: MutTeam;
 
   public submit() {
     if (!this.team.club || !this.team.player) {

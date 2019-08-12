@@ -29,18 +29,15 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { matchWinner, matchStates } from '@/store/config';
+import { MutMatch } from '@/interfaces/match';
 
 @Component
-export default class MutMatch extends Vue {
-  @Prop({ required: true }) public match!: any;
-  @Prop({ required: true }) public noTieAllowed!: any;
+export default class MutMatchComponent extends Vue {
+  @Prop({ required: true }) public match!: MutMatch;
+  @Prop({ required: true }) public noTieAllowed!: boolean;
 
-  public internalMatch: any;
-  public alert = false;
-
-  public beforeMount() {
-    this.internalMatch = this.match;
-  }
+  public internalMatch: MutMatch = this.match;
+  public alert: boolean = false;
 
   public startMatch() {
     this.$emit('update', {
@@ -58,18 +55,12 @@ export default class MutMatch extends Vue {
     }
   }
 
-  public endMatch(event: any) {
+  public endMatch(event: MouseEvent) {
     let winner = matchWinner.TIE;
-
-    // convert to number
-    this.internalMatch.home.score = parseInt(this.internalMatch.home.score, 10);
-    this.internalMatch.away.score = parseInt(this.internalMatch.away.score, 10);
 
     if (this.internalMatch.home.score > this.internalMatch.away.score) {
       winner = matchWinner.HOME;
-    } else if (
-      this.internalMatch.home.score < this.internalMatch.away.score
-    ) {
+    } else if (this.internalMatch.home.score < this.internalMatch.away.score) {
       winner = matchWinner.AWAY;
     }
 

@@ -1,24 +1,25 @@
 <template lang="pug">
   .matches
-    mut-match(v-for="match in matches" :match="match" @update="matchUpdate" :noTieAllowed="noTieAllowed")
+    mut-match-component(v-for="match in matches" :match="match" @update="matchUpdate" :noTieAllowed="noTieAllowed")
 </template>
 
 <script lang="ts">
-import MutMatch from '@/components/match.vue';
+import MutMatchComponent from '@/components/match.vue';
 
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { matchStates } from '@/store/config';
+import { MutMatch } from '@/interfaces/match';
 
 @Component({
   components: {
-    MutMatch,
+    MutMatchComponent,
   },
 })
 export default class MutMatches extends Vue {
-  @Prop({ required: true }) public matches!: any[];
-  @Prop({ required: false }) public noTieAllowed!: any;
+  @Prop({ required: true }) public matches!: MutMatch[];
+  @Prop({ required: false }) public noTieAllowed!: boolean;
 
-  public activeTeams: any = [];
+  public activeTeams: string[] = [];
   public totalMatchesLeft = 0;
 
   public beforeMount() {
@@ -28,11 +29,11 @@ export default class MutMatches extends Vue {
   }
 
   get isTeamPlaying() {
-    return (team: any) => this.activeTeams.indexOf(team) > -1;
+    return (team: string) => this.activeTeams.indexOf(team) > -1;
   }
 
   public allMatchedsPlayed() {
-    const hasRemainingMatches = this.matches.every((match) => {
+    const hasRemainingMatches = this.matches.every((match: MutMatch): boolean => {
       return match.state === matchStates.DONE;
     });
 
@@ -40,7 +41,7 @@ export default class MutMatches extends Vue {
   }
 
   public matchUpdate(event: any) {
-    const index = this.matches.findIndex((m: any) => {
+    const index = this.matches.findIndex((m: MutMatch) => {
       return m.id === event.match.id;
     });
 
@@ -52,10 +53,10 @@ export default class MutMatches extends Vue {
     this.activeTeams = [];
 
     const activeMatches = this.matches.filter(
-      (m: any) => m.state === matchStates.PLAYING,
+      (m: MutMatch) => m.state === matchStates.PLAYING,
     );
 
-    activeMatches.forEach((m: any) => {
+    activeMatches.forEach((m: MutMatch) => {
       this.activeTeams.push(m.home.club);
       this.activeTeams.push(m.away.club);
     });

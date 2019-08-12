@@ -20,11 +20,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import { MutTeam } from '../interfaces/teams';
 
 @Component
 export default class MutKnockoutMatch extends Vue {
-  @Prop({ type: Object, required: true }) public home!: any;
-  @Prop({ type: Object, required: true }) public away!: any;
+  @Prop({ type: Object, required: true }) public home!: MutTeam;
+  @Prop({ type: Object, required: true }) public away!: MutTeam;
 }
 </script>
 
