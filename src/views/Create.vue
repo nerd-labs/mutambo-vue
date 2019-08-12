@@ -30,6 +30,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { IdGenerator } from '../store/helpers/id-generator';
 import { Routes } from '../router';
 import { namespace } from 'vuex-class';
+import { MutTournament } from '@/interfaces/tournament';
 
 const currentTournament = namespace('currentTournament');
 
@@ -59,19 +60,18 @@ export default class Create extends Vue {
   public submit() {
     const slugged = slug(this.name.toLowerCase());
 
-    const tournament: any = {
+    const tournament: MutTournament = {
       id: this.id,
       name: this.name,
       type: this.type,
+      slug: `${slugged}-${IdGenerator.r4c}`,
     };
-
-    tournament.slug = `${slugged}-${IdGenerator.r4c}`;
 
     this.$store.commit('addTournament', tournament);
     this.$router.push(`${Routes.Detail}/${tournament.slug}`);
   }
 
-  public setType(type: any) {
+  public setType(type: string) {
     this.type = type;
   }
 }

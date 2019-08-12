@@ -23,6 +23,8 @@ import MutTable from '@/components/table.vue';
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { getTable } from '@/store/helpers/berger';
+import { MutMatch } from '@/interfaces/match';
+import { MutTeams } from '@/interfaces/teams';
 
 const currentTournament = namespace('currentTournament');
 const league = namespace('league');
@@ -35,12 +37,12 @@ const league = namespace('league');
   },
 })
 export default class League extends Vue {
-  @currentTournament.Getter('slug') public slug!: any;
-  @currentTournament.Getter('name') public name!: any;
-  @currentTournament.Getter('teams') public teams!: any[];
-  @currentTournament.Getter('numberOfPlays') public numberOfPlays!: any;
-  @league.Getter('completed') public done!: any;
-  @league.Getter('matches') public matches!: any[];
+  @currentTournament.Getter('slug') public slug!: string;
+  @currentTournament.Getter('name') public name!: string;
+  @currentTournament.Getter('teams') public teams!: MutTeams[];
+  @currentTournament.Getter('numberOfPlays') public numberOfPlays!: number;
+  @league.Getter('completed') public done!: boolean;
+  @league.Getter('matches') public matches!: MutMatch[];
   @league.Getter('table') public table!: any;
 
   public view: string = 'matches';
@@ -90,7 +92,7 @@ export default class League extends Vue {
   }
 
   public generateMatches() {
-    const matches: any[] = [];
+    const matches: MutMatch[] = [];
 
     for (let i = 1; i <= this.numberOfPlays; i++) {
       const teams = JSON.parse(JSON.stringify(this.teams));
@@ -102,7 +104,7 @@ export default class League extends Vue {
       matches.push(...bergerTable);
     }
 
-    matches.map((match: any) => {
+    matches.map((match: MutMatch) => {
       match.away.score = 0;
       match.home.score = 0;
     });

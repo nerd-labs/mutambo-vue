@@ -30,6 +30,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { shuffle } from '@/store/helpers/shuffle';
 import { IdGenerator } from '@/store/helpers/id-generator';
+import { MutTeam } from '@/interfaces/teams';
 
 const currentTournament = namespace('currentTournament');
 const ANIMATION_TIME = 2000;
@@ -40,11 +41,11 @@ const ANIMATION_TIME = 2000;
   },
 })
 export default class Detail extends Vue {
-  @currentTournament.Getter('slug') public slug!: any;
-  @currentTournament.Getter('teams') public teams!: any;
-  @currentTournament.Getter('type') public type!: any;
+  @currentTournament.Getter('slug') public slug!: string;
+  @currentTournament.Getter('teams') public teams!: MutTeam[];
+  @currentTournament.Getter('type') public type!: string;
 
-  public animatedTeams: any[] = [];
+  public animatedTeams: MutTeam[] = [];
   public currentTeam: {} = {};
   public loading: boolean = true;
   public done: boolean = false;
@@ -77,7 +78,7 @@ export default class Detail extends Vue {
 
     const shuffledTeams: any[] = [];
 
-    shuffledPlayers.forEach((club: any, index: any) => {
+    shuffledPlayers.forEach((club: any, index: number) => {
       shuffledTeams.push({
         club: shuffledClubs[index],
         player: shuffledPlayers[index],
@@ -88,7 +89,7 @@ export default class Detail extends Vue {
     this.$store.dispatch('currentTournament/randomizeTeams', shuffledTeams);
   }
 
-  public animate(index: any) {
+  public animate(index: number) {
     this.loading = true;
 
     this.loadingTimeout = setTimeout(() => {
@@ -124,7 +125,7 @@ export default class Detail extends Vue {
   public startDraw() {
     const tmp = JSON.parse(JSON.stringify(this.teams));
 
-    tmp.forEach((team: any) => {
+    tmp.forEach((team: MutTeam) => {
       team.active = false;
     });
 

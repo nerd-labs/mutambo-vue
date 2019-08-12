@@ -44,10 +44,10 @@ export default class Knockout extends Vue {
   @currentTournament.Getter('slug') public slug!: string;
   @knockout.Getter('rounds') public rounds!: any[];
   @knockout.Getter('round') public activeRound!: any;
-  @knockout.Getter('activeRoundId') public activeRoundId!: any;
-  @knockout.Getter('activeRoundState') public activeRoundState!: any;
+  @knockout.Getter('activeRoundId') public activeRoundId!: string;
+  @knockout.Getter('activeRoundState') public activeRoundState!: number;
   @knockout.Getter('winner') public winner!: any;
-  @knockout.Getter('complete') public tournamentComplete!: any;
+  @knockout.Getter('complete') public tournamentComplete!: boolean;
 
   public internalRounds: any[] = [];
   public view: string = 'tree';
@@ -85,7 +85,7 @@ export default class Knockout extends Vue {
     return getRoundName(round.totalTeams);
   }
 
-  public toggleView(state: any) {
+  public toggleView(state: string) {
     this.view = state;
   }
 

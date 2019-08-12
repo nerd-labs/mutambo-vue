@@ -38,6 +38,7 @@ import MutHeader from '@/components/header.vue';
 
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import { MutTournament } from '@/interfaces/tournament';
 
 const currentTournament = namespace('currentTournament');
 
@@ -49,8 +50,8 @@ const currentTournament = namespace('currentTournament');
 export default class Detail extends Vue {
   @currentTournament.Getter('name') public name!: string;
   @currentTournament.Getter('type') public type!: string;
-  @currentTournament.Getter('tournament') public tournament!: any;
-  @currentTournament.Getter('totalTeams') public totalTeams!: any;
+  @currentTournament.Getter('tournament') public tournament!: MutTournament;
+  @currentTournament.Getter('totalTeams') public totalTeams!: number;
   @currentTournament.Getter('slug') private slug!: string;
 
   public readonly knockoutTotalPlayerOptions = [2, 4, 8, 16, 32];
@@ -77,7 +78,7 @@ export default class Detail extends Vue {
 
   public get numberOfProceedingPlayersOptions() {
     if (this.type === 'groupstage') {
-      return this.knockoutTotalPlayerOptions.filter((totalPlayers: any) => {
+      return this.knockoutTotalPlayerOptions.filter((totalPlayers: number) => {
         return totalPlayers <= this.totalPlayers;
       });
     } else {
